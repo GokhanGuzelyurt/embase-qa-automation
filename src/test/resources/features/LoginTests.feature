@@ -1,4 +1,3 @@
-@all
 Feature: ID+ login tests
 
   Background: Home page

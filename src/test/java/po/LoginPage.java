@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 @DefaultUrl("https://dev.embase-np.cm-elsevier.com")
-public class HomePage extends PageObject {
+public class LoginPage extends PageObject {
 
     @FindBy(id = "header-btn-sign-in")
     public WebElementFacade signInButton;
