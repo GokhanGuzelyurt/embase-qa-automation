@@ -1,12 +1,13 @@
 package po;
 
+import embase.tests.StepDefs.CommonSteps;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-@DefaultUrl("https://dev.embase-np.cm-elsevier.com")
+
 public class LoginPage extends PageObject {
 
     @FindBy(id = "header-btn-sign-in")
