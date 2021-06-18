@@ -2,8 +2,9 @@ package po;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import po.common.BasePage;
 
-public class HeaderNavigation {
+public class HeaderNavigation extends BasePage {
 
     @FindBy(id = "header-holder")
     public static HeaderNavigation headerNavigation;

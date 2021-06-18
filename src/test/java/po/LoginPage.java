@@ -1,9 +1,9 @@
 package po;
 
-import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import po.common.BasePage;
 
 import java.nio.channels.Selector;
 

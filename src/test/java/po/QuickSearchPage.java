@@ -1,17 +1,17 @@
 package po;
 
-import net.serenitybdd.core.pages.PageObject;
 import net.thucydides.core.annotations.DefaultUrl;
 import org.assertj.core.api.Assertions;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
+import po.common.BasePage;
 
 import java.awt.*;
 import java.util.List;
 
-@DefaultUrl("#search")
-public class QuickSearchPage extends PageObject {
+@DefaultUrl("page:search.page")
+public class QuickSearchPage extends BasePage {
 
     @FindBy(id = "showResults")
     public WebElement showResultsButton;
@@ -69,7 +69,7 @@ public class QuickSearchPage extends PageObject {
     public WebElement searchTipsCloseButton;
 
 
-    public void at(){
+    public void at() {
         Assertions.assertThat(showResultsButton.isDisplayed()).describedAs("Show Results button is not displayed").isTrue();
 
     }

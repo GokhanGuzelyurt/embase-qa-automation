@@ -1,4 +1,4 @@
-package po;
+package po.common;
 
 public class SearchPage {
 }
