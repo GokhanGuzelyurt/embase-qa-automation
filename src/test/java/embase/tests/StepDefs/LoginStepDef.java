@@ -44,4 +44,9 @@ public class LoginStepDef {
     public void quickSearchpageisOpened() {
         loginPage.firstLine.waitUntilVisible().shouldBeEnabled();
     }
+
+    @When("user logs in as Default User")
+    public void defaultLoginIDPlus() {
+        loginPage.loginDefaultUser();
+    }
 }

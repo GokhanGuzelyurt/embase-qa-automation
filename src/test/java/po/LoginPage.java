@@ -1,5 +1,6 @@
 package po;
 
+import embase.tests.StepDefs.CommonSteps;
 import net.serenitybdd.core.pages.WebElementFacade;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,6 +10,8 @@ import java.nio.channels.Selector;
 
 
 public class LoginPage extends BasePage {
+
+    HeaderNavigation headerNavigation;
 
     @FindBy(id = "header-btn-sign-in")
     public WebElementFacade signInButton;
@@ -51,6 +54,14 @@ public class LoginPage extends BasePage {
 
     public void enterPassword(String userPass) {
         password.sendKeys(userPass);
+        primaryButton.click();
+    }
+
+    public void loginDefaultUser() {
+        headerNavigation.clickSignInButton();
+        email.sendKeys(CommonSteps.USER_EMAIL);
+        primaryButton.click();
+        password.sendKeys(CommonSteps.USER_PASSWORD);
         primaryButton.click();
     }
 }

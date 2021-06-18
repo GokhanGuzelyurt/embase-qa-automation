@@ -14,4 +14,9 @@ public class HeaderNavigation extends BasePage {
     @FindBy(id = "header-btn-sign-in")
     public WebElementFacade signInButton;
 
+    public void clickSignInButton() {
+        signInButton.waitUntilVisible();
+        signInButton.click();
+    }
+
 }

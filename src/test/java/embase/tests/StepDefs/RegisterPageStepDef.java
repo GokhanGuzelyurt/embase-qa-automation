@@ -10,8 +10,6 @@ public class RegisterPageStepDef {
 
     @Given("user clicks on Sign In button")
     public void clickSignInButton() {
-        headerNavigation.signInButton.waitUntilVisible();
-        headerNavigation.signInButton.click();
-
+        headerNavigation.clickSignInButton();
     }
 }
