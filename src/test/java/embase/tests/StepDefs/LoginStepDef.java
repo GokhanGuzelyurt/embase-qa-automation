@@ -15,11 +15,23 @@ public class LoginStepDef {
         loginPage.signInButton.waitUntilVisible().then().click();
     }
 
-    @Given("^user enters email id as (.*)  and click Continue$")
+    @Given("^user enters email id as (.*) and click Continue$")
     public void enterEmail(String emailID) {
         loginPage.email.sendKeys(emailID);
         loginPage.primaryButton.click();
     }
+
+    @When("^user tries to login with password (.*)$")
+    public void userTriesLogin(String userPass) {
+        loginPage.enterPassword(userPass);
+    }
+
+    @Then("^an error message (.*) is displayed$")
+    public void checkPasswordError(String errorText) {
+        Assertions.assertThat(loginPage.pwdErrorMsg.getText()).describedAs("Password Error message is incorrect").isEqualToIgnoringCase(errorText);
+    }
+
+
 
     @And("^user enters password as (.*) and click SignIn$")
     public void enterPassword(String pwd) {
