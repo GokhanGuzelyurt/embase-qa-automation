@@ -34,7 +34,6 @@ public class LoginStepDef {
     }
 
 
-
     @And("^user enters password as (.*) and click SignIn$")
     public void enterPassword(String pwd) {
         loginPage.password.sendKeys(pwd);
