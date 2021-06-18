@@ -3,18 +3,12 @@ package embase.tests.StepDefs;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import net.thucydides.core.annotations.Step;
 import po.LoginPage;
 
-public class LoginStepDef extends CommonSteps {
+public class LoginStepDef {
 
     LoginPage loginPage;
 
-    @Step
-    @Given("user opens Embase application")
-    public void openEmbase() {
-        loginPage.open();
-    }
 
     @Then("Sign in button is displayed")
     public void signInBtnDisplayed() {

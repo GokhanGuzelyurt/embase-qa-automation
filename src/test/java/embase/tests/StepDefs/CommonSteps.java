@@ -1,18 +1,27 @@
 package embase.tests.StepDefs;
 
-import net.serenitybdd.core.environment.EnvironmentSpecificConfiguration;
-import net.thucydides.core.annotations.Step;
-import net.thucydides.core.util.EnvironmentVariables;
+import cucumber.api.java.Before;
+import cucumber.api.java.en.Given;
+import po.LoginPage;
 
 public class CommonSteps {
 
-    private EnvironmentVariables environmentVariables;
-    public static String baseURL;
 
-    @Step
-    public void getEnvironmentVariables() {
-        baseURL = EnvironmentSpecificConfiguration.from(environmentVariables)
-                .getProperty("webdriver.base.url");
+    LoginPage loginPage;
+
+    @Before
+    public void setUp() {
+        System.out.println("BEFORE");
+
     }
+
+
+    @Given("user opens Embase application")
+    public void openEmbase() {
+        loginPage.open();
+        System.out.println("OPEN PAGE");
+    }
+
+
 
 }
