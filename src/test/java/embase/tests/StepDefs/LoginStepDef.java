@@ -8,7 +8,7 @@ import net.thucydides.core.annotations.Step;
 import org.assertj.core.api.Assertions;
 import po.LoginPage;
 
-public class LoginStepDef extends CommonSteps {
+public class LoginStepDef {
 
     LoginPage loginPage;
 
