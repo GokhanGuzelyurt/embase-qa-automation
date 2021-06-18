@@ -8,8 +8,7 @@ public class QuickSearchPageStepDef {
     QuickSearchPage quickSearchPage;
 
     @Then("Quick search page is opened")
-    public void verifyQuickSearchPage()
-    {
+    public void verifyQuickSearchPage() {
         quickSearchPage.at();
     }
 

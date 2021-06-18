@@ -44,7 +44,6 @@ public class CommonSteps {
     @Given("user opens Embase application")
     public void openEmbase() {
         basePage.open();
-        System.out.println("OPEN PAGE");
     }
 
     private void getBuildNumber() {
