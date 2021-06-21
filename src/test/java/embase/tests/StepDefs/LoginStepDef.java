@@ -4,7 +4,6 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import net.thucydides.core.annotations.Step;
 import org.assertj.core.api.Assertions;
 import po.LoginPage;
 
@@ -12,11 +11,6 @@ public class LoginStepDef {
 
     LoginPage loginPage;
 
-    @Step
-    @Given("user opens Embase application")
-    public void openEmbase() {
-        loginPage.open();
-    }
 
     @Then("Sign in button is displayed")
     public void signInBtnDisplayed() {
@@ -81,6 +75,11 @@ public class LoginStepDef {
     @Then("^verify that user email field is displayed$")
     public void userEmailFieldDisplayed() {
         Assertions.assertThat(loginPage.email.isDisplayed()).describedAs("Email Field isnort displayed").isTrue();
+    }
+
+    @When("user logs in as Default User")
+    public void defaultLoginIDPlus() {
+        loginPage.loginDefaultUser();
     }
 
     @And("^the disabled email value on login page is (.*)$")

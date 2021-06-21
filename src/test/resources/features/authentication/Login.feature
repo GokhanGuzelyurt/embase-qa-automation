@@ -12,7 +12,7 @@ Feature: ID+ login tests
 #    Then Login page UI elements are displayed
 
   @C392041
-  Scenario:Verify that a warning message is displayed when password is entered incorrectly
+  Scenario: Verify that a warning message is displayed when password is entered incorrectly
     And user tries to login with password abcdef
     Then an error message Password incorrect. Try again or click forgot password. is displayed
 
