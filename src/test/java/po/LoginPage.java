@@ -4,6 +4,7 @@ import embase.tests.StepDefs.CommonSteps;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
+import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -31,7 +32,7 @@ public class LoginPage extends PageObject {
     public WebElement disabledEmail;
 
     @FindBy(id = "rememberMe")
-    public Selector loginRememberCheckBox;
+    public WebElement loginRememberCheckBox;
 
     @FindBy(id = "bdd-els-close")
     public WebElement cancel;
@@ -51,8 +52,29 @@ public class LoginPage extends PageObject {
     @FindBy(css = ".sec-B .els-h1-txt")
     public WebElement forgottenPwdText1;
 
+    @FindBy(css = ".els-signin-form .els-h2-txt")
+    public WebElementFacade loginTitle;
+
+    @FindBy(css = ".els-signin-form .els-h1-txt")
+    public WebElement signInTitle;
+
     public void enterPassword(String userPass) {
         password.sendKeys(userPass);
         primaryButton.click();
+    }
+
+    public void verifyPage() {
+        loginTitle.waitUntilVisible().isDisplayed();
+//        logger.info("Verify the page 'Login' is displayed.");
+        SoftAssertions.assertSoftly(softly -> {
+            softly.assertThat(signInTitle.getText()).describedAs("Sign in title is wrong").isEqualTo("Sign in");
+            softly.assertThat(loginTitle.getText()).describedAs("Login page title is wrong").isEqualTo("Enter your password to sign in to Embase");
+            softly.assertThat(disabledEmail.isDisplayed()).describedAs("Username field is not displayed").isTrue();
+            softly.assertThat(password.isDisplayed()).describedAs("Password field is not displayed").isTrue();
+            softly.assertThat(primaryButton.isDisplayed()).describedAs("Sign In button is not displayed").isTrue();
+            softly.assertThat(loginRememberCheckBox.isDisplayed()).describedAs("Remember me checkbox is not displayed").isTrue();
+            softly.assertThat(forgottenPasswordLink.isDisplayed()).describedAs("Forgotten Password link is not displayed").isTrue();
+            softly.assertThat(secondaryButton.isDisplayed()).describedAs("Sign in with a different account button is not displayed").isTrue();
+        });
     }
 }
