@@ -1,0 +1,137 @@
+
+def testImage        =   'markhobson/maven-chrome:jdk-8'
+def upstreamProjectString = BRANCH_NAME == 'ID+' ? 'embase-webapp/' : ''
+
+pipeline {
+  agent {
+    kubernetes {
+      defaultContainer 'jnlp'
+      yaml """
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    jenkins: qa-pod
+spec:
+  serviceAccountName: jenkins-agent-terraform
+  tolerations:
+  - operator: "Exists"
+  containers:
+  - name: test-container
+    image: ${testImage}
+    command:
+    - "cat"
+    tty: true
+    resources:
+      limits:
+        memory: 5000M
+        cpu: 500m
+      requests:
+        memory: 5000M
+        cpu: 500m
+
+"""
+    }
+  }
+
+  options {
+    timeout(time: 4, unit: 'HOURS')
+    disableConcurrentBuilds()
+  }
+
+  parameters {
+        choice(name: 'environment', choices: ['idplus-cert', 'idplus-dev', 'trunk', 'cert', 'pre-prod', 'prod'], description: 'Select environment')
+
+        string(name: 'includeTags', defaultValue: '@nightly', description: 'Cucumber tags')
+
+        string(name: 'testRun', defaultValue: '2515', description: 'TestRail run')
+
+        choice(name: 'driver', choices: ['chrome', 'firefox'], description: 'Webdriver')
+
+        choice(name: 'headless', choices: ['true', 'false'], description: 'Headless webdriver')
+
+        choice(name: 'testGroup', choices: ['none', '1/2', '2/2', '1/4', '2/4', '3/4', '4/4'], description: 'Parallel execution group')
+  }
+
+    triggers {
+        cron( BRANCH_NAME == 'ID+' ? 'H 00 * * 1-5' : '')
+        upstream(upstreamProjects: "${upstreamProjectString}", threshold: hudson.model.Result.SUCCESS)
+    }
+
+  stages {
+    stage('Prepare') {
+      steps {
+        echo 'Preparing steps'
+        echo pwd
+        container('test-container') {
+          echo 'Checking upstream name...'
+          script {
+            currentBuild.upstreamBuilds?.each { b ->
+              echo "Triggered by upstream project: ${b.getFullDisplayName()}"
+              // example: Triggered by upstream project: embase-webapp 0.1.512 master 9050336a9
+              TRIGGER_NAME = "${b.getFullDisplayName()}"
+              EXPECTED_UPSTREAM_NAME = 'embase-webapp'
+
+              if (TRIGGER_NAME.contains(EXPECTED_UPSTREAM_NAME)) {
+                echo 'Upstream trigger matches expected name - setting parameters for upstream trigger smoke'
+
+                env.environment = 'idplus-dev'
+                env.includeTags = '@smokeFE'
+                env.testRun = '2669'
+              }
+            }
+          }
+
+          sh """
+              echo "Find working directory:"
+              pwd
+              echo ${WORKSPACE}
+              find . -name pom.xml
+              echo "Find linux version:"
+              cat /etc/os-release
+              echo "Find Environment variables:"
+              env
+              echo "Find IP:"
+              curl https://ipinfo.io/ip
+
+             """
+        }
+      }
+    }
+
+    stage('Maven - Clean') {
+      steps {
+        echo 'Maven clean'
+        container('test-container') {
+          dir('embase-e2e') {
+            sh 'mvn --no-transfer-progress clean'
+          }
+        }
+      }
+    }
+
+    stage('Maven - Test') {
+      steps {
+        echo 'Maven test'
+        container('test-container') {
+          // only for debugging
+          dir('embase-e2e') {
+            sh 'mvn --no-transfer-progress org.apache.maven.plugins:maven-dependency-plugin:2.10:tree -Dverbose=true'
+          }
+
+          // actual test execution
+          dir('embase-e2e') {
+            script {
+              def exitCode = sh(returnStatus: true, script: "mvn --no-transfer-progress integration-test \\\"-Dcucumber.options=--tags \\\'@testrail and ${env.includeTags}\\\'\\\"  ")
+              if (exitCode == 0) {
+                currentBuild.result = 'SUCCESS'
+            } else if (exitCode == 1) {
+                currentBuild.result = 'UNSTABLE'
+            } else currentBuild.result = 'FAILURE'
+            }
+          }
+        }
+      }
+    }
+  }
+}
