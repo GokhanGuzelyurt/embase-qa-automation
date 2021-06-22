@@ -103,9 +103,7 @@ spec:
       steps {
         echo 'Maven clean'
         container('test-container') {
-          dir('embase-e2e') {
             sh 'mvn --no-transfer-progress clean'
-          }
         }
       }
     }
@@ -114,22 +112,18 @@ spec:
       steps {
         echo 'Maven test'
         container('test-container') {
-          // only for debugging
-          dir('embase-e2e') {
+            // only for debugging
             sh 'mvn --no-transfer-progress org.apache.maven.plugins:maven-dependency-plugin:2.10:tree -Dverbose=true'
-          }
 
-          // actual test execution
-          dir('embase-e2e') {
+            // actual test execution
             script {
               def exitCode = sh(returnStatus: true, script: "mvn --no-transfer-progress integration-test \\\"-Dcucumber.options=--tags \\\'@testrail and ${env.includeTags}\\\'\\\"  ")
               if (exitCode == 0) {
-                currentBuild.result = 'SUCCESS'
+              currentBuild.result = 'SUCCESS'
             } else if (exitCode == 1) {
-                currentBuild.result = 'UNSTABLE'
+              currentBuild.result = 'UNSTABLE'
             } else currentBuild.result = 'FAILURE'
             }
-          }
         }
       }
     }
