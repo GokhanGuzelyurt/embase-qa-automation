@@ -1,5 +1,6 @@
 package embase.tests.StepDefs;
 
+import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
@@ -12,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import po.ConfigPage;
 import po.common.BasePage;
 
+import java.io.IOException;
 import java.lang.invoke.MethodHandles;
 
 public class CommonSteps {
@@ -19,8 +21,10 @@ public class CommonSteps {
     final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     private EnvironmentVariables environmentVariables;
     public static String EMB_BUILD_NUMBER;
+    public static String BASE_URL;
     public static String USER_EMAIL;
     public static String USER_PASSWORD;
+    public static boolean IS_BE_SCENARIO = false;
 
 
     @Managed
@@ -29,16 +33,35 @@ public class CommonSteps {
     BasePage basePage;
     ConfigPage configPage;
 
-    @Before
-    public void setUp() {
-        logger.info("-- BEFORE --");
-        getBuildNumber();
-        logger.info("Build number EMB_BUILD_NUMBER: " + EMB_BUILD_NUMBER);
+    @Before(order = 1)
+    public void setUp(Scenario scenario) {
+        logger.info("Scenario Cucumber ID: " + scenario.getId());
+        logger.info("Scenario Name: " + scenario.getName());
+        logger.info("Scenario lines: " + scenario.getLines().toString());
+        logger.info("Scenario Location: " + scenario.getUri());
+        logger.info("Scenario tags: " + scenario.getSourceTagNames());
 
-        // reading values from the conf file
-        USER_EMAIL = getProperty("user.email");
-        USER_PASSWORD = getProperty("user.password");
+        for (String tag : scenario.getSourceTagNames()) {
+            if (tag.equals("@BE")) {
+                IS_BE_SCENARIO = true;
+                logger.info("This is a BE Scenario. WebDriver instance not needed.");
+                break;
+            }
+        }
 
+        if (!IS_BE_SCENARIO) {
+            logger.info("-- BEFORE --");
+            getBuildNumber();
+            logger.info("Build number EMB_BUILD_NUMBER: " + EMB_BUILD_NUMBER);
+
+            // reading values from the conf file
+            USER_EMAIL = getProperty("user.email");
+            USER_PASSWORD = getProperty("user.password");
+        } else {
+            //getting base url
+            BASE_URL = getProperty("webdriver.base.url");
+
+        }
     }
 
 
@@ -73,5 +96,4 @@ public class CommonSteps {
         return EnvironmentSpecificConfiguration.from(environmentVariables)
                 .getProperty(propertyName);
     }
-
 }
