@@ -6,10 +6,12 @@ import po.HeaderNavigation;
 
 public class RegisterPageStepDef {
 
-    HeaderNavigation headerNavigation;
+HeaderNavigation headerNavigation;
 
     @Given("user clicks on Sign In button")
     public void clickSignInButton() {
-        headerNavigation.clickSignInButton();
+        headerNavigation.signInButton.waitUntilVisible();
+        headerNavigation.signInButton.click();
+
     }
 }

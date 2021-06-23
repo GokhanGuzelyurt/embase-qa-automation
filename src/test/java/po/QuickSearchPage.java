@@ -10,7 +10,7 @@ import po.common.BasePage;
 import java.awt.*;
 import java.util.List;
 
-@DefaultUrl("page:search.page")
+@DefaultUrl("page:quicksearch.page")
 public class QuickSearchPage extends BasePage {
 
     @FindBy(id = "showResults")

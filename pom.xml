@@ -54,13 +54,15 @@
             <artifactId>serenity-screenplay-webdriver</artifactId>
             <version>1.1.36</version>
         </dependency>
-        <!-- Rest assured Dependency -->
+        <!-- adding Rest assured Dependency -->
+        <!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
         <dependency>
-            <groupId>com.jayway.restassured</groupId>
+            <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
-            <version>2.5.0</version>
-            <scope>compile</scope>
+            <version>4.2.0</version>
+            <scope>test</scope>
         </dependency>
+
 
         <!-- Adding dependency for serenity logging -->
         <dependency>
