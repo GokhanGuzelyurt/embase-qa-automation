@@ -77,7 +77,7 @@ public class LoginStepDef {
         Assertions.assertThat(loginPage.email.isDisplayed()).describedAs("Email Field isnort displayed").isTrue();
     }
 
-    @When("user logs in as Default User")
+    @When("^user logs in as Default User$")
     public void defaultLoginIDPlus() {
         loginPage.loginDefaultUser();
     }

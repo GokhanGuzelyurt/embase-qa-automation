@@ -7,9 +7,9 @@ Feature: ID+ login tests
     And user clicks on Sign In button
     Given user enters email id as test31220185249@test.test and click Continue
 
-#  @C392040
-#  Scenario: Verify Login page contents
-#    Then Login page UI elements are displayed
+  @C392040
+  Scenario: Verify Login page contents
+    Then Login page UI elements are displayed
 
   @C392041
   Scenario: Verify that a warning message is displayed when password is entered incorrectly
