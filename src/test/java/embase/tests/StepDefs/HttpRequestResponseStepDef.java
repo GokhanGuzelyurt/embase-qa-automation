@@ -1,32 +1,25 @@
 package embase.tests.StepDefs;
 
 import cucumber.api.java.Before;
-
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import groovy.beans.PropertyReader;
 import io.restassured.RestAssured;
 import io.restassured.config.HttpClientConfig;
 import io.restassured.config.RestAssuredConfig;
 import io.restassured.http.Cookie;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import net.serenitybdd.core.environment.EnvironmentSpecificConfiguration;
-import net.thucydides.core.annotations.DefaultUrl;
-import net.thucydides.core.util.EnvironmentVariables;
 import org.apache.http.client.params.ClientPNames;
 import org.apache.http.client.params.CookiePolicy;
 import org.apache.http.params.CoreConnectionPNames;
 import org.assertj.core.api.Assertions;
-import org.jruby.RubyProcess;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
-import po.ConfigPage;
-import po.common.BasePage;
-
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -35,11 +28,14 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import java.io.StringReader;
+import java.lang.invoke.MethodHandles;
+
+import static embase.tests.StepDefs.CommonSteps.BASE_URL;
 
 
-public class HttpRequestResponseStepDef extends CommonSteps {
+public class HttpRequestResponseStepDef {
 
-
+    final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     private Response response = null;
     private RequestSpecification request;
     private boolean printRequestToConsole = true;
@@ -50,11 +46,6 @@ public class HttpRequestResponseStepDef extends CommonSteps {
     private RestAssuredConfig config;
     private Cookie cookie;
 
-    CommonSteps commonSteps;
-
-    private EnvironmentVariables environmentVariables;
-    String webserviceEndpoint =  EnvironmentSpecificConfiguration.from(environmentVariables)
-            .getProperty("webdriver.base.url");
 
     @Before(order = 5)
     public void setupTest() {
@@ -68,9 +59,9 @@ public class HttpRequestResponseStepDef extends CommonSteps {
                             .setParam(CoreConnectionPNames.CONNECTION_TIMEOUT, timeoutSeconds * 1000)
                             .setParam(CoreConnectionPNames.SO_TIMEOUT, timeoutSeconds * 1000)
                             .setParam(ClientPNames.COOKIE_POLICY, CookiePolicy.BROWSER_COMPATIBILITY));
-            BASE_URL=getProperty("webdriver.base.url");
-            RestAssured.baseURI =BASE_URL;
-//            commonSteps.logger.info("Setting RestAssured baseURI to: " + commonSteps.getProperty("webdriver.base.url"));
+
+            RestAssured.baseURI = BASE_URL;
+            logger.info("Setting RestAssured baseURI to: " + BASE_URL);
 
             concatenatedBody = "";
             concatenatedUrl = "";
@@ -183,7 +174,7 @@ public class HttpRequestResponseStepDef extends CommonSteps {
                 response = request.patch(concatenatedUrl);
                 break;
             default:
-                commonSteps.logger.error("ERROR: unsupported HTTP METHOD");
+                logger.error("ERROR: unsupported HTTP METHOD");
         }
         if (printResponseToConsole)
             response.then().log().all();
@@ -286,7 +277,7 @@ public class HttpRequestResponseStepDef extends CommonSteps {
         // List<String> jsonResponse=response.jsonPath().getList("$");
         String values = response.jsonPath().getString("" + element + "");
         System.out.println(values);
-        commonSteps.logger.info("the values returned are" + values);
+        logger.info("the values returned are" + values);
         Assertions.assertThat(values).describedAs("Element value is not equal to expected").contains(value);
 
     }
@@ -318,7 +309,6 @@ public class HttpRequestResponseStepDef extends CommonSteps {
         }
         return nodes;
     }
-
 
 
 }
