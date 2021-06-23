@@ -22,3 +22,4 @@ embase-performance/.project
 *.jpg
 embase-e2e/embase-e2e.ipr
 embase-e2e/embase-e2e.iws
+*.log

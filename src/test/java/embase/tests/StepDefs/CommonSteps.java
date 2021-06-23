@@ -21,7 +21,7 @@ public class CommonSteps {
     final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     private EnvironmentVariables environmentVariables;
     public static String EMB_BUILD_NUMBER;
-    public static  String BASE_URL;
+    public static String BASE_URL;
     public static String USER_EMAIL;
     public static String USER_PASSWORD;
     public static boolean IS_BE_SCENARIO = false;
@@ -33,7 +33,7 @@ public class CommonSteps {
     BasePage basePage;
     ConfigPage configPage;
 
-    @Before
+    @Before(order = 2)
     public void setUp() {
         if (!IS_BE_SCENARIO) {
             logger.info("-- BEFORE --");
@@ -43,7 +43,8 @@ public class CommonSteps {
             // reading values from the conf file
             USER_EMAIL = getProperty("user.email");
             USER_PASSWORD = getProperty("user.password");
-
+        } else {
+            BASE_URL = getProperty("webdriver.base.url");
         }
     }
 
@@ -93,7 +94,7 @@ public class CommonSteps {
         }
     }
 
-    public String getProperty(String propertyName) {
+    private String getProperty(String propertyName) {
         return EnvironmentSpecificConfiguration.from(environmentVariables)
                 .getProperty(propertyName);
     }
