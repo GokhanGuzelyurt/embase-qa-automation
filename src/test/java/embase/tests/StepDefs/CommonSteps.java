@@ -33,25 +33,8 @@ public class CommonSteps {
     BasePage basePage;
     ConfigPage configPage;
 
-    @Before(order = 2)
-    public void setUp() {
-        if (!IS_BE_SCENARIO) {
-            logger.info("-- BEFORE --");
-            getBuildNumber();
-            logger.info("Build number EMB_BUILD_NUMBER: " + EMB_BUILD_NUMBER);
-
-            // reading values from the conf file
-            USER_EMAIL = getProperty("user.email");
-            USER_PASSWORD = getProperty("user.password");
-        } else {
-            BASE_URL = getProperty("webdriver.base.url");
-        }
-    }
-
     @Before(order = 1)
-    public void setUp(Scenario scenario) throws IOException {
-        logger.info("---------------- This is the start of a scenario ----------------");
-        logger.info("InitTests - setUp - Before");
+    public void setUp(Scenario scenario) {
         logger.info("Scenario Cucumber ID: " + scenario.getId());
         logger.info("Scenario Name: " + scenario.getName());
         logger.info("Scenario lines: " + scenario.getLines().toString());
@@ -65,7 +48,22 @@ public class CommonSteps {
                 break;
             }
         }
+
+        if (!IS_BE_SCENARIO) {
+            logger.info("-- BEFORE --");
+            getBuildNumber();
+            logger.info("Build number EMB_BUILD_NUMBER: " + EMB_BUILD_NUMBER);
+
+            // reading values from the conf file
+            USER_EMAIL = getProperty("user.email");
+            USER_PASSWORD = getProperty("user.password");
+        } else {
+            //getting base url
+            BASE_URL = getProperty("webdriver.base.url");
+
+        }
     }
+
 
     @After
     public void tearDown() {

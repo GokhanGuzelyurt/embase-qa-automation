@@ -31,7 +31,7 @@ public class LoginPage extends BasePage {
     public WebElementFacade firstLine;
 
     @FindBy(id = "bdd-disabledEmail")
-    public WebElement disabledEmail;
+    public WebElementFacade disabledEmail;
 
     @FindBy(id = "rememberMe")
     public WebElement loginRememberCheckBox;

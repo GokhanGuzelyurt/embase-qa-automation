@@ -84,7 +84,7 @@ public class LoginStepDef {
 
     @And("^the disabled email value on login page is (.*)$")
     public void verifyDisabledEmailValue(String email) {
-        Assertions.assertThat(loginPage.disabledEmail.getText()).describedAs("Email value is not equal to expected").isEqualToIgnoringCase(email);
+        Assertions.assertThat(loginPage.disabledEmail.getValue()).describedAs("Email value is not equal to expected").isEqualToIgnoringCase(email);
     }
 }
 
