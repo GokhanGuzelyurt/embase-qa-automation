@@ -117,7 +117,7 @@ spec:
 
             // actual test execution
             script {
-              def exitCode = sh(returnStatus: true, script: "mvn --no-transfer-progress integration-test \\\"-Dcucumber.options=--tags \\\'${env.includeTags}\\\' -Denvironment=${env.environment}\\\" ")
+              def exitCode = sh(returnStatus: true, script: "mvn --no-transfer-progress integration-test \\\"-Dcucumber.options=--tags \\\'${env.includeTags}\\\'\\\" -Denvironment=${env.environment} ")
               if (exitCode == 0) {
               currentBuild.result = 'SUCCESS'
             } else if (exitCode == 1) {
