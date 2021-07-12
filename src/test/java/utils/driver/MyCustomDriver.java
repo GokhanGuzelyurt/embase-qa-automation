@@ -13,7 +13,7 @@ public class MyCustomDriver implements DriverSource {
         WebDriver driver;
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-extensions");
+//        options.addArguments("--disable-extensions");
 
 //        if (BaseSteps.getProperty("headless").equals("true"))
 //            options.addArguments("--headless");
