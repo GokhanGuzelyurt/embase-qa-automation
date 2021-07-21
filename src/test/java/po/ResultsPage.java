@@ -23,10 +23,10 @@ public class ResultsPage extends BasePage {
     SearchPage searchPage;
 
     @FindBy(css = ".empty:not(#search_row_empty) p")
-    public WebElement recordSecWarnZero;
+    public WebElementFacade recordSecWarnZero;
 
     @FindBy(id = "recordsFound")
-    public WebElement recordSectionFilled;
+    public WebElementFacade recordSectionFilled;
 
     @FindBy(id = "ResultList")
     public ResultList resultList;
@@ -40,6 +40,9 @@ public class ResultsPage extends BasePage {
     @FindBy(id = "searchField")
     public WebElementFacade searchField;
 
+    @FindBy(className = "queryContent")
+    public WebElementFacade querySection;
+
 
     public void at() {
 //        searchField.isDisplayed();
@@ -48,11 +51,11 @@ public class ResultsPage extends BasePage {
     public void waitForRecordSectionIsLoaded() {
         logger.info("Wait for please wait to vanish");
         logger.info("Wait if 0 results page is not displayed");
-        if (!recordSecWarnZero.isDisplayed()) {
+      querySection.waitUntilVisible();
 
-            recordSectionFilled.isDisplayed();
-            Assertions.assertThat(resultList.searchHitCounts.getText()).isNotBlank();
-            int hitCount = Integer.parseInt(resultList.searchHitCounts.getText().split(" results")[0].replaceAll(",", ""));
+//            recordSectionFilled.isDisplayed();
+//            Assertions.assertThat(resultList.searchHitCounts.getText()).isNotBlank();
+//            int hitCount = Integer.parseInt(resultList.searchHitCounts.getText().split(" results")[0].replaceAll(",", ""));
 //            int lastHit = Integer.parseInt(resultList.hitStart.getText()) + Integer.parseInt(pageIndex.pageSizeSelector.isSelected()) - 1;
 //            lastHit = Math.min(lastHit, hitCount);
 //            String lastHitStr = String.valueOf(lastHit);
@@ -61,12 +64,13 @@ public class ResultsPage extends BasePage {
 
 //            Assertions.assertThat(resultList.hitEnd.getText()).describedAs("resultList last hit is not equal to the no of results per page").isEqualTo(lastHitStr);
 //            scrollToTop();
-        } else {
-            logger.info("Zero results page is loaded");
-        }
+//        } else {
+//            logger.info("Zero results page is loaded");
+//        }
     }
 
     public void verifySearchQuery(String expectedQuery) {
+        querySection.waitUntilVisible();
         searchField.waitUntilVisible();
         Assertions.assertThat(searchField.getValue()).describedAs(String.format("Query expected: <%s> but was: <%s>",expectedQuery,searchField.getValue())).isEqualToIgnoringCase(expectedQuery);
     }

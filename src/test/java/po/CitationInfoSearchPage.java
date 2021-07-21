@@ -3,17 +3,21 @@ package po;
 import net.serenitybdd.core.annotations.findby.By;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
+import net.thucydides.core.pages.components.Dropdown;
 import net.thucydides.core.webelements.Checkbox;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import po.common.BasePage;
 import po.sections.results.SearchHistory;
 
 import java.lang.invoke.MethodHandles;
+import java.nio.channels.Selector;
+import java.util.List;
 
 
 @DefaultUrl("page:citationInfo.page")
@@ -30,10 +34,6 @@ public class CitationInfoSearchPage extends BasePage {
 
     @FindBy(id = "journal-title")
     public WebElementFacade journalTitleField;
-
-//"//*[contains(@id,'journal-title-exact')]"));
-//    @FindBy(xpath = "//*[contains(@id,'journal-title-exact')]")
-//    public WebElementFacade journalTitleExactCheckBox;
 
     @FindBy(id = "abbr-journal-title")
     public WebElementFacade abbrJournalTitleField;
@@ -68,17 +68,61 @@ public class CitationInfoSearchPage extends BasePage {
     @FindBy(xpath = "//span[contains(@class,'LinkButton-module_content__2F1Lc')][contains(text(),'More citation fields')]")
     public WebElement moreCitationFieldsLink;
 
+    @FindBy(xpath = "//span[contains(@class,'LinkButton-module_content__2F1Lc')][contains(text(),'Specify name variants')]")
+    public WebElement authorNameVariantsLink;
+
+    @FindBy(xpath = "//span[contains(@class='LinkButton-module_content__2F1Lc']/text()[2]")
+    public WebElement selectAllLink;
+
+    @FindBy(id = "publication-year-from")
+    public WebElement fromYearSelect;
+
+    @FindBy(xpath = "//span[contains(@class,'Button-module_content__7QNNH')][contains(text(),'Add to search')]")
+    public WebElement AddToSearch;
+
+    @FindBy(id = "publication-year-from-options")
+    public WebElement fromYearListOptions;
+
+    @FindBy(id = "publication-year-to")
+    public WebElement toYearSelect;
+
+    @FindBy(id = "publication-year-to-options")
+    public WebElement toYearListOptions;
+
+    @FindBy(id = "author-variations-modal-label")
+    public WebElement authorVariationsLabel;
+
+    @FindBy(id = "lastName")
+    public WebElement authorLastName;
+
+    @FindBy(id = "firstName")
+    public WebElement authorFirstName;
+
+    @FindBy(id = "initial")
+    public WebElement authorInitials;
+
+    @FindBy(id = "orcid")
+    public WebElement ORCID;
+
+    @FindBy(id = "affiliation")
+    public WebElement authorAffiliation;
+
+    @FindBy(className = "AuthorVariationsModal_authors__z-T7w row")
+    public WebElement authorVariantsResults;
+
+    @FindBy(className = "Checkbox-module_root__1DisM")
+    public WebElement authorVariantsCheckboxOptions;
+
 
     public void executeArticleSearch(String articleTitle, String authorName, String journalTitle, String journalTitleExact, String ABBRJournalTitle, String ABBRJournalTitleExact,
-                                    String ISSN, String CODEN, String DOI, String volume, String issue, String firstPage, String pubYears, String fromYear, String toYear) {
+                                     String ISSN, String CODEN, String DOI, String volume, String issue, String firstPage, String pubYears, String fromYear, String toYear) {
         logger.info("Fills in the search query, clicks the Search button");
         enterArticleSearchQuery(articleTitle, authorName, journalTitle, journalTitleExact, ABBRJournalTitle,
                 ABBRJournalTitleExact, ISSN, CODEN, DOI, volume, issue, firstPage, pubYears, fromYear, toYear);
         clickArticleSearchButton();
-//        resultsPage.waitForRecordSectionIsLoaded();
+        resultsPage.waitForRecordSectionIsLoaded();
 //        return resultsPage.searchHistory.getFirstRowNumber();
     }
-
 
 
     public void enterArticleSearchQuery(String articleTitle, String authorName, String journalTitle, String journalTitleExact, String ABBRJournalTitle, String ABBRJournalTitleExact,
@@ -88,12 +132,11 @@ public class CitationInfoSearchPage extends BasePage {
         boolean booljournalTitleChk = Boolean.parseBoolean(journalTitleExact);
         boolean boolABBRChk = Boolean.parseBoolean(ABBRJournalTitleExact);
         boolean boolpubYears = Boolean.parseBoolean(pubYears);
-        WebElement journalTitleExactCheckBox= getDriver().findElement(By.xpath("//*[contains(@id,'journal-title-exact')]"));
-        WebElement abbrJournalTitleExactCheckBox= getDriver().findElement(By.xpath("//*[contains(@id,'abbr-journal-title-exact')]"));
-        WebElement publicationYearsCheckBox=getDriver().findElement(By.xpath("//*[contains(@id,'is-publication-year')]"));
+        WebElement journalTitleExactCheckBox = getDriver().findElement(By.xpath("//*[contains(@id,'journal-title-exact')]"));
+        WebElement abbrJournalTitleExactCheckBox = getDriver().findElement(By.xpath("//*[contains(@id,'abbr-journal-title-exact')]"));
+        WebElement publicationYearsCheckBox = getDriver().findElement(By.xpath("//*[contains(@id,'is-publication-year')]"));
 
-
-
+        moreCitationFieldsLink.click();
 
 
         if (!articleTitle.isEmpty()) {
@@ -111,11 +154,10 @@ public class CitationInfoSearchPage extends BasePage {
         }
         if (booljournalTitleChk) {
 //
-                checkByScript(journalTitleExactCheckBox);
+            checkByScript(journalTitleExactCheckBox);
+        } else {
+            uncheckByScript(journalTitleExactCheckBox);
         }
-            else{
-                    uncheckByScript(journalTitleExactCheckBox);
-            }
 
         if (!ABBRJournalTitle.isEmpty()) {
             abbrJournalTitleField.waitUntilEnabled();
@@ -123,57 +165,52 @@ public class CitationInfoSearchPage extends BasePage {
             abbrJournalTitleField.sendKeys(ABBRJournalTitle);
         }
         if (boolABBRChk) {
-            checkByScript(abbrJournalTitleExactCheckBox);}
-
-            else{
-                uncheckByScript(abbrJournalTitleExactCheckBox);
-            }
+            checkByScript(abbrJournalTitleExactCheckBox);
+        } else {
+            uncheckByScript(abbrJournalTitleExactCheckBox);
+        }
         if (!ISSN.isEmpty()) {
-            moreCitationFieldsLink.click();
             ISSNField.clear();
             ISSNField.sendKeys(ISSN);
         }
         if (!CODEN.isEmpty()) {
-            if(moreCitationFieldsLink.isDisplayed()){
-                moreCitationFieldsLink.click();
-            }
+
             CODENField.clear();
             CODENField.sendKeys(CODEN);
         }
         if (!DOI.isEmpty()) {
-            if(moreCitationFieldsLink.isDisplayed()){
-                moreCitationFieldsLink.click();
-            }
+
             DOIField.clear();
             DOIField.sendKeys(DOI);
         }
         if (!volume.isEmpty()) {
-            if(moreCitationFieldsLink.isDisplayed()){
-                moreCitationFieldsLink.click();
-            }
+
             volumeField.clear();
             volumeField.sendKeys(volume);
         }
         if (!issue.isEmpty()) {
-            if(moreCitationFieldsLink.isDisplayed()){
-                moreCitationFieldsLink.click();
-            }
+
             issueField.clear();
             issueField.sendKeys(issue);
         }
         if (!firstPage.isEmpty()) {
-            if(moreCitationFieldsLink.isDisplayed()){
-                moreCitationFieldsLink.click();
-            }
             firstPageField.clear();
             firstPageField.sendKeys(firstPage);
         }
         if (boolpubYears) {
             checkByScript(publicationYearsCheckBox);
+        } else {
+            uncheckByScript(publicationYearsCheckBox);
         }
 
-        else{
-            uncheckByScript(publicationYearsCheckBox);
+        if (!fromYear.isEmpty()) {
+            fromYearSelect.click();
+            fromYearListOptions.findElement(By.buttonText(fromYear)).click();
+        }
+
+        if (!toYear.isEmpty()) {
+            toYearSelect.click();
+            toYearListOptions.findElement(By.buttonText(toYear)).click();
         }
     }
 
@@ -181,4 +218,34 @@ public class CitationInfoSearchPage extends BasePage {
         logger.info("Clicks Search button");
         showResultButton.click();
     }
+
+    public void enterAuthorSearchInfo(String lastName, String firstName, String nameInitials, String affiliationUni, String orcid) {
+        logger.info("Enter author information");
+
+        if (!lastName.isEmpty()) {
+            authorLastName.sendKeys(lastName);
+
+        }
+        if (!firstName.isEmpty()) {
+            authorFirstName.sendKeys(firstName);
+        }
+
+        if (!nameInitials.isEmpty()) {
+            authorInitials.sendKeys(nameInitials);
+        }
+
+        if (!affiliationUni.isEmpty()) {
+            authorAffiliation.sendKeys(affiliationUni);
+        }
+
+        if (!orcid.isEmpty()) {
+            ORCID.sendKeys(orcid);
+        }
+    }
+
+    public void clickSelectAll() {
+        WebElement element= getDriver().findElement(By.xpath("/html/body/div[9]/div/div[2]/div/div[2]/div/button/span"));
+        element.click();
+    }
+
 }
