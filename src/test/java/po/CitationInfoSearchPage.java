@@ -71,7 +71,7 @@ public class CitationInfoSearchPage extends BasePage {
     @FindBy(xpath = "//span[contains(@class,'LinkButton-module_content__2F1Lc')][contains(text(),'Specify name variants')]")
     public WebElement authorNameVariantsLink;
 
-    @FindBy(xpath = "//span[contains(@class='LinkButton-module_content__2F1Lc']/text()[2]")
+    @FindBy(xpath = "/html/body/div[9]/div/div[2]/div/div[2]/div/button/span")
     public WebElement selectAllLink;
 
     @FindBy(id = "publication-year-from")
@@ -112,6 +112,7 @@ public class CitationInfoSearchPage extends BasePage {
 
     @FindBy(className = "Checkbox-module_root__1DisM")
     public WebElement authorVariantsCheckboxOptions;
+
 
 
     public void executeArticleSearch(String articleTitle, String authorName, String journalTitle, String journalTitleExact, String ABBRJournalTitle, String ABBRJournalTitleExact,
@@ -244,8 +245,7 @@ public class CitationInfoSearchPage extends BasePage {
     }
 
     public void clickSelectAll() {
-        WebElement element= getDriver().findElement(By.xpath("/html/body/div[9]/div/div[2]/div/div[2]/div/button/span"));
-        element.click();
+        selectAllLink.click();
     }
 
 }
