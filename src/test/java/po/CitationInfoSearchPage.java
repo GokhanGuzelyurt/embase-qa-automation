@@ -130,9 +130,9 @@ public class CitationInfoSearchPage extends BasePage {
                                         String ISSN, String CODEN, String DOI, String volume, String issue, String firstPage, String pubYears, String fromYear, String toYear) {
         logger.info("Enter search query");
 
-        boolean booljournalTitleChk = Boolean.parseBoolean(journalTitleExact);
+        boolean boolJournalTitleChk = Boolean.parseBoolean(journalTitleExact);
         boolean boolABBRChk = Boolean.parseBoolean(ABBRJournalTitleExact);
-        boolean boolpubYears = Boolean.parseBoolean(pubYears);
+        boolean boolPubYears = Boolean.parseBoolean(pubYears);
         WebElement journalTitleExactCheckBox = getDriver().findElement(By.xpath("//*[contains(@id,'journal-title-exact')]"));
         WebElement abbrJournalTitleExactCheckBox = getDriver().findElement(By.xpath("//*[contains(@id,'abbr-journal-title-exact')]"));
         WebElement publicationYearsCheckBox = getDriver().findElement(By.xpath("//*[contains(@id,'is-publication-year')]"));
@@ -153,8 +153,7 @@ public class CitationInfoSearchPage extends BasePage {
             journalTitleField.clear();
             journalTitleField.sendKeys(journalTitle);
         }
-        if (booljournalTitleChk) {
-//
+        if (boolJournalTitleChk) {
             checkByScript(journalTitleExactCheckBox);
         } else {
             uncheckByScript(journalTitleExactCheckBox);
@@ -175,22 +174,18 @@ public class CitationInfoSearchPage extends BasePage {
             ISSNField.sendKeys(ISSN);
         }
         if (!CODEN.isEmpty()) {
-
             CODENField.clear();
             CODENField.sendKeys(CODEN);
         }
         if (!DOI.isEmpty()) {
-
             DOIField.clear();
             DOIField.sendKeys(DOI);
         }
         if (!volume.isEmpty()) {
-
             volumeField.clear();
             volumeField.sendKeys(volume);
         }
         if (!issue.isEmpty()) {
-
             issueField.clear();
             issueField.sendKeys(issue);
         }
@@ -198,7 +193,7 @@ public class CitationInfoSearchPage extends BasePage {
             firstPageField.clear();
             firstPageField.sendKeys(firstPage);
         }
-        if (boolpubYears) {
+        if (boolPubYears) {
             checkByScript(publicationYearsCheckBox);
         } else {
             uncheckByScript(publicationYearsCheckBox);
