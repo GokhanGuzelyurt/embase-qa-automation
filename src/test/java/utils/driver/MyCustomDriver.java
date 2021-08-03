@@ -15,8 +15,11 @@ public class MyCustomDriver implements DriverSource {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-extensions");
 
+        // for debugging purposes
+        options.addArguments("--verbose");
+
 //        if (BaseSteps.getProperty("headless").equals("true"))
-//            options.addArguments("--headless");
+            options.addArguments("--headless");
 
         options.addArguments("no-sandbox");
         driver = new ChromeDriver(options);
