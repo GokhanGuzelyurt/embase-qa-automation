@@ -5,8 +5,14 @@ import net.thucydides.core.webdriver.DriverSource;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.lang.invoke.MethodHandles;
 
 public class MyCustomDriver implements DriverSource {
+
+    final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     @Override
     public WebDriver newDriver() {
@@ -14,12 +20,12 @@ public class MyCustomDriver implements DriverSource {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-extensions");
-
-        // for debugging purposes
         options.addArguments("--verbose");
 
-//        if (BaseSteps.getProperty("headless").equals("true"))
+        if (System.getenv("JENKINS_URL") != null) {
+            logger.info("Job is running in JENKINS. Headless ChromeDriver mode: true");
             options.addArguments("--headless");
+        }
 
         options.addArguments("no-sandbox");
         driver = new ChromeDriver(options);
