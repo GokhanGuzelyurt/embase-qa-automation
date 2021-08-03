@@ -7,7 +7,9 @@ import cucumber.api.java.en.Given;
 import net.serenitybdd.core.environment.EnvironmentSpecificConfiguration;
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.util.EnvironmentVariables;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import po.ConfigPage;
@@ -93,4 +95,5 @@ public class CommonSteps {
         return EnvironmentSpecificConfiguration.from(environmentVariables)
                 .getProperty(propertyName);
     }
+
 }
