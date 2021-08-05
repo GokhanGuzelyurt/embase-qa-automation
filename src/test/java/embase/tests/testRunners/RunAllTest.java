@@ -1,10 +1,10 @@
 package embase.tests.testRunners;
 
 import cucumber.api.CucumberOptions;
-import net.serenitybdd.cucumber.CucumberWithSerenity;
+import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
 
-@RunWith(CucumberWithSerenity.class)
+@RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/test/resources/features/",
         glue = "embase.tests")

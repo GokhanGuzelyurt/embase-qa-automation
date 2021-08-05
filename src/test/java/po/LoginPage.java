@@ -2,13 +2,10 @@ package po;
 
 import embase.tests.StepDefs.CommonSteps;
 import net.serenitybdd.core.pages.WebElementFacade;
-import net.thucydides.core.annotations.DefaultUrl;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import po.common.BasePage;
-
-import java.nio.channels.Selector;
 
 
 public class LoginPage extends BasePage {

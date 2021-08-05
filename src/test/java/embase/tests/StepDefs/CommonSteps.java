@@ -7,15 +7,12 @@ import cucumber.api.java.en.Given;
 import net.serenitybdd.core.environment.EnvironmentSpecificConfiguration;
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.util.EnvironmentVariables;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import po.ConfigPage;
 import po.common.BasePage;
 
-import java.io.IOException;
 import java.lang.invoke.MethodHandles;
 
 public class CommonSteps {
@@ -28,7 +25,6 @@ public class CommonSteps {
     public static String USER_PASSWORD;
     public static boolean IS_BE_SCENARIO = false;
 
-
     @Managed
     WebDriver driver;
 
@@ -37,6 +33,7 @@ public class CommonSteps {
 
     @Before(order = 1)
     public void setUp(Scenario scenario) {
+        logger.info("-- BEFORE --");
         logger.info("Scenario Cucumber ID: " + scenario.getId());
         logger.info("Scenario Name: " + scenario.getName());
         logger.info("Scenario lines: " + scenario.getLines().toString());
@@ -52,7 +49,6 @@ public class CommonSteps {
         }
 
         if (!IS_BE_SCENARIO) {
-            logger.info("-- BEFORE --");
             getBuildNumber();
             logger.info("Build number EMB_BUILD_NUMBER: " + EMB_BUILD_NUMBER);
 
@@ -60,9 +56,8 @@ public class CommonSteps {
             USER_EMAIL = getProperty("user.email");
             USER_PASSWORD = getProperty("user.password");
         } else {
-            //getting base url
+            // getting base url to be used in BE scenarios
             BASE_URL = getProperty("webdriver.base.url");
-
         }
     }
 

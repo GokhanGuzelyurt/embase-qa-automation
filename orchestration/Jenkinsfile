@@ -40,7 +40,7 @@ spec:
   }
 
   parameters {
-        choice(name: 'environment', choices: ['idplus-cert', 'idplus-dev', 'trunk', 'cert', 'pre-prod', 'prod'], description: 'Select environment')
+        choice(name: 'environment', choices: ['cert', 'default', 'preprod', 'prod'], description: 'Select environment')
 
         string(name: 'includeTags', defaultValue: '@nightly', description: 'Cucumber tags')
 
@@ -75,7 +75,7 @@ spec:
               if (TRIGGER_NAME.contains(EXPECTED_UPSTREAM_NAME)) {
                 echo 'Upstream trigger matches expected name - setting parameters for upstream trigger smoke'
 
-                env.environment = 'idplus-dev'
+                env.environment = 'default'
                 env.includeTags = '@smokeFE'
                 env.testRun = '2669'
               }
@@ -83,15 +83,15 @@ spec:
           }
 
           sh """
-              echo "Find working directory:"
+              echo "Working directory:"
               pwd
               echo ${WORKSPACE}
               find . -name pom.xml
-              echo "Find linux version:"
+              echo "Linux version:"
               cat /etc/os-release
-              echo "Find Environment variables:"
+              echo "Environment variables:"
               env
-              echo "Find IP:"
+              echo "External IP address:"
               curl https://ipinfo.io/ip
 
              """
@@ -113,11 +113,11 @@ spec:
         echo 'Maven test'
         container('test-container') {
             // only for debugging
-            sh 'mvn --no-transfer-progress org.apache.maven.plugins:maven-dependency-plugin:2.10:tree -Dverbose=true'
+            // sh 'mvn --no-transfer-progress org.apache.maven.plugins:maven-dependency-plugin:2.10:tree -Dverbose=true'
 
             // actual test execution
             script {
-              def exitCode = sh(returnStatus: true, script: "mvn --no-transfer-progress integration-test \\\"-Dcucumber.options=--tags \\\'${env.includeTags}\\\'\\\"  ")
+              def exitCode = sh(returnStatus: true, script: "mvn --no-transfer-progress integration-test -Denvironment=${env.environment} \\\"-Dcucumber.options=--tags \\\'${env.includeTags}\\\'\\\" ")
               if (exitCode == 0) {
               currentBuild.result = 'SUCCESS'
             } else if (exitCode == 1) {
