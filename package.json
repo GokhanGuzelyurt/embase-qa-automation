@@ -1,0 +1,20 @@
+{
+  "name": "embase-qa-automation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "cucumber-testrail-sync": "cucumber-testrail-sync" 
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@ssense/cucumber-testrail-sync": "^3.0.6",
+    "cypress-testrail-reporter": "^1.1.0",
+    "npm": "^6.14.5",
+    "testrail-api": "^1.3.5"
+  },
+  "devDependencies": {
+    "browserstack-cypress-cli": "^1.6.0"
+  }
+}
