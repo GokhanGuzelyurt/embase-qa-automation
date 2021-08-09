@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "cucumber-testrail-sync": "cucumber-testrail-sync" 
+    "cucumber-testrail-sync": "cucumber-testrail-sync"
   },
   "author": "",
   "license": "ISC",
