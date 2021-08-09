@@ -15,6 +15,7 @@ import org.apache.http.client.params.ClientPNames;
 import org.apache.http.client.params.CookiePolicy;
 import org.apache.http.params.CoreConnectionPNames;
 import org.assertj.core.api.Assertions;
+import org.jruby.RubyProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
@@ -31,6 +32,7 @@ import java.io.StringReader;
 import java.lang.invoke.MethodHandles;
 
 import static embase.tests.StepDefs.CommonSteps.BASE_URL;
+import static embase.tests.StepDefs.CommonSteps.PUBLIC_API_DOMAIN;
 
 
 public class HttpRequestResponseStepDef {
@@ -39,12 +41,13 @@ public class HttpRequestResponseStepDef {
     private Response response = null;
     private RequestSpecification request;
     private boolean printRequestToConsole = true;
-    private boolean printResponseToConsole = false;
+    private boolean printResponseToConsole = true;
     private int timeoutSeconds = 300;
     private String concatenatedBody;
     private String concatenatedUrl;
     private RestAssuredConfig config;
     private Cookie cookie;
+
 
 
     @Before(order = 5)
@@ -61,6 +64,7 @@ public class HttpRequestResponseStepDef {
                             .setParam(ClientPNames.COOKIE_POLICY, CookiePolicy.BROWSER_COMPATIBILITY));
 
             RestAssured.baseURI = BASE_URL;
+
             logger.info("Setting RestAssured baseURI to: " + BASE_URL);
 
             concatenatedBody = "";
@@ -75,13 +79,6 @@ public class HttpRequestResponseStepDef {
         request.basePath(endpoint);
     }
 
-//    @Given("I set the Public API endpoint for the http request to (.*)$")
-//    public void setPublicApiRequestEndpoint(String endpoint) {
-//        RestAssured.baseURI = getProperty("publicApiDomain");
-//        request = RestAssured.given();
-//        setRequestEndpoint(endpoint);
-//    }
-
     @Given("^I concatenate the value (.*)to the URL$")
     public void setConcatenatedRequestUrl(String value) {
         concatenatedUrl += value;
@@ -94,16 +91,26 @@ public class HttpRequestResponseStepDef {
 
     }
 
+    @Given("^I set the Public API endpoint for the http request to (.*)$")
+    public void setPublicApiRequestEndpoint(String endpoint) {
+        RestAssured.baseURI = PUBLIC_API_DOMAIN;
+        System.out.println(PUBLIC_API_DOMAIN);
+        request = RestAssured.given().config(config);
+       request.basePath(endpoint);
+
+
+    }
+
 //    @Given("I set the queryParam '{str}' with encoded value '{str}'")
 //    public void setRequestWithEncodedParam(String param, String value) {
 //        request.queryParam(param, StringHelper.urlEncode(value));
 //    }
 //
 //
-//    @Given("I set the queryParam '{str}' with value from properties file")
-//    public void setRequestParamFromProperties(String param) {
-//        request.queryParam(param, PropertyReader.getProperty(param));
-//    }
+    @Given("^I set the parameter(.*) with value from properties file$")
+    public void setRequestParamFromProperties(String param) {
+        request.queryParam(param,param);
+    }
 
     @Given("^I set the request header (.*) with value (.*)$")
     public void setRequestHeader(String header, String value) {
