@@ -16,7 +16,7 @@ module.exports = {
         }
     },
     pushResults: false,
-    featuresDir: 'src/resources/features/run',
+    featuresDir: 'src/test/resources/features/run',
     /* Optional: default testcase attributes when pushing new testcases to TestRail
     newTestCase: {
       section_id: 1,
@@ -28,7 +28,10 @@ module.exports = {
     },
     */
     overwrite: {
-        local: false, // 'ask' will show you the differences and force you to confirm before overwriting
-        remote: 'ask'
+        local: 'ask', // 'ask' will show you the differences and force you to confirm before overwriting
+        remote: false
+    },
+    directoryStructure: {
+        type: 'section:name'
     },
 };
