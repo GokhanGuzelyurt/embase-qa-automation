@@ -21,6 +21,8 @@ import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
+import po.common.FileHelper;
+import po.common.StringHelper;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -31,8 +33,8 @@ import javax.xml.xpath.XPathFactory;
 import java.io.StringReader;
 import java.lang.invoke.MethodHandles;
 
-import static embase.tests.StepDefs.CommonSteps.BASE_URL;
-import static embase.tests.StepDefs.CommonSteps.PUBLIC_API_DOMAIN;
+import static embase.tests.StepDefs.CommonSteps.*;
+import static java.lang.System.getProperty;
 
 
 public class HttpRequestResponseStepDef {
@@ -41,12 +43,13 @@ public class HttpRequestResponseStepDef {
     private Response response = null;
     private RequestSpecification request;
     private boolean printRequestToConsole = true;
-    private boolean printResponseToConsole = true;
+    private boolean printResponseToConsole = false;
     private int timeoutSeconds = 300;
     private String concatenatedBody;
     private String concatenatedUrl;
     private RestAssuredConfig config;
     private Cookie cookie;
+    String apikey;
 
 
 
@@ -107,9 +110,9 @@ public class HttpRequestResponseStepDef {
 //    }
 //
 //
-    @Given("^I set the parameter(.*) with value from properties file$")
-    public void setRequestParamFromProperties(String param) {
-        request.queryParam(param,param);
+    @Given("^I set the API KEY with value from properties file$")
+    public void setRequestParamFromProperties() {
+        request.queryParam(apikey,API_KEY);
     }
 
     @Given("^I set the request header (.*) with value (.*)$")
@@ -135,13 +138,13 @@ public class HttpRequestResponseStepDef {
 //        setConcatenatedRequestBody(body);
 //    }
 
-//    @Given("I concatenate the request body with URL encoded content from file '{str}'")
-//    public void setConcatenatedRequestBodyFromFileUrlEncoded(String fileName) {
-//        String body = FileHelper.readFile(fileName);
-//        setConcatenatedRequestBody(StringHelper.urlEncode(body));
-//
-//
-//    }
+    @Given("^I concatenate the request body with URL encoded content from file (.*)$")
+    public void setConcatenatedRequestBodyFromFileUrlEncoded(String fileName) {
+        String body = FileHelper.readFile(fileName);
+        setConcatenatedRequestBody(StringHelper.urlEncode(body));
+
+
+    }
 
 //
 //    @Given("I concatenate the request body with value from property '{str}'")
@@ -216,11 +219,11 @@ public class HttpRequestResponseStepDef {
         }
     }
 
-//    @Then("the response body contains element '{str}' with content matching case insensitive text from file '{str}'")
-//    public void verifyResponseBodyElementValueFromFile(String element, String fileName) {
-//        String value = FileHelper.readFile(fileName);
-//        verifyResponseBodyElementValue(element.toLowerCase(), value.toLowerCase());
-//    }
+    @Then("^the response body contains element (.*) with content matching case insensitive text from file (.*)$")
+    public void verifyResponseBodyElementValueFromFile(String element, String fileName) {
+        String value = FileHelper.readFile(fileName);
+        verifyResponseBodyElementValue(element.toLowerCase(), value.toLowerCase());
+    }
 
 
     @Then("^the response body contains element (.*) with numeric value equal to (.*)$")
@@ -229,9 +232,10 @@ public class HttpRequestResponseStepDef {
         Assertions.assertThat(elementValueFromResponse).describedAs("Element in response body does not match expected value").isEqualTo(value);
     }
 
-    @Then("^the response body contains element (.*) with numeric value greater than(.*)$")
+    @Then("^the response body contains element (.*) with numeric value greater than (.*)$")
     public void verifyResponseBodyElementNumericValueGreater(String element, int value) {
         int elementValueFromResponse = Integer.parseInt(response.then().extract().path(element).toString());
+        System.out.println("The JSON response is" +elementValueFromResponse);
         Assertions.assertThat(elementValueFromResponse).describedAs("Element in response body does not match expected value").isGreaterThan(value);
     }
 
