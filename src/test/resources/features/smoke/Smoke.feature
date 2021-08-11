@@ -27,7 +27,7 @@ Feature: Smoke tests
     And user opens Email Alerts page
     And user selects the email alert '$uniqueAlertName'
     Then email alert details are as follows:
-      | query | alertName        | comments | emailAddresses           | emailFormat | contentSelection | frequency            | alertSent            | articles | lastResults | lastSent     |
+      | query | alertName        | comments | emailAddresses           | emailFormat | contentSelection | frequency               | alertSent            | articles | lastResults | lastSent     |
       | heart | $uniqueAlertName |          | cmittesters@elsevier.com | HTML        | Citations only   | Every week on Wednesday | Alert is always sent | Included | n/a         | not sent yet |
 
 
