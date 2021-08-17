@@ -54,7 +54,8 @@ public class FeatureFile {
                 text += scenario.getPreconds() + "\n";
             text += scenario.getIdString() + "\n";
             text += scenario.getTitle() + "\n";
-            text += scenario.getSteps().replace("\u00a0", "") + "\n";
+            text += scenario.getSteps() + "\n";
+            text = text.replace("\u00a0", "");
         }
         return text;
     }

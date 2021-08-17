@@ -14,16 +14,19 @@ import java.util.ArrayList;
 public class TestRailIntegration {
 
     private static Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
-    public static String testRailUri = "https://elss.testrail.net";
+    public static String testRailUri = "";
     public static int projectID = 5; // Embase project
     public static int suiteId = 909;
     public static String testRailUserName = "autotest@quosa.com";
     public static String testRailApiKey = "q0aHai6jAalmaixZibT7-w3mxw/QiQmzdO0ZwU2Iw";
     private static File runPath = Paths.get("src", "test", "resources", "features", "run").toFile();
     private static ArrayList<FeatureFile> featureFiles;
-    public static int runId = 2911;
+    private static int runId = 0; //2911
 
     public static void main(String[] args) throws IOException {
+        if (System.getenv("testRun") != null) {
+            runId = Integer.parseInt(System.getenv("testRun"));
+        }
         logger.info("Get feature files from TestRail.");
         FileUtils.forceMkdir(runPath);
         FileUtils.cleanDirectory(runPath);
@@ -41,9 +44,9 @@ public class TestRailIntegration {
                 featureFiles.add(new FeatureFile(s.getId(), s.getName(), s.getDescription()));
         }
 
-        ArrayList<Test> testsInRun = TestRailHelper.getTestsInRun(2911);
+        ArrayList<Test> testsInRun = null;
         if (runId != 0) {
-            testsInRun = TestRailHelper.getTestsInRun(2911);
+            testsInRun = TestRailHelper.getTestsInRun(runId);
         }
 
         // get all cases and put the cases in the featureFiles array

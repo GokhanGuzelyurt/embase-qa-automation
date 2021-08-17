@@ -48,8 +48,6 @@ spec:
 
         choice(name: 'driver', choices: ['chrome', 'firefox'], description: 'Webdriver')
 
-        choice(name: 'headless', choices: ['true', 'false'], description: 'Headless webdriver')
-
         choice(name: 'testGroup', choices: ['none', '1/2', '2/2', '1/4', '2/4', '3/4', '4/4'], description: 'Parallel execution group')
   }
 
