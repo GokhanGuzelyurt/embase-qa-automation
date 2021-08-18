@@ -104,7 +104,7 @@ spec:
       }
     }
 
-        // for the purposes of getting mvn dependencies and trigger TestRail workaround
+        //  getting .feature files from TestRail
     stage('TestRail integration') {
       steps {
         echo 'Maven test compile'

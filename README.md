@@ -1,11 +1,19 @@
-When all dependencies are set (npm install) we are ready to run BDD tests.
 
-Steps to run BDD tests:
+### To download the .feature files from TestRail into the /run folder:
+Runs the main() method in the TestRailIntegration class
+```
+mvn clean exec:java -Dexec.classpathScope="test" -Dexec.mainClass=utils.TestRailIntegration
+```
 
-first of all let's download existing test cases from a created test plan / run in TestRail:
 
-get test plan ID / run ID from TestRail
-enter this / these value(s) in the corresponding field(s) in config.js, e.g. like in line below:
-this.testRailPlanID = env.testPlanId ? env.testPlanId : '2315'
-run or execute the command: npm run cucumber-testrail-sync
-downloaded features are available in the folder: cypress/integration/features
+### To run tests
+
+Pass a value for environment (defined in serenity.conf). If missing it will be "default".
+```
+mvn clean integration-test -Denvironment=prod
+```
+
+Run specific cucumber tags
+```
+mvn clean integration-test -Denvironment=cert -Dcucumber.options="--tags '@C392040' --tags 'not @testrail'" 
+```
