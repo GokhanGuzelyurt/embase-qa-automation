@@ -64,8 +64,6 @@ public class CommonSteps {
             PUBLIC_API_DOMAIN= getProperty("publicApiDomain");
             API_KEY= getProperty("apikey");
             INST_TOKEN= getProperty("insttoken");
-
-
         }
     }
 
