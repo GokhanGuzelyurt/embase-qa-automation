@@ -51,12 +51,11 @@ public class HttpRequestResponseStepDef {
 
 
     @Before(order = 5)
-    public void setupTest() {
+    public void setupBeTest() {
         if (CommonSteps.IS_BE_SCENARIO) {
-//            .info("Before BE test");
+            logger.info("Before BE test");
+
             // Setting timeout limits - TODO - Needs to be tested
-
-
             config = RestAssured.config()
                     .httpClient(HttpClientConfig.httpClientConfig()
                             .setParam(CoreConnectionPNames.CONNECTION_TIMEOUT, timeoutSeconds * 1000)

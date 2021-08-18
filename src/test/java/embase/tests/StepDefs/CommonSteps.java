@@ -28,7 +28,6 @@ public class CommonSteps {
     public static String API_KEY;
     public static String INST_TOKEN;
 
-
     @Managed
     WebDriver driver;
 
@@ -37,6 +36,7 @@ public class CommonSteps {
 
     @Before(order = 1)
     public void setUp(Scenario scenario) {
+        logger.info("-- BEFORE --");
         logger.info("Scenario Cucumber ID: " + scenario.getId());
         logger.info("Scenario Name: " + scenario.getName());
         logger.info("Scenario lines: " + scenario.getLines().toString());
@@ -52,7 +52,6 @@ public class CommonSteps {
         }
 
         if (!IS_BE_SCENARIO) {
-            logger.info("-- BEFORE --");
             getBuildNumber();
             logger.info("Build number EMB_BUILD_NUMBER: " + EMB_BUILD_NUMBER);
 
@@ -60,7 +59,7 @@ public class CommonSteps {
             USER_EMAIL = getProperty("user.email");
             USER_PASSWORD = getProperty("user.password");
         } else {
-            //getting base url
+            // getting base url to be used in BE scenarios
             BASE_URL = getProperty("webdriver.base.url");
             PUBLIC_API_DOMAIN= getProperty("publicApiDomain");
             API_KEY= getProperty("apikey");

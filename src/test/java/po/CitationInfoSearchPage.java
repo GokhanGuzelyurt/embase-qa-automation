@@ -71,7 +71,7 @@ public class CitationInfoSearchPage extends BasePage {
     @FindBy(xpath = "//span[contains(@class,'LinkButton-module_content__2F1Lc')][contains(text(),'Specify name variants')]")
     public WebElement authorNameVariantsLink;
 
-    @FindBy(xpath = "//span[contains(@class='LinkButton-module_content__2F1Lc']/text()[2]")
+    @FindBy(xpath = "/html/body/div[9]/div/div[2]/div/div[2]/div/button/span")
     public WebElement selectAllLink;
 
     @FindBy(id = "publication-year-from")
@@ -114,6 +114,7 @@ public class CitationInfoSearchPage extends BasePage {
     public WebElement authorVariantsCheckboxOptions;
 
 
+
     public void executeArticleSearch(String articleTitle, String authorName, String journalTitle, String journalTitleExact, String ABBRJournalTitle, String ABBRJournalTitleExact,
                                      String ISSN, String CODEN, String DOI, String volume, String issue, String firstPage, String pubYears, String fromYear, String toYear) {
         logger.info("Fills in the search query, clicks the Search button");
@@ -129,9 +130,9 @@ public class CitationInfoSearchPage extends BasePage {
                                         String ISSN, String CODEN, String DOI, String volume, String issue, String firstPage, String pubYears, String fromYear, String toYear) {
         logger.info("Enter search query");
 
-        boolean booljournalTitleChk = Boolean.parseBoolean(journalTitleExact);
+        boolean boolJournalTitleChk = Boolean.parseBoolean(journalTitleExact);
         boolean boolABBRChk = Boolean.parseBoolean(ABBRJournalTitleExact);
-        boolean boolpubYears = Boolean.parseBoolean(pubYears);
+        boolean boolPubYears = Boolean.parseBoolean(pubYears);
         WebElement journalTitleExactCheckBox = getDriver().findElement(By.xpath("//*[contains(@id,'journal-title-exact')]"));
         WebElement abbrJournalTitleExactCheckBox = getDriver().findElement(By.xpath("//*[contains(@id,'abbr-journal-title-exact')]"));
         WebElement publicationYearsCheckBox = getDriver().findElement(By.xpath("//*[contains(@id,'is-publication-year')]"));
@@ -152,8 +153,7 @@ public class CitationInfoSearchPage extends BasePage {
             journalTitleField.clear();
             journalTitleField.sendKeys(journalTitle);
         }
-        if (booljournalTitleChk) {
-//
+        if (boolJournalTitleChk) {
             checkByScript(journalTitleExactCheckBox);
         } else {
             uncheckByScript(journalTitleExactCheckBox);
@@ -174,22 +174,18 @@ public class CitationInfoSearchPage extends BasePage {
             ISSNField.sendKeys(ISSN);
         }
         if (!CODEN.isEmpty()) {
-
             CODENField.clear();
             CODENField.sendKeys(CODEN);
         }
         if (!DOI.isEmpty()) {
-
             DOIField.clear();
             DOIField.sendKeys(DOI);
         }
         if (!volume.isEmpty()) {
-
             volumeField.clear();
             volumeField.sendKeys(volume);
         }
         if (!issue.isEmpty()) {
-
             issueField.clear();
             issueField.sendKeys(issue);
         }
@@ -197,7 +193,7 @@ public class CitationInfoSearchPage extends BasePage {
             firstPageField.clear();
             firstPageField.sendKeys(firstPage);
         }
-        if (boolpubYears) {
+        if (boolPubYears) {
             checkByScript(publicationYearsCheckBox);
         } else {
             uncheckByScript(publicationYearsCheckBox);
@@ -244,8 +240,7 @@ public class CitationInfoSearchPage extends BasePage {
     }
 
     public void clickSelectAll() {
-        WebElement element= getDriver().findElement(By.xpath("/html/body/div[9]/div/div[2]/div/div[2]/div/button/span"));
-        element.click();
+        selectAllLink.click();
     }
 
 }
