@@ -20,6 +20,8 @@ import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
+import po.common.FileHelper;
+import po.common.StringHelper;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -30,7 +32,7 @@ import javax.xml.xpath.XPathFactory;
 import java.io.StringReader;
 import java.lang.invoke.MethodHandles;
 
-import static embase.tests.StepDefs.CommonSteps.BASE_URL;
+import static embase.tests.StepDefs.CommonSteps.*;
 
 
 public class HttpRequestResponseStepDef {
@@ -45,6 +47,7 @@ public class HttpRequestResponseStepDef {
     private String concatenatedUrl;
     private RestAssuredConfig config;
     private Cookie cookie;
+    String apikey;
 
 
     @Before(order = 5)
@@ -74,13 +77,6 @@ public class HttpRequestResponseStepDef {
         request.basePath(endpoint);
     }
 
-//    @Given("I set the Public API endpoint for the http request to (.*)$")
-//    public void setPublicApiRequestEndpoint(String endpoint) {
-//        RestAssured.baseURI = getProperty("publicApiDomain");
-//        request = RestAssured.given();
-//        setRequestEndpoint(endpoint);
-//    }
-
     @Given("^I concatenate the value (.*)to the URL$")
     public void setConcatenatedRequestUrl(String value) {
         concatenatedUrl += value;
@@ -93,16 +89,24 @@ public class HttpRequestResponseStepDef {
 
     }
 
-//    @Given("I set the queryParam '{str}' with encoded value '{str}'")
+    @Given("^I set the Public API endpoint for the http request to (.*)$")
+    public void setPublicApiRequestEndpoint(String endpoint) {
+        RestAssured.baseURI = PUBLIC_API_DOMAIN;
+        System.out.println(PUBLIC_API_DOMAIN);
+        request = RestAssured.given().config(config);
+        request.basePath(endpoint);
+    }
+
+    //    @Given("I set the queryParam '{str}' with encoded value '{str}'")
 //    public void setRequestWithEncodedParam(String param, String value) {
 //        request.queryParam(param, StringHelper.urlEncode(value));
 //    }
 //
 //
-//    @Given("I set the queryParam '{str}' with value from properties file")
-//    public void setRequestParamFromProperties(String param) {
-//        request.queryParam(param, PropertyReader.getProperty(param));
-//    }
+    @Given("^I set the API KEY with value from properties file$")
+    public void setRequestParamFromProperties() {
+        request.queryParam(apikey, API_KEY);
+    }
 
     @Given("^I set the request header (.*) with value (.*)$")
     public void setRequestHeader(String header, String value) {
@@ -127,13 +131,11 @@ public class HttpRequestResponseStepDef {
 //        setConcatenatedRequestBody(body);
 //    }
 
-//    @Given("I concatenate the request body with URL encoded content from file '{str}'")
-//    public void setConcatenatedRequestBodyFromFileUrlEncoded(String fileName) {
-//        String body = FileHelper.readFile(fileName);
-//        setConcatenatedRequestBody(StringHelper.urlEncode(body));
-//
-//
-//    }
+    @Given("^I concatenate the request body with URL encoded content from file (.*)$")
+    public void setConcatenatedRequestBodyFromFileUrlEncoded(String fileName) {
+        String body = FileHelper.readFile(fileName);
+        setConcatenatedRequestBody(StringHelper.urlEncode(body));
+    }
 
 //
 //    @Given("I concatenate the request body with value from property '{str}'")
@@ -188,8 +190,6 @@ public class HttpRequestResponseStepDef {
     @And("I capture cookies from the authentication method")
     public void captureCookies() {
         cookie = response.getDetailedCookie("SESSION");
-
-
     }
 
     @And("I set the cookies captured in the request body")
@@ -208,11 +208,11 @@ public class HttpRequestResponseStepDef {
         }
     }
 
-//    @Then("the response body contains element '{str}' with content matching case insensitive text from file '{str}'")
-//    public void verifyResponseBodyElementValueFromFile(String element, String fileName) {
-//        String value = FileHelper.readFile(fileName);
-//        verifyResponseBodyElementValue(element.toLowerCase(), value.toLowerCase());
-//    }
+    @Then("^the response body contains element (.*) with content matching case insensitive text from file (.*)$")
+    public void verifyResponseBodyElementValueFromFile(String element, String fileName) {
+        String value = FileHelper.readFile(fileName);
+        verifyResponseBodyElementValue(element.toLowerCase(), value.toLowerCase());
+    }
 
 
     @Then("^the response body contains element (.*) with numeric value equal to (.*)$")
@@ -221,9 +221,10 @@ public class HttpRequestResponseStepDef {
         Assertions.assertThat(elementValueFromResponse).describedAs("Element in response body does not match expected value").isEqualTo(value);
     }
 
-    @Then("^the response body contains element (.*) with numeric value greater than(.*)$")
+    @Then("^the response body contains element (.*) with numeric value greater than (.*)$")
     public void verifyResponseBodyElementNumericValueGreater(String element, int value) {
         int elementValueFromResponse = Integer.parseInt(response.then().extract().path(element).toString());
+        System.out.println("The JSON response is" + elementValueFromResponse);
         Assertions.assertThat(elementValueFromResponse).describedAs("Element in response body does not match expected value").isGreaterThan(value);
     }
 

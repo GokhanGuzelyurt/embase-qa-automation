@@ -25,6 +25,9 @@ public class CommonSteps {
     public static String USER_EMAIL;
     public static String USER_PASSWORD;
     public static boolean IS_BE_SCENARIO = false;
+    public static String PUBLIC_API_DOMAIN;
+    public static String API_KEY;
+    public static String INST_TOKEN;
 
     @Managed
     WebDriver driver;
@@ -59,6 +62,9 @@ public class CommonSteps {
         } else {
             // getting base url to be used in BE scenarios
             BASE_URL = getProperty("webdriver.base.url");
+            PUBLIC_API_DOMAIN= getProperty("publicApiDomain");
+            API_KEY= getProperty("apikey");
+            INST_TOKEN= getProperty("insttoken");
         }
     }
 
