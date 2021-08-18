@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import po.ConfigPage;
 import po.common.BasePage;
+import utils.TestRailIntegration;
 
 import java.lang.invoke.MethodHandles;
 
@@ -64,6 +65,10 @@ public class CommonSteps {
 
     @After
     public void tearDown() {
+        if (TestRailIntegration.SEND_RESULTS_TESTRAIL.equals("true")) {
+            logger.info("Sending results to TestRail.");
+            // TODO call method to send results to TestRail
+        }
         logger.info("-- AFTER --");
         logger.info("Closing driver");
         driver.close();
