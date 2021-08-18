@@ -19,7 +19,6 @@ public class TestRailIntegration {
     public static String TESTRAIL_URI = properties.getProperty("testRailUri");
     public static int PROJECT_ID = Integer.parseInt(properties.getProperty("projectId")); // Embase project
     public static int SUITE_ID = Integer.parseInt(properties.getProperty("suiteId"));
-    ;
     public static String TESTRAIL_USERNAME = properties.getProperty("testRailUserName");
     public static String TESTRAIL_APIKEY = properties.getProperty("testRailApiKey");
     private static File runPath = Paths.get("src", "test", "resources", "features", "run").toFile();
@@ -39,14 +38,15 @@ public class TestRailIntegration {
 
     private static void getAllFeatureFiles() {
 
-        featureFiles = new ArrayList<>();
         // get all sections and put in featureFiles array
+        featureFiles = new ArrayList<>();
         ArrayList<Section> sections = TestRailHelper.getSections();
         for (Section s : sections) {
             if (s.getName().contains(".feature"))
                 featureFiles.add(new FeatureFile(s.getId(), s.getName(), s.getDescription()));
         }
 
+        // get list of cases in TestRun if applicable
         ArrayList<Test> testsInRun = null;
         if (RUN_ID != 0) {
             logger.info("Getting cases from Test Run = " + RUN_ID);
