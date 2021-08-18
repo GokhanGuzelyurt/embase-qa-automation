@@ -15,7 +15,7 @@ import java.util.Properties;
 public class TestRailIntegration {
 
     private static Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
-    private static Properties properties = PropertiesReader.getProperties("src/test/resources/conf/testrail.properties");
+    public static Properties properties = PropertiesReader.getProperties("src/test/resources/conf/testrail.properties");
     public static String TESTRAIL_URI = properties.getProperty("testRailUri");
     public static int PROJECT_ID = Integer.parseInt(properties.getProperty("projectId")); // Embase project
     public static int SUITE_ID = Integer.parseInt(properties.getProperty("suiteId"));
@@ -23,7 +23,7 @@ public class TestRailIntegration {
     public static String TESTRAIL_APIKEY = properties.getProperty("testRailApiKey");
     private static File runPath = Paths.get("src", "test", "resources", "features", "run").toFile();
     private static ArrayList<FeatureFile> featureFiles;
-    private static int RUN_ID = Integer.parseInt(properties.getProperty("testRunId"));
+    public static int RUN_ID = Integer.parseInt(properties.getProperty("testRunId"));
 
     public static void main(String[] args) throws IOException {
         if (System.getenv("testRun") != null) {
@@ -55,6 +55,7 @@ public class TestRailIntegration {
 
         // get all cases and put the cases in the featureFiles array
         ArrayList<Case> cases = TestRailHelper.getCases();
+        int scenarioCounter = 0;
         for (FeatureFile f : featureFiles) {
             for (Case c : cases) {
                 if (c.getSection_id() == f.getSectionId()) {
@@ -62,14 +63,18 @@ public class TestRailIntegration {
                         for (Test t : testsInRun) {
                             if (t.getCase_id() == c.getId()) {
                                 f.getScenarios().add(new FeatureFileScenario(c.getId(), c.getTitle(), c.getCustom_preconds(), c.getCustom_steps()));
+                                scenarioCounter++;
                             }
                         }
                     else {
                         f.getScenarios().add(new FeatureFileScenario(c.getId(), c.getTitle(), c.getCustom_preconds(), c.getCustom_steps()));
+                        scenarioCounter++;
                     }
                 }
             }
         }
+        logger.info("Total amount of .feature files: " + featureFiles.size());
+        logger.info("Total amount of Scenarios: " + scenarioCounter);
     }
 
     public static void writeToFiles() {
