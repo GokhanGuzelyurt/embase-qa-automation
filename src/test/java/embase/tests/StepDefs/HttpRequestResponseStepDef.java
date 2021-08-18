@@ -63,7 +63,6 @@ public class HttpRequestResponseStepDef {
                             .setParam(ClientPNames.COOKIE_POLICY, CookiePolicy.BROWSER_COMPATIBILITY));
 
             RestAssured.baseURI = BASE_URL;
-
             logger.info("Setting RestAssured baseURI to: " + BASE_URL);
 
             concatenatedBody = "";
@@ -96,8 +95,6 @@ public class HttpRequestResponseStepDef {
         System.out.println(PUBLIC_API_DOMAIN);
         request = RestAssured.given().config(config);
         request.basePath(endpoint);
-
-
     }
 
     //    @Given("I set the queryParam '{str}' with encoded value '{str}'")
@@ -138,8 +135,6 @@ public class HttpRequestResponseStepDef {
     public void setConcatenatedRequestBodyFromFileUrlEncoded(String fileName) {
         String body = FileHelper.readFile(fileName);
         setConcatenatedRequestBody(StringHelper.urlEncode(body));
-
-
     }
 
 //
@@ -195,8 +190,6 @@ public class HttpRequestResponseStepDef {
     @And("I capture cookies from the authentication method")
     public void captureCookies() {
         cookie = response.getDetailedCookie("SESSION");
-
-
     }
 
     @And("I set the cookies captured in the request body")
