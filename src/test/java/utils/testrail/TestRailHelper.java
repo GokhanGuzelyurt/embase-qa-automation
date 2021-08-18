@@ -19,14 +19,14 @@ public class TestRailHelper {
 
     public static ArrayList<Section> getSections() {
         ArrayList<Section> results = new ArrayList<>();
-        APIClient client = new APIClient(TestRailIntegration.testRailUri);
-        client.setUser(TestRailIntegration.testRailUserName);
-        client.setPassword(TestRailIntegration.testRailApiKey);
+        APIClient client = new APIClient(TestRailIntegration.TESTRAIL_URI);
+        client.setUser(TestRailIntegration.TESTRAIL_USERNAME);
+        client.setPassword(TestRailIntegration.TESTRAIL_APIKEY);
 
         try {
             // getting Sections
             Gson gson = new Gson();
-            results = gson.fromJson(client.sendGet("get_sections/" + TestRailIntegration.projectID + "&suite_id=" + TestRailIntegration.suiteId).toString(), Sections.class);
+            results = gson.fromJson(client.sendGet("get_sections/" + TestRailIntegration.PROJECT_ID + "&suite_id=" + TestRailIntegration.SUITE_ID).toString(), Sections.class);
 
         } catch (IOException | APIException e) {
             e.printStackTrace();
@@ -36,14 +36,14 @@ public class TestRailHelper {
 
     public static ArrayList<Case> getCases() {
         ArrayList<Case> results = new ArrayList<>();
-        APIClient client = new APIClient(TestRailIntegration.testRailUri);
-        client.setUser(TestRailIntegration.testRailUserName);
-        client.setPassword(TestRailIntegration.testRailApiKey);
+        APIClient client = new APIClient(TestRailIntegration.TESTRAIL_URI);
+        client.setUser(TestRailIntegration.TESTRAIL_USERNAME);
+        client.setPassword(TestRailIntegration.TESTRAIL_APIKEY);
 
         try {
             // getting Cases
             Gson gson = new Gson();
-            results = gson.fromJson(client.sendGet("get_cases/" + TestRailIntegration.projectID + "&suite_id=" + TestRailIntegration.suiteId).toString(), Cases.class);
+            results = gson.fromJson(client.sendGet("get_cases/" + TestRailIntegration.PROJECT_ID + "&suite_id=" + TestRailIntegration.SUITE_ID).toString(), Cases.class);
         } catch (IOException | APIException e) {
             e.printStackTrace();
         }
@@ -52,9 +52,9 @@ public class TestRailHelper {
 
     public static ArrayList<Test> getTestsInRun(int runId) {
         ArrayList<Test> results = new ArrayList<>();
-        APIClient client = new APIClient(TestRailIntegration.testRailUri);
-        client.setUser(TestRailIntegration.testRailUserName);
-        client.setPassword(TestRailIntegration.testRailApiKey);
+        APIClient client = new APIClient(TestRailIntegration.TESTRAIL_URI);
+        client.setUser(TestRailIntegration.TESTRAIL_USERNAME);
+        client.setPassword(TestRailIntegration.TESTRAIL_APIKEY);
 
         try {
             // getting Tests
@@ -70,9 +70,9 @@ public class TestRailHelper {
     public static int getLatestResultID(int runId, int caseId) {
         int resultId = 0;
 
-        APIClient client = new APIClient(TestRailIntegration.testRailUri);
-        client.setUser(TestRailIntegration.testRailUserName);
-        client.setPassword(TestRailIntegration.testRailApiKey);
+        APIClient client = new APIClient(TestRailIntegration.TESTRAIL_URI);
+        client.setUser(TestRailIntegration.TESTRAIL_USERNAME);
+        client.setPassword(TestRailIntegration.TESTRAIL_APIKEY);
 
         JSONArray responseJsonResultsArray = null;
         try {
