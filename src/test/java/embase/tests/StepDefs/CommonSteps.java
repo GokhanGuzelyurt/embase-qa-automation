@@ -73,7 +73,7 @@ public class CommonSteps {
     public void tearDown() {
         if (TestRailIntegration.SEND_RESULTS_TESTRAIL.equals("true")) {
             logger.info("Sending results to TestRail.");
-            // TODO call method to send results to TestRail
+            // TODO call method to send results to TestRail EMBASE-13468
         }
         logger.info("-- AFTER --");
         logger.info("Closing driver");
