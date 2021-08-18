@@ -15,7 +15,6 @@ import org.apache.http.client.params.ClientPNames;
 import org.apache.http.client.params.CookiePolicy;
 import org.apache.http.params.CoreConnectionPNames;
 import org.assertj.core.api.Assertions;
-import org.jruby.RubyProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
@@ -34,7 +33,6 @@ import java.io.StringReader;
 import java.lang.invoke.MethodHandles;
 
 import static embase.tests.StepDefs.CommonSteps.*;
-import static java.lang.System.getProperty;
 
 
 public class HttpRequestResponseStepDef {
@@ -50,7 +48,6 @@ public class HttpRequestResponseStepDef {
     private RestAssuredConfig config;
     private Cookie cookie;
     String apikey;
-
 
 
     @Before(order = 5)
@@ -99,12 +96,12 @@ public class HttpRequestResponseStepDef {
         RestAssured.baseURI = PUBLIC_API_DOMAIN;
         System.out.println(PUBLIC_API_DOMAIN);
         request = RestAssured.given().config(config);
-       request.basePath(endpoint);
+        request.basePath(endpoint);
 
 
     }
 
-//    @Given("I set the queryParam '{str}' with encoded value '{str}'")
+    //    @Given("I set the queryParam '{str}' with encoded value '{str}'")
 //    public void setRequestWithEncodedParam(String param, String value) {
 //        request.queryParam(param, StringHelper.urlEncode(value));
 //    }
@@ -112,7 +109,7 @@ public class HttpRequestResponseStepDef {
 //
     @Given("^I set the API KEY with value from properties file$")
     public void setRequestParamFromProperties() {
-        request.queryParam(apikey,API_KEY);
+        request.queryParam(apikey, API_KEY);
     }
 
     @Given("^I set the request header (.*) with value (.*)$")
@@ -235,7 +232,7 @@ public class HttpRequestResponseStepDef {
     @Then("^the response body contains element (.*) with numeric value greater than (.*)$")
     public void verifyResponseBodyElementNumericValueGreater(String element, int value) {
         int elementValueFromResponse = Integer.parseInt(response.then().extract().path(element).toString());
-        System.out.println("The JSON response is" +elementValueFromResponse);
+        System.out.println("The JSON response is" + elementValueFromResponse);
         Assertions.assertThat(elementValueFromResponse).describedAs("Element in response body does not match expected value").isGreaterThan(value);
     }
 
