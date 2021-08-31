@@ -72,6 +72,7 @@ public class ResultsPage extends BasePage {
     }
 
     public void verifySearchQuery(String expectedQuery) {
+        // TODO: requires additional waiter because query field takes a second to update
         pleaseWaitPanel.waitUntilNotVisible();
         querySection.waitUntilVisible();
         searchField.waitUntilVisible();
