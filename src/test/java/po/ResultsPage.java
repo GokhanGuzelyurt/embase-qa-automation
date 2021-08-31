@@ -3,7 +3,6 @@ package po;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import org.assertj.core.api.Assertions;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,8 +13,6 @@ import po.sections.results.ResultList;
 import po.sections.results.SearchHistory;
 
 import java.lang.invoke.MethodHandles;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @DefaultUrl("page:results.page")
 public class ResultsPage extends BasePage {
@@ -43,6 +40,9 @@ public class ResultsPage extends BasePage {
     @FindBy(className = "queryContent")
     public WebElementFacade querySection;
 
+    @FindBy(id = "processSearchDialog") // parent id: a2bxw
+    public WebElementFacade pleaseWaitPanel;
+
 
     public void at() {
 //        searchField.isDisplayed();
@@ -51,7 +51,9 @@ public class ResultsPage extends BasePage {
     public void waitForRecordSectionIsLoaded() {
         logger.info("Wait for please wait to vanish");
         logger.info("Wait if 0 results page is not displayed");
-      querySection.waitUntilVisible();
+        querySection.waitUntilVisible();
+
+        // TODO: this is a lot of commented code - must be removed
 
 //            recordSectionFilled.isDisplayed();
 //            Assertions.assertThat(resultList.searchHitCounts.getText()).isNotBlank();
@@ -70,8 +72,9 @@ public class ResultsPage extends BasePage {
     }
 
     public void verifySearchQuery(String expectedQuery) {
+        pleaseWaitPanel.waitUntilNotVisible();
         querySection.waitUntilVisible();
         searchField.waitUntilVisible();
-        Assertions.assertThat(searchField.getValue()).describedAs(String.format("Query expected: <%s> but was: <%s>",expectedQuery,searchField.getValue())).isEqualToIgnoringCase(expectedQuery);
+        Assertions.assertThat(searchField.getValue()).describedAs(String.format("Query expected: <%s> but was: <%s>", expectedQuery, searchField.getValue())).isEqualToIgnoringCase(expectedQuery);
     }
 }
