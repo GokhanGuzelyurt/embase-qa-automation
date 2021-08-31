@@ -11,7 +11,7 @@ Feature: Citation Information tests
     And user enters Citation Information
       | articleTitle | authorName | journalTitle    | journalTitleExact | ABBRJournalTitle | ABBRJournalTitleExact | ISSN     | CODEN | DOI                                   | volume | issue | firstPage | pubYears | fromYear | toYear |
       | heart        | katakami n | atherosclerosis | true              | atherosclerosis  | true                  | 18791484 | athsb | 10.1016/j.atherosclerosis.2014.05.936 | 235    | 2     | 408       | true     | 2005     | 2018   |
-    Then search query is ''heart':ti AND 'katakami n':au AND 'atherosclerosis'/jt AND 'atherosclerosis'/ta AND '18791484':is AND 'athsb':cd AND '10.1016/j.atherosclerosis.2014.05.936':do AND '235':vi AND '2':ip AND '408':sp AND [2005-2018]/py'
+    Then search query is 'heart':ti AND 'katakami n':au AND 'atherosclerosis'/jt AND 'atherosclerosis'/ta AND '10.1016/j.atherosclerosis.2014.05.936':do AND 'athsb':cd AND '18791484':is AND '235':vi AND '2':ip AND '408':sp AND [2005-2018]/py
 
   @C461621
   Scenario: Verify search query for Citation search: Article title
