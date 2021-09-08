@@ -107,7 +107,19 @@ public class CommonSteps {
     private void sendResults(Scenario scenario) {
         if (TestRailIntegration.SEND_RESULTS_TESTRAIL.equals("true")) {
             logger.info("Sending results to TestRail.");
-            //
+
+
+            // get result from scenario
+
+
+            // update result in test run
+
+
+            // add screenshot to result in test run
+
+
+
+
             Field field = FieldUtils.getField(scenario.getClass(), "stepResults", true);
             field.setAccessible(true);
             List<Result> errors = Collections.emptyList();

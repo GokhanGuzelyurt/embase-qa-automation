@@ -96,18 +96,18 @@ public class TestRailHelper {
     // https://www.gurock.com/testrail/docs/api/reference/attachments#addattachmenttoresult
     // POST index.php?/api/v2/add_attachment_to_result/:result_id
 
-//    public static void attachScreenshotToResult(Screenshot screenshot, int resultId) {
-//
-//        APIClient client = new APIClient(TestRailIntegration.testRailUri);
-//        client.setUser(TestRailIntegration.testRailUserName);
-//        client.setPassword(TestRailIntegration.testRailApiKey);
-//
-//        try {
-//            JSONObject response = (JSONObject) client.sendPost("add_attachment_to_result/" + resultId,
-//                    screenshot.getFileName());
-//        } catch (IOException | APIException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public static void attachScreenshotToResult(Screenshot screenshot, int resultId) {
+
+        APIClient client = new APIClient(TestRailIntegration.TESTRAIL_URI);
+        client.setUser(TestRailIntegration.TESTRAIL_USERNAME);
+        client.setPassword(TestRailIntegration.TESTRAIL_APIKEY);
+
+        try {
+            JSONObject response = (JSONObject) client.sendPost("add_attachment_to_result/" + resultId,
+                    screenshot.getFileName());
+        } catch (IOException | APIException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
