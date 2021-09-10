@@ -46,7 +46,7 @@ public class CommonSteps {
     public static String PUBLIC_API_DOMAIN;
     public static String API_KEY;
     public static String INST_TOKEN;
-    public static String JENKINS_URL = System.getenv("JENKINS_URL");
+    public static String JENKINS_BUILD_URL = System.getenv("BUILD_URL");
     public static String SCREENSHOTS_FOLDER;
     private Screenshot screenshot;
 
@@ -110,7 +110,7 @@ public class CommonSteps {
             Result result = new Result();
             // TODO parametrize browser value
             String comment = "Build: " + EMB_BUILD_NUMBER + " - Browser: " + "chrome" +
-                    " - Env: " + BASE_URL + " - Jenkins Job URL: " + JENKINS_URL + " ";
+                    " - Env: " + BASE_URL + " - Jenkins Build URL: " + JENKINS_BUILD_URL + " ";
 
             // get result status from scenario
             if (scenario.isFailed()) {

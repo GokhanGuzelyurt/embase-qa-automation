@@ -27,7 +27,7 @@ public class MyCustomDriver implements DriverSource {
         if (System.getenv("headless") != null && System.getenv("headless").equals("true")) {
             logger.info("Headless environment variable set to true. Headless ChromeDriver mode: true");
             options.addArguments("--headless");
-        } else if (CommonSteps.JENKINS_URL != null) {
+        } else if (CommonSteps.JENKINS_BUILD_URL != null) {
             logger.info("Job is running in JENKINS. Headless ChromeDriver mode: true");
             options.addArguments("--headless");
         }
