@@ -100,7 +100,7 @@ spec:
       steps {
         echo 'Maven test compile'
         container('test-container') {
-            sh 'mvn --no-transfer-progress clean test-compile exec:java -Dexec.classpathScope=\\\"test\\\" -Dexec.mainClass=utils.TestRailIntegration'
+            sh 'mvn --no-transfer-progress clean test-compile exec:java -Dexec.classpathScope=test -Dexec.mainClass=utils.TestRailIntegration'
         }
       }
     }
