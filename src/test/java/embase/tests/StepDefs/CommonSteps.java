@@ -32,10 +32,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class CommonSteps {
 
@@ -109,29 +106,31 @@ public class CommonSteps {
         if (TestRailIntegration.SEND_RESULTS_TESTRAIL.equals("true")) {
             logger.info("Sending results to TestRail.");
 
-            // get errors list from Cucumber
-            List<cucumber.api.Result> errors = Collections.emptyList();
-            Field field = FieldUtils.getField(scenario.getClass(), "stepResults", true);
-            field.setAccessible(true);
-            try {
-                ArrayList<cucumber.api.Result> results = (ArrayList<cucumber.api.Result>) field.get(scenario);
-                results.stream().filter(e -> e.getErrorMessage() != null).collect(Collectors.toList());
-            } catch (Exception ignored) {
-            }
-
             // create Result object
             Result result = new Result();
-
             // TODO parametrize browser value
             String comment = "Build: " + EMB_BUILD_NUMBER + " - Browser: " + "chrome" +
                     " - Env: " + BASE_URL + " - Jenkins Job URL: " + JENKINS_URL + " ";
 
-
             // get result status from scenario
             if (scenario.isFailed()) {
+                // when scenario failed
+                // get errors list from Cucumber scenario
+                String errors = "";
+                Field field = FieldUtils.getField(scenario.getClass(), "stepResults", true);
+                field.setAccessible(true);
+                try {
+                    ArrayList<cucumber.api.Result> results = (ArrayList<cucumber.api.Result>) field.get(scenario);
+                    for (cucumber.api.Result res : results) {
+                        if (res.getError() != null)
+                            errors += res.getError().getMessage();
+                    }
+                } catch (Exception ignored) {
+                }
+
                 // add screenshot object to result
                 if (screenshot != null) {
-                    // Put the screenshot in a cucumber result custom field
+                    // Put the screenshot in result
                     result.setScreenshot(screenshot);
                 } else {
                     comment += "[ERROR] - No screenshot available. ";
@@ -140,13 +139,11 @@ public class CommonSteps {
                 if (scenario.getSourceTagNames().contains("@known")) {
                     // result is Known Issue (6)
                     result.setStatusId(6);
-                    result.setComment(comment + ":\n" + scenario.getName() + " - Known Issue:\n"
-                            + errors.get(0).getError().getMessage());
+                    result.setComment(comment + ":\n" + scenario.getName() + " - Known Issue:\n" + errors);
                 } else {
                     // statusId 4 = retest / 5= failed
                     result.setStatusId(5);
-                    result.setComment(comment + ":\n" + scenario.getName() + " - Failed:\n"
-                            + errors.get(0).getError().getMessage());
+                    result.setComment(comment + ":\n" + scenario.getName() + " - Failed:\n" + errors);
                 }
             } else {
                 result.setStatusId(1);
@@ -162,7 +159,7 @@ public class CommonSteps {
     }
 
     @After(order = 3)
-    private void takeScreenshot(Scenario scenario) {
+    public void takeScreenshot(Scenario scenario) {
         if (!IS_BE_SCENARIO) {
             logger.info("InitTests - takesScreenshot - After");
             if (scenario.isFailed()) try {
@@ -214,5 +211,6 @@ public class CommonSteps {
         return EnvironmentSpecificConfiguration.from(environmentVariables)
                 .getProperty(propertyName);
     }
+
 
 }

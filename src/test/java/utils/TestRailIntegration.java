@@ -103,16 +103,6 @@ public class TestRailIntegration {
         return Integer.parseInt(caseIds.get(0).replaceAll("[^0-9]", ""));
     }
 
-    public static int getTestIdFromCaseId(Result result) {
-        ArrayList<Test> tests = TestRailHelper.getTestsInRun(RUN_ID);
-        for (Test t : tests) {
-            if (t.getCase_id() == result.getCaseId()) {
-                return t.getId();
-            }
-        }
-        return 0;
-    }
-
     public static void sendResult(Result result) {
         TestRailHelper.addResultForCase(result);
         if (result.getStatusId() != 1) {
