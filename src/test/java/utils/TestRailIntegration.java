@@ -10,7 +10,10 @@ import java.io.*;
 import java.lang.invoke.MethodHandles;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 public class TestRailIntegration {
 
@@ -95,4 +98,22 @@ public class TestRailIntegration {
     }
 
 
+    public static int getCaseIdFromScenarioTags(Collection<String> sourceTagNames) {
+        List<String> caseIds = sourceTagNames.stream().filter(t -> t.matches("@C\\d+")).collect(Collectors.toList());
+        return Integer.parseInt(caseIds.get(0).replaceAll("[^0-9]", ""));
+    }
+
+    public static int getTestIdFromCaseId(Result result) {
+        ArrayList<Test> tests = TestRailHelper.getTestsInRun(RUN_ID);
+        for (Test t : tests) {
+            if (t.getCase_id() == result.getCaseId()) {
+                return t.getId();
+            }
+        }
+        return 0;
+    }
+
+    public static void sendResult(Result result) {
+        TestRailHelper.addResultForCase(result);
+    }
 }

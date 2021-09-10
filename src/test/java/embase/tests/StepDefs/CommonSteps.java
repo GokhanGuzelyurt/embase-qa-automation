@@ -77,20 +77,21 @@ public class CommonSteps {
         }
 
         if (!IS_BE_SCENARIO) {
+            // for FE scenarios
             getBuildNumber();
             logger.info("Build number EMB_BUILD_NUMBER: " + EMB_BUILD_NUMBER);
 
             // reading values from the conf file
             USER_EMAIL = getProperty("user.email");
             USER_PASSWORD = getProperty("user.password");
+            SCREENSHOTS_FOLDER = getProperty("screenshotsFolderName");
         } else {
-            // getting base url to be used in BE scenarios
-            BASE_URL = getProperty("webdriver.base.url");
+            // for BE scenarios
             PUBLIC_API_DOMAIN = getProperty("publicApiDomain");
             API_KEY = getProperty("apikey");
             INST_TOKEN = getProperty("insttoken");
-            SCREENSHOTS_FOLDER = getProperty("screenshotsFolderName");
         }
+        BASE_URL = getProperty("webdriver.base.url");
     }
 
 
@@ -104,41 +105,64 @@ public class CommonSteps {
     }
 
     @After(order = 2)
-    private void sendResults(Scenario scenario) {
+    public void sendResults(Scenario scenario) {
         if (TestRailIntegration.SEND_RESULTS_TESTRAIL.equals("true")) {
             logger.info("Sending results to TestRail.");
 
-
-            // get result from scenario
-
-
-            // update result in test run
-
-
-            // add screenshot to result in test run
-
-
-
-
+            // get errors list from Cucumber
+            List<cucumber.api.Result> errors = Collections.emptyList();
             Field field = FieldUtils.getField(scenario.getClass(), "stepResults", true);
             field.setAccessible(true);
-            List<Result> errors = Collections.emptyList();
             try {
-                //ArrayList<Result> results = (ArrayList<cucumber.api.Result>) field.get(scenario);
-               // errors = results.stream().filter(e -> e.getErrorMessage() != null).collect(Collectors.toList());
+                ArrayList<cucumber.api.Result> results = (ArrayList<cucumber.api.Result>) field.get(scenario);
+                results.stream().filter(e -> e.getErrorMessage() != null).collect(Collectors.toList());
             } catch (Exception ignored) {
             }
-            List<String> tags = (List<String>) scenario.getSourceTagNames();
-            List<String> caseIds = tags.stream().filter(t -> t.matches("@C\\d+")).collect(Collectors.toList());
+
+            // create Result object
+            Result result = new Result();
+
 
             // TODO parametrize browser
             String comment = "Build: " + EMB_BUILD_NUMBER + " - Browser: " + "chrome" +
                     " - Env: " + BASE_URL + " - Jenkins Job URL: " + JENKINS_URL + " ";
 
-            // send Result based on case id
-            Result result = new Result();
 
+            // get result status from scenario
+            if (scenario.isFailed()) {
+                // add screenshot object to result
+                if (screenshot != null) {
+                    // Put the screenshot in a cucumber result custom field
+                    result.setScreenshot(screenshot);
+                } else {
+                    comment += "[ERROR] - No screenshot available. ";
+                    logger.error("Error trying to get screenshot");
+                }
+                if (scenario.getSourceTagNames().contains("@known")) {
+                    // result is Known Issue (6)
+                    result.setStatusId(6);
+                    result.setComment(comment + ":\n" + scenario.getName() + " - Known Issue:\n"
+                            + errors.get(0).getError().getMessage());
+                } else {
+                    // statusId 4 = retest / 5= failed
+                    result.setStatusId(5);
+                    result.setComment(comment + ":\n" + scenario.getName() + " - Failed:\n"
+                            + errors.get(0).getError().getMessage());
+                }
+            } else {
+                result.setStatusId(1);
+                result.setComment(comment + ":\n" + scenario.getName() + " - Passed");
+            }
 
+            // get caseId from scenario
+            result.setCaseId(TestRailIntegration.getCaseIdFromScenarioTags(scenario.getSourceTagNames()));
+//            // get testId from testRun in TR
+//            result.setTestId(TestRailIntegration.getTestIdFromCaseId(result));
+
+            // update result in test run
+            TestRailIntegration.sendResult(result);
+
+            // add screenshot to result in test run
 
 
             // get LatestResultID
