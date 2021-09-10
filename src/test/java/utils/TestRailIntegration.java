@@ -115,5 +115,10 @@ public class TestRailIntegration {
 
     public static void sendResult(Result result) {
         TestRailHelper.addResultForCase(result);
+        if (result.getStatusId() != 1) {
+            logger.info("Sending screenshot to Result");
+            int latestResultId = TestRailHelper.getLatestResultID(RUN_ID, result.getCaseId());
+            TestRailHelper.attachScreenshotToResult(result.getScreenshot(), latestResultId);
+        }
     }
 }

@@ -122,8 +122,7 @@ public class CommonSteps {
             // create Result object
             Result result = new Result();
 
-
-            // TODO parametrize browser
+            // TODO parametrize browser value
             String comment = "Build: " + EMB_BUILD_NUMBER + " - Browser: " + "chrome" +
                     " - Env: " + BASE_URL + " - Jenkins Job URL: " + JENKINS_URL + " ";
 
@@ -156,20 +155,9 @@ public class CommonSteps {
 
             // get caseId from scenario
             result.setCaseId(TestRailIntegration.getCaseIdFromScenarioTags(scenario.getSourceTagNames()));
-//            // get testId from testRun in TR
-//            result.setTestId(TestRailIntegration.getTestIdFromCaseId(result));
 
             // update result in test run
             TestRailIntegration.sendResult(result);
-
-            // add screenshot to result in test run
-
-
-            // get LatestResultID
-
-            // send Screenshot to LatestResult
-
-
         }
     }
 
