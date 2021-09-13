@@ -27,12 +27,10 @@ public class TestRailIntegration {
     private static File runPath = Paths.get("src", "test", "resources", "features", "run").toFile();
     private static ArrayList<FeatureFile> featureFiles;
     public static String SEND_RESULTS_TESTRAIL = properties.getProperty("sendResultsToTestRail");
-    public static int RUN_ID = Integer.parseInt(properties.getProperty("testRunId"));
+    public static int RUN_ID = getRunId();
+
 
     public static void main(String[] args) throws IOException {
-        if (System.getenv("testRun") != null) {
-            RUN_ID = Integer.parseInt(System.getenv("testRun"));
-        }
         logger.info("Get feature files from TestRail.");
         FileUtils.forceMkdir(runPath);
         FileUtils.cleanDirectory(runPath);
@@ -104,14 +102,18 @@ public class TestRailIntegration {
     }
 
     public static void sendResult(Result result) {
-        if (System.getenv("testRun") != null) {
-            RUN_ID = Integer.parseInt(System.getenv("testRun"));
-        }
         TestRailHelper.addResultForCase(result);
         if (result.getStatusId() != 1) {
             logger.info("Sending screenshot to Result");
             int latestResultId = TestRailHelper.getLatestResultID(RUN_ID, result.getCaseId());
             TestRailHelper.attachScreenshotToResult(result.getScreenshot(), latestResultId);
         }
+    }
+
+    private static int getRunId() {
+        if (System.getenv("testRun") != null) {
+            return Integer.parseInt(System.getenv("testRun"));
+        }
+        return Integer.parseInt(properties.getProperty("testRunId"));
     }
 }
