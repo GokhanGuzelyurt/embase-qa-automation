@@ -104,6 +104,9 @@ public class TestRailIntegration {
     }
 
     public static void sendResult(Result result) {
+        if (System.getenv("testRun") != null) {
+            RUN_ID = Integer.parseInt(System.getenv("testRun"));
+        }
         TestRailHelper.addResultForCase(result);
         if (result.getStatusId() != 1) {
             logger.info("Sending screenshot to Result");
