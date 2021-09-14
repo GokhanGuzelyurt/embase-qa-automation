@@ -95,21 +95,12 @@ spec:
       }
     }
 
-    stage('Maven - Clean') {
-      steps {
-        echo 'Maven clean'
-        container('test-container') {
-            sh 'mvn --no-transfer-progress clean'
-        }
-      }
-    }
-
         //  getting .feature files from TestRail
     stage('TestRail integration') {
       steps {
         echo 'Maven test compile'
         container('test-container') {
-            sh 'mvn --no-transfer-progress test-compile exec:java -Dexec.classpathScope=\\\"test\\\" -Dexec.mainClass=utils.TestRailIntegration' 
+            sh 'mvn --no-transfer-progress clean test-compile exec:java -Dexec.classpathScope=test -Dexec.mainClass=utils.TestRailIntegration'
         }
       }
     }

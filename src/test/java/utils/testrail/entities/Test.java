@@ -2,12 +2,21 @@ package utils.testrail.entities;
 
 public class Test {
 
+    private int id;
     private int case_id;
     private int status_id;
     private int run_id;
 //    private String title;
 //    private String custom_steps;
 
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getCase_id() {
         return case_id;

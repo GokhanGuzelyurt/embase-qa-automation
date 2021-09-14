@@ -10,7 +10,10 @@ import java.io.*;
 import java.lang.invoke.MethodHandles;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 public class TestRailIntegration {
 
@@ -24,12 +27,10 @@ public class TestRailIntegration {
     private static File runPath = Paths.get("src", "test", "resources", "features", "run").toFile();
     private static ArrayList<FeatureFile> featureFiles;
     public static String SEND_RESULTS_TESTRAIL = properties.getProperty("sendResultsToTestRail");
-    public static int RUN_ID = Integer.parseInt(properties.getProperty("testRunId"));
+    public static int RUN_ID = getRunId();
+
 
     public static void main(String[] args) throws IOException {
-        if (System.getenv("testRun") != null) {
-            RUN_ID = Integer.parseInt(System.getenv("testRun"));
-        }
         logger.info("Get feature files from TestRail.");
         FileUtils.forceMkdir(runPath);
         FileUtils.cleanDirectory(runPath);
@@ -95,4 +96,24 @@ public class TestRailIntegration {
     }
 
 
+    public static int getCaseIdFromScenarioTags(Collection<String> sourceTagNames) {
+        List<String> caseIds = sourceTagNames.stream().filter(t -> t.matches("@C\\d+")).collect(Collectors.toList());
+        return Integer.parseInt(caseIds.get(0).replaceAll("[^0-9]", ""));
+    }
+
+    public static void sendResult(Result result) {
+        TestRailHelper.addResultForCase(result);
+        if (result.getStatusId() != 1) {
+            logger.info("Sending screenshot to Result");
+            int latestResultId = TestRailHelper.getLatestResultID(RUN_ID, result.getCaseId());
+            TestRailHelper.attachScreenshotToResult(result.getScreenshot(), latestResultId);
+        }
+    }
+
+    private static int getRunId() {
+        if (System.getenv("testRun") != null) {
+            return Integer.parseInt(System.getenv("testRun"));
+        }
+        return Integer.parseInt(properties.getProperty("testRunId"));
+    }
 }
