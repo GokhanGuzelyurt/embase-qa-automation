@@ -1,5 +1,7 @@
-package po.common;
+package utils;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -20,7 +22,6 @@ public class FileHelper {
         return contentBuilder.toString();
     }
 
-
     public static List<String> readLines(String fileName) throws IOException {
 
         try {
@@ -31,7 +32,16 @@ public class FileHelper {
         return null;
     }
 
-
+    // used to put text in a local text file
+    public static void addTextToFile(String fileName, String text) {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
+            writer.append(text);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
 
 

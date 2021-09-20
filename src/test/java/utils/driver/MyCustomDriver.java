@@ -1,5 +1,6 @@
 package utils.driver;
 
+import embase.tests.StepDefs.CommonSteps;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import net.thucydides.core.webdriver.DriverSource;
 import org.openqa.selenium.WebDriver;
@@ -26,7 +27,7 @@ public class MyCustomDriver implements DriverSource {
         if (System.getenv("headless") != null && System.getenv("headless").equals("true")) {
             logger.info("Headless environment variable set to true. Headless ChromeDriver mode: true");
             options.addArguments("--headless");
-        } else if (System.getenv("JENKINS_URL") != null) {
+        } else if (CommonSteps.JENKINS_BUILD_URL != null) {
             logger.info("Job is running in JENKINS. Headless ChromeDriver mode: true");
             options.addArguments("--headless");
         }
