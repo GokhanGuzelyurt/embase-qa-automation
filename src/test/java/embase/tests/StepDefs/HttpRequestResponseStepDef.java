@@ -41,13 +41,14 @@ public class HttpRequestResponseStepDef {
     private Response response = null;
     private RequestSpecification request;
     private boolean printRequestToConsole = true;
-    private boolean printResponseToConsole = false;
+    private boolean printResponseToConsole = true;
     private int timeoutSeconds = 300;
     private String concatenatedBody;
     private String concatenatedUrl;
     private RestAssuredConfig config;
     private Cookie cookie;
-    String apikey;
+    public static String SESSION_COOKIE = "SESSION=A4F8DED1537BA37A6A241FACA90FEBF0; path=/; domain=.preprod.embase.com; Expires=Tue, 19 Jan 2038 03:14:07 GMT;";
+    private String prefTermId;
 
 
     @Before(order = 5)
@@ -71,22 +72,40 @@ public class HttpRequestResponseStepDef {
 
     }
 
+    @Given("I set a valid SESSION cookie")
+    public void setSessionCookie() {
+        // TODO improve way of getting SESSION
+        logger.info("Using SESSION COOKIE: \n" + SESSION_COOKIE);
+        logger.info("Using SESSION COOKIE Substring: \n" + SESSION_COOKIE.substring(8));
+        request.cookie("SESSION", SESSION_COOKIE.substring(8));
+    }
+
+    @And("I extract the prefTermId")
+    public void extractPrefTermId() {
+        prefTermId = response.then().extract().path("prefTermId[0]").toString();
+        logger.info("prefTermId value is: " + prefTermId);
+    }
+
+
     @Given("^I set the endpoint for the http request to (.*)$")
     public void setRequestEndpoint(String endpoint) {
         request = RestAssured.given().config(config);
         request.basePath(endpoint);
     }
 
-    @Given("^I concatenate the value (.*)to the URL$")
+    @Given("^I concatenate the value (.*) to the URL$")
     public void setConcatenatedRequestUrl(String value) {
         concatenatedUrl += value;
     }
 
+    @And("^I concatenate the extracted prefTermId to the URL$")
+    public void concatenatePrefTerm() {
+        concatenatedUrl += prefTermId;
+    }
 
     @Given("^I set the queryParam (.*) with value (.*)$")
     public void setRequestParam(String param, String value) {
         request.queryParam(param, value);
-
     }
 
     @Given("^I set the Public API endpoint for the http request to (.*)$")
@@ -101,11 +120,10 @@ public class HttpRequestResponseStepDef {
 //    public void setRequestWithEncodedParam(String param, String value) {
 //        request.queryParam(param, StringHelper.urlEncode(value));
 //    }
-//
-//
+
     @Given("^I set the API KEY with value from properties file$")
     public void setRequestParamFromProperties() {
-        request.queryParam(apikey, API_KEY);
+        setRequestParam("apikey", API_KEY);
     }
 
     @Given("^I set the request header (.*) with value (.*)$")
@@ -146,7 +164,8 @@ public class HttpRequestResponseStepDef {
 
     @When("^I execute the http request with method (.*)$")
     public void executeHttpGetRequest(String method) {
-//        commonSteps.logger.info("Executing HTTP request with method: " + method);
+        logger.info("Executing HTTP request with method: " + method
+        );
 
         if (printRequestToConsole)
             request.log().all();
@@ -308,6 +327,67 @@ public class HttpRequestResponseStepDef {
             e.printStackTrace();
         }
         return nodes;
+    }
+
+    @Then("the first suggested term is (.*)$")
+    public void verifyResponseBodyElementValue(String term) {
+        // this step checks if the main suggested term of a call to
+        // autosuggest matches the expected
+        try {
+            String elementValueFromResponse = response.then().extract().path("useTerm[0]");
+            logger.info("Extracted value: " + elementValueFromResponse);
+            if (elementValueFromResponse == null)
+                elementValueFromResponse = "null";
+
+            String status = "PASS";
+            if (!elementValueFromResponse.equals(term))
+                status = "FAIL";
+
+            // Saving results to a local csv file
+            // Columns are: expected, actual, status
+            FileHelper.addTextToFile("EmtreeResults.csv", "\n" + term + "," + elementValueFromResponse + "," + status);
+
+
+            Assertions.assertThat(elementValueFromResponse).describedAs("Element in response body does not match expected value").isEqualTo(term);
+        } catch (ClassCastException e) {
+            Assertions.fail("Could not parse response to find element: " + term);
+            // In case of error add a line to the local csv file
+            FileHelper.addTextToFile("EmtreeResults.csv", "\n" + term + "," + "ERROR" + "," + "ERROR");
+        }
+    }
+
+    @Then("the response body contains synonym (.*)$")
+    public void verifyResponseBodySynonym(String term) {
+        // this step is intended to check the content of a response from an emtree item
+        // and find is a synonym word is present in the list of synonyms
+
+        try {
+            int listSize = response.then().extract().jsonPath().getList("synonyms").size();
+            logger.info("LIST SIZE: " + listSize);
+
+            String elementValueFromResponse = "NULL";
+            String status = "FAIL";
+            for (int i = 0; i < listSize; i++) {
+                elementValueFromResponse = response.then().extract().path("synonyms[" + i + "]");
+                logger.info("Evaluating: " + elementValueFromResponse);
+                if (elementValueFromResponse.equals(term)) {
+                    status = "PASS";
+                    break;
+                } else {
+                    elementValueFromResponse = "NULL";
+                }
+            }
+            // Saving results to a local csv file
+            // expected, actual, status
+            FileHelper.addTextToFile("EmtreeResults.csv", "," + term + "," + elementValueFromResponse + "," + status);
+
+
+            Assertions.assertThat(elementValueFromResponse).describedAs("Element in response body does not match expected value").isEqualTo(term);
+        } catch (ClassCastException e) {
+            Assertions.fail("Could not parse response to find element with synonym: " + term);
+            // In case of error add a line to the local csv file
+            FileHelper.addTextToFile("EmtreeResults.csv", "," + term + "," + "ERROR" + "," + "ERROR");
+        }
     }
 
 
