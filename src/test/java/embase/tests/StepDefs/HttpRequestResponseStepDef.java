@@ -143,11 +143,11 @@ public class HttpRequestResponseStepDef {
         request.given().body(concatenatedBody);
     }
 
-//    @Given("I concatenate the request body with content from file '{str}'")
-//    public void setConcatenatedRequestBodyFromFile(String fileName) {
-//        String body = FileHelper.readFile(fileName);
-//        setConcatenatedRequestBody(body);
-//    }
+    @Given("^I concatenate the request body with content from file (.*)$")
+    public void setConcatenatedRequestBodyFromFile(String fileName) {
+        String body = FileHelper.readFile(fileName);
+        setConcatenatedRequestBody(body);
+    }
 
     @Given("^I concatenate the request body with URL encoded content from file (.*)$")
     public void setConcatenatedRequestBodyFromFileUrlEncoded(String fileName) {
@@ -206,9 +206,11 @@ public class HttpRequestResponseStepDef {
         Assertions.assertThat(response.getStatusCode()).describedAs("Status code is not equal to 200").isEqualTo(statusCode);
     }
 
-    @And("I capture cookies from the authentication method")
+    @And("^I capture cookies from the authentication method$")
     public void captureCookies() {
         cookie = response.getDetailedCookie("SESSION");
+        System.out.println("cookie is "+cookie);
+
     }
 
     @And("I set the cookies captured in the request body")
