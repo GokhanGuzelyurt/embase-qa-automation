@@ -1,0 +1,293 @@
+{
+  "userId": "51334796",
+  "username": null,
+  "token": {
+    "access_token": null,
+    "token_type": "Bearer",
+    "refresh_token": "E0vXYA8lJ9hMQBi8UaeoY8OY2FTUPItAxGi40Gapk8",
+    "expires_in": 6818,
+    "id_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6InQ0Q0p4UjNUdWlyUThOVkpYU0RmSWNORFV0OCJ9.eyJzdWIiOiI1MTMzNDc5NiIsImF1ZCI6IkVNQkFTRS1WMSIsImp0aSI6InV3Wmxmc2Q2Q3dsVDI0R293VHJUcjMiLCJpc3MiOiJodHRwczovL2xvYWRyYy1pZC5lbHNldmllci5jb20iLCJpYXQiOjE2MDEzNzcxNzMsImV4cCI6MTYwMTM3Nzc3MywiaW5zdF9hY2N0X25hbWUiOiJFTV9UU1RfQUNDMSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJ1c2VyX2luZm9fZXhwIjoiMTYwMTM3ODA3MyIsImluc3RfYWNjdF9pbWFnZSI6Imh0dHA6Ly9sb2FkcmMtaWQuZWxzZXZpZXIuY29tL2Fzc2V0cy9pbWFnZXMvZWxzZXZpZXIvZGVmYXVsdF9pbnN0aXR1dGlvbi5KUEciLCJpbnN0X2FjY3RfaWQiOiIyNjQ5NjkiLCJpZHBfYW5hbHl0aWNzX2F0dHJzIjoiYjM0OTA5MzIyZmVlZDg0NDZiOWI2YmY3NWUxYjZlZWRmZDU5Z3hycWIiLCJnaXZlbl9uYW1lIjoiVmFsZW50aW5vIiwiaW5zdF9hc3NvY19tZXRob2QiOiJJUCIsInBvbGljeV9zdWNjZXNzIjpbInVybjpjb206ZWxzZXZpZXI6aWRwOnBvbGljeTpwcm9kdWN0OmluZHZfaWRlbnRpdHkiLCJ1cm46Y29tOmVsc2V2aWVyOmlkcDpwb2xpY3k6cHJvZHVjdDppbnN0X2Fzc29jIl0sInBhdGhfY2hvaWNlIjp0cnVlLCJ1cGRhdGVkX2F0IjoxNjAwMzI3Mjk1LCJpbmR2X2lkZW50aXR5X21ldGhvZCI6IlVfUCIsImluZHZfaWRlbnRpdHkiOiJSRUciLCJpbnN0X2Fzc29jIjoiSU5TVCIsIm5hbWUiOiJWYWxlbnRpbm8gUGV6emFubyIsImF1dGhfdG9rZW4iOiJiMzQ5MDkzMjJmZWVkODQ0NmI5YjZiZjc1ZTFiNmVlZGZkNTlneHJxYiIsImZhbWlseV9uYW1lIjoiUGV6emFubyIsImVtYWlsIjoidi5wZXp6YW5vQGVsc2V2aWVyLmNvbSJ9.iuDF-7gIvh6YtZiV-vcAQTtR6Hc31jPdTVycIALWwFEDYHPrV20ESqxqDRaCofgDDVGnIBVRX6D9iVJRFRGgFyhpeNV7zXw3E6rwAXciK5-VGHFAqVqSkeFHZ_GHfHqHWpkslhKtXg1fn87-sO4rr9bWnALbtJS-Q_zjc88vwfXssyd6RpiiJdHV53mJ7pOkdHFAyzYHatYTEW7DYMzGcwkZB81nre7uWrdUNKtqKp5_8pyjYS2I_-w2YWdeplHPYfj0gS2VPwMVToPmaBAvnhiE4CAg0zdmL1u3CT8jMEPUVVikMUKbEiWBKH2hMxncgp9NtbrkhZjf0f-1icKHpw"
+  },
+  "userInfo": {
+    "sub": "51334796",
+    "aud": "EMBASE-V1",
+    "jti": "uwZlfsd6CwlT24GowTrTr3",
+    "iss": "https://loadrc-id.elsevier.com",
+    "iat": "1601377173",
+    "exp": "1601377773",
+    "inst_acct_name": "EM_TST_ACC1",
+    "email_verified": true,
+    "user_info_exp": "1601378073",
+    "inst_acct_image": "http://loadrc-id.elsevier.com/assets/images/elsevier/default_institution.JPG",
+    "inst_acct_id": "264969",
+    "given_name": "Al",
+    "policy_success": [
+      "urn:com:elsevier:idp:policy:product:indv_identity",
+      "urn:com:elsevier:idp:policy:product:inst_assoc"
+    ],
+    "path_choice": true,
+    "updated_at": 1600327295,
+    "indv_identity_method": "U_P",
+    "indv_identity": "REG",
+    "inst_assoc": "INST",
+    "name": "Test",
+    "auth_token": "b34909322feed8446b9b6bf75e1b6eedfd59gxrqb",
+    "family_name": "Test"
+  },
+  "status": "GREEN",
+  "userProfile": {
+    "firstName": "Test",
+    "lastName": "Test",
+    "email": "ELS.QA.email@test.com",
+    "indivWebUserId": "51334796",
+    "username": "Indiv_a.test@elsevier.com_LOGIN_51334796"
+  },
+  "account": {
+    "acctId": "264969",
+    "acctNumber": "C000264969",
+    "acctName": "EM_TST_ACC1"
+  },
+  "department": {
+    "deptId": "272791",
+    "deptName": "EM_TST_DEP0"
+  },
+  "anonymity": "INDIVIDUAL",
+  "associationType": "ONLINE_REGISTERED",
+  "fences": [
+    {
+      "id": "38375",
+      "name": "ALLOW_MIGRATION",
+      "type": "CARS Fences",
+      "value": "Y"
+    },
+    {
+      "id": "38376",
+      "name": "ALLOW_MANRA",
+      "type": "CARS Fences",
+      "value": "Y"
+    },
+    {
+      "id": "38377",
+      "name": "FENCE_INSTITUTIONAL_SHIB_LOGIN_LINK",
+      "type": "CARS Fences",
+      "value": "Y"
+    },
+    {
+      "id": "38380",
+      "name": "EnableSecureAccess",
+      "type": "EM_ENTITLEMENTS",
+      "value": "Y"
+    },
+    {
+      "id": "38381",
+      "name": "ExtendedEmailAlert",
+      "type": "EM_ENTITLEMENTS",
+      "value": "N"
+    },
+    {
+      "id": "38382",
+      "name": "ClassicCollection",
+      "type": "EM_ENTITLEMENTS",
+      "value": "Y"
+    },
+    {
+      "id": "38383",
+      "name": "EnableXmlGatewayDrugConcepts",
+      "type": "EM_ENTITLEMENTS",
+      "value": "Y"
+    },
+    {
+      "id": "41459",
+      "name": "BLOCK_ALL_SOCIAL_LOGINS",
+      "type": "LOGIN FENCES",
+      "value": "Y"
+    },
+    {
+      "id": "41460",
+      "name": "BLOCK_FACEBOOK_LOGIN",
+      "type": "LOGIN FENCES",
+      "value": "Y"
+    },
+    {
+      "id": "41461",
+      "name": "BLOCK_TWITTER_LOGIN",
+      "type": "LOGIN FENCES",
+      "value": "Y"
+    },
+    {
+      "id": "41462",
+      "name": "BLOCK_GOOGLE_LOGIN",
+      "type": "LOGIN FENCES",
+      "value": "Y"
+    },
+    {
+      "id": "41463",
+      "name": "BLOCK_LINKED_LOGIN",
+      "type": "LOGIN FENCES",
+      "value": "Y"
+    },
+    {
+      "id": "41464",
+      "name": "BLOCK_YAHOO!_LOGIN",
+      "type": "LOGIN FENCES",
+      "value": "Y"
+    },
+    {
+      "id": "41465",
+      "name": "BLOCK_OPENID_LOGIN",
+      "type": "LOGIN FENCES",
+      "value": "Y"
+    },
+    {
+      "id": "44371",
+      "name": "FENCE_OPENATHENS_LOGIN_LINK",
+      "type": "CARS Fences",
+      "value": "N"
+    },
+    {
+      "id": "45370",
+      "name": "ImageBasedLinking",
+      "type": "EM_ENTITLEMENTS",
+      "value": "N"
+    },
+    {
+      "id": "60376",
+      "name": "BLOCK_UN_TO_EMAIL_MIGRATION_AT_LOGIN",
+      "type": "LOGIN FENCES",
+      "value": "Y"
+    },
+    {
+      "id": "62375",
+      "name": "API_PURCHASED",
+      "type": "EM_ENTITLEMENTS",
+      "value": "N"
+    },
+    {
+      "id": "69381",
+      "name": "EMB_ADOBE_SITE_CATALYST_NO_TRACKING",
+      "type": "EM_ENTITLEMENTS",
+      "value": "Y"
+    },
+    {
+      "id": "69393",
+      "name": "Enable Email alert functionality",
+      "type": "EM_ENTITLEMENTS",
+      "value": "Y"
+    },
+    {
+      "id": "110379",
+      "name": "French local collection",
+      "type": "EM_ENTITLEMENTS",
+      "value": "Y"
+    }
+  ],
+  "nceTypes": [
+    {
+      "nceTypeName": "EM_ENTITLEMENTS",
+      "nce": [
+        {
+          "nceId": "1",
+          "nceName": "ExportSize",
+          "nceValue": "10000"
+        },
+        {
+          "nceId": "2",
+          "nceName": "ExportSizeEmail",
+          "nceValue": "http://hostedvl103.quosavl.com/linking.php"
+        },
+        {
+          "nceId": "3",
+          "nceName": "OpenURL",
+          "nceValue": "http://hostedvl103.quosavl.com/linking.php"
+        },
+        {
+          "nceId": "4",
+          "nceName": "UserGroup",
+          "nceValue": "migrationtest1"
+        },
+        {
+          "nceId": "5",
+          "nceName": "OpenURLImage",
+          "nceValue": null
+        },
+        {
+          "nceId": "6",
+          "nceName": "OpenURLName",
+          "nceValue": "Link test"
+        },
+        {
+          "nceId": "7",
+          "nceName": "EmailAlertLimit",
+          "nceValue": null
+        },
+        {
+          "nceId": "8",
+          "nceName": "SessionLimit",
+          "nceValue": "2"
+        }
+      ]
+    },
+    {
+      "nceTypeName": "CARS_TEXT",
+      "nce": [
+        {
+          "nceId": "1",
+          "nceName": "Registration Value Proposition",
+          "nceValue": null
+        },
+        {
+          "nceId": "2",
+          "nceName": "Self-Managed Access Bottom text zone",
+          "nceValue": "Please enter your organizational email address."
+        },
+        {
+          "nceId": "3",
+          "nceName": "Self-Managed Access Top text zone",
+          "nceValue": "To access Embase from outside your subscribing organizational IP range, your user account needs to be associated with your organization by validating your organizational email."
+        },
+        {
+          "nceId": "4",
+          "nceName": "PROFILE_RECOVERY_TEXTZONE",
+          "nceValue": "<div class=\"profRecoveryTZ\">\r\n<h2 class=\"warningTxt txtLarge marginB5\">\r\nWe are unable to locate your profile in our system.</h2>\r\n<p>\r\nIf you received an email containing link to recover your profile, please follow the instructions in the email. Otherwise, re-register. Please note, if you re-register, you may lose personalization settings.</p>\r\n</div>"
+        },
+        {
+          "nceId": "5",
+          "nceName": "CARS_REG_ID_ASSOCIATION_REGISTER",
+          "nceValue": "<p><b>It allows you to:</b></p>\r\n<ul>\r\n<li>Create email alerts</li>\r\n<li>Save searches</li>\r\n<li>Edit your profile</li>\r\n\r\n</ul>"
+        }
+      ]
+    }
+  ],
+  "hasMultipleOrganizations": true,
+  "userInfoObject": {
+    "sub": "51334796",
+    "aud": "EMBASE-V1",
+    "jti": "uwZlfsd6CwlT24GowTrTr3",
+    "iss": "https://loadrc-id.elsevier.com",
+    "iat": "1601377173",
+    "exp": "1601377773",
+    "inst_acct_name": "EM_TST_ACC1",
+    "email_verified": true,
+    "user_info_exp": "1601378073",
+    "inst_acct_image": "http://loadrc-id.elsevier.com/assets/images/elsevier/default_institution.JPG",
+    "inst_acct_id": "264969",
+    "given_name": "Al",
+    "policy_success": [
+      "urn:com:elsevier:idp:policy:product:indv_identity",
+      "urn:com:elsevier:idp:policy:product:inst_assoc"
+    ],
+    "path_choice": true,
+    "updated_at": 1600327295,
+    "indv_identity_method": "U_P",
+    "indv_identity": "REG",
+    "inst_assoc": "INST",
+    "name": "Test",
+    "auth_token": "b34909322feed8446b9b6bf75e1b6eedfd59gxrqb",
+    "family_name": "Test"
+  },
+  "role": null,
+  "enabled": true,
+  "accountNonLocked": true,
+  "accountNonExpired": true,
+  "credentialsNonExpired": true
+}

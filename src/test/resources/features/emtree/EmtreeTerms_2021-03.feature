@@ -1,9 +1,15 @@
 @regression @api @PublicApiInternal @skip @BE
 Feature: Public API - Internal
 
+  Background:
+    Given I set the endpoint for the http request to /mock/login
+    And I set the request header Content-Type with value application/json
+    And I concatenate the request body with content from file mock-sguserdetails.json
+    And I execute the http request with method POST
+    And I capture cookies from the authentication method
+
   @EmtreeWipAdded
   Scenario Outline: Verify that added Emtree terms from 2021.03 are present BE
-
     Given I set the endpoint for the http request to /rest/searchquery/term/autocomplete
     And I set the queryParam term with value <term>
     And I set the queryParam limit with value 10
