@@ -46,8 +46,7 @@ public class HttpRequestResponseStepDef {
     private String concatenatedBody;
     private String concatenatedUrl;
     private RestAssuredConfig config;
-    private Cookie cookie;
-    public static String SESSION_COOKIE = "SESSION=A4F8DED1537BA37A6A241FACA90FEBF0; path=/; domain=.preprod.embase.com; Expires=Tue, 19 Jan 2038 03:14:07 GMT;";
+    public Cookie sessionCookie;
     private String prefTermId;
 
 
@@ -64,21 +63,13 @@ public class HttpRequestResponseStepDef {
                             .setParam(ClientPNames.COOKIE_POLICY, CookiePolicy.BROWSER_COMPATIBILITY));
 
             RestAssured.baseURI = BASE_URL;
-            logger.info("Setting RestAssured baseURI to: " + BASE_URL);
+            logger.info("Setting RestAssured baseURI to: " + PUBLIC_API_DOMAIN);
 
             concatenatedBody = "";
             concatenatedUrl = "";
         }
-
     }
 
-    @Given("I set a valid SESSION cookie")
-    public void setSessionCookie() {
-        // TODO improve way of getting SESSION
-        logger.info("Using SESSION COOKIE: \n" + SESSION_COOKIE);
-        logger.info("Using SESSION COOKIE Substring: \n" + SESSION_COOKIE.substring(8));
-        request.cookie("SESSION", SESSION_COOKIE.substring(8));
-    }
 
     @And("I extract the prefTermId")
     public void extractPrefTermId() {
@@ -143,11 +134,11 @@ public class HttpRequestResponseStepDef {
         request.given().body(concatenatedBody);
     }
 
-//    @Given("I concatenate the request body with content from file '{str}'")
-//    public void setConcatenatedRequestBodyFromFile(String fileName) {
-//        String body = FileHelper.readFile(fileName);
-//        setConcatenatedRequestBody(body);
-//    }
+    @Given("^I concatenate the request body with content from file (.*)$")
+    public void setConcatenatedRequestBodyFromFile(String fileName) {
+        String body = FileHelper.readFile(fileName);
+        setConcatenatedRequestBody(body);
+    }
 
     @Given("^I concatenate the request body with URL encoded content from file (.*)$")
     public void setConcatenatedRequestBodyFromFileUrlEncoded(String fileName) {
@@ -164,13 +155,13 @@ public class HttpRequestResponseStepDef {
 
     @When("^I execute the http request with method (.*)$")
     public void executeHttpGetRequest(String method) {
-        logger.info("Executing HTTP request with method: " + method
-        );
+        logger.info("Executing HTTP request with method: " + method);
 
         if (printRequestToConsole)
             request.log().all();
 
         method = method.toUpperCase();
+
         switch (method) {
             case "GET":
                 response = request.get(concatenatedUrl);
@@ -206,14 +197,19 @@ public class HttpRequestResponseStepDef {
         Assertions.assertThat(response.getStatusCode()).describedAs("Status code is not equal to 200").isEqualTo(statusCode);
     }
 
-    @And("I capture cookies from the authentication method")
+    @And("^I capture cookies from the authentication method$")
     public void captureCookies() {
-        cookie = response.getDetailedCookie("SESSION");
+        sessionCookie = response.getDetailedCookie("SESSION");
+    }
+
+    @Given("I set a valid SESSION cookie")
+    public void setSessionCookie() {
+        setCookie();
     }
 
     @And("I set the cookies captured in the request body")
     public void setCookie() {
-        request.given().cookie(cookie);
+        request.given().cookie(sessionCookie);
     }
 
     @Then("^the response body contains element (.*) with value (.*)$")
