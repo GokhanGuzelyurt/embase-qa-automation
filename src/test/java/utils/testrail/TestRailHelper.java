@@ -28,7 +28,7 @@ public class TestRailHelper {
         try {
             // getting Sections
             Gson gson = new Gson();
-            results = gson.fromJson(client.sendGet("get_sections/" + TestRailIntegration.PROJECT_ID + "&suite_id=" + TestRailIntegration.SUITE_ID).toString(), Sections.class);
+            results = gson.fromJson(client.sendGet("get_sections/" + TestRailIntegration.PROJECT_ID + "&suite_id=" + TestRailIntegration.SUITE_ID).toString(), PaginatedResponse.class).getSections();
 
         } catch (IOException | APIException e) {
             e.printStackTrace();
@@ -41,11 +41,28 @@ public class TestRailHelper {
         APIClient client = new APIClient(TestRailIntegration.TESTRAIL_URI);
         client.setUser(TestRailIntegration.TESTRAIL_USERNAME);
         client.setPassword(TestRailIntegration.TESTRAIL_APIKEY);
+        String nextPageString = "";
 
         try {
             // getting Cases
-            Gson gson = new Gson();
-            results = gson.fromJson(client.sendGet("get_cases/" + TestRailIntegration.PROJECT_ID + "&suite_id=" + TestRailIntegration.SUITE_ID).toString(), Cases.class);
+            while (true) {
+                Gson gson = new Gson();
+
+                PaginatedResponse paginatedResponse = gson.fromJson(client.sendGet("get_cases/"
+                        + TestRailIntegration.PROJECT_ID + "&suite_id="
+                        + TestRailIntegration.SUITE_ID + nextPageString).toString(), PaginatedResponse.class);
+                results.addAll(paginatedResponse.getCases());
+
+                if (paginatedResponse.get_links().getNext() == null) {
+                    break;
+                } else {
+                    nextPageString = paginatedResponse.get_links().getNext();
+                    nextPageString = nextPageString.substring(18 +
+                            (TestRailIntegration.PROJECT_ID + "").length() + 10 +
+                            (TestRailIntegration.SUITE_ID + "").length());
+                }
+            }
+
         } catch (IOException | APIException e) {
             e.printStackTrace();
         }
@@ -61,7 +78,7 @@ public class TestRailHelper {
         try {
             // getting Tests
             Gson gson = new Gson();
-            results = gson.fromJson(client.sendGet("get_tests/" + runId).toString(), Tests.class);
+            results = gson.fromJson(client.sendGet("get_tests/" + runId).toString(), PaginatedResponse.class).getTests();
         } catch (IOException | APIException e) {
             e.printStackTrace();
         }
