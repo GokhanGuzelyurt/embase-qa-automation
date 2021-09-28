@@ -32,6 +32,8 @@ public class TestRailIntegration {
 
     public static void main(String[] args) throws IOException {
         logger.info("Get feature files from TestRail.");
+        logger.info("TestRail Project ID: " + PROJECT_ID);
+        logger.info("TestRail Suite ID:" + SUITE_ID);
         FileUtils.forceMkdir(runPath);
         FileUtils.cleanDirectory(runPath);
         getAllFeatureFiles();

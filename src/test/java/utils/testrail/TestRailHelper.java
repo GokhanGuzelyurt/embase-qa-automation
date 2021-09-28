@@ -47,12 +47,10 @@ public class TestRailHelper {
             // getting Cases
             while (true) {
                 Gson gson = new Gson();
-
                 PaginatedResponse paginatedResponse = gson.fromJson(client.sendGet("get_cases/"
                         + TestRailIntegration.PROJECT_ID + "&suite_id="
                         + TestRailIntegration.SUITE_ID + nextPageString).toString(), PaginatedResponse.class);
                 results.addAll(paginatedResponse.getCases());
-
                 if (paginatedResponse.get_links().getNext() == null) {
                     break;
                 } else {
@@ -62,7 +60,6 @@ public class TestRailHelper {
                             (TestRailIntegration.SUITE_ID + "").length());
                 }
             }
-
         } catch (IOException | APIException e) {
             e.printStackTrace();
         }
