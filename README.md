@@ -2,7 +2,7 @@
 ### To download the .feature files from TestRail into the /run folder:
 Runs the main() method in the TestRailIntegration class
 ```
-mvn clean exec:java -Dexec.classpathScope="test" -Dexec.mainClass=utils.TestRailIntegration
+mvn clean test-compile exec:java -Dexec.classpathScope=test -Dexec.mainClass=utils.TestRailIntegration
 ```
 
 
