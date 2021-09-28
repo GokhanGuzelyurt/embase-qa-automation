@@ -2,7 +2,6 @@ package utils.testrail;
 
 
 import com.google.gson.Gson;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import utils.TestRailIntegration;
 import utils.testrail.entities.*;
@@ -28,8 +27,9 @@ public class TestRailHelper {
         try {
             // getting Sections
             Gson gson = new Gson();
-            results = gson.fromJson(client.sendGet("get_sections/" + TestRailIntegration.PROJECT_ID + "&suite_id=" + TestRailIntegration.SUITE_ID).toString(), PaginatedResponse.class).getSections();
-
+            results = gson.fromJson(client.sendGet("get_sections/"
+                    + TestRailIntegration.PROJECT_ID + "&suite_id="
+                    + TestRailIntegration.SUITE_ID).toString(), PaginatedResponse.class).getSections();
         } catch (IOException | APIException e) {
             e.printStackTrace();
         }
@@ -90,17 +90,15 @@ public class TestRailHelper {
         client.setUser(TestRailIntegration.TESTRAIL_USERNAME);
         client.setPassword(TestRailIntegration.TESTRAIL_APIKEY);
 
-        JSONArray responseJsonResultsArray = null;
+        ArrayList<Result> results = new ArrayList<Result>();
         try {
             // getting latest Results for the CaseId (in the Run)
-            responseJsonResultsArray = (JSONArray) client.sendGet("get_results_for_case/" + runId + "/" + caseId);
-
+            Gson gson = new Gson();
+            results = gson.fromJson(client.sendGet("get_results_for_case/" + runId + "/" + caseId).toString(), PaginatedResponse.class).getResults();
             // getting 1st element from array (latest reported Result)
-            JSONObject firstResult = (JSONObject) responseJsonResultsArray.get(0);
-
+            Result firstResult = results.get(0);
             // getting ID of the Result
-            resultId = Integer.parseInt(firstResult.get("id").toString());
-
+            resultId = firstResult.getId();
         } catch (IOException | APIException e) {
             e.printStackTrace();
         }
@@ -124,8 +122,6 @@ public class TestRailHelper {
         } catch (IOException | APIException e) {
             e.printStackTrace();
         }
-
-
     }
 
 
