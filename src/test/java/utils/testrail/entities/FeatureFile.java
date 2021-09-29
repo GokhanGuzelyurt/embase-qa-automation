@@ -1,7 +1,12 @@
 package utils.testrail.entities;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.ArrayList;
 
+@Getter
+@Setter
 public class FeatureFile {
     private int sectionId;
     private String name;
@@ -16,33 +21,6 @@ public class FeatureFile {
         scenarios = new ArrayList<>();
     }
 
-    public int getSectionId() {
-        return sectionId;
-    }
-
-    public void setSectionId(int sectionId) {
-        this.sectionId = sectionId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public ArrayList<FeatureFileScenario> getScenarios() {
-        return scenarios;
-    }
 
     @Override
     public String toString() {

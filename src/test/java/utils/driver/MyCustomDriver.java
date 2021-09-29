@@ -30,6 +30,8 @@ public class MyCustomDriver implements DriverSource {
         } else if (CommonSteps.JENKINS_BUILD_URL != null) {
             logger.info("Job is running in JENKINS. Headless ChromeDriver mode: true");
             options.addArguments("--headless");
+        } else {
+            logger.info("Chromedriver Headless is FALSE. Instantiating window.");
         }
 
         options.addArguments("no-sandbox");
