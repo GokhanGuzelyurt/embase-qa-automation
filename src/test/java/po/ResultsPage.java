@@ -78,4 +78,8 @@ public class ResultsPage extends BasePage {
         searchField.waitUntilVisible();
         Assertions.assertThat(searchField.getValue()).describedAs(String.format("Query expected: <%s> but was: <%s>", expectedQuery, searchField.getValue())).isEqualToIgnoringCase(expectedQuery);
     }
+
+
+    public void resultsPageIsOpened(){
+    }
 }
