@@ -3,6 +3,7 @@ package po;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.Step;
+import net.serenitybdd.core.annotations.findby.By;
 import org.assertj.core.api.Assertions;
 import org.openqa.selenium.*;
 import org.openqa.selenium.Dimension;
@@ -87,7 +88,7 @@ public class MedicalDeviceSearchPage extends BasePage {
     @FindBy(id = "react-autowhatever-1")
     public WebElement DeviceSuggestionsTermsList;
 
-    @FindBy(css = ".els-emtree-list .els-emtree-list-item-content")
+    @FindBy(className = "els-emtree")
     public WebElement DeviceEmtreeNodesList;
 
     @FindBy(css = ".els-emtree .els-emtree-list .term-holder")
@@ -102,7 +103,7 @@ public class MedicalDeviceSearchPage extends BasePage {
     @FindBy(css = ".Tag-module_content__3E4R- .LinkButton-module_root__2jLpv")
     public WebElement EditDeviceIcon;
 
-    @FindBy(css = ".device-name-tag .icon-container .icon-cross")
+    @FindBy(xpath = "//button[contains(@title,'Close')]")
     public WebElement RemoveDeviceIcon;
 
     @FindBy(css = "span.button-text")
@@ -153,6 +154,20 @@ public class MedicalDeviceSearchPage extends BasePage {
     @FindBy(className = "PanelButton_root__1JTb7")
     public WebElement iconGroup;
 
+    @FindBy(id = "publication-year-from")
+    public WebElement pubYearFrom;
+
+    @FindBy(id="publication-year-to")
+    public WebElement pubYearTo;
+
+    @FindBy(id="publication-year-from-options")
+    public WebElement pubYearFromOptions;
+
+
+    @FindBy(id="publication-year-to-options")
+    public WebElement pubYearToOptions;
+
+
     public boolean medicalDeviceLabelDisplayed() {
         logger.info("Verify Medical device form label is displayed");
         return MedicalDeviceLabel.isDisplayed();
@@ -167,7 +182,7 @@ public class MedicalDeviceSearchPage extends BasePage {
 
     public void verifyIconLabelIsDisplayed(String iconLabel) {
         logger.info("Verify the label of the icon");
-        WebElement ele = driver.findElement(By.xpath("//span[contains(@class ,'icon-text') and contains(text(),'" + iconLabel + "')]"));
+        WebElement ele = iconGroup.findElement(By.xpath("//span[contains(@class ,'PanelButton_content__3tpqy') and contains(text(),'" + iconLabel + "')]"));
         ele.click();
     }
 
@@ -232,7 +247,7 @@ public class MedicalDeviceSearchPage extends BasePage {
 
     public void clickOnEmtreeNode(String nodeName) {
         logger.info("Click on Emtree node " + nodeName);
-        List<WebElement> emtreeNodeList = DeviceEmtreeNodesList.findElements(By.className("term-holder"));
+        List<WebElement> emtreeNodeList = DeviceEmtreeNodesList.findElements(By.className("term"));
         for (WebElement emtreeNode : emtreeNodeList) {
             if (emtreeNode.getText().equals(nodeName)) {
                 emtreeNode.click(); // click the desired option
@@ -244,17 +259,15 @@ public class MedicalDeviceSearchPage extends BasePage {
 
     public void clickEmtreeDeviceTerm(String nodeTerm) {
         logger.info("Click on Emtree term  " + nodeTerm);
-        List<WebElement> items = DeviceEmtreeNodesList.findElements(By.className("term-holder"));
-        for (WebElement emtreeNode : items) {
+        List<WebElement> items = DeviceEmtreeNodesList.findElements(By.cssSelector(".item-sub-list-holder .term"));
+            for (WebElement emtreeNode : items) {
             if (emtreeNode.getText().equals(nodeTerm)) {
-                emtreeNode.findElement(By.className("Icon-module_root__3r_4i")).click();// click the plus option
+                emtreeNode.click();
+//                emtreeNode.findElement(By.className("Icon-module_root__3r_4i")).click();// click the plus option
                 break;
             }
 
         }
-//        item.click();
-//        item.find(By.cssSelector(".icon-plus")).click();
-////
     }
 
 
@@ -316,19 +329,25 @@ public class MedicalDeviceSearchPage extends BasePage {
 
         return tagName.getText();
     }
-//        List<WebElement> tagNameList = tagNameGroup.findElements(By.className("Tag-module_text__3dcY0"));
-//        for (WebElement tagName : tagNameList) {
-//            if (tagName.getText().equals(text))
-//                break;
-//            }
-//
-//        }
+
 
 
     public void clickAddSynonymIcon() {
         addSynonymsIcon.click();
 
 
+    }
+
+    public void fillPublicationYears(String fromYear, String toYear){
+        if (!fromYear.isEmpty()) {
+            pubYearFrom.click();
+            pubYearFromOptions.findElement(By.buttonText(fromYear)).click();
+        }
+
+        if (!toYear.isEmpty()) {
+            pubYearTo.click();
+            pubYearToOptions.findElement(By.buttonText(toYear)).click();
+        }
     }
 
 }

@@ -45,19 +45,19 @@ Feature: Medical Device tests
     Then user is on Results Page
     And search query is 'medical thermometer'/exp OR 'medical thermometer':ti,ab OR 'medical thermometer'/exp/'adverse device effect'
 
-#  @C253896
-#  Scenario: Selecting the device name from Emtree
-#    When user clicks on Add device name icon
-#    Then the title on the popup is Add device name
-#    When Emtree node medical device is selected
-#    And Emtree node implant is selected
-#    And Emtree term bipolar implant is selected
-#    And user clicks on Add device name button at medical device page
-#    Then the Add device name popup is closed
-#    Then the device name bipolar implant is displayed on the form
-#    When user clicks on results button at medical device page
-#    Then the result set is not empty
-#    And search query is 'bipolar implant'/exp OR 'bipolar implant':ti,ab OR 'bipolar implant'/exp/'adverse device effect'
+  @C253896
+  Scenario: Selecting the device name from Emtree
+    When user clicks on Add device name icon
+    Then the title on the popup is Add device name
+    When Emtree node medical device is selected
+    And Emtree term implant is selected
+    And Emtree term bipolar implant is selected
+    And user clicks on Add device name button at medical device page
+    Then the Add device name popup is closed
+    Then the device name bipolar implant is displayed on the form
+    When user clicks on results button at medical device page
+    Then the result set is not empty
+    And search query is 'bipolar implant'/exp OR 'bipolar implant':ti,ab OR 'bipolar implant'/exp/'adverse device effect'
 
   @C253897
   Scenario: Selecting the device name and subheadings checkboxes in the medical device
@@ -86,19 +86,19 @@ Feature: Medical Device tests
     Then the Add device name popup is closed
     And the device name cardiac rhythm management device is displayed on the form
 
-#  @C253899
-#  Scenario: Removing the device name on medical device search form
-#    When user clicks on Add device name icon
-#    Then the title on the popup is Add device name
-#    When Emtree node general device is selected
-#    And Emtree node clothing is selected
-#    And Emtree term glove is selected
-#    And user clicks on Add device name button at medical device page
-#    Then the Add device name popup is closed
-#    When user clicks on close icon to remove the device name
-#    Then the label Add device name is displayed
-#    And Show results button is disabled
-##
+  @C253899
+  Scenario: Removing the device name on medical device search form
+    When user clicks on Add device name icon
+    Then the title on the popup is Add device name
+    When Emtree node general device is selected
+    And Emtree node clothing is selected
+    And Emtree term glove is selected
+    And user clicks on Add device name button at medical device page
+    Then the Add device name popup is closed
+    When user clicks on close icon to remove the device name
+    Then the label Add device name is displayed
+    And Show results button is disabled
+
   @C258698
   Scenario:Adding general adverse reactions on medical devices
     When user clicks on Add device name icon
@@ -144,16 +144,17 @@ Feature: Medical Device tests
     Then user is on Results Page
     And search query is ('medical thermometer'/exp OR 'medical thermometer':ti,ab OR 'medical thermometer'/exp/'adverse device effect') AND [humans]/lim
 
-#  @C357018
-#  Scenario:  Searching for medical devices articles in a selected publication years range
-#    When user clicks on Add device name icon
-#    And user enters the device name as bandages and dressings
-#    Then user clicks on Add device name button at medical device page
-#    And the device name bandages and dressings is displayed on the form
-#    When user selects publication years range from '1990' to '2005'
-#    And user clicks on Show Results
-#    Then Results page is opened
-#    And results query is '('bandages and dressings'/exp OR 'bandages and dressings':ti,ab OR 'bandages and dressings'/exp/'adverse device effect') AND [1990-2005]/py'
+  @C357018
+  Scenario:  Searching for medical devices articles in a selected publication years range
+    When user clicks on Add device name icon
+    And user enters the device name as bandages and dressings
+    Then user clicks on Add device name button at medical device page
+    And the device name bandages and dressings is displayed on the form
+    And check box Publication years is selected
+    When user selects publication years range from 1990 to 2005
+    And user clicks on Show Results
+    Then user is on Results Page
+    And search query is ('bandages and dressings'/exp OR 'bandages and dressings':ti,ab OR 'bandages and dressings'/exp/'adverse device effect') AND [1990-2005]/py
 
   @C357019
   Scenario: Selecting date range by date Picker
@@ -165,5 +166,5 @@ Feature: Medical Device tests
     And user clicks on DateRange picker and selects range from 01-01-2000 to 01-05-2010
     Then user clicks on Show Results
     Then user is on Results Page
-    And search query is ('bandages and dressings'/exp OR 'bandages and dressings':ti,ab OR 'bandages and dressings'/exp/'adverse device effect') AND [1-1-2000]/sd NOT [02  -05-2010]/sd
+    And search query is ('bandages and dressings'/exp OR 'bandages and dressings':ti,ab OR 'bandages and dressings'/exp/'adverse device effect') AND [1-1-2000]/sd NOT [02-05-2010]/sd
 

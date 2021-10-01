@@ -155,11 +155,11 @@ public class MedicalDeviceStepDef {
         medicalDeviceSearchPage.selectHumanFromLimitsDropDown();
     }
 
-//    @When("^user selects publication years range from '{str}' to '{str}'$")
-////    public void selectPubYearsRange(String startYear, String endYear) {
-////
-//////        .fillPublicationYears(startYear, endYear);
-////    }
+    @When("^user selects publication years range from (.*) to (.*)$")
+    public void selectPubYearsRange(String startYear, String endYear) {
+
+       medicalDeviceSearchPage.fillPublicationYears(startYear, endYear);
+    }
 
     @When("^user clicks on DateRange picker and selects range from (.*) to (.*)$")
     public void selectDateRange(String startDate, String endDate) {
