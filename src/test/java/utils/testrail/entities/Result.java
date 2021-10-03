@@ -9,6 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Result {
 
+    private int id;
     private int caseId;
     private int testId;
     private int statusId;

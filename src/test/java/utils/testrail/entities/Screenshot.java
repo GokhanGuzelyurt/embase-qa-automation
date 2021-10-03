@@ -1,7 +1,12 @@
 package utils.testrail.entities;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.awt.image.BufferedImage;
 
+@Getter
+@Setter
 public class Screenshot {
 
     private BufferedImage image;
@@ -12,19 +17,5 @@ public class Screenshot {
         this.image = image;
     }
 
-    public BufferedImage getImage() {
-        return image;
-    }
 
-    public void setImage(BufferedImage image) {
-        this.image = image;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
 }

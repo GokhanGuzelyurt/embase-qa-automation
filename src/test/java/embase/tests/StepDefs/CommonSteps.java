@@ -75,6 +75,7 @@ public class CommonSteps {
 
         if (!IS_BE_SCENARIO) {
             // for FE scenarios
+            logger.info("FRONTEND SCENARIO, getting Build number from /config");
             getBuildNumber();
             logger.info("Build number EMB_BUILD_NUMBER: " + EMB_BUILD_NUMBER);
 

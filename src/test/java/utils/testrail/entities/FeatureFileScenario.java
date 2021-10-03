@@ -1,5 +1,10 @@
 package utils.testrail.entities;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class FeatureFileScenario {
 
     private int id;
@@ -16,43 +21,5 @@ public class FeatureFileScenario {
         this.idString = "@C" + id;
     }
 
-    public String getIdString() {
-        return idString;
-    }
 
-    public void setIdString(String idString) {
-        this.idString = idString;
-    }
-
-    public String getPreconds() {
-        return preconds;
-    }
-
-    public void setPreconds(String preconds) {
-        this.preconds = preconds;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getSteps() {
-        return steps;
-    }
-
-    public void setSteps(String steps) {
-        this.steps = steps;
-    }
 }
