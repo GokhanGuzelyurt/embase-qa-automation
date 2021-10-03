@@ -51,7 +51,7 @@ Feature: Medical Device tests
     Then the title on the popup is Add device name
     When Emtree node medical device is selected
     And Emtree term implant is selected
-    And Emtree term bipolar implant is selected
+    And Emtree child node bipolar implant is selected
     And user clicks on Add device name button at medical device page
     Then the Add device name popup is closed
     Then the device name bipolar implant is displayed on the form

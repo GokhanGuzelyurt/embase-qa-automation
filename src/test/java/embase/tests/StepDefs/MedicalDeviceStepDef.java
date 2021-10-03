@@ -95,6 +95,11 @@ public class MedicalDeviceStepDef {
         medicalDeviceSearchPage.clickEmtreeDeviceTerm(emtreeTerm);
     }
 
+    @And("^Emtree child node (.*) is selected$")
+    public void selectChildNode(String childNode){
+        medicalDeviceSearchPage.clickEmtreeDeviceChildTerm(childNode);
+    }
+
 
     @When("^check box (.*) is selected$")
     public void selectClinicalTrial(String text) {

@@ -249,6 +249,7 @@ public class MedicalDeviceSearchPage extends BasePage {
         logger.info("Click on Emtree node " + nodeName);
         List<WebElement> emtreeNodeList = DeviceEmtreeNodesList.findElements(By.className("term"));
         for (WebElement emtreeNode : emtreeNodeList) {
+            System.out.println("Items are" +emtreeNode.getText());
             if (emtreeNode.getText().equals(nodeName)) {
                 emtreeNode.click(); // click the desired option
                 break;
@@ -259,15 +260,33 @@ public class MedicalDeviceSearchPage extends BasePage {
 
     public void clickEmtreeDeviceTerm(String nodeTerm) {
         logger.info("Click on Emtree term  " + nodeTerm);
-        List<WebElement> items = DeviceEmtreeNodesList.findElements(By.cssSelector(".item-sub-list-holder .term"));
-            for (WebElement emtreeNode : items) {
-            if (emtreeNode.getText().equals(nodeTerm)) {
-                emtreeNode.click();
-//                emtreeNode.findElement(By.className("Icon-module_root__3r_4i")).click();// click the plus option
-                break;
+//        WebElement nodeGrp = DeviceEmtreeNodesList.findElement(By.xpath("//*[contains(text(),'" + nodeTerm + "')]"));
+
+
+        WebElement nodeGrp= DeviceEmtreeNodesList.findElement(By.xpath("//*[text()[contains(.,'" + nodeTerm +"')]]"));
+
+//
+//        List<WebElement> items = DeviceEmtreeNodesList.findElements(By.cssSelector(".els-emtree-list-item .els-emtree-list .term-holder"));
+//            for (WebElement emtreeNode : items) {
+                System.out.println("Medical device child" +nodeGrp.getText());
+                nodeGrp.click();
+//            if (emtreeNode.getText().equals(nodeTerm)) {
+//                emtreeNode.click();
+////                emtreeNode.findElement(By.className("Icon-module_root__3r_4i")).click();// click the plus option
+
             }
 
-        }
+
+
+
+
+    public void clickEmtreeDeviceChildTerm(String childTerm) {
+        logger.info("Click on Emtree term  " + childTerm);
+        WebElement nodeGrp= DeviceEmtreeNodesList.findElement(By.xpath("//*[text()[contains(.,'" + childTerm +"')]]"));
+        System.out.println("Medical device child" +nodeGrp.getText());
+        nodeGrp.click();
+         nodeGrp.findElement(By.cssSelector(".Icon-module_root__3r_4i .FontSize-module_lg__3phJr")).click();// click the plus option
+
     }
 
 
