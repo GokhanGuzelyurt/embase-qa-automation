@@ -274,7 +274,6 @@ public class MedicalDeviceSearchPage extends BasePage {
 
     }
 
-
     @Step
     public void clickEditDeviceIcon() {
         EditDeviceIcon.click();
@@ -285,7 +284,6 @@ public class MedicalDeviceSearchPage extends BasePage {
     public void clickRemoveDevice() {
         RemoveDeviceIcon.click();
     }
-
 
     @Step
     public void waitForSynonymsToLoad() {
