@@ -4,19 +4,12 @@ import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.Step;
 import net.serenitybdd.core.annotations.findby.By;
-import org.assertj.core.api.Assertions;
 import org.openqa.selenium.*;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.yecht.Data;
-import po.ResultsPage;
 import po.common.BasePage;
 
-import java.awt.*;
 import java.lang.invoke.MethodHandles;
 import java.util.List;
 
@@ -227,10 +220,6 @@ public class MedicalDeviceSearchPage extends BasePage {
         return SpecificDeviceEffectsPopUp.isDisplayed();
     }
 
-    public void deviceSuggestionTermsDisplayed() {
-//        Assertions.assertThat(DeviceSuggestionsList.isDisplayed()).describedAs("Suggestions terms list is not displayed").isTrue();
-    }
-
 
     public void clickAutoSuggestDeviceTerm(String term) {
 
@@ -266,24 +255,14 @@ public class MedicalDeviceSearchPage extends BasePage {
         WebElement nodeGrp = DeviceEmtreeNodesList.findElement(By.xpath("//*[text()[contains(.,'" + nodeTerm + "')]]"));
 
 //
-//        List<WebElement> items = DeviceEmtreeNodesList.findElements(By.cssSelector(".els-emtree-list-item .els-emtree-list .term-holder"));
-//            for (WebElement emtreeNode : items) {
         System.out.println("Medical device child" + nodeGrp.getText());
         nodeGrp.click();
-
-
-//            if (emtreeNode.getText().equals(nodeTerm)) {
-//                emtreeNode.click();
-////                emtreeNode.findElement(By.className("Icon-module_root__3r_4i")).click();// click the plus option
 
     }
 
 
     public void clickEmtreeDeviceChildTerm(String childTerm) {
         logger.info("Click on Emtree term  " + childTerm);
-//        WebElement nodeGrp= DeviceEmtreeNodesList.findElement(By.xpath("//*[text()[contains(.,'" + childTerm +"')]]"));
-//        System.out.println("Medical device child" +nodeGrp.getText());
-//        nodeGrp.click();
         List<WebElement> items = DeviceEmtreeNodesList.findElements(By.cssSelector(".child .term-holder"));
         for (WebElement emtreeNode : items) {
             if (emtreeNode.getText().equalsIgnoreCase(childTerm)) {
@@ -292,8 +271,6 @@ public class MedicalDeviceSearchPage extends BasePage {
 
             }
         }
-
-//         nodeGrp.findElement(By.cssSelector(".Icon-module_root__3r_4i .FontSize-module_lg__3phJr")).click();// click the plus option
 
     }
 

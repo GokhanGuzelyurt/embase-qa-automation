@@ -14,16 +14,6 @@ public class MedicalDeviceStepDef {
     SearchPage searchPage;
     ResultsPage resultsPage;
 
-//    @When("^user clicks on Add device name icon$")
-//    public void clickIcon() {
-//        medicalDeviceSearchPage.clickAddDeviceIcon();
-//
-//    }
-
-//    @When("^user clicks on Add device name button$")
-//    public void clickAddDeviceBtn() {
-//        medicalDeviceSearchPage.AddDeviceNameIcon.click();
-//    }
 
     @And("^user clicks on Add Synonym icon$")
     public void clickAddSynonymIcon() {
