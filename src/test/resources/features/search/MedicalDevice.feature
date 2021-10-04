@@ -90,13 +90,12 @@ Feature: Medical Device tests
   Scenario: Removing the device name on medical device search form
     When user clicks on Add device name icon
     Then the title on the popup is Add device name
-    When Emtree node general device is selected
-    And Emtree node clothing is selected
-    And Emtree term glove is selected
+    When Emtree node medical device is selected
+    And Emtree term implant is selected
+    And Emtree child node bipolar implant is selected
     And user clicks on Add device name button at medical device page
     Then the Add device name popup is closed
     When user clicks on close icon to remove the device name
-    Then the label Add device name is displayed
     And Show results button is disabled
 
   @C467187

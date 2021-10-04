@@ -96,7 +96,7 @@ public class MedicalDeviceStepDef {
     }
 
     @And("^Emtree child node (.*) is selected$")
-    public void selectChildNode(String childNode){
+    public void selectChildNode(String childNode) {
         medicalDeviceSearchPage.clickEmtreeDeviceChildTerm(childNode);
     }
 
@@ -163,7 +163,7 @@ public class MedicalDeviceStepDef {
     @When("^user selects publication years range from (.*) to (.*)$")
     public void selectPubYearsRange(String startYear, String endYear) {
 
-       medicalDeviceSearchPage.fillPublicationYears(startYear, endYear);
+        medicalDeviceSearchPage.fillPublicationYears(startYear, endYear);
     }
 
     @When("^user clicks on DateRange picker and selects range from (.*) to (.*)$")

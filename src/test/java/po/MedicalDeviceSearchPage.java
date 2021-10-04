@@ -127,7 +127,7 @@ public class MedicalDeviceSearchPage extends BasePage {
     @FindBy(name = "daterangepicker_end")
     public WebElement EndDate;
 
-    @FindBy(className ="date-range-picker")
+    @FindBy(className = "date-range-picker")
     public WebElement DateRangePicker;
 
     @FindBy(css = ".range_inputs")
@@ -157,14 +157,14 @@ public class MedicalDeviceSearchPage extends BasePage {
     @FindBy(id = "publication-year-from")
     public WebElement pubYearFrom;
 
-    @FindBy(id="publication-year-to")
+    @FindBy(id = "publication-year-to")
     public WebElement pubYearTo;
 
-    @FindBy(id="publication-year-from-options")
+    @FindBy(id = "publication-year-from-options")
     public WebElement pubYearFromOptions;
 
 
-    @FindBy(id="publication-year-to-options")
+    @FindBy(id = "publication-year-to-options")
     public WebElement pubYearToOptions;
 
 
@@ -249,7 +249,7 @@ public class MedicalDeviceSearchPage extends BasePage {
         logger.info("Click on Emtree node " + nodeName);
         List<WebElement> emtreeNodeList = DeviceEmtreeNodesList.findElements(By.className("term"));
         for (WebElement emtreeNode : emtreeNodeList) {
-            System.out.println("Items are" +emtreeNode.getText());
+            System.out.println("Items are" + emtreeNode.getText());
             if (emtreeNode.getText().equals(nodeName)) {
                 emtreeNode.click(); // click the desired option
                 break;
@@ -263,29 +263,37 @@ public class MedicalDeviceSearchPage extends BasePage {
 //        WebElement nodeGrp = DeviceEmtreeNodesList.findElement(By.xpath("//*[contains(text(),'" + nodeTerm + "')]"));
 
 
-        WebElement nodeGrp= DeviceEmtreeNodesList.findElement(By.xpath("//*[text()[contains(.,'" + nodeTerm +"')]]"));
+        WebElement nodeGrp = DeviceEmtreeNodesList.findElement(By.xpath("//*[text()[contains(.,'" + nodeTerm + "')]]"));
 
 //
 //        List<WebElement> items = DeviceEmtreeNodesList.findElements(By.cssSelector(".els-emtree-list-item .els-emtree-list .term-holder"));
 //            for (WebElement emtreeNode : items) {
-                System.out.println("Medical device child" +nodeGrp.getText());
-                nodeGrp.click();
+        System.out.println("Medical device child" + nodeGrp.getText());
+        nodeGrp.click();
+
+
 //            if (emtreeNode.getText().equals(nodeTerm)) {
 //                emtreeNode.click();
 ////                emtreeNode.findElement(By.className("Icon-module_root__3r_4i")).click();// click the plus option
 
-            }
-
-
-
+    }
 
 
     public void clickEmtreeDeviceChildTerm(String childTerm) {
         logger.info("Click on Emtree term  " + childTerm);
-        WebElement nodeGrp= DeviceEmtreeNodesList.findElement(By.xpath("//*[text()[contains(.,'" + childTerm +"')]]"));
-        System.out.println("Medical device child" +nodeGrp.getText());
-        nodeGrp.click();
-         nodeGrp.findElement(By.cssSelector(".Icon-module_root__3r_4i .FontSize-module_lg__3phJr")).click();// click the plus option
+//        WebElement nodeGrp= DeviceEmtreeNodesList.findElement(By.xpath("//*[text()[contains(.,'" + childTerm +"')]]"));
+//        System.out.println("Medical device child" +nodeGrp.getText());
+//        nodeGrp.click();
+        List<WebElement> items = DeviceEmtreeNodesList.findElements(By.cssSelector(".child .term-holder"));
+        for (WebElement emtreeNode : items) {
+            if (emtreeNode.getText().equalsIgnoreCase(childTerm)) {
+                emtreeNode.click();
+                emtreeNode.findElement(By.cssSelector(".actions .Icon-module_root__3r_4i")).click();// click the plus option
+
+            }
+        }
+
+//         nodeGrp.findElement(By.cssSelector(".Icon-module_root__3r_4i .FontSize-module_lg__3phJr")).click();// click the plus option
 
     }
 
@@ -350,14 +358,13 @@ public class MedicalDeviceSearchPage extends BasePage {
     }
 
 
-
     public void clickAddSynonymIcon() {
         addSynonymsIcon.click();
 
 
     }
 
-    public void fillPublicationYears(String fromYear, String toYear){
+    public void fillPublicationYears(String fromYear, String toYear) {
         if (!fromYear.isEmpty()) {
             pubYearFrom.click();
             pubYearFromOptions.findElement(By.buttonText(fromYear)).click();
