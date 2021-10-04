@@ -58,11 +58,7 @@ public class MedicalDeviceStepDef {
         medicalDeviceSearchPage.shouldBeDisplayed();
     }
 
-    @Then("^the device autosuggestions list is displayed$")
-    public void deviceAutosuggestionsListDisplayed() {
-        medicalDeviceSearchPage.deviceSuggestionTermsDisplayed();
 
-    }
 
     @When("^user selects (.*) as the autosuggested device name from the list$")
     public void selectAutosuggestedTerm(String term) {
