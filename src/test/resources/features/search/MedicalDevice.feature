@@ -165,5 +165,5 @@ Feature: Medical Device tests
     And user clicks on DateRange picker and selects range from 01-01-2000 to 01-05-2010
     Then user clicks on Show Results
     Then user is on Results Page
-    And search query is ('bandages and dressings'/exp OR 'bandages and dressings':ti,ab OR 'bandages and dressings'/exp/'adverse device effect') AND [1-1-2000]/sd NOT [02-05-2010]/sd
+    And search query is ('bandages and dressings'/exp OR 'bandages and dressings':ti,ab OR 'bandages and dressings'/exp/'adverse device effect') AND [1-1-2000]/sd NOT [2-5-2010]/sd
 
