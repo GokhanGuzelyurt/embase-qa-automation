@@ -10,3 +10,4 @@ Feature: Record Details tests
     Given user enters query dna on Results Page
     Then the result set is not empty
     And user performs View for record #1 on results page
+    Then user is on Record Details page

@@ -6,9 +6,12 @@ import po.RecordDetailsPage;
 public class RecordDetailsStepDef {
     RecordDetailsPage recordDetailsPage;
 
-    @When("^user opens Record Details page$")
-    public void openMedicalDevice() {
-        recordDetailsPage.open();
+    @When("^user is on Record Details page$")
+    public void recordDetailsPageDisplayed() {
+        recordDetailsPage.shouldBeDisplayed();
     }
+
+
+
 
 }

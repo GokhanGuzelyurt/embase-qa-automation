@@ -139,8 +139,10 @@ public class ResultList extends BasePage {
         logger.info("Select the record #" + recordNumber);
 
 //        recordListChecks.findElement(By.cssSelector(".result-number")[1]);
-        List<WebElement> s= getDriver().findElements(By.cssSelector("input[name=record_id]"));
-        s.get(2).click();
+        List<WebElement> s= recordListChecks.findElements(By.cssSelector(".resultPreviewInner"));
+       s.get(2).findElement(By.xpath("//a[contains(@class,'hitsHighlighted')]")).click();
+
+//        By.XPath(".//input[following-sibling::label[contains(., '" + appDto.StatePicker_SpecificCheckbox + "')]]").Click();
 
 
 //        List<WebElement> s= recordListChecks.findElements(By.cssSelector(".resultPreviewItem .selectable .checkbox"));
@@ -149,16 +151,15 @@ public class ResultList extends BasePage {
 //            elements.get(recordNumber-1).click();
 //        List<WebElement> recordIds= recordListChecks.findElements(By.cssSelector(".selectable .emb-checkbox-result"));
 //        recordIds.get(1).click();
-        System.out.println("Test" + s.get(1));
        // recordListChecks.findElement(By.xpath("//*[contains(@class,'emb-checkbox-result,')][contains(text(),'"+recordNumber+"')]")).click();
     }
 
     public void clickActionLinkOnRecord(RecordActions action) {
         logger.info("Perform action with the selected record: '" + action.getName() + "'.");
 //        recordActionsList.findElement().click();
-//        recordActionsList.get(action.getName()).jsClick();
+
 //        if (action == RecordActions.View) {
 //            recordDetailsPage.at();
-//        }
-    }
+        }
+
 }
