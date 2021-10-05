@@ -3,12 +3,15 @@ package po.sections.results;
 import net.thucydides.core.webelements.Checkbox;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import po.common.BasePage;
 
 import java.awt.*;
 import java.nio.channels.Selector;
 import java.util.List;
 
-public class ResultList {
+public class ResultList extends BasePage {
+
+
     @FindBy(css = "#searchHitsText .search-hitcounts")
     public WebElement searchHitCounts;
 
@@ -114,4 +117,9 @@ public class ResultList {
 
     @FindBy(css = ".emailSubmit:first-of-type")
     public WebElement emailResultsButton;
+
+
+    public int getResultsCount() {
+    return Integer.valueOf(searchHitCounts.getText().split(" ")[0].replace(",", ""));
+}
 }
