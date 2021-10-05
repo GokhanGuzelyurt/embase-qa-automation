@@ -1,16 +1,22 @@
 package po.sections.results;
 
+import enums.RecordActions;
 import net.thucydides.core.webelements.Checkbox;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import po.common.BasePage;
 
 import java.awt.*;
+import java.lang.invoke.MethodHandles;
 import java.nio.channels.Selector;
 import java.util.List;
 
 public class ResultList extends BasePage {
 
+    final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     @FindBy(css = "#searchHitsText .search-hitcounts")
     public WebElement searchHitCounts;
@@ -44,7 +50,7 @@ public class ResultList extends BasePage {
     public List checkAllCheckboxes;
 
     @FindBy(css = ".resultHeader .textButton")
-    public List recordActionsList;
+    public WebElement recordActionsList;
 
     @FindBy(css = ".extraNav previous")
     public WebElement previousButton;
@@ -59,10 +65,10 @@ public class ResultList extends BasePage {
     public WebElement nextButton;
 
     @FindBy(css = ".emb-checkbox.emb-checkbox-result")
-    public List recordListLabels;
+    public WebElement recordListLabels;
 
-    @FindBy(css = "input[name=record_id]")
-    public CheckboxGroup recordListChecks;
+    @FindBy(id = "recordsFound")
+    public WebElement recordListChecks;
 
 //    @FindBy(css = ".pageIndex")
 //    public PageIndex pageIndex;
@@ -74,16 +80,16 @@ public class ResultList extends BasePage {
     public WebElement inProcessLabels;
 
     @FindBy(css = ".resultInfo>a")
-    public List titleLinks;
+    public WebElement titleLinks;
 
     @FindBy(id = "selectionAmount")
-    public Selector recordSelector;
+    public WebElement recordSelector;
 
     @FindBy(css = "option[disabled='disabled']")
-    public List disabledOpts;
+    public WebElement disabledOpts;
 
     @FindBy(css = "#selectionAmount option")
-    public List allOptions;
+    public WebElement allOptions;
 
     @FindBy(css = ".selectable.cur-d")
     public List recordsList;
@@ -120,6 +126,39 @@ public class ResultList extends BasePage {
 
 
     public int getResultsCount() {
-    return Integer.valueOf(searchHitCounts.getText().split(" ")[0].replace(",", ""));
+
+        return Integer.valueOf(searchHitCounts.getText().split(" ")[0].replace(",", ""));
 }
+
+    public void runActionOnRecord(int recordID, RecordActions action) {
+        logger.info("Selects a Record and Runs the action from the Records action menu");
+        checkRecord(recordID);
+//        clickActionLinkOnRecord(action);
+    }
+    public void checkRecord(int recordNumber) {
+        logger.info("Select the record #" + recordNumber);
+
+//        recordListChecks.findElement(By.cssSelector(".result-number")[1]);
+        List<WebElement> s= getDriver().findElements(By.cssSelector("input[name=record_id]"));
+        s.get(2).click();
+
+
+//        List<WebElement> s= recordListChecks.findElements(By.cssSelector(".resultPreviewItem .selectable .checkbox"));
+//        List<WebElement> elements=recordListChecks.findElements(By.xpath(".//*[contains(@class,'emb-checkbox-result')]"));
+//        int numberOfElements=elements.size();
+//            elements.get(recordNumber-1).click();
+//        List<WebElement> recordIds= recordListChecks.findElements(By.cssSelector(".selectable .emb-checkbox-result"));
+//        recordIds.get(1).click();
+        System.out.println("Test" + s.get(1));
+       // recordListChecks.findElement(By.xpath("//*[contains(@class,'emb-checkbox-result,')][contains(text(),'"+recordNumber+"')]")).click();
+    }
+
+    public void clickActionLinkOnRecord(RecordActions action) {
+        logger.info("Perform action with the selected record: '" + action.getName() + "'.");
+//        recordActionsList.findElement().click();
+//        recordActionsList.get(action.getName()).jsClick();
+//        if (action == RecordActions.View) {
+//            recordDetailsPage.at();
+//        }
+    }
 }
