@@ -1,5 +1,6 @@
 package embase.tests.StepDefs;
 
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -31,9 +32,10 @@ public class ResultsPageStepDef {
         resultsPage.searchField.sendKeys(Keys.ENTER);
     }
 
-    @When("^user performs (.*) for record #(.*) on results page$")
-    public void runActionOnRecordResultsPage(RecordActions action, int recordID) {
-        resultsPage.resultList.runActionOnRecord(recordID, action);
+
+    @And("^user opens record #(.*) by clicking on title$")
+    public void openRecordByTitle(int recordId){
+        resultsPage.resultList.clickRecordByTitle(recordId);
     }
 
 }

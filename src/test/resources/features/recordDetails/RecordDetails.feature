@@ -9,5 +9,5 @@ Feature: Record Details tests
   Scenario: Opening record details page
     Given user enters query dna on Results Page
     Then the result set is not empty
-    And user performs View for record #1 on results page
+    And user opens record #1 by clicking on title
     Then user is on Record Details page

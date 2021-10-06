@@ -130,36 +130,13 @@ public class ResultList extends BasePage {
         return Integer.valueOf(searchHitCounts.getText().split(" ")[0].replace(",", ""));
 }
 
-    public void runActionOnRecord(int recordID, RecordActions action) {
-        logger.info("Selects a Record and Runs the action from the Records action menu");
-        checkRecord(recordID);
-//        clickActionLinkOnRecord(action);
-    }
-    public void checkRecord(int recordNumber) {
+    public void clickRecordByTitle(int recordNumber) {
         logger.info("Select the record #" + recordNumber);
 
-//        recordListChecks.findElement(By.cssSelector(".result-number")[1]);
         List<WebElement> s= recordListChecks.findElements(By.cssSelector(".resultPreviewInner"));
-       s.get(2).findElement(By.xpath("//a[contains(@class,'hitsHighlighted')]")).click();
+       s.get(recordNumber+1).findElement(By.xpath("//a[contains(@class,'hitsHighlighted')]")).click();
 
-//        By.XPath(".//input[following-sibling::label[contains(., '" + appDto.StatePicker_SpecificCheckbox + "')]]").Click();
-
-
-//        List<WebElement> s= recordListChecks.findElements(By.cssSelector(".resultPreviewItem .selectable .checkbox"));
-//        List<WebElement> elements=recordListChecks.findElements(By.xpath(".//*[contains(@class,'emb-checkbox-result')]"));
-//        int numberOfElements=elements.size();
-//            elements.get(recordNumber-1).click();
-//        List<WebElement> recordIds= recordListChecks.findElements(By.cssSelector(".selectable .emb-checkbox-result"));
-//        recordIds.get(1).click();
-       // recordListChecks.findElement(By.xpath("//*[contains(@class,'emb-checkbox-result,')][contains(text(),'"+recordNumber+"')]")).click();
     }
 
-    public void clickActionLinkOnRecord(RecordActions action) {
-        logger.info("Perform action with the selected record: '" + action.getName() + "'.");
-//        recordActionsList.findElement().click();
-
-//        if (action == RecordActions.View) {
-//            recordDetailsPage.at();
-        }
 
 }
