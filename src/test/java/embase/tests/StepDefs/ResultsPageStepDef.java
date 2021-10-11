@@ -1,8 +1,13 @@
 package embase.tests.StepDefs;
 
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+import enums.RecordActions;
 import org.assertj.core.api.Assertions;
 import org.jruby.RubyProcess;
+import org.openqa.selenium.Keys;
 import po.ResultsPage;
 
 public class ResultsPageStepDef {
@@ -15,6 +20,22 @@ public class ResultsPageStepDef {
         System.out.println("Count is" +resultsPage.resultList.getResultsCount());
     }
 
+    @When("^user opens Results page$")
+    public void openMedicalDevice() {
+        resultsPage.open();
+    }
 
+    @Given("^user enters query (.*) on Results Page$")
+    public void enterSearchQuery(String query){
+        resultsPage.searchField.clear();
+        resultsPage.searchField.sendKeys(query);
+        resultsPage.searchField.sendKeys(Keys.ENTER);
+    }
+
+
+    @And("^user opens record #(.*) by clicking on title$")
+    public void openRecordByTitle(int recordId){
+        resultsPage.resultList.clickRecordByTitle(recordId);
+    }
 
 }

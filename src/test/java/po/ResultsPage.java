@@ -1,5 +1,6 @@
 package po;
 
+import enums.RecordActions;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import org.assertj.core.api.Assertions;
@@ -80,6 +81,5 @@ public class ResultsPage extends BasePage {
     }
 
 
-    public void resultsPageIsOpened(){
-    }
+
 }
