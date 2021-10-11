@@ -67,7 +67,7 @@ public class MedicalDeviceStepDef {
 
     @And("^that Adverse device effect checkbox is selected by default$")
     public void verifyAdverseDeviceEffectChkboxEnabled() {
-//        Assertions.assertThat(medicalDeviceSearchPage.AdverseDeviceEffectCheckBox.isChecked()).describedAs("The Adverse DeviceEffect checkbox is not enabled").isTrue();
+        Assertions.assertThat(medicalDeviceSearchPage.adverseDeviceEffectsChkBoxSelected()).describedAs("The Adverse DeviceEffect checkbox is not enabled").isTrue();
     }
 
     @When("^Emtree node (.*) is selected$")
