@@ -41,6 +41,13 @@ public class ResultsPageStepDef {
         resultsPage.resultList.clickRecordByTitle(recordId);
     }
 
+    @And("^record #(.*) contains source as (.*)$")
+    public void checkRecordContent(int recordID, String source){
+        resultsPage.resultList.checkRecordContent(recordID,source);
+        Assertions.assertThat(resultsPage.resultList.checkRecordContent(recordID,source)).describedAs("Preprints source is not present").isEqualToIgnoringCase(source);
+
+    }
+
     @And("^user opens Source tab on Results page$")
     public void openSourceTabResultsPage() {
         resultsPage.sourceTab.click();

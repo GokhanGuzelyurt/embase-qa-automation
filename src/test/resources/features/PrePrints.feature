@@ -3,7 +3,7 @@ Feature: Pre Prints tests
 
   Background: Home page
     Given user opens Embase application
-    And user logs in as Default User
+#    And user logs in as Default User
     And Quick search page is opened
     Then user opens Results page
 
@@ -30,6 +30,10 @@ Feature: Pre Prints tests
     And Preprints labelname is displayed on Email Alerts
     And Preprints checkbox is selected by default
 
+    Scenario: Verify Source is shown as PREPRINT on Results page for a preprint record
+    Given user enters query [preprint]/lim on Results Page and performs a search
+    Then the result set is not empty
+    And record #1 contains source as PREPRINT
 
 
 

@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.yecht.Data;
 import po.common.BasePage;
 
 import java.awt.*;
@@ -136,6 +137,14 @@ public class ResultList extends BasePage {
         List<WebElement> s= recordListChecks.findElements(By.cssSelector(".resultPreviewInner"));
        s.get(recordNumber+1).findElement(By.xpath("//a[contains(@class,'hitsHighlighted')]")).click();
 
+    }
+
+    public String checkRecordContent(int recordNumber, String sourceName){
+        logger.info("Check the record content#" + recordNumber);
+
+        List<WebElement> s= recordListChecks.findElements(By.cssSelector(".resultPreviewInner"));
+       sourceName = s.get(recordNumber-1).findElement(By.xpath("//span[contains(@class,'source') and contains(text(),'"+sourceName+"')]")).getText();
+       return sourceName;
     }
 
 
