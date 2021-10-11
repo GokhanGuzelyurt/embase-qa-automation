@@ -9,6 +9,14 @@ import po.common.BasePage;
 public class ConfigPage extends BasePage {
 
     @FindBy(xpath = "//p[contains(text(),'Version')]")
-    public WebElement buildNumber;
+    public WebElement legacyBuildNumber;
 
+    @FindBy(xpath = "//pre[1]")
+    public WebElement webappBuildNumber;
+
+    @FindBy(id = "sg")
+    public WebElement scurityGatewayBuildNumber;
+
+    @FindBy(id = "fe")
+    public WebElement reactBuildNumber;
 }
