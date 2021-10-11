@@ -216,7 +216,7 @@ Feature: Public API-External
   @C357028
   Scenario: Retrieval EMBASE ID GET request to Public API with JSON response
     Given I set the Public API endpoint for the http request to /content/embase/article/embase
-    And I concatenate the value /2013715327to the URL
+    And I concatenate the value /2013715327 to the URL
     And I set the queryParam apikey with value 6196bbd774a02f6bcaf5b6f2f9e9c3a3
     And I set the queryParam insttoken with value 12f6d639ad436c2288a67e900477930b
     And I set the queryParam httpaccept with value application/json
@@ -229,7 +229,7 @@ Feature: Public API-External
   @C357029
   Scenario: Retrieval PUBMED ID GET request to Public API with JSON response
     Given I set the Public API endpoint for the http request to /content/embase/article/pubmed_id
-    And I concatenate the value /31910170to the URL
+    And I concatenate the value /31910170 to the URL
     And I set the queryParam apikey with value 6196bbd774a02f6bcaf5b6f2f9e9c3a3
     And I set the queryParam insttoken with value 12f6d639ad436c2288a67e900477930b
     And I set the queryParam httpaccept with value application/json
@@ -273,7 +273,7 @@ Feature: Public API-External
   @C357032
   Scenario: Retrieval LUI GET request to Public API resource not found
     Given I set the Public API endpoint for the http request to '/content/embase/article/lui'
-    And I concatenate the value '/L62-non-existing'to the URL
+    And I concatenate the value /L62-non-existing to the URL
     And I set the queryParam 'apikey' with value from properties file
     And I set the queryParam 'insttoken' with value from properties file
     And I set the queryParam 'httpaccept' with value 'application/json'
@@ -302,7 +302,7 @@ Feature: Public API-External
     # BUG - EMBASE-12146
   @C357034
   Scenario: Search GET request to Public API invalid MIME type
-    Given I set the Public API endpoint for the http request to '/content/embase/article'
+    Given I set the Public API endpoint for the http request to /content/embase/article
     And I set the queryParam 'apikey' with value from properties file
     And I set the queryParam 'insttoken' with value from properties file
     And I set the queryParam 'httpaccept' with value 'image/jpeg'
@@ -314,5 +314,4 @@ Feature: Public API-External
     Then the status code of the response is 406
     And the response body contains element 'service-error.status.statusCode' with value 'INVALID_INPUT'
     And the response body contains element 'service-error.status.statusText' with value 'Accept header value 'image/jpeg' is not valid for this resource'
-
 
