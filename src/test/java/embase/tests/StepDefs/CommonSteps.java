@@ -9,6 +9,7 @@ import net.serenitybdd.core.environment.EnvironmentSpecificConfiguration;
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.util.EnvironmentVariables;
 import org.apache.commons.lang3.reflect.FieldUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -201,7 +202,15 @@ public class CommonSteps {
             logger.info("setUp - go to /config page");
             configPage.open();
             logger.info("setUp - get the build number");
-            EMB_BUILD_NUMBER = configPage.buildNumber.getText().split("build ")[1];
+
+            if (!configPage.find(By.xpath("//html/body")).getText().contains("Webapp")) {
+                EMB_BUILD_NUMBER = configPage.legacyBuildNumber.getText().split("build ")[1];
+            } else {
+                EMB_BUILD_NUMBER = "Webapp: " + configPage.webappBuildNumber.getText().split(": ")[2].split("\n")[0];
+                EMB_BUILD_NUMBER += ", SG: " + configPage.scurityGatewayBuildNumber.getText().split(": ")[2].split("\n")[0];
+                EMB_BUILD_NUMBER += ", FE: " + configPage.reactBuildNumber.getText().split(": ")[2].split("\n")[0];
+            }
+
             tearDown();
         } else {
             logger.info("build number already known");
