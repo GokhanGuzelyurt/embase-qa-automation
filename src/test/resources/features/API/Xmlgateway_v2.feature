@@ -54,7 +54,7 @@ Feature: XmlGateway version 2 test cases
     When I execute the http request with method GET
     Then the status code of the response is 200
     And the response body contains element embaseidlist.query with value [preprint]/lim
-    And the response body contains element hitstart with value 1
+    And the response body contains element embaseidlist.hitstart with value 1
 
   @C477856
   Scenario: Running xmlgateway v2 by preprints pub type query
@@ -66,4 +66,4 @@ Feature: XmlGateway version 2 test cases
     When I execute the http request with method GET
     Then the status code of the response is 200
     And the response body contains element embaseidlist.query with value 'preprint'/it
-    And the response body contains element hitstart with value 1
+    And the response body contains element embaseidlist.hitstart with value 1
