@@ -1,16 +1,13 @@
 package po;
 
-import enums.RecordActions;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import org.assertj.core.api.Assertions;
-import org.jruby.RubyProcess;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.yecht.Data;
 import po.common.BasePage;
 import po.common.SearchPage;
 import po.sections.results.PageIndex;
@@ -44,7 +41,7 @@ public class ResultsPage extends BasePage {
     @FindBy(id = "searchField")
     public WebElementFacade searchField;
 
-    @FindBy(id= "submit_search")
+    @FindBy(id = "submit_search")
     public WebElement searchButton;
 
     @FindBy(className = "queryContent")
@@ -53,15 +50,14 @@ public class ResultsPage extends BasePage {
     @FindBy(id = "processSearchDialog") // parent id: a2bxw
     public WebElementFacade pleaseWaitPanel;
 
-    @FindBy(id="sourcesTab")
+    @FindBy(id = "sourcesTab")
     public WebElement sourceTab;
 
-    @FindBy(id="sourcesTab_search_records_4_container")
+    @FindBy(id = "sourcesTab_search_records_4_container")
     public WebElement prePrintsChkBox;
 
-    @FindBy(id="alertform")
+    @FindBy(id = "alertform")
     public WebElement emailAlertForm;
-
 
 
     public void waitForRecordSectionIsLoaded() {
@@ -99,32 +95,28 @@ public class ResultsPage extends BasePage {
         logger.info("Set email alert dialog for current search result");
         resultList.setEmailAlertLink.click();
         waitABit(3);
-        }
+    }
 
-        public boolean emailAlertLabelNames(String labelName) {
-            boolean flag1 = false;
-            List<WebElement> labels = emailAlertForm.findElements(By.xpath("//*[@class='field-wrapper']//label"));
-            for (WebElement label : labels) {
-                if (label.getText().equalsIgnoreCase(labelName)) {
-                    flag1 = true;
-                    break;
-                }
-                else{
-                System.out.println("Label name" + "\t"+ labelName + "\t" +" is not equal to" +"\t" +label.getText());
-                    }
+    public boolean emailAlertLabelNames(String labelName) {
+        boolean flag1 = false;
+        List<WebElement> labels = emailAlertForm.findElements(By.xpath("//*[@class='field-wrapper']//label"));
+        for (WebElement label : labels) {
+            if (label.getText().equalsIgnoreCase(labelName)) {
+                flag1 = true;
+                break;
+            } else {
+                System.out.println("Label name" + "\t" + labelName + "\t" + " is not equal to" + "\t" + label.getText());
+            }
         }
-
-                return flag1;
-
-        }
+        return flag1;
+    }
 
     public boolean emailAlertPreprintSelected() {
         boolean flag = false;
         WebElement element = emailAlertForm.findElement(By.xpath("//*[@class='field']//input[@name='includePreprints']"));
-       if(element.isSelected()){
-           flag =true;
-       }
-
-       return flag;
-           }
+        if (element.isSelected()) {
+            flag = true;
+        }
+        return flag;
+    }
 }

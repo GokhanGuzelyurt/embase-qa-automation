@@ -1,16 +1,13 @@
 package po.sections.results;
 
-import enums.RecordActions;
 import net.thucydides.core.webelements.Checkbox;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.yecht.Data;
 import po.common.BasePage;
 
-import java.awt.*;
 import java.lang.invoke.MethodHandles;
 import java.nio.channels.Selector;
 import java.util.List;
@@ -125,27 +122,20 @@ public class ResultList extends BasePage {
     @FindBy(css = ".emailSubmit:first-of-type")
     public WebElement emailResultsButton;
 
-
     public int getResultsCount() {
-
         return Integer.valueOf(searchHitCounts.getText().split(" ")[0].replace(",", ""));
-}
+    }
 
     public void clickRecordByTitle(int recordNumber) {
         logger.info("Select the record #" + recordNumber);
-
-        List<WebElement> s= recordListChecks.findElements(By.cssSelector(".resultPreviewInner"));
-       s.get(recordNumber+1).findElement(By.xpath("//a[contains(@class,'hitsHighlighted')]")).click();
-
+        List<WebElement> s = recordListChecks.findElements(By.cssSelector(".resultPreviewInner"));
+        s.get(recordNumber + 1).findElement(By.xpath("//a[contains(@class,'hitsHighlighted')]")).click();
     }
 
-    public String checkRecordContent(int recordNumber, String sourceName){
+    public String checkRecordContent(int recordNumber, String sourceName) {
         logger.info("Check the record content#" + recordNumber);
-
-        List<WebElement> s= recordListChecks.findElements(By.cssSelector(".resultPreviewInner"));
-       sourceName = s.get(recordNumber-1).findElement(By.xpath("//span[contains(@class,'source') and contains(text(),'"+sourceName+"')]")).getText();
-       return sourceName;
+        List<WebElement> s = recordListChecks.findElements(By.cssSelector(".resultPreviewInner"));
+        sourceName = s.get(recordNumber - 1).findElement(By.xpath("//span[contains(@class,'source') and contains(text(),'" + sourceName + "')]")).getText();
+        return sourceName;
     }
-
-
 }

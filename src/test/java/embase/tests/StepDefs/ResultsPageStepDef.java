@@ -4,11 +4,8 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import enums.RecordActions;
 import org.assertj.core.api.Assertions;
-import org.jruby.RubyProcess;
 import org.openqa.selenium.Keys;
-import org.yecht.Data;
 import po.ResultsPage;
 
 public class ResultsPageStepDef {
@@ -42,9 +39,9 @@ public class ResultsPageStepDef {
     }
 
     @And("^record #(.*) contains source as (.*)$")
-    public void checkRecordContent(int recordID, String source){
-        resultsPage.resultList.checkRecordContent(recordID,source);
-        Assertions.assertThat(resultsPage.resultList.checkRecordContent(recordID,source)).describedAs("Preprints source is not present").isEqualToIgnoringCase(source);
+    public void checkRecordContent(int recordID, String source) {
+        resultsPage.resultList.checkRecordContent(recordID, source);
+        Assertions.assertThat(resultsPage.resultList.checkRecordContent(recordID, source)).describedAs("Preprints source is not present").isEqualToIgnoringCase(source);
 
     }
 
@@ -71,12 +68,11 @@ public class ResultsPageStepDef {
 
     @And("^(.*) labelname is displayed on Email Alerts$")
     public void prePrintsLabelEmailAlerts(String labelName) {
-
         Assertions.assertThat(resultsPage.emailAlertLabelNames(labelName)).describedAs("Flag shouldbe true").isTrue();
     }
 
     @And("^Preprints checkbox is selected by default$")
-    public void prePrintsCheckBoxState(){
-Assertions.assertThat(resultsPage.emailAlertPreprintSelected()).describedAs("Preprints checkbox is not selected").isTrue();
+    public void prePrintsCheckBoxState() {
+        Assertions.assertThat(resultsPage.emailAlertPreprintSelected()).describedAs("Preprints checkbox is not selected").isTrue();
     }
 }
