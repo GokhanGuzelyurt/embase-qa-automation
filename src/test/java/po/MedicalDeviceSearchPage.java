@@ -351,4 +351,10 @@ public class MedicalDeviceSearchPage extends BasePage {
         }
     }
 
+    public boolean adverseDeviceEffectsChkBoxSelected(){
+       WebElement element= getDriver().findElement(By.xpath("//*[@id='checkbox-adverse device effect']"));
+       element.isEnabled();
+       return element.isEnabled();
+    }
+
 }
