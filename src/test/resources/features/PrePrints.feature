@@ -3,7 +3,7 @@ Feature: Pre Prints tests
 
   Background: Home page
     Given user opens Embase application
-#    And user logs in as Default User
+    And user logs in as Default User
     And Quick search page is opened
     Then user opens Results page
 
