@@ -207,7 +207,7 @@ public class CommonSteps {
                 EMB_BUILD_NUMBER = configPage.legacyBuildNumber.getText().split("build ")[1];
             } else {
                 EMB_BUILD_NUMBER = "Webapp: " + configPage.webappBuildNumber.getText().split(": ")[2].split("\n")[0];
-                EMB_BUILD_NUMBER += ", SG: " + configPage.scurityGatewayBuildNumber.getText().split(": ")[2].split("\n")[0];
+                EMB_BUILD_NUMBER += ", SG: " + configPage.securityGatewayBuildNumber.getText().split(": ")[2].split("\n")[0];
                 EMB_BUILD_NUMBER += ", FE: " + configPage.reactBuildNumber.getText().split(": ")[2].split("\n")[0];
             }
 

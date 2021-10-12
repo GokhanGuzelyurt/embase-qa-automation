@@ -15,7 +15,7 @@ public class ConfigPage extends BasePage {
     public WebElement webappBuildNumber;
 
     @FindBy(id = "sg")
-    public WebElement scurityGatewayBuildNumber;
+    public WebElement securityGatewayBuildNumber;
 
     @FindBy(id = "fe")
     public WebElement reactBuildNumber;
