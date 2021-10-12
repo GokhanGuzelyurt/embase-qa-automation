@@ -14,6 +14,7 @@ public class Result {
     private int testId;
     private int statusId;
     private String comment;
+    private String elapsed;
     private Screenshot screenshot;
 
 
