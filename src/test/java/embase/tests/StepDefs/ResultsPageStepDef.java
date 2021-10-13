@@ -25,8 +25,7 @@ public class ResultsPageStepDef {
     }
 
     @When("^user opens Advanced Search page$")
-    public void openAdvancedSearch(){
-
+    public void openAdvancedSearch() {
     }
 
     @Given("^user enters query (.*) and performs a search$")
@@ -36,7 +35,6 @@ public class ResultsPageStepDef {
         resultsPage.searchField.sendKeys(Keys.ENTER);
         resultsPage.waitForRecordSectionIsLoaded();
     }
-
 
     @And("^user opens record #(.*) by clicking on title$")
     public void openRecordByTitle(int recordId) {
