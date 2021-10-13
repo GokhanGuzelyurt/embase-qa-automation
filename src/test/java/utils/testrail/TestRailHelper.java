@@ -115,6 +115,7 @@ public class TestRailHelper {
         Map data = new HashMap();
         data.put("status_id", result.getStatusId());
         data.put("comment", result.getComment());
+        data.put("elapsed", result.getElapsed());
 
         try {
             JSONObject r = (JSONObject) client.sendPost("add_result_for_case/" + TestRailIntegration.RUN_ID
