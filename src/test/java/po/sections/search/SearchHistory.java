@@ -1,4 +1,4 @@
-package po.sections.results;
+package po.sections.search;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

@@ -18,13 +18,9 @@ public class ResultsPageStepDef {
     }
 
     @When("^user opens Results page$")
-    public void openMedicalDevice() {
+    public void openResultsPage() {
         resultsPage.open();
         resultsPage.waitFor(resultsPage.searchField);
-    }
-
-    @When("^user opens Advanced Search page$")
-    public void openAdvancedSearch() {
     }
 
     @Given("^user enters query (.*) and performs a search$")
@@ -76,5 +72,15 @@ public class ResultsPageStepDef {
     @And("^Preprints checkbox is selected by default$")
     public void prePrintsCheckBoxState() {
         Assertions.assertThat(resultsPage.emailAlertPreprintSelected()).describedAs("Preprints checkbox is not selected").isTrue();
+    }
+
+    @Then("^search query is (.*)$")
+    public void verifySearchQuery(String query) {
+        resultsPage.verifySearchQuery(query);
+    }
+
+    @And("^user is on Results Page$")
+    public void resultsPageIsOpened() {
+        resultsPage.open();
     }
 }

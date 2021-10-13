@@ -12,7 +12,7 @@ import po.common.BasePage;
 import po.common.SearchPage;
 import po.sections.results.PageIndex;
 import po.sections.results.ResultList;
-import po.sections.results.SearchHistory;
+import po.sections.search.SearchHistory;
 
 import java.lang.invoke.MethodHandles;
 import java.util.List;
@@ -21,7 +21,6 @@ import java.util.List;
 public class ResultsPage extends BasePage {
     final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     SearchPage searchPage;
-
 
     @FindBy(css = ".empty:not(#search_row_empty) p")
     public WebElementFacade recordSecWarnZero;
