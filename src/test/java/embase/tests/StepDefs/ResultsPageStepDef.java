@@ -11,7 +11,6 @@ import po.ResultsPage;
 public class ResultsPageStepDef {
     ResultsPage resultsPage;
 
-
     @Then("^the result set is not empty$")
     public void iVerifyResultsNotEmpty() {
         Assertions.assertThat(resultsPage.resultList.getResultsCount()).describedAs("Result is empty").isGreaterThan(0);
