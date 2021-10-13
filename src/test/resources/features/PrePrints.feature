@@ -9,12 +9,12 @@ Feature: Pre Prints tests
 
   @C477852
   Scenario: Verify that a new Preprints limit is introduced
-    Given user enters query [preprint]/lim on Results Page and performs a search
+    Given user enters query [preprint]/lim and performs a search
     Then the result set is not empty
 
   @C477853
   Scenario: Verify the results Source filters for preprints checkbox
-    Given user enters query ? on Results Page and performs a search
+    Given user enters query ? and performs a search
     Then the result set is not empty
     When user opens Source tab on Results page
     Then source checkbox Preprints should be displayed
@@ -24,7 +24,7 @@ Feature: Pre Prints tests
 
   @C477854
   Scenario: Verify Preprints checkbox is present on Email alerts dialog box
-    And user enters query dna on Results Page and performs a search
+    And user enters query dna and performs a search
     Then the result set is not empty
     And user clicks on EmailAlert link
     And Preprints labelname is displayed on Email Alerts
@@ -32,7 +32,7 @@ Feature: Pre Prints tests
 
   @C477859
   Scenario: Verify Source is shown as PREPRINT on Results page for a preprint record
-    Given user enters query [preprint]/lim on Results Page and performs a search
+    Given user enters query [preprint]/lim and performs a search
     Then the result set is not empty
     And record #1 contains source as PREPRINT
 

@@ -11,7 +11,6 @@ import po.ResultsPage;
 public class ResultsPageStepDef {
     ResultsPage resultsPage;
 
-
     @Then("^the result set is not empty$")
     public void iVerifyResultsNotEmpty() {
         Assertions.assertThat(resultsPage.resultList.getResultsCount()).describedAs("Result is empty").isGreaterThan(0);
@@ -24,14 +23,17 @@ public class ResultsPageStepDef {
         resultsPage.waitFor(resultsPage.searchField);
     }
 
-    @Given("^user enters query (.*) on Results Page and performs a search$")
+    @When("^user opens Advanced Search page$")
+    public void openAdvancedSearch() {
+    }
+
+    @Given("^user enters query (.*) and performs a search$")
     public void enterSearchQuery(String query) {
         resultsPage.searchField.clear();
         resultsPage.searchField.sendKeys(query);
         resultsPage.searchField.sendKeys(Keys.ENTER);
         resultsPage.waitForRecordSectionIsLoaded();
     }
-
 
     @And("^user opens record #(.*) by clicking on title$")
     public void openRecordByTitle(int recordId) {
