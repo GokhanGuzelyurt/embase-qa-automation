@@ -40,13 +40,13 @@ Feature: Pre Prints tests
     And record #1 contains source as PREPRINT
 
   Scenario:Preprints checkbox on Advanced Search page
-  Given user opens Advanced Search page
-  And user enters search criteria as ?
-  When user opens Sources on search page
-  And user selects the preprints checkbox and clicks on Search
-  Then user is on Results Page
-  And search query is ? AND [preprint]/lim
-  And the result set is not empty
+    Given user opens Advanced Search page
+    And user enters search criteria as ?
+    When user opens Sources on search page
+    And user selects the preprints checkbox and clicks on Search
+    Then user is on Results Page
+    And search query is ? AND [preprint]/lim
+    And the result set is not empty
 
   
 
