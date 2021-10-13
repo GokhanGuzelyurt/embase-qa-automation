@@ -5,16 +5,17 @@ Feature: Pre Prints tests
     Given user opens Embase application
     And user logs in as Default User
     And Quick search page is opened
-    Then user opens Results page
 
   @C477852
   Scenario: Verify that a new Preprints limit is introduced
-    Given user enters query [preprint]/lim and performs a search
+    Given user opens Results page
+    And user enters query [preprint]/lim and performs a search
     Then the result set is not empty
 
   @C477853
   Scenario: Verify the results Source filters for preprints checkbox
-    Given user enters query ? and performs a search
+    Given user opens Results page
+    And user enters query ? and performs a search
     Then the result set is not empty
     When user opens Source tab on Results page
     Then source checkbox Preprints should be displayed
@@ -24,6 +25,7 @@ Feature: Pre Prints tests
 
   @C477854
   Scenario: Verify Preprints checkbox is present on Email alerts dialog box
+    Given user opens Results page
     And user enters query dna and performs a search
     Then the result set is not empty
     And user clicks on EmailAlert link
@@ -32,11 +34,20 @@ Feature: Pre Prints tests
 
   @C477859
   Scenario: Verify Source is shown as PREPRINT on Results page for a preprint record
-    Given user enters query [preprint]/lim and performs a search
+    Given user opens Results page
+    And user enters query [preprint]/lim and performs a search
     Then the result set is not empty
     And record #1 contains source as PREPRINT
 
+  Scenario:Preprints checkbox on Advanced Search page
+  Given user opens Advanced Search page
+  And user enters search criteria as ?
+  When user opens Sources on search page
+  And user selects the preprints checkbox and clicks on Search
+  Then user is on Results Page
+  And search query is ? AND [preprint]/lim
+  And the result set is not empty
 
-
+  
 
 

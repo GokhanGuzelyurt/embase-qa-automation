@@ -43,16 +43,6 @@ public class CitationInfoSearchPageStepDef {
                 data.get("toYear"));
     }
 
-    @Then("^search query is (.*)$")
-    public void verifySearchQuery(String query) {
-        resultsPage.verifySearchQuery(query);
-    }
-
-    @And("^user is on Results Page$")
-    public void resultsPageIsOpened() {
-        resultsPage.open();
-    }
-
     @When("^user clicks Article search button$")
     public void ClickArticleSearchButton() {
         citationInfoSearchPage.clickArticleSearchButton();
