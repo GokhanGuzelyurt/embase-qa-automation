@@ -24,7 +24,12 @@ public class ResultsPageStepDef {
         resultsPage.waitFor(resultsPage.searchField);
     }
 
-    @Given("^user enters query (.*) on Results Page and performs a search$")
+    @When("^user opens Advanced Search page$")
+    public void openAdvancedSearch(){
+
+    }
+
+    @Given("^user enters query (.*) and performs a search$")
     public void enterSearchQuery(String query) {
         resultsPage.searchField.clear();
         resultsPage.searchField.sendKeys(query);
