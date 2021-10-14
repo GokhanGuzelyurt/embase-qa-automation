@@ -3,6 +3,7 @@ package utils;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,5 +24,16 @@ public class StringHelper {
             return matcher.group(0);
         }
         return "";
+    }
+
+    public static String millisToTimespan(long millis) {
+        Duration timeLeft = Duration.ofMillis(millis);
+        long hours = timeLeft.toHours();
+        timeLeft = timeLeft.minusHours(hours);
+        long minutes = timeLeft.toMinutes();
+        timeLeft = timeLeft.minusMinutes(minutes);
+        long seconds = timeLeft.toMillis() / 1000;
+        String hms = String.format("%02dh %02dm %02ds", hours, minutes, seconds);
+        return hms;
     }
 }
