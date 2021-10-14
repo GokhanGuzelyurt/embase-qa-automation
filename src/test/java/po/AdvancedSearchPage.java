@@ -30,10 +30,6 @@ public class AdvancedSearchPage extends BasePage {
                 break;
             }
         }
-
-
-//        Assertions.assertThat(ribbon.barButtonSelected.getText()).isEqualTo(tabName);
-
     }
 
     public boolean isTabSelected(String tabName) {
