@@ -9,6 +9,7 @@ import net.serenitybdd.core.environment.EnvironmentSpecificConfiguration;
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.util.EnvironmentVariables;
 import org.apache.commons.lang3.reflect.FieldUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -49,6 +50,7 @@ public class CommonSteps {
     public static String JENKINS_BUILD_URL = System.getenv("BUILD_URL");
     public static String SCREENSHOTS_FOLDER;
     private Screenshot screenshot;
+    private static long START_TIMESTAMP;
 
     @Managed
     WebDriver driver;
@@ -58,6 +60,7 @@ public class CommonSteps {
 
     @Before(order = 1)
     public void setUp(Scenario scenario) {
+        START_TIMESTAMP = System.currentTimeMillis();
         logger.info("-- BEFORE --");
         logger.info("Scenario Cucumber ID: " + scenario.getId());
         logger.info("Scenario Name: " + scenario.getName());
@@ -150,6 +153,8 @@ public class CommonSteps {
                 result.setStatusId(1);
                 result.setComment(comment + ":\n" + scenario.getName() + " - Passed");
             }
+            // add elapsed time to result
+            result.setElapsed(StringHelper.millisToTimespan(System.currentTimeMillis() - START_TIMESTAMP));
 
             // get caseId from scenario
             result.setCaseId(TestRailIntegration.getCaseIdFromScenarioTags(scenario.getSourceTagNames()));
@@ -201,7 +206,13 @@ public class CommonSteps {
             logger.info("setUp - go to /config page");
             configPage.open();
             logger.info("setUp - get the build number");
-            EMB_BUILD_NUMBER = configPage.buildNumber.getText().split("build ")[1];
+            if (!configPage.find(By.xpath("//html/body")).getText().contains("Webapp")) {
+                EMB_BUILD_NUMBER = configPage.legacyBuildNumber.getText().split("build ")[1];
+            } else {
+                EMB_BUILD_NUMBER = "Webapp: " + configPage.webappBuildNumber.getText().split(": ")[2].split("\n")[0];
+                EMB_BUILD_NUMBER += ", SG: " + configPage.securityGatewayBuildNumber.getText().split(": ")[2].split("\n")[0];
+                EMB_BUILD_NUMBER += ", FE: " + configPage.reactBuildNumber.getText().split(": ")[2].split("\n")[0];
+            }
             tearDown();
         } else {
             logger.info("build number already known");
