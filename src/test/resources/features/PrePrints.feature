@@ -39,6 +39,7 @@ Feature: Pre Prints tests
     Then the result set is not empty
     And record #1 contains source as PREPRINT
 
+  @C483158
   Scenario:Preprints checkbox on Advanced Search page
     Given user opens Advanced Search page
     And user enters search criteria as ?
@@ -48,6 +49,34 @@ Feature: Pre Prints tests
     And search query is ? AND [preprint]/lim
     And the result set is not empty
 
-  
+  @C483159
+  Scenario: Preprints checkbox on Drug Search page
+    Given user opens Drug Search page
+    And user enters search criteria as ?
+    When user opens Sources on search page
+    And user selects the preprints checkbox and clicks on Search
+    Then user is on Results Page
+    And search query is ? AND [preprint]/lim
+    And the result set is not empty
+
+   @C483160
+  Scenario: Preprints checkbox on Disease Search page
+    Given user opens Disease Search page
+    And user enters search criteria as ?
+    When user opens Sources on search page
+    And user selects the preprints checkbox and clicks on Search
+    Then user is on Results Page
+    And search query is ? AND [preprint]/lim
+    And the result set is not empty
+
+  @C483161
+  Scenario: Preprints checkbox on Device Search page
+    Given user opens Device Search page
+    And user enters search criteria as ?
+    When user opens Sources on search page
+    And user selects the preprints checkbox and clicks on Search
+    Then user is on Results Page
+    And search query is ? AND [preprint]/lim
+    And the result set is not empty
 
 
