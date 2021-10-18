@@ -81,6 +81,6 @@ public class ResultsPageStepDef {
 
     @And("^user is on Results Page$")
     public void resultsPageIsOpened() {
-        resultsPage.open();
+        resultsPage.searchField.waitUntilEnabled();
     }
 }
