@@ -7,7 +7,6 @@ import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import po.common.BasePage;
-
 import java.lang.invoke.MethodHandles;
 import java.nio.channels.Selector;
 import java.util.List;
@@ -129,7 +128,7 @@ public class ResultList extends BasePage {
     public void clickRecordByTitle(int recordNumber) {
         logger.info("Select the record #" + recordNumber);
         List<WebElement> s = recordListChecks.findElements(By.cssSelector(".resultPreviewInner"));
-        s.get(recordNumber + 1).findElement(By.xpath("//a[contains(@class,'hitsHighlighted')]")).click();
+        s.get(recordNumber - 1).findElement(By.xpath("//a[contains(@class,'hitsHighlighted')]")).click();
     }
 
     public String checkRecordContent(int recordNumber, String sourceName) {
