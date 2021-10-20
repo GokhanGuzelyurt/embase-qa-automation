@@ -6,6 +6,7 @@ Feature: Record Details tests
     Then Quick search page is opened
     And user opens Results page
 
+  @C483739
   Scenario: Validating that ORCID is displayed on record details page and is clickable
     Given user enters query 0000-0001-6084-166X and performs a search
     Then the result set is not empty
