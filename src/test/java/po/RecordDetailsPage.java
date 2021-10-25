@@ -28,6 +28,12 @@ public class RecordDetailsPage extends BasePage {
     @FindBy(xpath = "//button[@title='Search by 0000-0001-6084-166X']")
     public WebElement orcIDTitle;
 
+    @FindBy(xpath = "//span[text()='Full text']")
+    public WebElement fullTextLink;
+
+    @FindBy(xpath="*[@id='column2']/h2")
+    public WebElement fullTextPageTitle;
+
     public boolean verifyORCIDHighlighting() {
         boolean flag = false;
         WebElement orcID = orcIDTitle.findElement(By.xpath("//mark[1]"));
@@ -38,4 +44,5 @@ public class RecordDetailsPage extends BasePage {
         }
         return flag;
     }
+
 }
