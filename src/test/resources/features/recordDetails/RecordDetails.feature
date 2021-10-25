@@ -12,9 +12,9 @@ Feature: Record Details tests
     Then the result set is not empty
     And user opens record #1 by clicking on title
     Then user is on Record Details page
-    And author ORCID is displayed on record details page
-    And the author ORCID is highlighted
-    When user clicks on the highlighted ORCID
+    And author ORCID 0000-0001-6084-166X is displayed on record details page
+    And the author ORCID 0000-0001-6084-166X is highlighted
+    When user clicks on the highlighted ORCID 0000-0001-6084-166X
     Then user is on Results Page
     And search query is '0000-0001-6084-166x'/oc
-     
+
