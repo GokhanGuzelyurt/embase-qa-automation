@@ -130,7 +130,7 @@ public class HttpRequestResponseStepDef {
 
     @Given("^I concatenate the request body with value (.*)$")
     public void setConcatenatedRequestBody(String body) {
-        concatenatedBody += body;
+        concatenatedBody = body;
         request.given().body(concatenatedBody);
     }
 
