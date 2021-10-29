@@ -43,7 +43,7 @@ public class HttpRequestResponseStepDef {
     private boolean printRequestToConsole = true;
     private boolean printResponseToConsole = true;
     private int timeoutSeconds = 300;
-    private String concatenatedBody;
+    private String body;
     private String concatenatedUrl;
     private RestAssuredConfig config;
     public Cookie sessionCookie;
@@ -65,7 +65,7 @@ public class HttpRequestResponseStepDef {
             RestAssured.baseURI = BASE_URL;
             logger.info("Setting RestAssured baseURI to: " + PUBLIC_API_DOMAIN);
 
-            concatenatedBody = "";
+            body = "";
             concatenatedUrl = "";
         }
     }
@@ -125,7 +125,7 @@ public class HttpRequestResponseStepDef {
 
     @Given("^I set the request body with value (.*)$")
     public void setRequestBody(String body) {
-        concatenatedBody = body;
+        this.body = body;
         request.given().body(body);
     }
 
