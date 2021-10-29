@@ -107,10 +107,11 @@ public class HttpRequestResponseStepDef {
         request.basePath(endpoint);
     }
 
-    //    @Given("I set the queryParam '{str}' with encoded value '{str}'")
-//    public void setRequestWithEncodedParam(String param, String value) {
-//        request.queryParam(param, StringHelper.urlEncode(value));
-//    }
+    @Deprecated
+    @Given("I set the queryParam '{str}' with encoded value '{str}'")
+    public void setRequestWithEncodedParam(String param, String value) {
+        request.queryParam(param, StringHelper.urlEncode(value));
+    }
 
     @Given("^I set the API KEY with value from properties file$")
     public void setRequestParamFromProperties() {
@@ -128,11 +129,6 @@ public class HttpRequestResponseStepDef {
         request.given().body(body);
     }
 
-    @Given("^I concatenate the request body with value (.*)$")
-    public void setConcatenatedRequestBody(String body) {
-        concatenatedBody += body;
-        request.given().body(concatenatedBody);
-    }
 
     @Given("^I concatenate the request body with content from file (.*)$")
     public void setConcatenatedRequestBodyFromFile(String fileName) {
@@ -143,15 +139,8 @@ public class HttpRequestResponseStepDef {
     @Given("^I concatenate the request body with URL encoded content from file (.*)$")
     public void setConcatenatedRequestBodyFromFileUrlEncoded(String fileName) {
         String body = FileHelper.readFile(fileName);
-        setConcatenatedRequestBody(StringHelper.urlEncode(body));
+        setRequestBody(StringHelper.urlEncode(body));
     }
-
-//
-//    @Given("I concatenate the request body with value from property '{str}'")
-//    public void setConcatenatedRequestBodyFromProperty(String property) {
-//        String propertyValue = PropertyReader.getProperty(property);
-//        setConcatenatedRequestBody(propertyValue);
-//    }
 
     @When("^I execute the http request with method (.*)$")
     public void executeHttpGetRequest(String method) {
@@ -243,6 +232,7 @@ public class HttpRequestResponseStepDef {
         Assertions.assertThat(elementValueFromResponse).describedAs("Element in response body does not match expected value").isGreaterThan(value);
     }
 
+    // TODO refactor - does not compile
 //    @Then("I save the value from element '{str}' in variable '{str}'")
 //    public void saveNumberOfHitsCountInMap(String element, String nameOfVariable) {
 //        valuesMap.put(nameOfVariable, response.then().extract().path(element).toString());
@@ -279,11 +269,11 @@ public class HttpRequestResponseStepDef {
         Assertions.assertThat(nodesAfterXpathEvaluation.getLength()).describedAs("No nodes found for xpath: " + xpath).isGreaterThan(0);
     }
 
-
-//    @And("^the response body contains (.*)$")
-//    public void verifyResponseBody(String responseQuery) {
-//        Assertions.assertThat(response.getBody().asString()).describedAs("Body does not contain").contains(responseQuery);
-//    }
+    @Deprecated
+    @And("^the response body contains (.*)$")
+    public void verifyResponseBody(String responseQuery) {
+        Assertions.assertThat(response.getBody().asString()).describedAs("Body does not contain").contains(responseQuery);
+    }
 
     @And("^the JSON response body contains element (.*) with value (.*)$")
     public void validateJSONresponse(String element, String value) {
