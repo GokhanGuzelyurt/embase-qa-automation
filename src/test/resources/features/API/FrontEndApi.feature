@@ -41,4 +41,11 @@ Feature: Mock login
     Then the status code of the response is 200
     And the JSON response body contains element count with value 1
 
-
+  Scenario: Validating the preprints source is present in the sources bubbles
+    And I set the endpoint for the http request to content/facet/filter/items/SOURCES
+    And I set the cookies captured in the request body
+    And I set the request body with value L2010334450
+    And I execute the http request with method POST
+    Then the status code of the response is 200
+    And the JSON response body contains element label with value Preprints
+    And the JSON response body contains element count with value 1
