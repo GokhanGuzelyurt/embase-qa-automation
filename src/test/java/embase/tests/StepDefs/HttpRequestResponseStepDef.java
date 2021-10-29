@@ -43,7 +43,7 @@ public class HttpRequestResponseStepDef {
     private boolean printRequestToConsole = true;
     private boolean printResponseToConsole = true;
     private int timeoutSeconds = 300;
-    private String body;
+    private String concatenatedBody;
     private String concatenatedUrl;
     private RestAssuredConfig config;
     public Cookie sessionCookie;
@@ -65,7 +65,7 @@ public class HttpRequestResponseStepDef {
             RestAssured.baseURI = BASE_URL;
             logger.info("Setting RestAssured baseURI to: " + PUBLIC_API_DOMAIN);
 
-            body = "";
+            concatenatedBody = "";
             concatenatedUrl = "";
         }
     }
@@ -76,7 +76,6 @@ public class HttpRequestResponseStepDef {
         prefTermId = response.then().extract().path("prefTermId[0]").toString();
         logger.info("prefTermId value is: " + prefTermId);
     }
-
 
     @Given("^I set the endpoint for the http request to (.*)$")
     public void setRequestEndpoint(String endpoint) {
@@ -108,7 +107,7 @@ public class HttpRequestResponseStepDef {
     }
 
     @Deprecated
-    @Given("I set the queryParam '{str}' with encoded value '{str}'")
+    @Given("^I set the queryParam (.*) with encoded value (.*)$")
     public void setRequestWithEncodedParam(String param, String value) {
         request.queryParam(param, StringHelper.urlEncode(value));
     }
@@ -125,12 +124,17 @@ public class HttpRequestResponseStepDef {
 
     @Given("^I set the request body with value (.*)$")
     public void setRequestBody(String body) {
-        this.body = body;
+        concatenatedBody = body;
         request.given().body(body);
     }
 
+    @Given("^I concatenate the request body with value (.*)$")
+    public void setConcatenatedRequestBody(String body) {
+        concatenatedBody = body;
+        request.given().body(concatenatedBody);
+    }
 
-    @Given("^I concatenate the request body with content from file (.*)$")
+    @Given("^I set the request body with content from file (.*)$")
     public void setConcatenatedRequestBodyFromFile(String fileName) {
         String body = FileHelper.readFile(fileName);
         setRequestBody(body);
