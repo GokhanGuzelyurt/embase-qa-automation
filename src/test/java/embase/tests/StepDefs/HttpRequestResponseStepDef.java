@@ -124,20 +124,20 @@ public class HttpRequestResponseStepDef {
 
     @Given("^I set the request body with value (.*)$")
     public void setRequestBody(String body) {
-        concatenatedBody += body;
+        concatenatedBody = body;
         request.given().body(body);
     }
 
     @Given("^I concatenate the request body with value (.*)$")
     public void setConcatenatedRequestBody(String body) {
-        concatenatedBody = body;
+        concatenatedBody += body;
         request.given().body(concatenatedBody);
     }
 
     @Given("^I concatenate the request body with content from file (.*)$")
     public void setConcatenatedRequestBodyFromFile(String fileName) {
         String body = FileHelper.readFile(fileName);
-        setConcatenatedRequestBody(body);
+        setRequestBody(body);
     }
 
     @Given("^I concatenate the request body with URL encoded content from file (.*)$")
