@@ -75,7 +75,7 @@ public class ResultsPageStepDef {
     }
 
     @Then("^search query is (.*)$")
-    public void verifySearchQuery(String query) {
+    public void verifySearchQuery(String query) throws InterruptedException {
         resultsPage.verifySearchQuery(query);
     }
 
@@ -83,4 +83,21 @@ public class ResultsPageStepDef {
     public void resultsPageIsOpened() {
         resultsPage.searchField.waitUntilEnabled();
     }
+
+    @And("^user opens Sources filter$")
+    public void openSourceFilter(){
+        resultsPage.sourcesFilter.click();
+    }
+
+    @And("^user selects Preprints source bubble$")
+    public void selectPreprintsBubble(){
+        resultsPage.preprintsSourceBubble.click();
+    }
+
+    @And("^user click on Apply button$")
+    public void clickApply() throws InterruptedException {
+        resultsPage.applyBtn.click();
+    }
+
+
 }

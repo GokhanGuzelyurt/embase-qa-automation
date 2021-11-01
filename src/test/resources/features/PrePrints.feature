@@ -59,7 +59,7 @@ Feature: Pre Prints tests
     And search query is ? AND [preprint]/lim
     And the result set is not empty
 
-   @C483160
+  @C483160
   Scenario: Preprints checkbox on Disease Search page
     Given user opens Disease Search page
     And user enters search criteria as ?
@@ -79,4 +79,12 @@ Feature: Pre Prints tests
     And search query is ? AND [preprint]/lim
     And the result set is not empty
 
+  @C488485
+  Scenario: Preprint source bubble on UI
+    Given user opens Results page
+    And user enters query ? and performs a search
+    And user opens Sources filter
+    And user selects Preprints source bubble
+    And user click on Apply button
+    Then search query is #1 AND [preprint]/lim
 
