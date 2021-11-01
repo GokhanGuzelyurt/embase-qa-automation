@@ -3,7 +3,7 @@ Feature: Mock login
 
   Background:
     Given I set the endpoint for the http request to /mock/login
-    And I concatenate the request body with content from file \features\jsonFiles\mock-sguserdetails.json
+    And I set the request body with content from file \jsonFiles\mock-sguserdetails.json
     And I set the request header Content-Type with value application/json
     When I execute the http request with method POST
     And I capture cookies from the authentication method
@@ -35,7 +35,7 @@ Feature: Mock login
   Scenario: Validating the migration of clipboard API to REST
     And I set the endpoint for the http request to /rest/tools/clipboard/add
     And I set the cookies captured in the request body
-    And I concatenate the request body with content from file \features\jsonFiles\clipboard.json
+    And I set the request body with content from file \jsonFiles\clipboard.json
     And I set the request header Content-Type with value application/json
     And I execute the http request with method POST
     Then the status code of the response is 200
