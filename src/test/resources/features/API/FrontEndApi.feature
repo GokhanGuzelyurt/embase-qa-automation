@@ -48,4 +48,3 @@ Feature: Front End API
     And I execute the http request with method POST
     Then the status code of the response is 200
     And the JSON response body contains element label with value Preprints
-    And the JSON response body contains element count with value 1
