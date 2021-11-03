@@ -80,7 +80,7 @@ public class ResultsPageStepDef {
     }
 
     @Then("^search query is (.*)$")
-    public void verifySearchQuery(String query) throws InterruptedException {
+    public void verifySearchQuery(String query) {
         resultsPage.verifySearchQuery(query);
     }
 
@@ -100,7 +100,7 @@ public class ResultsPageStepDef {
     }
 
     @And("^user click on Apply button$")
-    public void clickApply() throws InterruptedException {
+    public void clickApply() {
         resultsPage.applyBtn.click();
     }
 

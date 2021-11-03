@@ -90,8 +90,7 @@ public class ResultsPage extends BasePage {
 //        }
     }
 
-    public void verifySearchQuery(String expectedQuery) throws InterruptedException {
-        // TODO: requires additional waiter because query field takes a second to update
+    public void verifySearchQuery(String expectedQuery) {
         pleaseWaitPanel.waitUntilNotVisible();
         querySection.waitUntilVisible();
         searchField.waitUntilVisible();
