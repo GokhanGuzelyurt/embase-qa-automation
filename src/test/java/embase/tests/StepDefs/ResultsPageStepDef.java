@@ -6,9 +6,14 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.assertj.core.api.Assertions;
 import org.openqa.selenium.Keys;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import po.ResultsPage;
 
-public class ResultsPageStepDef extends CommonSteps {
+import java.lang.invoke.MethodHandles;
+
+public class ResultsPageStepDef {
+    final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     ResultsPage resultsPage;
 
     @Then("^the result set is not empty$")
