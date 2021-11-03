@@ -238,7 +238,7 @@ public class MedicalDeviceSearchPage extends BasePage {
         logger.info("Click on Emtree node " + nodeName);
         List<WebElement> emtreeNodeList = DeviceEmtreeNodesList.findElements(By.className("term"));
         for (WebElement emtreeNode : emtreeNodeList) {
-            System.out.println("Items are" + emtreeNode.getText());
+            logger.info("Items are " + emtreeNode.getText());
             if (emtreeNode.getText().equals(nodeName)) {
                 emtreeNode.click(); // click the desired option
                 break;
@@ -255,7 +255,7 @@ public class MedicalDeviceSearchPage extends BasePage {
         WebElement nodeGrp = DeviceEmtreeNodesList.findElement(By.xpath("//*[text()[contains(.,'" + nodeTerm + "')]]"));
 
 //
-        System.out.println("Medical device child" + nodeGrp.getText());
+        logger.info("Medical device child " + nodeGrp.getText());
         nodeGrp.click();
 
     }

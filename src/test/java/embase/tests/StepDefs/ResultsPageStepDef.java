@@ -8,13 +8,13 @@ import org.assertj.core.api.Assertions;
 import org.openqa.selenium.Keys;
 import po.ResultsPage;
 
-public class ResultsPageStepDef {
+public class ResultsPageStepDef extends CommonSteps{
     ResultsPage resultsPage;
 
     @Then("^the result set is not empty$")
     public void iVerifyResultsNotEmpty() {
         Assertions.assertThat(resultsPage.resultList.getResultsCount()).describedAs("Result is empty").isGreaterThan(0);
-        System.out.println("Count is" + resultsPage.resultList.getResultsCount());
+        logger.info("Count is " + resultsPage.resultList.getResultsCount());
     }
 
     @When("^user opens Results page$")
