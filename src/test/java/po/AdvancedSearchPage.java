@@ -1,7 +1,6 @@
 package po;
 
 import net.thucydides.core.annotations.DefaultUrl;
-import org.assertj.core.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -23,9 +22,9 @@ public class AdvancedSearchPage extends BasePage {
 
     public void selectTab(String tabName) {
         logger.info("Open specified tab " + tabName);
-        List<WebElement> tabs= ribbon.ribbonBlock.findElements(By.cssSelector(".buttonBar .barbutton"));
-        for(WebElement tab:tabs){
-            if(tab.getText().equalsIgnoreCase(tabName)){
+        List<WebElement> tabs = ribbon.ribbonBlock.findElements(By.cssSelector(".buttonBar .barbutton"));
+        for (WebElement tab : tabs) {
+            if (tab.getText().equalsIgnoreCase(tabName)) {
                 tab.click();
                 break;
             }

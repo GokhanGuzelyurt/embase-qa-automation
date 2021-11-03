@@ -8,7 +8,7 @@ import org.assertj.core.api.Assertions;
 import org.openqa.selenium.Keys;
 import po.ResultsPage;
 
-public class ResultsPageStepDef extends CommonSteps{
+public class ResultsPageStepDef extends CommonSteps {
     ResultsPage resultsPage;
 
     @Then("^the result set is not empty$")
@@ -85,12 +85,12 @@ public class ResultsPageStepDef extends CommonSteps{
     }
 
     @And("^user opens Sources filter$")
-    public void openSourceFilter(){
+    public void openSourceFilter() {
         resultsPage.sourcesFilter.click();
     }
 
     @And("^user selects Preprints source bubble$")
-    public void selectPreprintsBubble(){
+    public void selectPreprintsBubble() {
         resultsPage.preprintsSourceBubble.click();
     }
 
