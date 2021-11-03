@@ -31,7 +31,7 @@ public class RecordDetailsPage extends BasePage {
     @FindBy(xpath = "//span[text()='Full text']")
     public WebElement fullTextLink;
 
-    @FindBy(xpath="*[@id='column2']/h2")
+    @FindBy(xpath = "*[@id='column2']/h2")
     public WebElement fullTextPageTitle;
 
     public boolean verifyORCIDHighlighting() {

@@ -1,7 +1,5 @@
 package po.sections.search;
 
-import org.assertj.core.api.Assertions;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;

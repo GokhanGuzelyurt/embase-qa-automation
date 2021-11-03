@@ -58,6 +58,14 @@ public class ResultsPage extends BasePage {
     @FindBy(id = "alertform")
     public WebElement emailAlertForm;
 
+    @FindBy(id = "SOURCES")
+    public WebElement sourcesFilter;
+
+    @FindBy(id = "preprintsCircle")
+    public WebElement preprintsSourceBubble;
+
+    @FindBy(css = ".filterActions .pushButton")
+    public WebElementFacade applyBtn;
 
     public void waitForRecordSectionIsLoaded() {
         logger.info("Wait for please wait to vanish");
@@ -83,11 +91,12 @@ public class ResultsPage extends BasePage {
     }
 
     public void verifySearchQuery(String expectedQuery) {
-        // TODO: requires additional waiter because query field takes a second to update
         pleaseWaitPanel.waitUntilNotVisible();
         querySection.waitUntilVisible();
         searchField.waitUntilVisible();
-        Assertions.assertThat(searchField.getValue()).describedAs(String.format("Query expected: <%s> but was: <%s>", expectedQuery, searchField.getValue())).isEqualToIgnoringCase(expectedQuery);
+        waitForJStoLoad();
+        Assertions.assertThat(searchField.getValue()).describedAs("Search field is not equal to expected").isEqualToIgnoringCase(expectedQuery);
+
     }
 
     public void setEmailAlert() {
@@ -104,7 +113,7 @@ public class ResultsPage extends BasePage {
                 flag1 = true;
                 break;
             } else {
-                System.out.println("Label name" + "\t" + labelName + "\t" + " is not equal to" + "\t" + label.getText());
+                logger.info("Label name" + "\t" + labelName + "\t" + " is not equal to" + "\t" + label.getText());
             }
         }
         return flag1;
@@ -118,4 +127,6 @@ public class ResultsPage extends BasePage {
         }
         return flag;
     }
+
 }
+

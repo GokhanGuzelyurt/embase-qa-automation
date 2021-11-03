@@ -1,5 +1,5 @@
 package po.common;
 
-public class SearchPage  {
+public class SearchPage {
 
 }

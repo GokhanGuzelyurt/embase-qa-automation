@@ -4,9 +4,9 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.assertj.core.api.Assertions;
+import po.MedicalDeviceSearchPage;
 import po.ResultsPage;
 import po.common.SearchPage;
-import po.MedicalDeviceSearchPage;
 
 public class MedicalDeviceStepDef {
 
@@ -57,7 +57,6 @@ public class MedicalDeviceStepDef {
     public void medicalDevicePageOpened() {
         medicalDeviceSearchPage.shouldBeDisplayed();
     }
-
 
 
     @When("^user selects (.*) as the autosuggested device name from the list$")

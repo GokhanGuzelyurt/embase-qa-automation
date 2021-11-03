@@ -77,7 +77,6 @@ public class HttpRequestResponseStepDef {
         logger.info("prefTermId value is: " + prefTermId);
     }
 
-
     @Given("^I set the endpoint for the http request to (.*)$")
     public void setRequestEndpoint(String endpoint) {
         request = RestAssured.given().config(config);
@@ -102,15 +101,16 @@ public class HttpRequestResponseStepDef {
     @Given("^I set the Public API endpoint for the http request to (.*)$")
     public void setPublicApiRequestEndpoint(String endpoint) {
         RestAssured.baseURI = PUBLIC_API_DOMAIN;
-        System.out.println(PUBLIC_API_DOMAIN);
+        logger.info(PUBLIC_API_DOMAIN);
         request = RestAssured.given().config(config);
         request.basePath(endpoint);
     }
 
-    //    @Given("I set the queryParam '{str}' with encoded value '{str}'")
-//    public void setRequestWithEncodedParam(String param, String value) {
-//        request.queryParam(param, StringHelper.urlEncode(value));
-//    }
+    @Deprecated
+    @Given("^I set the queryParam (.*) with encoded value (.*)$")
+    public void setRequestWithEncodedParam(String param, String value) {
+        request.queryParam(param, StringHelper.urlEncode(value));
+    }
 
     @Given("^I set the API KEY with value from properties file$")
     public void setRequestParamFromProperties() {
@@ -124,34 +124,27 @@ public class HttpRequestResponseStepDef {
 
     @Given("^I set the request body with value (.*)$")
     public void setRequestBody(String body) {
-        concatenatedBody += body;
+        concatenatedBody = body;
         request.given().body(body);
     }
 
     @Given("^I concatenate the request body with value (.*)$")
     public void setConcatenatedRequestBody(String body) {
-        concatenatedBody += body;
+        concatenatedBody = body;
         request.given().body(concatenatedBody);
     }
 
-    @Given("^I concatenate the request body with content from file (.*)$")
+    @Given("^I set the request body with content from file (.*)$")
     public void setConcatenatedRequestBodyFromFile(String fileName) {
         String body = FileHelper.readFile(fileName);
-        setConcatenatedRequestBody(body);
+        setRequestBody(body);
     }
 
     @Given("^I concatenate the request body with URL encoded content from file (.*)$")
     public void setConcatenatedRequestBodyFromFileUrlEncoded(String fileName) {
         String body = FileHelper.readFile(fileName);
-        setConcatenatedRequestBody(StringHelper.urlEncode(body));
+        setRequestBody(StringHelper.urlEncode(body));
     }
-
-//
-//    @Given("I concatenate the request body with value from property '{str}'")
-//    public void setConcatenatedRequestBodyFromProperty(String property) {
-//        String propertyValue = PropertyReader.getProperty(property);
-//        setConcatenatedRequestBody(propertyValue);
-//    }
 
     @When("^I execute the http request with method (.*)$")
     public void executeHttpGetRequest(String method) {
@@ -214,7 +207,7 @@ public class HttpRequestResponseStepDef {
 
     @Then("^the response body contains element (.*) with value (.*)$")
     public void verifyResponseBodyElementValue(String element, String value) {
-        System.out.println(response.then().extract().body().xmlPath());
+        logger.info(response.then().extract().body().xmlPath().toString());
         try {
             String elementValueFromResponse = response.then().extract().path(element);
             Assertions.assertThat(elementValueFromResponse).describedAs("Element in response body does not match expected value").isEqualTo(value);
@@ -239,10 +232,11 @@ public class HttpRequestResponseStepDef {
     @Then("^the response body contains element (.*) with numeric value greater than (.*)$")
     public void verifyResponseBodyElementNumericValueGreater(String element, int value) {
         int elementValueFromResponse = Integer.parseInt(response.then().extract().path(element).toString());
-        System.out.println("The JSON response is" + elementValueFromResponse);
+        logger.info("The JSON response is " + elementValueFromResponse);
         Assertions.assertThat(elementValueFromResponse).describedAs("Element in response body does not match expected value").isGreaterThan(value);
     }
 
+    // TODO refactor - does not compile
 //    @Then("I save the value from element '{str}' in variable '{str}'")
 //    public void saveNumberOfHitsCountInMap(String element, String nameOfVariable) {
 //        valuesMap.put(nameOfVariable, response.then().extract().path(element).toString());
@@ -279,11 +273,11 @@ public class HttpRequestResponseStepDef {
         Assertions.assertThat(nodesAfterXpathEvaluation.getLength()).describedAs("No nodes found for xpath: " + xpath).isGreaterThan(0);
     }
 
-
-//    @And("^the response body contains (.*)$")
-//    public void verifyResponseBody(String responseQuery) {
-//        Assertions.assertThat(response.getBody().asString()).describedAs("Body does not contain").contains(responseQuery);
-//    }
+    @Deprecated
+    @And("^the response body contains (.*)$")
+    public void verifyResponseBody(String responseQuery) {
+        Assertions.assertThat(response.getBody().asString()).describedAs("Body does not contain").contains(responseQuery);
+    }
 
     @And("^the JSON response body contains element (.*) with value (.*)$")
     public void validateJSONresponse(String element, String value) {
@@ -291,8 +285,7 @@ public class HttpRequestResponseStepDef {
         // getting Json path as a string
         // List<String> jsonResponse=response.jsonPath().getList("$");
         String values = response.jsonPath().getString("" + element + "");
-        System.out.println(values);
-        logger.info("the values returned are" + values);
+        logger.info("the values returned are " + values);
         Assertions.assertThat(values).describedAs("Element value is not equal to expected").contains(value);
 
     }
