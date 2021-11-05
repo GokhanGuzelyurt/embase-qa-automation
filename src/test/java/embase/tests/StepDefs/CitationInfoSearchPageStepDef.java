@@ -1,13 +1,14 @@
 package embase.tests.StepDefs;
 
-import io.cucumber.datatable.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import io.cucumber.datatable.DataTable;
 import org.assertj.core.api.Assertions;
 import po.CitationInfoSearchPage;
 import po.ResultsPage;
 import po.common.SearchPage;
+
 import java.util.List;
 import java.util.Map;
 

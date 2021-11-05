@@ -1,10 +1,12 @@
 package po;
 
+import net.serenitybdd.core.annotations.findby.By;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.Step;
-import net.serenitybdd.core.annotations.findby.By;
-import org.openqa.selenium.*;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -238,7 +240,7 @@ public class MedicalDeviceSearchPage extends BasePage {
         logger.info("Click on Emtree node " + nodeName);
         List<WebElement> emtreeNodeList = DeviceEmtreeNodesList.findElements(By.className("term"));
         for (WebElement emtreeNode : emtreeNodeList) {
-            System.out.println("Items are" + emtreeNode.getText());
+            logger.info("Items are " + emtreeNode.getText());
             if (emtreeNode.getText().equals(nodeName)) {
                 emtreeNode.click(); // click the desired option
                 break;
@@ -249,13 +251,8 @@ public class MedicalDeviceSearchPage extends BasePage {
 
     public void clickEmtreeDeviceTerm(String nodeTerm) {
         logger.info("Click on Emtree term  " + nodeTerm);
-//        WebElement nodeGrp = DeviceEmtreeNodesList.findElement(By.xpath("//*[contains(text(),'" + nodeTerm + "')]"));
-
-
         WebElement nodeGrp = DeviceEmtreeNodesList.findElement(By.xpath("//*[text()[contains(.,'" + nodeTerm + "')]]"));
-
-//
-        System.out.println("Medical device child" + nodeGrp.getText());
+        logger.info("Medical device child " + nodeGrp.getText());
         nodeGrp.click();
 
     }
@@ -268,16 +265,13 @@ public class MedicalDeviceSearchPage extends BasePage {
             if (emtreeNode.getText().equalsIgnoreCase(childTerm)) {
                 emtreeNode.click();
                 emtreeNode.findElement(By.cssSelector(".actions .Icon-module_root__3r_4i")).click();// click the plus option
-
             }
         }
-
     }
 
     @Step
     public void clickEditDeviceIcon() {
         EditDeviceIcon.click();
-
     }
 
     @Step
@@ -290,7 +284,6 @@ public class MedicalDeviceSearchPage extends BasePage {
         if (SynonymsBox.getText().contains("synonyms")) {
             SynonymsBox.isEnabled();
         }
-
     }
 
     @Step
@@ -312,31 +305,24 @@ public class MedicalDeviceSearchPage extends BasePage {
             EndDate.sendKeys(endDate);
             ApplyBtn.click();
         }
-
     }
 
     @Step
     public void clickByBtnText(String text) {
         WebElement btntext = btnTextValue.findElement(By.xpath("//span[contains(@class,'Button-module_content__7QNNH')and contains(text(),'" + text + "')]"));
-
         if (btntext.isEnabled()) {
             btntext.click();
         }
-
-
     }
 
     public String checkTagName(String text) {
         WebElement tagName = tagNameGroup.findElement(By.xpath("//span[contains(@class,'Tag-module_text__3dcY0')and contains(text(),'" + text + "')]"));
-
         return tagName.getText();
     }
 
 
     public void clickAddSynonymIcon() {
         addSynonymsIcon.click();
-
-
     }
 
     public void fillPublicationYears(String fromYear, String toYear) {
@@ -351,10 +337,10 @@ public class MedicalDeviceSearchPage extends BasePage {
         }
     }
 
-    public boolean adverseDeviceEffectsChkBoxSelected(){
-       WebElement element= getDriver().findElement(By.xpath("//*[@id='checkbox-adverse device effect']"));
-       element.isEnabled();
-       return element.isEnabled();
+    public boolean adverseDeviceEffectsChkBoxSelected() {
+        WebElement element = getDriver().findElement(By.xpath("//*[@id='checkbox-adverse device effect']"));
+        element.isEnabled();
+        return element.isEnabled();
     }
 
 }
