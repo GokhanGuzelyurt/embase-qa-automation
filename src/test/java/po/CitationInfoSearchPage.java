@@ -9,8 +9,8 @@ import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import po.common.BasePage;
-import java.lang.invoke.MethodHandles;
 
+import java.lang.invoke.MethodHandles;
 
 
 @DefaultUrl("page:citationInfo.page")
@@ -105,7 +105,6 @@ public class CitationInfoSearchPage extends BasePage {
 
     @FindBy(className = "Checkbox-module_root__1DisM")
     public WebElement authorVariantsCheckboxOptions;
-
 
 
     public void executeArticleSearch(String articleTitle, String authorName, String journalTitle, String journalTitleExact, String ABBRJournalTitle, String ABBRJournalTitleExact,

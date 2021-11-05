@@ -6,15 +6,20 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.assertj.core.api.Assertions;
 import org.openqa.selenium.Keys;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import po.ResultsPage;
 
+import java.lang.invoke.MethodHandles;
+
 public class ResultsPageStepDef {
+    final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     ResultsPage resultsPage;
 
     @Then("^the result set is not empty$")
     public void iVerifyResultsNotEmpty() {
         Assertions.assertThat(resultsPage.resultList.getResultsCount()).describedAs("Result is empty").isGreaterThan(0);
-        System.out.println("Count is" + resultsPage.resultList.getResultsCount());
+        logger.info("Count is " + resultsPage.resultList.getResultsCount());
     }
 
     @When("^user opens Results page$")
@@ -75,7 +80,7 @@ public class ResultsPageStepDef {
     }
 
     @Then("^search query is (.*)$")
-    public void verifySearchQuery(String query) throws InterruptedException {
+    public void verifySearchQuery(String query) {
         resultsPage.verifySearchQuery(query);
     }
 
@@ -85,17 +90,17 @@ public class ResultsPageStepDef {
     }
 
     @And("^user opens Sources filter$")
-    public void openSourceFilter(){
+    public void openSourceFilter() {
         resultsPage.sourcesFilter.click();
     }
 
     @And("^user selects Preprints source bubble$")
-    public void selectPreprintsBubble(){
+    public void selectPreprintsBubble() {
         resultsPage.preprintsSourceBubble.click();
     }
 
     @And("^user click on Apply button$")
-    public void clickApply() throws InterruptedException {
+    public void clickApply() {
         resultsPage.applyBtn.click();
     }
 

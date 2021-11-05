@@ -101,7 +101,7 @@ public class HttpRequestResponseStepDef {
     @Given("^I set the Public API endpoint for the http request to (.*)$")
     public void setPublicApiRequestEndpoint(String endpoint) {
         RestAssured.baseURI = PUBLIC_API_DOMAIN;
-        System.out.println(PUBLIC_API_DOMAIN);
+        logger.info(PUBLIC_API_DOMAIN);
         request = RestAssured.given().config(config);
         request.basePath(endpoint);
     }
@@ -207,7 +207,7 @@ public class HttpRequestResponseStepDef {
 
     @Then("^the response body contains element (.*) with value (.*)$")
     public void verifyResponseBodyElementValue(String element, String value) {
-        System.out.println(response.then().extract().body().xmlPath());
+        logger.info(response.then().extract().body().xmlPath().toString());
         try {
             String elementValueFromResponse = response.then().extract().path(element);
             Assertions.assertThat(elementValueFromResponse).describedAs("Element in response body does not match expected value").isEqualTo(value);
@@ -232,7 +232,7 @@ public class HttpRequestResponseStepDef {
     @Then("^the response body contains element (.*) with numeric value greater than (.*)$")
     public void verifyResponseBodyElementNumericValueGreater(String element, int value) {
         int elementValueFromResponse = Integer.parseInt(response.then().extract().path(element).toString());
-        System.out.println("The JSON response is" + elementValueFromResponse);
+        logger.info("The JSON response is " + elementValueFromResponse);
         Assertions.assertThat(elementValueFromResponse).describedAs("Element in response body does not match expected value").isGreaterThan(value);
     }
 
@@ -285,8 +285,7 @@ public class HttpRequestResponseStepDef {
         // getting Json path as a string
         // List<String> jsonResponse=response.jsonPath().getList("$");
         String values = response.jsonPath().getString("" + element + "");
-        System.out.println(values);
-        logger.info("the values returned are" + values);
+        logger.info("the values returned are " + values);
         Assertions.assertThat(values).describedAs("Element value is not equal to expected").contains(value);
 
     }

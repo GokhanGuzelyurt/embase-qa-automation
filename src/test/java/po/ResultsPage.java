@@ -90,12 +90,11 @@ public class ResultsPage extends BasePage {
 //        }
     }
 
-    public void verifySearchQuery(String expectedQuery) throws InterruptedException {
-        // TODO: requires additional waiter because query field takes a second to update
+    public void verifySearchQuery(String expectedQuery) {
         pleaseWaitPanel.waitUntilNotVisible();
         querySection.waitUntilVisible();
         searchField.waitUntilVisible();
-        Thread.sleep(1000);
+        waitForJStoLoad();
         Assertions.assertThat(searchField.getValue()).describedAs("Search field is not equal to expected").isEqualToIgnoringCase(expectedQuery);
 
     }
@@ -114,7 +113,7 @@ public class ResultsPage extends BasePage {
                 flag1 = true;
                 break;
             } else {
-                System.out.println("Label name" + "\t" + labelName + "\t" + " is not equal to" + "\t" + label.getText());
+                logger.info("Label name" + "\t" + labelName + "\t" + " is not equal to" + "\t" + label.getText());
             }
         }
         return flag1;
