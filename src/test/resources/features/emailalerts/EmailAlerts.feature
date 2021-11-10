@@ -13,9 +13,10 @@ Feature: Email Alerts
     When user clicks on EmailAlert link
     And Preprints labelname is displayed on Email Alerts
     And Preprints checkbox is selected by default
+    And set variable $emailTitle to unique string Preprint alert
     And user saves Email Alert:
-      | alertName | emailAddress      | isIncludeArticles | isIncludePreprints | comment | format  | content | freqPeriod | frequency |
-      | name1     | changeme@test.com | false              | false               |         | default | default | default    | default   |
+      | alertName   | emailAddress      | isIncludeArticles | isIncludePreprints | comment | format  | content | freqPeriod | frequency |
+      | $emailTitle | changeme@test.com | true              | true               |         | default | default | default    | default   |
   # And user creates email alert including preprints
   # And user goes to email alerts
   # And user goes checks the email alert and has preprints enabled

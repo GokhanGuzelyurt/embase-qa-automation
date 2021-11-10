@@ -116,8 +116,12 @@ public class ResultsPageStepDef {
         List<Map<String, String>> rows = table.asMaps(String.class, String.class);
         Map<String, String> data = rows.get(0);
 
+        String emailTitle = data.get("alertName");
+        if (data.get("alertName").substring(0, 1).equals("$"))
+            emailTitle = CommonSteps.testCaseVariables.get(data.get("alertName"));
+
         emailAlertDialog.saveEmailAlert(
-                data.get("alertName"),
+                emailTitle,
                 data.get("emailAddress"),
                 Boolean.parseBoolean(data.get("isIncludeArticles")),
                 Boolean.parseBoolean(data.get("isIncludePreprints")));
