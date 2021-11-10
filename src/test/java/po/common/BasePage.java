@@ -15,6 +15,7 @@ public class BasePage extends PageObject {
     final static Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     WebDriver driver;
 
+
     public void checkByScript(WebElement element) {
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
         js.executeScript("arguments[0].click();", element);

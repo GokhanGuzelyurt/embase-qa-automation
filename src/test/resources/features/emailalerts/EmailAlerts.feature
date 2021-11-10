@@ -17,7 +17,6 @@ Feature: Email Alerts
     And user saves Email Alert:
       | alertName   | emailAddress      | isIncludeArticles | isIncludePreprints | comment | format  | content | freqPeriod | frequency |
       | $emailTitle | changeme@test.com | true              | true               |         | default | default | default    | default   |
-  # And user creates email alert including preprints
   # And user goes to email alerts
   # And user goes checks the email alert and has preprints enabled
   # And user clicks rerun
@@ -31,7 +30,7 @@ Feature: Email Alerts
 #    And Preprints labelname is displayed on Email Alerts
 #    And Preprints checkbox is selected by default
 #    And user enters unique email alert name ''
-#    And user creates email alert excluding preprints
+#  #  And user creates email alert excluding preprints
 #    And  user goes to email alerts
 #    And user goes checks the email alert and has preprints enables
 #    And user clicks rerun
