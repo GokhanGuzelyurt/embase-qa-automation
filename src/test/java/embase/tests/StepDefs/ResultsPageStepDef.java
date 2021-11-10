@@ -4,17 +4,22 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import io.cucumber.datatable.DataTable;
 import org.assertj.core.api.Assertions;
 import org.openqa.selenium.Keys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import po.ResultsPage;
+import po.sections.results.EmailAlertDialog;
 
 import java.lang.invoke.MethodHandles;
+import java.util.List;
+import java.util.Map;
 
 public class ResultsPageStepDef {
     final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     ResultsPage resultsPage;
+    EmailAlertDialog emailAlertDialog;
 
     @Then("^the result set is not empty$")
     public void iVerifyResultsNotEmpty() {
@@ -105,5 +110,18 @@ public class ResultsPageStepDef {
         resultsPage.applyBtn.click();
     }
 
+    // TODO move to different file
+    @When("user saves Email Alert:")
+    public void iSaveEmailAlert(DataTable table) {
+        List<Map<String, String>> rows = table.asMaps(String.class, String.class);
+        Map<String, String> data = rows.get(0);
+
+        emailAlertDialog.saveEmailAlert(
+                data.get("alertName"),
+                data.get("emailAddress"),
+                Boolean.parseBoolean(data.get("isIncludeArticles")),
+                Boolean.parseBoolean(data.get("isIncludePreprints")));
+
+    }
 
 }
