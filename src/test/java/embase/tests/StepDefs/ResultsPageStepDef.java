@@ -30,6 +30,7 @@ public class ResultsPageStepDef {
 
     @Given("^user enters query (.*) and performs a search$")
     public void enterSearchQuery(String query) {
+        resultsPage.waitForJStoLoad();
         resultsPage.searchField.clear();
         resultsPage.searchField.sendKeys(query);
         resultsPage.searchField.sendKeys(Keys.ENTER);
