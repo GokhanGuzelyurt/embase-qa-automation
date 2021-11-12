@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import po.ResultsPage;
 import po.sections.results.EmailAlertDialog;
+import utils.StringHelper;
 
 import java.lang.invoke.MethodHandles;
 import java.util.List;
@@ -116,9 +117,7 @@ public class ResultsPageStepDef {
         List<Map<String, String>> rows = table.asMaps(String.class, String.class);
         Map<String, String> data = rows.get(0);
 
-        String emailTitle = data.get("alertName");
-        if (data.get("alertName").substring(0, 1).equals("$"))
-            emailTitle = CommonSteps.testCaseVariables.get(data.get("alertName"));
+        String emailTitle = StringHelper.resolveVariable(data.get("alertName"));
 
         emailAlertDialog.saveEmailAlert(
                 emailTitle,

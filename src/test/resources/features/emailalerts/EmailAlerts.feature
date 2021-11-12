@@ -17,7 +17,7 @@ Feature: Email Alerts
     And user saves Email Alert:
       | alertName   | emailAddress      | isIncludeArticles | isIncludePreprints | comment | format  | content | freqPeriod | frequency |
       | $emailTitle | changeme@test.com | true              | true               |         | default | default | default    | default   |
-  # And user goes to email alerts
+   And user opens Email Alerts page
   # And user goes checks the email alert and has preprints enabled
   # And user clicks rerun
   # And search query is [same as in prev step]
