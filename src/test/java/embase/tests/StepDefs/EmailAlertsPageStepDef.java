@@ -26,7 +26,6 @@ public class EmailAlertsPageStepDef {
         String emailAlertName = StringHelper.resolveVariable(name);
         emailAlertsPage.getEmailAlertRowByName(emailAlertName).click();
         logger.info("Highlighted Email Alert ID is: " + emailAlertsPage.getEmailAlertRowByName(emailAlertName).getAttribute("data-id"));
-        CommonSteps.setTestCaseVariable("highlightedEmailAlertId", emailAlertsPage.getEmailAlertRowByName(emailAlertName).getAttribute("data-id"));
         emailAlertsPage.waitForJStoLoad();
     }
 
@@ -36,9 +35,10 @@ public class EmailAlertsPageStepDef {
         Assertions.assertThat(emailAlertsPage.alertDetailsPreprintsStatus.getText()).isEqualTo(expectedStatus).describedAs("Preprint status is not " + expectedStatus);
     }
 
-    @When("^user clicks on ReRun action for the highlighted Email Alert$")
-    public void clickOnEmailAlertAction() {
-        emailAlertsPage.getReRunButtonForHighlightedEmailAlert().click();
+    @When("^user clicks on ReRun action for Email Alert with name (.*)$")
+    public void clickOnEmailAlertAction(String name) {
+        String emailAlertName = StringHelper.resolveVariable(name);
+        emailAlertsPage.getReRunButtonForEmailAlertByName(emailAlertName).click();
         emailAlertsPage.waitForJStoLoad();
     }
 }

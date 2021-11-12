@@ -20,7 +20,7 @@ Feature: Email Alerts
     When user opens Email Alerts page
     And user highlights Email Alert with name $emailTitle
     Then email alert details shows Preprints status Included
-    When user clicks on ReRun action for the highlighted Email Alert
+    When user clicks on ReRun action for Email Alert with name $emailTitle
     Then search query is dna
 
   Scenario: Verify Email alert can be set excluding Preprints
@@ -37,12 +37,24 @@ Feature: Email Alerts
     When user opens Email Alerts page
     And user highlights Email Alert with name $emailTitle
     Then email alert details shows Preprints status Excluded
-    When user clicks on ReRun action for the highlighted Email Alert
+    When user clicks on ReRun action for Email Alert with name $emailTitle
     Then search query is dna NOT [preprint]/lim
 
 
 
   Scenario: Verify single email alert can be edited to exclude preprints
+    Given user opens Results page
+    And user enters query dna and performs a search
+    Then the result set is not empty
+    When user clicks on EmailAlert link
+    And set variable $emailTitle to unique string Preprint alert
+    And user saves Email Alert:
+      | alertName   | emailAddress      | isIncludeArticles | isIncludePreprints | comment | format  | content | freqPeriod | frequency |
+      | $emailTitle | changeme@test.com | true              | true               |         | default | default | default    | default   |
+    When user opens Email Alerts page
+    And user highlights Email Alert with name $emailTitle
+    Then email alert details shows Preprints status Included
+
 
 
   Scenario: Verify bulk email alert can be edited to exclude preprints

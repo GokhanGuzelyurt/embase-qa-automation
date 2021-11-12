@@ -1,6 +1,5 @@
 package po;
 
-import embase.tests.StepDefs.CommonSteps;
 import net.serenitybdd.core.annotations.findby.By;
 import net.thucydides.core.annotations.DefaultUrl;
 import org.openqa.selenium.WebElement;
@@ -35,8 +34,8 @@ public class EmailAlertsPage extends BasePage {
         return getDriver().findElement(By.xpath("//ul[@id='emailAlertListUL']//div[contains(text(), '" + name + "')]"));
     }
 
-    public WebElement getReRunButtonForHighlightedEmailAlert() {
-        return getDriver().findElement(By.cssSelector(".rerun[data-querynum='" + CommonSteps.testCaseVariables.get("highlightedEmailAlertId") + "']"));
+    public WebElement getReRunButtonForEmailAlertByName(String name) {
+        return getDriver().findElement(By.cssSelector(".rerun[data-querynum='" + getEmailAlertRowByName(name).getAttribute("data-id") + "']"));
     }
 
 
