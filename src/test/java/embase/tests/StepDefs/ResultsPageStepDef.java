@@ -71,7 +71,7 @@ public class ResultsPageStepDef {
         resultsPage.searchButton.click();
     }
 
-    @And("^user clicks on EmailAlert link$")
+    @And("^user clicks on set EmailAlert link$")
     public void clickEmailAlert() {
         resultsPage.setEmailAlert();
     }
