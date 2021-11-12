@@ -6,9 +6,10 @@ Feature: Email Alerts
     And user logs in as Default User
     And Quick search page is opened
 
-  Scenario: Verify Email alert can be set including Preprints
+  @C488503
+  Scenario Outline: Verify Email alert can be created with desired Preprints initial setting
     Given user opens Results page
-    And user enters query dna and performs a search
+    And user enters query <initialSearchQuery> and performs a search
     Then the result set is not empty
     When user clicks on set EmailAlert link
     And Preprints labelname is displayed on Email Alerts
@@ -16,31 +17,19 @@ Feature: Email Alerts
     And set variable $emailTitle to unique string Preprint alert
     And user saves Email Alert:
       | alertName   | emailAddress      | isIncludeArticles | isIncludePreprints | comment | format  | content | freqPeriod | frequency |
-      | $emailTitle | changeme@test.com | true              | true               |         | default | default | default    | default   |
+      | $emailTitle | changeme@test.com | true              | <includePreprints> |         | default | default | default    | default   |
     When user opens Email Alerts page
     And user highlights Email Alert with name $emailTitle
-    Then email alert details shows Preprints status Included
+    Then email alert details shows Preprints status <expectedInitialStatus>
     When user clicks on ReRun action for Email Alert with name $emailTitle
-    Then search query is dna
-
-  Scenario: Verify Email alert can be set excluding Preprints
-    Given user opens Results page
-    And user enters query dna and performs a search
-    Then the result set is not empty
-    When user clicks on set EmailAlert link
-    And Preprints labelname is displayed on Email Alerts
-    And Preprints checkbox is selected by default
-    And set variable $emailTitle to unique string Preprint alert
-    And user saves Email Alert:
-      | alertName   | emailAddress      | isIncludeArticles | isIncludePreprints | comment | format  | content | freqPeriod | frequency |
-      | $emailTitle | changeme@test.com | true              | false              |         | default | default | default    | default   |
-    When user opens Email Alerts page
-    And user highlights Email Alert with name $emailTitle
-    Then email alert details shows Preprints status Excluded
-    When user clicks on ReRun action for Email Alert with name $emailTitle
-    Then search query is dna NOT [preprint]/lim
+    Then search query is <expectedSearchQuery>
+    Examples:
+      | includePreprints | expectedInitialStatus | initialSearchQuery | expectedSearchQuery    |
+      | true             | Included              | dna                | dna                    |
+      | false            | Excluded              | dna                | dna NOT [preprint]/lim |
 
 
+  @C488505
   Scenario: Verify single email alert can be bulk edited with Preprint settings to exclude preprints
     Given user opens Results page
     And user enters query dna and performs a search
@@ -57,8 +46,8 @@ Feature: Email Alerts
     And user uses the bulk Edit Preprint Settings to Exclude preprints
     And user highlights Email Alert with name $emailTitle
     Then email alert details shows Preprints status Excluded
-    
 
+  @C488507
   Scenario Outline: Verify multiple email alert can be bulk edited with Preprint settings
     Given user opens Results page
     And user enters query dna and performs a search
