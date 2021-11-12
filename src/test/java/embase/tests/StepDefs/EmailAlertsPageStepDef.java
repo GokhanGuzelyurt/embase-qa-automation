@@ -44,4 +44,18 @@ public class EmailAlertsPageStepDef {
     public void selectEmailAlertCheckboxByName(String name) {
         emailAlertsPage.checkByScript(emailAlertsPage.getEmailAlertCheckboxByName(StringHelper.resolveVariable(name)));
     }
+
+
+    @When("^user uses the bulk Edit Preprint Settings to (.*) preprints$")
+    public void bulkEditPreprintSetting(String targetPreprintStatus) {
+        emailAlertsPage.editPreprintSettingsLink.click();
+        if (targetPreprintStatus.toLowerCase().equals("include")) {
+            emailAlertsPage.editPreprintSettingsModalIncludeButton.waitUntilClickable();
+            emailAlertsPage.editPreprintSettingsModalIncludeButton.click();
+        } else {
+            emailAlertsPage.editPreprintSettingsModalExcludeButton.waitUntilClickable();
+            emailAlertsPage.editPreprintSettingsModalExcludeButton.click();
+        }
+        emailAlertsPage.waitForJStoLoad();
+    }
 }

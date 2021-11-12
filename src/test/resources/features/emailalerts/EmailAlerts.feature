@@ -55,6 +55,9 @@ Feature: Email Alerts
     And user highlights Email Alert with name $emailTitle
     Then email alert details shows Preprints status Included
     When user selects checkbox for Email Alert with name $emailTitle
+    And user uses the bulk Edit Preprint Settings to Exclude preprints
+    And user highlights Email Alert with name $emailTitle
+    Then email alert details shows Preprints status Excluded
 
 
 

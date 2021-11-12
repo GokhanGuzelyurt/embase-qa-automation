@@ -1,6 +1,7 @@
 package po;
 
 import net.serenitybdd.core.annotations.findby.By;
+import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,6 +30,16 @@ public class EmailAlertsPage extends BasePage {
 
     @FindBy(css = ".summary :nth-child(6) :nth-child(2)")
     public WebElement alertDetailsPreprintsStatus;
+
+    @FindBy(css = ".editPreprints:first-of-type")
+    public WebElement editPreprintSettingsLink;
+
+    @FindBy(xpath = "//span[contains(text(),'Include preprints')]")
+    public WebElementFacade editPreprintSettingsModalIncludeButton;
+
+    @FindBy(xpath = "//span[contains(text(),'Exclude preprints')]")
+    public WebElementFacade editPreprintSettingsModalExcludeButton;
+
 
     public WebElement getEmailAlertRowByName(String name) {
         return getDriver().findElement(By.xpath("//ul[@id='emailAlertListUL']//div[contains(text(), '" + name + "')]"));
