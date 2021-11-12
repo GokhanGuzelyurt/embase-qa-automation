@@ -17,9 +17,10 @@ Feature: Email Alerts
     And user saves Email Alert:
       | alertName   | emailAddress      | isIncludeArticles | isIncludePreprints | comment | format  | content | freqPeriod | frequency |
       | $emailTitle | changeme@test.com | true              | true               |         | default | default | default    | default   |
-   And user opens Email Alerts page
-  # And user goes checks the email alert and has preprints enabled
-  # And user clicks rerun
+    When user opens Email Alerts page
+    And user highlights Email Alert with name $emailTitle
+    Then email alert details shows Preprints status Included
+    When user clicks on ReRun action for the highlighted Email Alert
   # And search query is [same as in prev step]
 
   Scenario: Verify Email alert can be set excluding Preprints
