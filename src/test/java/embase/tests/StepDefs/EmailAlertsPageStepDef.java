@@ -29,16 +29,19 @@ public class EmailAlertsPageStepDef {
         emailAlertsPage.waitForJStoLoad();
     }
 
-
     @Then("^email alert details shows Preprints status (.*)$")
     public void checkEmailAlertDetailsPreprintsStatus(String expectedStatus) {
         Assertions.assertThat(emailAlertsPage.alertDetailsPreprintsStatus.getText()).isEqualTo(expectedStatus).describedAs("Preprint status is not " + expectedStatus);
     }
 
     @When("^user clicks on ReRun action for Email Alert with name (.*)$")
-    public void clickOnEmailAlertAction(String name) {
-        String emailAlertName = StringHelper.resolveVariable(name);
-        emailAlertsPage.getReRunButtonForEmailAlertByName(emailAlertName).click();
+    public void clickOnEmailAlertReRunActionByName(String name) {
+        emailAlertsPage.getReRunButtonForEmailAlertByName(StringHelper.resolveVariable(name)).click();
         emailAlertsPage.waitForJStoLoad();
+    }
+
+    @When("^user selects checkbox for Email Alert with name (.*)$")
+    public void selectEmailAlertCheckboxByName(String name) {
+        emailAlertsPage.checkByScript(emailAlertsPage.getEmailAlertCheckboxByName(StringHelper.resolveVariable(name)));
     }
 }

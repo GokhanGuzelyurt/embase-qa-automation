@@ -38,6 +38,9 @@ public class EmailAlertsPage extends BasePage {
         return getDriver().findElement(By.cssSelector(".rerun[data-querynum='" + getEmailAlertRowByName(name).getAttribute("data-id") + "']"));
     }
 
+    public WebElement getEmailAlertCheckboxByName(String name) {
+        return getDriver().findElement(By.cssSelector(".checkbox[id='" + getEmailAlertRowByName(name).getAttribute("data-id") + "']"));
+    }
 
 }
 

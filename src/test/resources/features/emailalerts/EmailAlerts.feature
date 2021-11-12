@@ -54,6 +54,7 @@ Feature: Email Alerts
     When user opens Email Alerts page
     And user highlights Email Alert with name $emailTitle
     Then email alert details shows Preprints status Included
+    When user selects checkbox for Email Alert with name $emailTitle
 
 
 
