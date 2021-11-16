@@ -34,10 +34,12 @@ import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CommonSteps {
 
-    final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
+    static final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     private EnvironmentVariables environmentVariables;
     public static String EMB_BUILD_NUMBER;
     public static String BASE_URL;
@@ -51,6 +53,7 @@ public class CommonSteps {
     public static String SCREENSHOTS_FOLDER;
     private Screenshot screenshot;
     private static long START_TIMESTAMP;
+    public static Map<String, String> testCaseVariables = new HashMap();
 
     @Managed
     WebDriver driver;
@@ -224,5 +227,18 @@ public class CommonSteps {
                 .getProperty(propertyName);
     }
 
+    @Given("^set variable (.*) to unique string (.*)$")
+    public void iSetUniqueStringVariable(String variableName, String variableValue) {
+        setTestCaseVariable(variableName, variableValue + " " + System.currentTimeMillis());
+    }
+
+    public static void setTestCaseVariable(String variableName, String variableValue) {
+        logger.info("Storing variable: " + variableName + " - with value: " + variableValue);
+        if (testCaseVariables.containsKey(variableName)) {
+            testCaseVariables.replace(variableName, variableValue);
+        } else {
+            testCaseVariables.put(variableName, variableValue);
+        }
+    }
 
 }

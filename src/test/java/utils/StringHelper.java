@@ -1,5 +1,7 @@
 package utils;
 
+import embase.tests.StepDefs.CommonSteps;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -35,5 +37,12 @@ public class StringHelper {
         long seconds = timeLeft.toMillis() / 1000;
         String hms = String.format("%02dh %02dm %02ds", hours, minutes, seconds);
         return hms;
+    }
+
+    public static String resolveVariable(String var){
+        if (var.substring(0, 1).equals("$"))
+            return CommonSteps.testCaseVariables.get(var);
+
+        return var;
     }
 }

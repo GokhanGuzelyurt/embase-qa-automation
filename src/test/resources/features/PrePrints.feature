@@ -28,7 +28,7 @@ Feature: Pre Prints tests
     Given user opens Results page
     And user enters query dna and performs a search
     Then the result set is not empty
-    And user clicks on EmailAlert link
+    And user clicks on set EmailAlert link
     And Preprints labelname is displayed on Email Alerts
     And Preprints checkbox is selected by default
 

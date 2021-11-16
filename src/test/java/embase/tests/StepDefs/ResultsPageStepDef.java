@@ -4,17 +4,23 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import io.cucumber.datatable.DataTable;
 import org.assertj.core.api.Assertions;
 import org.openqa.selenium.Keys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import po.ResultsPage;
+import po.sections.results.EmailAlertDialog;
+import utils.StringHelper;
 
 import java.lang.invoke.MethodHandles;
+import java.util.List;
+import java.util.Map;
 
 public class ResultsPageStepDef {
     final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     ResultsPage resultsPage;
+    EmailAlertDialog emailAlertDialog;
 
     @Then("^the result set is not empty$")
     public void iVerifyResultsNotEmpty() {
@@ -30,6 +36,7 @@ public class ResultsPageStepDef {
 
     @Given("^user enters query (.*) and performs a search$")
     public void enterSearchQuery(String query) {
+        resultsPage.waitForJStoLoad();
         resultsPage.searchField.clear();
         resultsPage.searchField.sendKeys(query);
         resultsPage.searchField.sendKeys(Keys.ENTER);
@@ -64,7 +71,7 @@ public class ResultsPageStepDef {
         resultsPage.searchButton.click();
     }
 
-    @And("^user clicks on EmailAlert link$")
+    @And("^user clicks on set EmailAlert link$")
     public void clickEmailAlert() {
         resultsPage.setEmailAlert();
     }
@@ -104,5 +111,20 @@ public class ResultsPageStepDef {
         resultsPage.applyBtn.click();
     }
 
+    // TODO move to different file
+    @When("user saves Email Alert:")
+    public void iSaveEmailAlert(DataTable table) {
+        List<Map<String, String>> rows = table.asMaps(String.class, String.class);
+        Map<String, String> data = rows.get(0);
+
+        String emailTitle = StringHelper.resolveVariable(data.get("alertName"));
+
+        emailAlertDialog.saveEmailAlert(
+                emailTitle,
+                data.get("emailAddress"),
+                Boolean.parseBoolean(data.get("isIncludeArticles")),
+                Boolean.parseBoolean(data.get("isIncludePreprints")));
+
+    }
 
 }
