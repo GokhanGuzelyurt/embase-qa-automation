@@ -1,6 +1,7 @@
 package utils;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.text.StringEscapeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import utils.testrail.TestRailHelper;
@@ -14,6 +15,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Properties;
 import java.util.stream.Collectors;
+
 
 public class TestRailIntegration {
 
@@ -88,9 +90,9 @@ public class TestRailIntegration {
                 try {
                     Writer out = new BufferedWriter(new OutputStreamWriter(
                             new FileOutputStream(Paths.get(runPath.getPath(), f.getName()).toFile()), "UTF-8"));
-                    out.write(f.toString());
+                    out.write(StringEscapeUtils.unescapeHtml4(f.toString()));
                     out.close();
-                    logger.info(f.toString());
+                    logger.info(StringEscapeUtils.unescapeHtml4(f.toString()));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

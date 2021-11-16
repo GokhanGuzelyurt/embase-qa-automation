@@ -71,6 +71,5 @@ public class QuickSearchPage extends BasePage {
 
     public void at() {
         Assertions.assertThat(showResultsButton.isDisplayed()).describedAs("Show Results button is not displayed").isTrue();
-
     }
 }
