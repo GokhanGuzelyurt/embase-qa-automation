@@ -202,6 +202,7 @@ public class CommonSteps {
     @Given("user opens Embase application")
     public void openEmbase() {
         basePage.open();
+        basePage.closePendoBanner();
     }
 
     private void getBuildNumber() {
