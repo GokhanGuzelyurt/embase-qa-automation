@@ -95,7 +95,6 @@ public class ResultsPage extends BasePage {
         searchField.waitUntilVisible();
         waitForJStoLoad();
         Assertions.assertThat(searchField.getValue()).describedAs("Search field is not equal to expected").isEqualToIgnoringCase(expectedQuery);
-
     }
 
     public void setEmailAlert() {
@@ -126,6 +125,7 @@ public class ResultsPage extends BasePage {
         }
         return flag;
     }
+
 
 }
 

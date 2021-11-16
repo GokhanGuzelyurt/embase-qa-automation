@@ -16,17 +16,16 @@ public class BasePage extends PageObject {
     WebDriver driver;
 
     public void checkByScript(WebElement element) {
-        JavascriptExecutor js = (JavascriptExecutor) getDriver();
-        js.executeScript("arguments[0].click();", element);
-
+        if (!element.isSelected()) {
+            JavascriptExecutor js = (JavascriptExecutor) getDriver();
+            js.executeScript("arguments[0].click();", element);
+        }
     }
 
     public void uncheckByScript(WebElement element) {
         if (element.isSelected()) {
             JavascriptExecutor js = (JavascriptExecutor) getDriver();
             js.executeScript("arguments[0].click();", element);
-
-
         }
     }
 

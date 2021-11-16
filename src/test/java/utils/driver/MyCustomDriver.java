@@ -8,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import utils.TestRailIntegration;
 
 import java.lang.invoke.MethodHandles;
 
@@ -30,6 +31,7 @@ public class MyCustomDriver implements DriverSource {
         } else if (CommonSteps.JENKINS_BUILD_URL != null) {
             logger.info("Job is running in JENKINS. Headless ChromeDriver mode: true");
             options.addArguments("--headless");
+            TestRailIntegration.SEND_RESULTS_TESTRAIL = "true";
         } else {
             logger.info("Chromedriver Headless is FALSE. Instantiating window.");
         }
