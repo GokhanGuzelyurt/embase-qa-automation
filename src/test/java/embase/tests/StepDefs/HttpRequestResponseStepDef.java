@@ -273,12 +273,6 @@ public class HttpRequestResponseStepDef {
         Assertions.assertThat(nodesAfterXpathEvaluation.getLength()).describedAs("No nodes found for xpath: " + xpath).isGreaterThan(0);
     }
 
-    @Deprecated
-    @And("^the response body contains (.*)$")
-    public void verifyResponseBody(String responseQuery) {
-        Assertions.assertThat(response.getBody().asString()).describedAs("Body does not contain").contains(responseQuery);
-    }
-
     @And("^the JSON response body contains element (.*) with value (.*)$")
     public void validateJSONresponse(String element, String value) {
 
