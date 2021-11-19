@@ -18,4 +18,4 @@ Feature: Elastic search queries
   @C488587
   Scenario: Validate that autosuggestions on Quick Search page works fine
     Given user enters query heart arrhythmia on quick search page
-    Then the autosuggested term contains count greater than 10
+    Then the autosuggested term contains count greater than 100000
