@@ -13,6 +13,8 @@ import po.common.SearchPage;
 
 import java.lang.invoke.MethodHandles;
 
+import static org.apache.commons.lang3.BooleanUtils.and;
+
 @DefaultUrl("page:recordDetails.page")
 public class RecordDetailsPage extends BasePage {
 
@@ -34,6 +36,12 @@ public class RecordDetailsPage extends BasePage {
     @FindBy(xpath = "*[@id='column2']/h2")
     public WebElement fullTextPageTitle;
 
+    @FindBy(xpath="//*[@data-testid='back-to']")
+    public WebElement backToResultsLink;
+
+    @FindBy(xpath="//*[@data-testid='pagination']")
+    public WebElement paginationLinks;
+
     public boolean verifyORCIDHighlighting() {
         boolean flag = false;
         WebElement orcID = orcIDTitle.findElement(By.xpath("//mark[1]"));
@@ -43,6 +51,15 @@ public class RecordDetailsPage extends BasePage {
             flag = true;
         }
         return flag;
+    }
+
+    public boolean verifyPaginationLinksNavigationState(){
+        WebElement previous= paginationLinks.findElement(By.xpath("//span[contains(@class,'LinkButton-module_content__2F1Lc'] and contains(text()='Previous')"));
+        WebElement next= paginationLinks.findElement(By.xpath("//span[contains(@class,'LinkButton-module_content__2F1Lc'] and contains(text()='Next')"));
+        if (previous.isEnabled()== true && next.isEnabled()== true){
+            return true ;
+        }
+        else return false;
     }
 
 }

@@ -30,4 +30,15 @@ public class RecordDetailsStepDef {
         recordDetailsPage.orcIDTitle.click();
     }
 
+    @And("^Back to results link is displayed and enabled$")
+    public void backToResultsLinkDisplayed(){
+        Assertions.assertThat(recordDetailsPage.backToResultsLink.isDisplayed()).describedAs("Back to results link is not displayed").isTrue();
+        Assertions.assertThat(recordDetailsPage.backToResultsLink.isEnabled()).describedAs("Back to results link is not enabled").isTrue();
+    }
+
+    @And("^pagination links are disabled$")
+    public void paginationLinksDisabled(){
+    Assertions.assertThat(recordDetailsPage.verifyPaginationLinksNavigationState()).describedAs("Pagination links are not disabled").isFalse();
+    }
+
 }
