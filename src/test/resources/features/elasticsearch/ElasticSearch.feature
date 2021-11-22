@@ -19,3 +19,10 @@ Feature: Elastic search queries
   Scenario: Validate that autosuggestions on Quick Search page works fine
     Given user enters query heart arrhythmia on quick search page
     Then the autosuggested term contains count greater than 100000
+
+  @C488630
+  Scenario: Validate that cytochrome c' is identified by the ES
+    Given user opens Results page
+    And user enters query 'cytochrome c`' AND l634537462 and performs a search
+    Then the result set is not empty
+    And the term cytochrome c' is highlighted in the title on Results page

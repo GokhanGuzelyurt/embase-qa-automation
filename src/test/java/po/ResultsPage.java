@@ -126,6 +126,14 @@ public class ResultsPage extends BasePage {
         return flag;
     }
 
+    public boolean verifyHighlightedTerm(String term){
+        String highlightedTerm= resultList.recordListChecks.findElement(By.cssSelector(".hit")).getText();
+        if(highlightedTerm.equalsIgnoreCase(term)){
+            return true;
+        }
+        else return false;
+    }
+
 
 }
 
