@@ -29,14 +29,14 @@ public class QuickSearchPageStepDef {
         quickSearchPage.firstLine.sendKeys(query);
     }
 
-    @Then("^the autosuggested term contains count greater than (.*)$")
+    @Then("^the autosuggested term contains count greater than (\\d*)$")
     public void verifyAutosuggestedCounts(Integer count) {
         Integer val;
         String text = quickSearchPage.autosuggestList.getText();
         String substring = StringUtils.substringAfterLast(text, "\n");
         substring= substring.replaceAll("//s+","").replaceAll(",","");
         val = Integer.parseInt(substring);
-        Assertions.assertThat(val).describedAs("Value is not greater than 10").isGreaterThan(count);
+        Assertions.assertThat(val).describedAs("Value is not greater than"+count).isGreaterThan(count);
     }
 
 
