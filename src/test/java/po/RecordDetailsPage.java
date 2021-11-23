@@ -42,6 +42,27 @@ public class RecordDetailsPage extends BasePage {
     @FindBy(xpath="//*[@data-testid='pagination']")
     public WebElement paginationLinks;
 
+    @FindBy(xpath="//ul[@class='Pagination-module_items__1jifO']/li[1]/button")
+    public WebElement previous;
+
+    @FindBy(xpath="//ul[@class='Pagination-module_items__1jifO']/li[3]/button")
+    public WebElement next;
+
+    @FindBy(xpath = "//span[@class='Pagination-module_label__34GAB']")
+    public WebElement paginationLabel;
+
+    @FindBy(xpath= "//*[@data-testid='source']/span[1]")
+    public WebElement sourceMagazine;
+
+    @FindBy(xpath= "//*[@data-testid='source']/span[3]")
+    public WebElement sourceVolume;
+
+    @FindBy(xpath="//*[@data-testid='view-author-addresses']")
+    public WebElement viewAuthorAddresses;
+
+    @FindBy(xpath="//*[@data-testid='title']")
+    public WebElement title;
+
     public boolean verifyORCIDHighlighting() {
         boolean flag = false;
         WebElement orcID = orcIDTitle.findElement(By.xpath("//mark[1]"));
@@ -54,12 +75,25 @@ public class RecordDetailsPage extends BasePage {
     }
 
     public boolean verifyPaginationLinksNavigationState(){
-        WebElement previous= paginationLinks.findElement(By.xpath("//span[contains(@class,'LinkButton-module_content__2F1Lc'] and contains(text()='Previous')"));
-        WebElement next= paginationLinks.findElement(By.xpath("//span[contains(@class,'LinkButton-module_content__2F1Lc'] and contains(text()='Next')"));
-        if (previous.isEnabled()== true && next.isEnabled()== true){
+        if (previous.isEnabled() && next.isEnabled()){
             return true ;
         }
         else return false;
     }
 
+    public String getPaginationLabelText(){
+        String text= paginationLabel.getText();
+        return text;
+    }
+
+   public String getSourceMagazineText(){
+        String sourceMagazineText= sourceMagazine.getText();
+        return sourceMagazineText;
+    }
+
+    public String getSourceVolumeText(){
+        String sourceVolumeText= sourceVolume.getText();
+        return sourceVolumeText;
+    }
 }
+
