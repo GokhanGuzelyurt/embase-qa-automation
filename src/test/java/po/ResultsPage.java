@@ -67,6 +67,22 @@ public class ResultsPage extends BasePage {
     @FindBy(css = ".filterActions .pushButton")
     public WebElementFacade applyBtn;
 
+    @FindBy(id = "viewSubmitAction")
+    public WebElementFacade viewActionLink;
+
+    @FindBy(css = ".exportSubmit")
+    public WebElementFacade exportActionLink;
+
+    @FindBy(css = ".emailSubmit")
+    public WebElementFacade emailActionLink;
+
+    @FindBy(id = "orderSubmitAction")
+    public WebElementFacade orderActionLink;
+
+    @FindBy(id = "addToClipboardAction")
+    public WebElementFacade addToClipboardActionLink;
+
+
     public void waitForRecordSectionIsLoaded() {
         logger.info("Wait for please wait to vanish");
         logger.info("Wait if 0 results page is not displayed");
@@ -126,12 +142,11 @@ public class ResultsPage extends BasePage {
         return flag;
     }
 
-    public boolean verifyHighlightedTerm(String term){
-        String highlightedTerm= resultList.recordListChecks.findElement(By.cssSelector(".hit")).getText();
-        if(highlightedTerm.equalsIgnoreCase(term)){
+    public boolean verifyHighlightedTerm(String term) {
+        String highlightedTerm = resultList.recordListChecks.findElement(By.cssSelector(".hit")).getText();
+        if (highlightedTerm.equalsIgnoreCase(term)) {
             return true;
-        }
-        else return false;
+        } else return false;
     }
 
 
