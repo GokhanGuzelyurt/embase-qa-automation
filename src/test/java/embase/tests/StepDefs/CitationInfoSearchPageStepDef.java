@@ -68,7 +68,7 @@ public class CitationInfoSearchPageStepDef {
 
     }
 
-    @And("^user selects first result from the list$")
+    @And("^user selects all authors from the citation info authors list$")
     public void selectFirstResult() {
         citationInfoSearchPage.clickSelectAll();
     }

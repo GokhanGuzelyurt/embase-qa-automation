@@ -26,3 +26,12 @@ Feature: Elastic search queries
     And user enters query 'cytochrome c`' AND l634537462 and performs a search
     Then the result set is not empty
     And the term cytochrome c' is highlighted in the title on Results page
+    And user enters query 'cytochrome c' AND L2010517837 and performs a search
+    Then the result set is not empty
+    And the term cytochrome c is highlighted in the title on Results page
+
+
+
+
+
+

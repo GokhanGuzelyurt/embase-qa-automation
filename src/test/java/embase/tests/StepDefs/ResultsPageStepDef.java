@@ -10,6 +10,7 @@ import org.openqa.selenium.Keys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import po.ResultsPage;
+import po.common.BasePage;
 import po.sections.results.EmailAlertDialog;
 import utils.StringHelper;
 
@@ -24,6 +25,7 @@ public class ResultsPageStepDef {
 
     @Then("^the result set is not empty$")
     public void iVerifyResultsNotEmpty() {
+        resultsPage.waitForJStoLoad();
         Assertions.assertThat(resultsPage.resultList.getResultsCount()).describedAs("Result is empty").isGreaterThan(0);
         logger.info("Count is " + resultsPage.resultList.getResultsCount());
     }
@@ -52,7 +54,6 @@ public class ResultsPageStepDef {
     public void checkRecordContent(int recordID, String source) {
         resultsPage.resultList.checkRecordContent(recordID, source);
         Assertions.assertThat(resultsPage.resultList.checkRecordContent(recordID, source)).describedAs("Preprints source is not present").isEqualToIgnoringCase(source);
-
     }
 
     @And("^user opens Source tab on Results page$")

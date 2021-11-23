@@ -202,7 +202,8 @@ public class CommonSteps {
     @Given("user opens Embase application")
     public void openEmbase() {
         basePage.open();
-        basePage.closePendoBanner();
+        // TODO - waiting for resolution of EMBASE-13758
+        // basePage.closePendoBanner();
     }
 
     private void getBuildNumber() {
