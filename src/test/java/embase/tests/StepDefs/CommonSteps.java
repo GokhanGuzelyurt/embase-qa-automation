@@ -130,7 +130,7 @@ public class CommonSteps {
                     ArrayList<cucumber.api.Result> results = (ArrayList<cucumber.api.Result>) field.get(scenario);
                     for (cucumber.api.Result res : results) {
                         if (res.getError() != null)
-                            errors += res.getError().getMessage();
+                            errors += res.getError();
                     }
                 } catch (Exception ignored) {
                 }
