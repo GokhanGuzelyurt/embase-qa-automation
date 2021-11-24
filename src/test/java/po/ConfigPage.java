@@ -1,5 +1,6 @@
 package po;
 
+import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,14 +10,14 @@ import po.common.BasePage;
 public class ConfigPage extends BasePage {
 
     @FindBy(xpath = "//p[contains(text(),'Version')]")
-    public WebElement legacyBuildNumber;
+    public WebElementFacade legacyBuildNumber;
 
     @FindBy(xpath = "//pre[1]")
-    public WebElement webappBuildNumber;
+    public WebElementFacade webappBuildNumber;
 
     @FindBy(id = "sg")
-    public WebElement securityGatewayBuildNumber;
+    public WebElementFacade securityGatewayBuildNumber;
 
     @FindBy(id = "fe")
-    public WebElement reactBuildNumber;
+    public WebElementFacade reactBuildNumber;
 }
