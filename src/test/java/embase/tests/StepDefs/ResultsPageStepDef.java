@@ -26,8 +26,8 @@ public class ResultsPageStepDef {
     @Then("^the result set is not empty$")
     public void iVerifyResultsNotEmpty() {
         resultsPage.waitForJStoLoad();
-        Assertions.assertThat(resultsPage.resultList.getResultsCount()).describedAs("Result is empty").isGreaterThan(0);
         logger.info("Count is " + resultsPage.resultList.getResultsCount());
+        Assertions.assertThat(resultsPage.resultList.getResultsCount()).describedAs("Result is empty").isGreaterThan(0);
     }
 
     @When("^user opens Results page$")

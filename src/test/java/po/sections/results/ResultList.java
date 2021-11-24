@@ -1,5 +1,6 @@
 package po.sections.results;
 
+import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.webelements.Checkbox;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -17,7 +18,7 @@ public class ResultList extends BasePage {
     final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     @FindBy(css = "#searchHitsText .search-hitcounts")
-    public WebElement searchHitCounts;
+    public WebElementFacade searchHitCounts;
 
     @FindBy(id = "setEmailAlertForLatest")
     public WebElement setEmailAlertLink;
