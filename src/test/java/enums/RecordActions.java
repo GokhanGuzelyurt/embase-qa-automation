@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+ // TODO if we are not using this Enum it should be removed
 public enum RecordActions {
     View("View"),
     Print("Print"),

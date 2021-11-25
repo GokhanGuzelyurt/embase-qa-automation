@@ -1,6 +1,7 @@
 package po.sections.results;
 
 import net.serenitybdd.core.pages.WebElementFacade;
+import net.thucydides.core.annotations.Step;
 import net.thucydides.core.webelements.Checkbox;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -138,5 +139,12 @@ public class ResultList extends BasePage {
         List<WebElement> s = recordListChecks.findElements(By.cssSelector(".resultPreviewInner"));
         sourceName = s.get(recordNumber - 1).findElement(By.xpath("//span[contains(@class,'source') and contains(text(),'" + sourceName + "')]")).getText();
         return sourceName;
+    }
+
+    @Step
+    public void selectRecordNumber(int recordNumber) {
+        logger.info("Select the record #" + recordNumber);
+        scrollIntoView();
+        checkByScript(getDriver().findElement(By.xpath("//div[@class='selectable cur-d']/span[text() = '" + recordNumber + "']/../label")));
     }
 }

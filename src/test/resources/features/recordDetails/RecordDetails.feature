@@ -18,3 +18,11 @@ Feature: Record Details tests
     Then user is on Results Page
     And search query is '0000-0001-6084-166x'/oc
 
+  @C488656
+  Scenario: Validate that ORCID is displayed on record details page via view action
+    Given user enters query '0000 0001 6084 166x':oc and performs a search
+    Then the result set is not empty
+    And user selects record #1 from the records list in Result Page
+    And user clicks on View action link of Result Page
+    Then user is on Record Details page
+    And author ORCID 0000-0001-6084-166X is displayed on record details page

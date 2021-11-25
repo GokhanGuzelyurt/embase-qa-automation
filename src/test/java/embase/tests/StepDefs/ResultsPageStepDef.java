@@ -10,7 +10,6 @@ import org.openqa.selenium.Keys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import po.ResultsPage;
-import po.common.BasePage;
 import po.sections.results.EmailAlertDialog;
 import utils.StringHelper;
 
@@ -30,6 +29,11 @@ public class ResultsPageStepDef {
         Assertions.assertThat(resultsPage.resultList.getResultsCount()).describedAs("Result is empty").isGreaterThan(0);
     }
 
+    @When("^user selects record #(\\d*) from the records list in Result Page$")
+    public void selectRecordFromResultsList(int recordNumber) {
+        resultsPage.resultList.selectRecordNumber(recordNumber);
+    }
+
     @When("^user opens Results page$")
     public void openResultsPage() {
         resultsPage.open();
@@ -45,7 +49,7 @@ public class ResultsPageStepDef {
         resultsPage.waitForRecordSectionIsLoaded();
     }
 
-    @And("^user opens record #(.*) by clicking on title$")
+    @And("^user opens record #(\\d*) by clicking on title$")
     public void openRecordByTitle(int recordId) {
         resultsPage.resultList.clickRecordByTitle(recordId);
     }
@@ -97,6 +101,14 @@ public class ResultsPageStepDef {
         resultsPage.searchField.waitUntilEnabled();
     }
 
+    @And("^user clicks on (.*) action link of Result Page$")
+    public void clickOnActionLink(String actionLinkName) {
+        switch (actionLinkName.toLowerCase()) {
+            case "view":
+                resultsPage.viewActionLink.click();
+        }
+    }
+
     @And("^user opens Sources filter$")
     public void openSourceFilter() {
         resultsPage.sourcesFilter.click();
@@ -129,7 +141,7 @@ public class ResultsPageStepDef {
     }
 
     @And("^the term (.*) is highlighted in the title on Results page$")
-    public void verigyHighlightedTermResultsPage(String highlightedTerm){
+    public void verigyHighlightedTermResultsPage(String highlightedTerm) {
         Assertions.assertThat(resultsPage.verifyHighlightedTerm(highlightedTerm)).describedAs("Highlighted term is not equal to expected").isTrue();
 
     }
