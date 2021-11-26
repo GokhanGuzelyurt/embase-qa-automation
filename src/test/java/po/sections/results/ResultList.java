@@ -147,4 +147,9 @@ public class ResultList extends BasePage {
         scrollIntoView();
         checkByScript(getDriver().findElement(By.xpath("//div[@class='selectable cur-d']/span[text() = '" + recordNumber + "']/../label")));
     }
+
+    @Step
+    public String getResultListTextForRecord(int recordNumber) {
+        return recordListChecks.findElements(By.cssSelector(".resultInfo")).get(recordNumber - 1).getText();
+    }
 }

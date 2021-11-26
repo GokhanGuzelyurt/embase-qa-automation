@@ -26,3 +26,12 @@ Feature: Record Details tests
     And user clicks on View action link of Result Page
     Then user is on Record Details page
     And author ORCID 0000-0001-6084-166X is displayed on record details page
+
+  @C488660
+  Scenario: validating et al presents in authors
+    Given user enters query L21814599 and performs a search
+    Then the result set is not empty
+    And record #1 of the results list contains et al. in authors
+    And user opens record #1 by clicking on title
+    Then user is on Record Details page
+    And Authors values on Record details page include "et al."
