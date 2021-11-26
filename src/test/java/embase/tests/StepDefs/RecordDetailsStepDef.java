@@ -2,8 +2,12 @@ package embase.tests.StepDefs;
 
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
+import io.cucumber.datatable.DataTable;
 import org.assertj.core.api.Assertions;
 import po.RecordDetailsPage;
+
+import java.util.List;
+import java.util.Map;
 
 public class RecordDetailsStepDef {
     RecordDetailsPage recordDetailsPage;
@@ -22,7 +26,7 @@ public class RecordDetailsStepDef {
 
     @And("^the author ORCID 0000-0001-6084-166X is highlighted$")
     public void orcIDHighlighted() {
-        Assertions.assertThat(recordDetailsPage.verifyORCIDHighlighting()).describedAs("ORCID is not highlighted").isTrue();
+        Assertions.assertThat(recordDetailsPage.isORCIDHighlightingEnabled()).describedAs("ORCID is not highlighted").isTrue();
     }
 
     @When("^user clicks on the highlighted ORCID 0000-0001-6084-166X$")
@@ -30,4 +34,38 @@ public class RecordDetailsStepDef {
         recordDetailsPage.orcIDTitle.click();
     }
 
+    @And("^Back to results link is displayed and enabled$")
+    public void backToResultsLinkDisplayed() {
+        Assertions.assertThat(recordDetailsPage.backToResultsLink.isDisplayed()).describedAs("Back to results link is not displayed").isTrue();
+        Assertions.assertThat(recordDetailsPage.backToResultsLink.isEnabled()).describedAs("Back to results link is not enabled").isTrue();
+    }
+
+    @And("^pagination links are disabled on Record details page$")
+    public void paginationLinksDisabled() {
+        Assertions.assertThat(recordDetailsPage.isPaginationLinksNavigationStateEnabled()).describedAs("Pagination links are not disabled").isFalse();
+    }
+
+    @And("^pagination label contains value (.*)$")
+    public void paginationLabelText(String labelText) {
+        Assertions.assertThat(recordDetailsPage.getPaginationLabelText()).describedAs("Pagination text is not equal to expected").isEqualToIgnoringCase(labelText);
+    }
+
+    @And("^source values on Record details page are displayed:$")
+    public void sourceValues(DataTable table) {
+        List<Map<String, String>> rows = table.asMaps(String.class, String.class);
+        Map<String, String> data = rows.get(0);
+
+     Assertions.assertThat(recordDetailsPage.getSourceMagazineText()).describedAs("Source Magazine text is not equal to expected").isEqualToIgnoringCase(data.get("sourceMagazine"));
+     Assertions.assertThat(recordDetailsPage.getSourceVolumeText()).describedAs("Source Volume text is not equal to expected text").isEqualToIgnoringCase(data.get("sourceVolume"));
+    }
+
+    @And("^view author address button is present on Record details page$")
+    public void viewAuthorAddressBtn(){
+    Assertions.assertThat(recordDetailsPage.viewAuthorAddresses.isDisplayed()).describedAs("Viewauthor address is not displayed").isTrue();
+    }
+
+    @And("^title field is not empty on record details page$")
+    public void verifyTitleIsNotEmpty(){
+    Assertions.assertThat(recordDetailsPage.title.getText().isEmpty()).describedAs("Title field is empty").isFalse();
+    }
 }
