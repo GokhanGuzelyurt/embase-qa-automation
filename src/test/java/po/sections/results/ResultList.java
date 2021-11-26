@@ -139,16 +139,17 @@ public class ResultList extends BasePage {
     }
 
     @Step
-    public void selectRecordNumber(int recordNumber) {
-        logger.info("Select the record #" + recordNumber);
+    public void selectResultListCheckboxForRecord(int recordNumber) {
+        logger.info("Select checkbox for record #" + recordNumber);
+        // TODO we used to have this scroll in JDI framework but we may want to drop it
         scrollIntoView();
-        checkByScript(getDriver().findElement(By.xpath("//div[@class='selectable cur-d']/span[text() = '" + recordNumber + "']/../label")));
+        checkByScript(getResultListElementForRecord(recordNumber).findElement(By.cssSelector(".emb-checkbox.emb-checkbox-result")));
     }
 
 
     @Step
     public String getResultListAuthorsTextForRecord(int recordNumber) {
-        List<WebElement> list = getResultInfoElementForRecord(recordNumber).findElements(By.cssSelector(".author.fn.notranslate"));
+        List<WebElement> list = getResultListElementForRecord(recordNumber).findElements(By.cssSelector(".author.fn.notranslate"));
         String authorsText = "";
         for (WebElement e : list) {
             authorsText += e.getText();
@@ -157,7 +158,7 @@ public class ResultList extends BasePage {
         return authorsText;
     }
 
-    private WebElement getResultInfoElementForRecord(int recordNumber) {
-        return recordsFoundList.findElements(By.cssSelector(".resultInfo")).get(recordNumber - 1);
+    private WebElement getResultListElementForRecord(int recordNumber) {
+        return recordsFoundList.findElements(By.xpath("//*[contains(@class,'resultPreviewItem')]")).get(recordNumber - 1);
     }
 }

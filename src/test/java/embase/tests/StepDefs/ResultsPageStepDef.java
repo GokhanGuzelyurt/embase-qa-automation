@@ -36,7 +36,7 @@ public class ResultsPageStepDef {
 
     @When("^user selects record #(\\d*) from the records list in Result Page$")
     public void selectRecordFromResultsList(int recordNumber) {
-        resultsPage.resultList.selectRecordNumber(recordNumber);
+        resultsPage.resultList.selectResultListCheckboxForRecord(recordNumber);
     }
 
     @When("^user opens Results page$")
