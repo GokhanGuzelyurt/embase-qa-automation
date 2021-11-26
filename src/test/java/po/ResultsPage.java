@@ -161,6 +161,5 @@ public class ResultsPage extends BasePage {
         }
     }
 
-
 }
 
