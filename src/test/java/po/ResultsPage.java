@@ -2,6 +2,7 @@ package po;
 
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
+import net.thucydides.core.annotations.Step;
 import org.assertj.core.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -142,6 +143,22 @@ public class ResultsPage extends BasePage {
     public boolean isHighlightedTerm(String term) {
         String highlightedTerm = resultList.recordsFoundList.findElement(By.cssSelector(".hit")).getText();
         return highlightedTerm.equalsIgnoreCase(term);
+    }
+
+    @Step
+    public void clickOnActionLink(String actionLinkName) {
+        switch (actionLinkName.toLowerCase().replace(" ", "")) {
+            case "view":
+                viewActionLink.click();
+            case "export":
+                exportActionLink.click();
+            case "email":
+                emailActionLink.click();
+            case "order":
+                orderActionLink.click();
+            case "addtoclipboard":
+                addToClipboardActionLink.click();
+        }
     }
 
 

@@ -108,10 +108,7 @@ public class ResultsPageStepDef {
 
     @And("^user clicks on (.*) action link of Result Page$")
     public void clickOnActionLink(String actionLinkName) {
-        switch (actionLinkName.toLowerCase()) {
-            case "view":
-                resultsPage.viewActionLink.click();
-        }
+        resultsPage.clickOnActionLink(actionLinkName);
     }
 
     @And("^user opens Sources filter$")
