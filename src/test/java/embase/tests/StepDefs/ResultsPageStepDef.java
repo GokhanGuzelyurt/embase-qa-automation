@@ -31,7 +31,7 @@ public class ResultsPageStepDef {
 
     @Then("^record #(\\d*) of the results list contains (.*) in authors$")
     public void verifyResultListAuthors(int recordNumber, String expectedText) {
-        Assertions.assertThat(resultsPage.resultList.getResultListTextForRecord(recordNumber)).describedAs("Results list element does not contain expected text").contains(expectedText);
+        Assertions.assertThat(resultsPage.resultList.getResultListAuthorsTextForRecord(recordNumber)).describedAs("Results list element does not contain expected text").contains(expectedText);
     }
 
     @When("^user selects record #(\\d*) from the records list in Result Page$")

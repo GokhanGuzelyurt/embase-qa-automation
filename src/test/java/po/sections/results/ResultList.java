@@ -145,16 +145,19 @@ public class ResultList extends BasePage {
         checkByScript(getDriver().findElement(By.xpath("//div[@class='selectable cur-d']/span[text() = '" + recordNumber + "']/../label")));
     }
 
-    @Step
-    public String getResultListFullTextForRecord(int recordNumber) {
-        return recordsFoundList.findElements(By.cssSelector(".resultInfo")).get(recordNumber - 1).getText();
-    }
 
     @Step
     public String getResultListAuthorsTextForRecord(int recordNumber) {
+        List<WebElement> list = getResultInfoElementForRecord(recordNumber).findElements(By.cssSelector(".author.fn.notranslate"));
+        String authorsText = "";
+        for (WebElement e : list) {
+            authorsText += e.getText();
+        }
+        logger.info("Authors text for result #" + recordNumber + " is: " + authorsText);
+        return authorsText;
+    }
 
-
-
-        return recordsFoundList.findElements(By.cssSelector(".resultInfo")).get(recordNumber - 1).getText();
+    private WebElement getResultInfoElementForRecord(int recordNumber) {
+        return recordsFoundList.findElements(By.cssSelector(".resultInfo")).get(recordNumber - 1);
     }
 }
