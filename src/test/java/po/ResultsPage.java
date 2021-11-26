@@ -137,7 +137,7 @@ public class ResultsPage extends BasePage {
         return element.isSelected();
     }
 
-    public boolean isHighlightedTerm(String term) {
+    public boolean isHighlightedTermEqualTo(String term) {
         String highlightedTerm = resultList.recordsFoundList.findElement(By.cssSelector(".hit")).getText();
         return highlightedTerm.equalsIgnoreCase(term);
     }
