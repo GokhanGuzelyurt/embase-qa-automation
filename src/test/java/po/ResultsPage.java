@@ -25,9 +25,6 @@ public class ResultsPage extends BasePage {
     @FindBy(css = ".empty:not(#search_row_empty) p")
     public WebElementFacade recordSecWarnZero;
 
-    @FindBy(id = "recordsFound")
-    public WebElementFacade recordSectionFilled;
-
     @FindBy(id = "ResultList")
     public ResultList resultList;
 
@@ -143,7 +140,7 @@ public class ResultsPage extends BasePage {
     }
 
     public boolean verifyHighlightedTerm(String term) {
-        String highlightedTerm = resultList.recordListChecks.findElement(By.cssSelector(".hit")).getText();
+        String highlightedTerm = resultList.recordsFoundList.findElement(By.cssSelector(".hit")).getText();
         if (highlightedTerm.equalsIgnoreCase(term)) {
             return true;
         } else return false;

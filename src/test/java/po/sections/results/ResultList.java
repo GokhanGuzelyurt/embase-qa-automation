@@ -36,9 +36,6 @@ public class ResultList extends BasePage {
     @FindBy(css = ".resultList .empty")
     public WebElement emptyList;
 
-//    @FindBy(css = "#recordsFound>li")
-//    public List<ResultPreviewItem> resultPreviewItems;
-
     @FindBy(id = "resultsLoadingBar")
     public WebElement resultsLoadingBar;
 
@@ -68,7 +65,7 @@ public class ResultList extends BasePage {
     public WebElement recordListLabels;
 
     @FindBy(id = "recordsFound")
-    public WebElement recordListChecks;
+    public WebElement recordsFoundList;
 
 //    @FindBy(css = ".pageIndex")
 //    public PageIndex pageIndex;
@@ -130,14 +127,14 @@ public class ResultList extends BasePage {
 
     public void clickRecordByTitle(int recordNumber) {
         logger.info("Select the record #" + recordNumber);
-        List<WebElement> s = recordListChecks.findElements(By.cssSelector(".resultPreviewInner"));
-        s.get(recordNumber - 1).findElement(By.xpath("//a[contains(@class,'hitsHighlighted')]")).click();
+        List<WebElement> list = recordsFoundList.findElements(By.cssSelector(".resultPreviewInner"));
+        list.get(recordNumber - 1).findElement(By.xpath("//a[contains(@class,'hitsHighlighted')]")).click();
     }
 
     public String checkRecordContent(int recordNumber, String sourceName) {
-        logger.info("Check the record content#" + recordNumber);
-        List<WebElement> s = recordListChecks.findElements(By.cssSelector(".resultPreviewInner"));
-        sourceName = s.get(recordNumber - 1).findElement(By.xpath("//span[contains(@class,'source') and contains(text(),'" + sourceName + "')]")).getText();
+        logger.info("Check the record content #" + recordNumber);
+        List<WebElement> list = recordsFoundList.findElements(By.cssSelector(".resultPreviewInner"));
+        sourceName = list.get(recordNumber - 1).findElement(By.xpath("//span[contains(@class,'source') and contains(text(),'" + sourceName + "')]")).getText();
         return sourceName;
     }
 
@@ -149,7 +146,15 @@ public class ResultList extends BasePage {
     }
 
     @Step
-    public String getResultListTextForRecord(int recordNumber) {
-        return recordListChecks.findElements(By.cssSelector(".resultInfo")).get(recordNumber - 1).getText();
+    public String getResultListFullTextForRecord(int recordNumber) {
+        return recordsFoundList.findElements(By.cssSelector(".resultInfo")).get(recordNumber - 1).getText();
+    }
+
+    @Step
+    public String getResultListAuthorsTextForRecord(int recordNumber) {
+
+
+
+        return recordsFoundList.findElements(By.cssSelector(".resultInfo")).get(recordNumber - 1).getText();
     }
 }
