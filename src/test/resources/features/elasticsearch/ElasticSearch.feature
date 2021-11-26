@@ -30,8 +30,35 @@ Feature: Elastic search queries
     Then the result set is not empty
     And the term cytochrome c is highlighted in the title on Results page
 
-
-
-
-
+  @C488651
+  Scenario Outline: Date fields validation
+    Given user opens Results page
+    And user enters query <queries> and performs a search
+    Then the result set is not empty
+    Examples:
+      | queries                    |
+      | [23-11-2020]/sd            |
+      | [2020-11-23]/sd            |
+      | [2021-11-23]/aip           |
+      | [23-11-2021]/aip           |
+      | test AND '2020-10-30':ld   |
+      | cancer AND '2020-10-01':ld |
+      | public AND '2020-11-04':ld |
+      | metformin AND '2020-10':ld |
+      | cell AND '2020':ld         |
+      | test AND '30-10-2020':ld   |
+      | cancer AND '01-10-2020':ld |
+      | public AND '04-11-2020':ld |
+      | metformin AND '10-2020':ld |
+      | cell AND '2020':ld         |
+      | '2020-01-31':pd            |
+      | '2020-10':pd               |
+      | '31-10-2020':pd            |
+      | '10-2020':pd               |
+      | '2020':pd                  |
+      | '2019-09-19':dc            |
+      | '2019-09':dc               |
+      | '19-09-2019':dc            |
+      | '09-2019':dc               |
+      | '2019':dc                  |
 
