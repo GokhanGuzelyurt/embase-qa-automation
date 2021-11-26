@@ -139,11 +139,9 @@ public class ResultsPage extends BasePage {
         return flag;
     }
 
-    public boolean verifyHighlightedTerm(String term) {
+    public boolean isHighlightedTerm(String term) {
         String highlightedTerm = resultList.recordsFoundList.findElement(By.cssSelector(".hit")).getText();
-        if (highlightedTerm.equalsIgnoreCase(term)) {
-            return true;
-        } else return false;
+        return highlightedTerm.equalsIgnoreCase(term);
     }
 
 

@@ -147,7 +147,7 @@ public class ResultsPageStepDef {
 
     @And("^the term (.*) is highlighted in the title on Results page$")
     public void verigyHighlightedTermResultsPage(String highlightedTerm) {
-        Assertions.assertThat(resultsPage.verifyHighlightedTerm(highlightedTerm)).describedAs("Highlighted term is not equal to expected").isTrue();
+        Assertions.assertThat(resultsPage.isHighlightedTerm(highlightedTerm)).describedAs("Highlighted term is not equal to expected").isTrue();
 
     }
 
