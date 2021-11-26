@@ -49,4 +49,4 @@ Feature: Record Details tests
     And record #1 of the results list contains et al. in authors
     And user opens record #1 by clicking on title
     Then user is on Record Details page
-    And Authors values on Record details page include "et al."
+    And authors text in Record Details page contain et al.

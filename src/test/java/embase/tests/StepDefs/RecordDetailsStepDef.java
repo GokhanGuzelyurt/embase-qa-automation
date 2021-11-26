@@ -68,4 +68,9 @@ public class RecordDetailsStepDef {
     public void verifyTitleIsNotEmpty(){
     Assertions.assertThat(recordDetailsPage.title.getText().isEmpty()).describedAs("Title field is empty").isFalse();
     }
+
+    @And("^authors text in Record Details page contain (.*)$")
+    public void verifyAuthorsContainText(String expectedText){
+        Assertions.assertThat(recordDetailsPage.authors.getText()).describedAs("Record Details authors do not contain expected text").contains(expectedText);
+    }
 }
