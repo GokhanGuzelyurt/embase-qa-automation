@@ -26,7 +26,7 @@ public class RecordDetailsStepDef {
 
     @And("^the author ORCID 0000-0001-6084-166X is highlighted$")
     public void orcIDHighlighted() {
-        Assertions.assertThat(recordDetailsPage.verifyORCIDHighlighting()).describedAs("ORCID is not highlighted").isTrue();
+        Assertions.assertThat(recordDetailsPage.isORCIDHighlightingEnabled()).describedAs("ORCID is not highlighted").isTrue();
     }
 
     @When("^user clicks on the highlighted ORCID 0000-0001-6084-166X$")
@@ -42,7 +42,7 @@ public class RecordDetailsStepDef {
 
     @And("^pagination links are disabled on Record details page$")
     public void paginationLinksDisabled() {
-        Assertions.assertThat(recordDetailsPage.verifyPaginationLinksNavigationState()).describedAs("Pagination links are not disabled").isFalse();
+        Assertions.assertThat(recordDetailsPage.isPaginationLinksNavigationStateEnabled()).describedAs("Pagination links are not disabled").isFalse();
     }
 
     @And("^pagination label contains value (.*)$")
