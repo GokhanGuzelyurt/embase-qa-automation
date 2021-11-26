@@ -104,6 +104,7 @@ public class ResultsPage extends BasePage {
 //        }
     }
 
+    @Step
     public void verifySearchQuery(String expectedQuery) {
         pleaseWaitPanel.waitUntilNotVisible();
         searchField.waitUntilVisible();
@@ -117,7 +118,7 @@ public class ResultsPage extends BasePage {
         waitABit(3);
     }
 
-    public boolean emailAlertLabelNames(String labelName) {
+    public boolean isLabelPresentInEmailAlertForm(String labelName) {
         boolean flag1 = false;
         List<WebElement> labels = emailAlertForm.findElements(By.xpath("//*[@class='field-wrapper']//label"));
         for (WebElement label : labels) {
@@ -131,13 +132,9 @@ public class ResultsPage extends BasePage {
         return flag1;
     }
 
-    public boolean emailAlertPreprintSelected() {
-        boolean flag = false;
+    public boolean isEmailAlertPreprintSelected() {
         WebElement element = emailAlertForm.findElement(By.xpath("//*[@class='field']//input[@name='includePreprints']"));
-        if (element.isSelected()) {
-            flag = true;
-        }
-        return flag;
+        return element.isSelected();
     }
 
     public boolean isHighlightedTerm(String term) {

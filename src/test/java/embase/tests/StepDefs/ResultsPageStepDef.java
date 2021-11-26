@@ -88,12 +88,12 @@ public class ResultsPageStepDef {
 
     @And("^(.*) labelname is displayed on Email Alerts$")
     public void prePrintsLabelEmailAlerts(String labelName) {
-        Assertions.assertThat(resultsPage.emailAlertLabelNames(labelName)).describedAs("Flag shouldbe true").isTrue();
+        Assertions.assertThat(resultsPage.isLabelPresentInEmailAlertForm(labelName)).describedAs("Flag shouldbe true").isTrue();
     }
 
     @And("^Preprints checkbox is selected by default$")
     public void prePrintsCheckBoxState() {
-        Assertions.assertThat(resultsPage.emailAlertPreprintSelected()).describedAs("Preprints checkbox is not selected").isTrue();
+        Assertions.assertThat(resultsPage.isEmailAlertPreprintSelected()).describedAs("Preprints checkbox is not selected").isTrue();
     }
 
     @Then("^search query is (.*)$")
