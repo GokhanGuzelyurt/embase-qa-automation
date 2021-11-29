@@ -50,3 +50,13 @@ Feature: Record Details tests
     And user opens record #1 by clicking on title
     Then user is on Record Details page
     And authors text in Record Details page contain et al.
+
+  Scenario: Validating when original title and translated title are available
+    Given user enters query L2011118590 and performs a search
+    Then the result set is not empty
+    And user opens record #1 by clicking on title
+    Then user is on Record Details page
+    Then show original title link is displayed
+    And user clicks on Show original link to verify:
+      | originalTitle                                                                                                                      | translatedTitle                                                                                                     |
+      | Exposição de pacientes da emergência pediátrica a exames de imagem, na atualidade e em tempos de COVID-19: Uma revisão integrativa | Exposure of pediatric emergency patients to imaging exams, nowadays and in times of covid-19: An integrative review |
