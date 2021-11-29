@@ -3,6 +3,7 @@ package embase.tests.StepDefs;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import groovyjarjarantlr4.v4.analysis.LeftRecursiveRuleAnalyzer;
 import io.cucumber.datatable.DataTable;
 import org.assertj.core.api.Assertions;
 import po.RecordDetailsPage;
@@ -76,17 +77,51 @@ public class RecordDetailsStepDef {
     }
 
     @Then("^show original title link is displayed$")
-    public void verifyShowOriginalTitleLink(){
+    public void verifyShowOriginalTitleLink() {
         Assertions.assertThat(recordDetailsPage.showOriginalTitleLink.isDisplayed()).describedAs("Show original title link is not displayed").isTrue();
     }
 
     @And("^user clicks on Show original link to verify:$")
-    public void verifyOriginalAndTranslatedTitle(DataTable table){
-            List<Map<String, String>> rows = table.asMaps(String.class, String.class);
-            Map<String, String> data = rows.get(0);
-    recordDetailsPage.showOriginalTitleLink.click();
-    Assertions.assertThat(recordDetailsPage.originalTitle.getText()).describedAs("Original title is not equal to expected").isEqualToIgnoringCase(data.get("originalTitle"));
-    Assertions.assertThat(recordDetailsPage.translatedTitle.getText()).describedAs("Original title is not equal to expected").isEqualToIgnoringCase(data.get("translatedTitle"));
+    public void verifyOriginalAndTranslatedTitle(DataTable table) {
+        List<Map<String, String>> rows = table.asMaps(String.class, String.class);
+        Map<String, String> data = rows.get(0);
+        recordDetailsPage.showOriginalTitleLink.click();
 
+        Assertions.assertThat(recordDetailsPage.original.getText()).describedAs("Original title is not equal to expected").isEqualToIgnoringCase(data.get("originalTitle"));
+        Assertions.assertThat(recordDetailsPage.translated.getText()).describedAs("Original title is not equal to expected").isEqualToIgnoringCase(data.get("translatedTitle"));
+    }
+
+    @And("^the title on the Record details page is displayed as (.*)$")
+    public void verifyTitleTextAvailable(String title){
+        Assertions.assertThat(recordDetailsPage.original.getText()).describedAs("No title available is not displayed as a text").isEqualToIgnoringCase(title);
+    }
+
+    @And("^the abstract on the Record details page is displayed as (.*)$")
+    public void verifyAbstractTextAvailable(String abstractText){
+      Assertions.assertThat(recordDetailsPage.abstractText.getText()).describedAs("Abstract is not equal to expected").isEqualToIgnoringCase(abstractText);
+    }
+
+    @Then("^show original abstract link is displayed$")
+    public void verifyShowOriginalAbstractLink() {
+        Assertions.assertThat(recordDetailsPage.showOriginalAbstractLink.isDisplayed()).describedAs("Show original abstract link is not displayed").isTrue();
+    }
+
+    @And("^user clicks on Show original abstract link$")
+    public void clickShowOriginalAbstractLink(){
+        recordDetailsPage.showOriginalAbstractLink.click();
+    }
+
+    @And("^original abstract is:$")
+    public void verifyOriginalAbstract(DataTable table){
+        List<Map<String, String>> rows = table.asMaps(String.class, String.class);
+        Map<String, String> data = rows.get(0);
+        Assertions.assertThat(recordDetailsPage.original.getText()).describedAs("Original abstract is not equal to expected").isEqualToIgnoringCase(data.get("originalAbstract"));
+    }
+
+    @And("^translated abstract is:$")
+    public void verifyTranslatedAbstract(DataTable table){
+        List<Map<String, String>> rows = table.asMaps(String.class, String.class);
+        Map<String, String> data = rows.get(0);
+        Assertions.assertThat(recordDetailsPage.translated.getText()).describedAs("Translated abstract is not equal to expected").isEqualToIgnoringCase(data.get("translatedAbstract"));
     }
 }

@@ -68,10 +68,16 @@ public class RecordDetailsPage extends BasePage {
     public WebElement showOriginalTitleLink;
 
     @FindBy(css = "[data-testid='original']")
-    public WebElement originalTitle;
+    public WebElement original;
 
     @FindBy(css = "[data-testid='translated']")
-    public WebElement translatedTitle;
+    public WebElement translated;
+
+    @FindBy(css = "[data-testid='collapsible-block-content']")
+    public WebElement abstractText;
+
+    @FindBy(css = "[data-testid='show-hide-original']")
+    public WebElement showOriginalAbstractLink;
 
     public boolean isORCIDHighlightingEnabled() {
         boolean flag = false;
