@@ -87,13 +87,13 @@ public class RecordDetailsStepDef {
         Map<String, String> data = rows.get(0);
         recordDetailsPage.showOriginalTitleLink.click();
 
-        Assertions.assertThat(recordDetailsPage.original.getText()).describedAs("Original title is not equal to expected").isEqualToIgnoringCase(data.get("originalTitle"));
-        Assertions.assertThat(recordDetailsPage.translated.getText()).describedAs("Original title is not equal to expected").isEqualToIgnoringCase(data.get("translatedTitle"));
+        Assertions.assertThat(recordDetailsPage.originalTitle.getText()).describedAs("Original title is not equal to expected").isEqualToIgnoringCase(data.get("originalTitle"));
+        Assertions.assertThat(recordDetailsPage.translatedTitle.getText()).describedAs("Original title is not equal to expected").isEqualToIgnoringCase(data.get("translatedTitle"));
     }
 
     @And("^the title on the Record details page is displayed as (.*)$")
     public void verifyTitleTextAvailable(String title){
-        Assertions.assertThat(recordDetailsPage.original.getText()).describedAs("No title available is not displayed as a text").isEqualToIgnoringCase(title);
+        Assertions.assertThat(recordDetailsPage.originalTitle.getText()).describedAs("No title available is not displayed as a text").isEqualToIgnoringCase(title);
     }
 
     @And("^the abstract on the Record details page is displayed as (.*)$")
@@ -115,13 +115,13 @@ public class RecordDetailsStepDef {
     public void verifyOriginalAbstract(DataTable table){
         List<Map<String, String>> rows = table.asMaps(String.class, String.class);
         Map<String, String> data = rows.get(0);
-        Assertions.assertThat(recordDetailsPage.original.getText()).describedAs("Original abstract is not equal to expected").isEqualToIgnoringCase(data.get("originalAbstract"));
+        Assertions.assertThat(recordDetailsPage.originalAbstract.getText()).describedAs("Original abstract is not equal to expected").isEqualToIgnoringCase(data.get("originalAbstract"));
     }
 
     @And("^translated abstract is:$")
     public void verifyTranslatedAbstract(DataTable table){
         List<Map<String, String>> rows = table.asMaps(String.class, String.class);
         Map<String, String> data = rows.get(0);
-        Assertions.assertThat(recordDetailsPage.translated.getText()).describedAs("Translated abstract is not equal to expected").isEqualToIgnoringCase(data.get("translatedAbstract"));
+        Assertions.assertThat(recordDetailsPage.translatedAbstract.getText()).describedAs("Translated abstract is not equal to expected").isEqualToIgnoringCase(data.get("translatedAbstract"));
     }
 }
