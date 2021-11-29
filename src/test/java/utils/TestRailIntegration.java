@@ -1,5 +1,6 @@
 package utils;
 
+import cucumber.api.Scenario;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.text.StringEscapeUtils;
 import org.slf4j.Logger;
@@ -119,5 +120,24 @@ public class TestRailIntegration {
             return Integer.parseInt(System.getenv("testRun"));
         }
         return Integer.parseInt(properties.getProperty("testRunId"));
+    }
+
+    public static String getScenarioDetails(Scenario scenario) {
+        if (isScenarioOutline(scenario)) {
+            return "Scenario Outline: " + scenario.getName() + "\nExample line:\n" + readExampleFromScenario(scenario);
+        } else {
+            return "Single Scenario: " + scenario.getName();
+        }
+    }
+
+    private static boolean isScenarioOutline(Scenario scenario) {
+        return scenario.getLines().size() > 1;
+    }
+
+    private static String readExampleFromScenario(Scenario scenario) {
+        int lineNumber = scenario.getLines().get(0);
+        String fileName = scenario.getUri().replace("file:", "");
+        logger.info("Getting example line " + lineNumber + " in file " + fileName);
+        return FileHelper.readLineFromFile(lineNumber, fileName);
     }
 }

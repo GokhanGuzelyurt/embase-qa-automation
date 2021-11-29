@@ -2,6 +2,7 @@ package po;
 
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
+import net.thucydides.core.annotations.Step;
 import org.assertj.core.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -24,9 +25,6 @@ public class ResultsPage extends BasePage {
 
     @FindBy(css = ".empty:not(#search_row_empty) p")
     public WebElementFacade recordSecWarnZero;
-
-    @FindBy(id = "recordsFound")
-    public WebElementFacade recordSectionFilled;
 
     @FindBy(id = "ResultList")
     public ResultList resultList;
@@ -67,6 +65,22 @@ public class ResultsPage extends BasePage {
     @FindBy(css = ".filterActions .pushButton")
     public WebElementFacade applyBtn;
 
+    @FindBy(id = "viewSubmitAction")
+    public WebElementFacade viewActionLink;
+
+    @FindBy(css = ".exportSubmit")
+    public WebElementFacade exportActionLink;
+
+    @FindBy(css = ".emailSubmit")
+    public WebElementFacade emailActionLink;
+
+    @FindBy(id = "orderSubmitAction")
+    public WebElementFacade orderActionLink;
+
+    @FindBy(id = "addToClipboardAction")
+    public WebElementFacade addToClipboardActionLink;
+
+
     public void waitForRecordSectionIsLoaded() {
         logger.info("Wait for please wait to vanish");
         logger.info("Wait if 0 results page is not displayed");
@@ -90,6 +104,7 @@ public class ResultsPage extends BasePage {
 //        }
     }
 
+    @Step
     public void verifySearchQuery(String expectedQuery) {
         pleaseWaitPanel.waitUntilNotVisible();
         searchField.waitUntilVisible();
@@ -103,7 +118,7 @@ public class ResultsPage extends BasePage {
         waitABit(3);
     }
 
-    public boolean emailAlertLabelNames(String labelName) {
+    public boolean isLabelPresentInEmailAlertForm(String labelName) {
         boolean flag1 = false;
         List<WebElement> labels = emailAlertForm.findElements(By.xpath("//*[@class='field-wrapper']//label"));
         for (WebElement label : labels) {
@@ -117,23 +132,31 @@ public class ResultsPage extends BasePage {
         return flag1;
     }
 
-    public boolean emailAlertPreprintSelected() {
-        boolean flag = false;
+    public boolean isEmailAlertPreprintSelected() {
         WebElement element = emailAlertForm.findElement(By.xpath("//*[@class='field']//input[@name='includePreprints']"));
-        if (element.isSelected()) {
-            flag = true;
-        }
-        return flag;
+        return element.isSelected();
     }
 
-    public boolean verifyHighlightedTerm(String term){
-        String highlightedTerm= resultList.recordListChecks.findElement(By.cssSelector(".hit")).getText();
-        if(highlightedTerm.equalsIgnoreCase(term)){
-            return true;
-        }
-        else return false;
+    public boolean isHighlightedTermEqualTo(String term) {
+        String highlightedTerm = resultList.recordsFoundList.findElement(By.cssSelector(".hit")).getText();
+        return highlightedTerm.equalsIgnoreCase(term);
     }
 
+    @Step
+    public void clickOnActionLink(String actionLinkName) {
+        switch (actionLinkName.toLowerCase().replace(" ", "")) {
+            case "view":
+                viewActionLink.click();
+            case "export":
+                exportActionLink.click();
+            case "email":
+                emailActionLink.click();
+            case "order":
+                orderActionLink.click();
+            case "addtoclipboard":
+                addToClipboardActionLink.click();
+        }
+    }
 
 }
 

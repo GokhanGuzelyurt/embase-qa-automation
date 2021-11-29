@@ -13,8 +13,6 @@ import po.common.SearchPage;
 
 import java.lang.invoke.MethodHandles;
 
-import static org.apache.commons.lang3.BooleanUtils.and;
-
 @DefaultUrl("page:recordDetails.page")
 public class RecordDetailsPage extends BasePage {
 
@@ -42,16 +40,13 @@ public class RecordDetailsPage extends BasePage {
     @FindBy(xpath = "//*[@data-testid='pagination']")
     public WebElement paginationLinks;
 
-    //    @FindBy(xpath="//ul[@class='Pagination-module_items__1jifO']/li[1]/button")
     @FindBy(xpath = "//*[@data-testid='pagination']//span[text() = 'Previous']/..")
     public WebElement previous;
 
-    // @FindBy(xpath="//ul[@class='Pagination-module_items__1jifO']/li[3]/button")
     @FindBy(xpath = "//*[@data-testid='pagination']//span[text() = 'Next']/..")
     public WebElement next;
 
-//    @FindBy(xpath = "//span[@class='Pagination-module_label__34GAB']")
-    @FindBy(xpath="//*[@data-testid='pagination']//div[text() = ' of ']")
+    @FindBy(xpath = "//*[@data-testid='pagination']//div[text() = ' of ']")
     public WebElement paginationLabel;
 
     @FindBy(xpath = "//*[@data-testid='source']/span[1]")
@@ -65,6 +60,9 @@ public class RecordDetailsPage extends BasePage {
 
     @FindBy(xpath = "//*[@data-testid='title']")
     public WebElement title;
+
+    @FindBy(css = "[data-testid='authors']")
+    public WebElement authors;
 
     public boolean isORCIDHighlightingEnabled() {
         boolean flag = false;

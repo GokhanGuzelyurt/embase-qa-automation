@@ -130,7 +130,7 @@ public class CommonSteps {
                     ArrayList<cucumber.api.Result> results = (ArrayList<cucumber.api.Result>) field.get(scenario);
                     for (cucumber.api.Result res : results) {
                         if (res.getError() != null)
-                            errors += res.getError().getMessage();
+                            errors += res.getError();
                     }
                 } catch (Exception ignored) {
                 }
@@ -146,16 +146,18 @@ public class CommonSteps {
                 if (scenario.getSourceTagNames().contains("@known")) {
                     // result is Known Issue (6)
                     result.setStatusId(6);
-                    result.setComment(comment + ":\n" + scenario.getName() + " - Known Issue:\n" + errors);
+                    result.setComment(comment + ":\n" + TestRailIntegration.getScenarioDetails(scenario) + "\n - Known Issue:\n" + errors);
                 } else {
                     // statusId 4 = retest / 5= failed
                     result.setStatusId(5);
-                    result.setComment(comment + ":\n" + scenario.getName() + " - Failed:\n" + errors);
+                    result.setComment(comment + ":\n" + TestRailIntegration.getScenarioDetails(scenario) + " - Failed:\n" + errors);
                 }
             } else {
                 result.setStatusId(1);
-                result.setComment(comment + ":\n" + scenario.getName() + " - Passed");
+                result.setComment(comment + ":\n" + TestRailIntegration.getScenarioDetails(scenario) + "\n" + " - Passed");
             }
+            logger.info("Scenario result comment:\n" + result.getComment());
+
             // add elapsed time to result
             result.setElapsed(StringHelper.millisToTimespan(System.currentTimeMillis() - START_TIMESTAMP));
 
@@ -170,7 +172,7 @@ public class CommonSteps {
     @After(order = 3)
     public void takeScreenshot(Scenario scenario) {
         if (!IS_BE_SCENARIO) {
-            logger.info("InitTests - takesScreenshot - After");
+            logger.info("takeScreenshot - After test");
             if (scenario.isFailed()) try {
                 logger.info("Failed scenario: Trying to take screenshot");
                 byte[] screenshotBytes = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
@@ -202,7 +204,8 @@ public class CommonSteps {
     @Given("user opens Embase application")
     public void openEmbase() {
         basePage.open();
-        basePage.closePendoBanner();
+        // TODO - waiting for resolution of EMBASE-13758
+        // basePage.closePendoBanner();
     }
 
     private void getBuildNumber() {

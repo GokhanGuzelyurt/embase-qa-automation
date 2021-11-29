@@ -55,17 +55,22 @@ public class RecordDetailsStepDef {
         List<Map<String, String>> rows = table.asMaps(String.class, String.class);
         Map<String, String> data = rows.get(0);
 
-     Assertions.assertThat(recordDetailsPage.getSourceMagazineText()).describedAs("Source Magazine text is not equal to expected").isEqualToIgnoringCase(data.get("sourceMagazine"));
-     Assertions.assertThat(recordDetailsPage.getSourceVolumeText()).describedAs("Source Volume text is not equal to expected text").isEqualToIgnoringCase(data.get("sourceVolume"));
+        Assertions.assertThat(recordDetailsPage.getSourceMagazineText()).describedAs("Source Magazine text is not equal to expected").isEqualToIgnoringCase(data.get("sourceMagazine"));
+        Assertions.assertThat(recordDetailsPage.getSourceVolumeText()).describedAs("Source Volume text is not equal to expected text").isEqualToIgnoringCase(data.get("sourceVolume"));
     }
 
     @And("^view author address button is present on Record details page$")
-    public void viewAuthorAddressBtn(){
-    Assertions.assertThat(recordDetailsPage.viewAuthorAddresses.isDisplayed()).describedAs("Viewauthor address is not displayed").isTrue();
+    public void viewAuthorAddressBtn() {
+        Assertions.assertThat(recordDetailsPage.viewAuthorAddresses.isDisplayed()).describedAs("Viewauthor address is not displayed").isTrue();
     }
 
     @And("^title field is not empty on record details page$")
-    public void verifyTitleIsNotEmpty(){
-    Assertions.assertThat(recordDetailsPage.title.getText().isEmpty()).describedAs("Title field is empty").isFalse();
+    public void verifyTitleIsNotEmpty() {
+        Assertions.assertThat(recordDetailsPage.title.getText().isEmpty()).describedAs("Title field is empty").isFalse();
+    }
+
+    @And("^authors text in Record Details page contain (.*)$")
+    public void verifyAuthorsContainText(String expectedText) {
+        Assertions.assertThat(recordDetailsPage.authors.getText()).describedAs("Record Details authors do not contain expected text").contains(expectedText);
     }
 }

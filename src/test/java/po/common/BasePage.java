@@ -42,6 +42,11 @@ public class BasePage extends PageObject {
         }
     }
 
+    // TODO this method does not seem to have visible impact - taken from JDI project, we may not keep it
+    public void scrollIntoView() {
+        ((JavascriptExecutor) getDriver()).executeScript("document.body.scrollIntoView()");
+    }
+
     public boolean waitForJStoLoad() {
         return waitForJStoLoad(30);
     }

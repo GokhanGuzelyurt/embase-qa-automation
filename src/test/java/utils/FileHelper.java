@@ -1,8 +1,6 @@
 package utils;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -11,9 +9,7 @@ import java.util.stream.Stream;
 
 public class FileHelper {
     public static String readFile(String fileName) {
-
         StringBuilder contentBuilder = new StringBuilder();
-
         try (Stream<String> stream = Files.lines(Paths.get("src/test/resources/" + fileName), StandardCharsets.UTF_8)) {
             stream.forEach(s -> contentBuilder.append(s));
         } catch (IOException e) {
@@ -22,8 +18,29 @@ public class FileHelper {
         return contentBuilder.toString();
     }
 
-    public static List<String> readLines(String fileName) throws IOException {
+    public static String readLineFromFile(int lineNumber, String fileName) {
+        try {
+            FileInputStream fstream = new FileInputStream(fileName);
+            BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+            String strLine;
+            int counter = 0;
+            while ((strLine = br.readLine()) != null) {
+                counter++;
+                if (counter == lineNumber) {
+                    return strLine;
+                }
+            }
+            fstream.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
+
+    public static List<String> readLines(String fileName) throws IOException {
         try {
             return Files.readAllLines(Paths.get(fileName));
         } catch (IOException e) {

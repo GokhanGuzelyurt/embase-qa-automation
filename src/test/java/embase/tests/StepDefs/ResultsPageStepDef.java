@@ -24,8 +24,19 @@ public class ResultsPageStepDef {
 
     @Then("^the result set is not empty$")
     public void iVerifyResultsNotEmpty() {
-        Assertions.assertThat(resultsPage.resultList.getResultsCount()).describedAs("Result is empty").isGreaterThan(0);
+        resultsPage.waitForJStoLoad();
         logger.info("Count is " + resultsPage.resultList.getResultsCount());
+        Assertions.assertThat(resultsPage.resultList.getResultsCount()).describedAs("Result is empty").isGreaterThan(0);
+    }
+
+    @Then("^record #(\\d*) of the results list contains (.*) in authors$")
+    public void verifyResultListAuthors(int recordNumber, String expectedText) {
+        Assertions.assertThat(resultsPage.resultList.getResultListAuthorsTextForRecord(recordNumber)).describedAs("Results list element does not contain expected text").contains(expectedText);
+    }
+
+    @When("^user selects record #(\\d*) from the records list in Result Page$")
+    public void selectRecordFromResultsList(int recordNumber) {
+        resultsPage.resultList.selectResultListCheckboxForRecord(recordNumber);
     }
 
     @When("^user opens Results page$")
@@ -43,7 +54,7 @@ public class ResultsPageStepDef {
         resultsPage.waitForRecordSectionIsLoaded();
     }
 
-    @And("^user opens record #(.*) by clicking on title$")
+    @And("^user opens record #(\\d*) by clicking on title$")
     public void openRecordByTitle(int recordId) {
         resultsPage.resultList.clickRecordByTitle(recordId);
     }
@@ -52,7 +63,6 @@ public class ResultsPageStepDef {
     public void checkRecordContent(int recordID, String source) {
         resultsPage.resultList.checkRecordContent(recordID, source);
         Assertions.assertThat(resultsPage.resultList.checkRecordContent(recordID, source)).describedAs("Preprints source is not present").isEqualToIgnoringCase(source);
-
     }
 
     @And("^user opens Source tab on Results page$")
@@ -78,12 +88,12 @@ public class ResultsPageStepDef {
 
     @And("^(.*) labelname is displayed on Email Alerts$")
     public void prePrintsLabelEmailAlerts(String labelName) {
-        Assertions.assertThat(resultsPage.emailAlertLabelNames(labelName)).describedAs("Flag shouldbe true").isTrue();
+        Assertions.assertThat(resultsPage.isLabelPresentInEmailAlertForm(labelName)).describedAs("Flag shouldbe true").isTrue();
     }
 
     @And("^Preprints checkbox is selected by default$")
     public void prePrintsCheckBoxState() {
-        Assertions.assertThat(resultsPage.emailAlertPreprintSelected()).describedAs("Preprints checkbox is not selected").isTrue();
+        Assertions.assertThat(resultsPage.isEmailAlertPreprintSelected()).describedAs("Preprints checkbox is not selected").isTrue();
     }
 
     @Then("^search query is (.*)$")
@@ -94,6 +104,11 @@ public class ResultsPageStepDef {
     @And("^user is on Results Page$")
     public void resultsPageIsOpened() {
         resultsPage.searchField.waitUntilEnabled();
+    }
+
+    @And("^user clicks on (.*) action link of Result Page$")
+    public void clickOnActionLink(String actionLinkName) {
+        resultsPage.clickOnActionLink(actionLinkName);
     }
 
     @And("^user opens Sources filter$")
@@ -128,8 +143,8 @@ public class ResultsPageStepDef {
     }
 
     @And("^the term (.*) is highlighted in the title on Results page$")
-    public void verigyHighlightedTermResultsPage(String highlightedTerm){
-        Assertions.assertThat(resultsPage.verifyHighlightedTerm(highlightedTerm)).describedAs("Highlighted term is not equal to expected").isTrue();
+    public void verigyHighlightedTermResultsPage(String highlightedTerm) {
+        Assertions.assertThat(resultsPage.isHighlightedTermEqualTo(highlightedTerm)).describedAs("Highlighted term is not equal to expected").isTrue();
 
     }
 
