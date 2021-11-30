@@ -14,6 +14,7 @@ import po.sections.results.EmailAlertDialog;
 import utils.StringHelper;
 
 import java.lang.invoke.MethodHandles;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +38,12 @@ public class ResultsPageStepDef {
     @When("^user selects record #(\\d*) from the records list in Result Page$")
     public void selectRecordFromResultsList(int recordNumber) {
         resultsPage.resultList.selectResultListCheckboxForRecord(recordNumber);
+    }
+
+    @And("^user selects records (.*) from the records list on Results page and click on (.*)$")
+    public void selectRecords(String recordIds, String actionName) {
+        resultsPage.resultList.selectResultListCheckboxForMultipleRecords(Arrays.stream(recordIds.split(",")).mapToInt(Integer::parseInt).toArray());
+        resultsPage.clickOnActionLink(actionName);
     }
 
     @When("^user opens Results page$")
@@ -104,6 +111,7 @@ public class ResultsPageStepDef {
     @And("^user is on Results Page$")
     public void resultsPageIsOpened() {
         resultsPage.searchField.waitUntilEnabled();
+        resultsPage.waitForJStoLoad();
     }
 
     @And("^user clicks on (.*) action link of Result Page$")
@@ -147,6 +155,5 @@ public class ResultsPageStepDef {
         Assertions.assertThat(resultsPage.isHighlightedTermEqualTo(highlightedTerm)).describedAs("Highlighted term is not equal to expected").isTrue();
 
     }
-
 
 }

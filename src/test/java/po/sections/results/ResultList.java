@@ -121,6 +121,10 @@ public class ResultList extends BasePage {
     @FindBy(css = ".emailSubmit:first-of-type")
     public WebElement emailResultsButton;
 
+    @FindBy(id="initialSmall")
+    public WebElement rec100;
+
+
     public int getResultsCount() {
         return Integer.valueOf(searchHitCounts.getText().split(" ")[0].replace(",", ""));
     }
@@ -146,6 +150,13 @@ public class ResultList extends BasePage {
         checkByScript(getResultListElementForRecord(recordNumber).findElement(By.cssSelector(".emb-checkbox.emb-checkbox-result")));
     }
 
+
+    @Step
+    public void selectResultListCheckboxForMultipleRecords(int[] recordNumbers) {
+        logger.info("Selecting multiple records");
+        for(int recordNumber:recordNumbers)
+        checkByScript(getResultListElementForRecord(recordNumber).findElement(By.cssSelector(".emb-checkbox.emb-checkbox-result")));
+    }
 
     @Step
     public String getResultListAuthorsTextForRecord(int recordNumber) {

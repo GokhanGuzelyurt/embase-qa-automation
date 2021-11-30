@@ -7,12 +7,14 @@ import groovyjarjarantlr4.v4.analysis.LeftRecursiveRuleAnalyzer;
 import io.cucumber.datatable.DataTable;
 import org.assertj.core.api.Assertions;
 import po.RecordDetailsPage;
+import po.ResultsPage;
 
 import java.util.List;
 import java.util.Map;
 
 public class RecordDetailsStepDef {
     RecordDetailsPage recordDetailsPage;
+    ResultsPage resultsPage;
 
     @When("^user is on Record Details page$")
     public void recordDetailsPageDisplayed() {
@@ -92,13 +94,13 @@ public class RecordDetailsStepDef {
     }
 
     @And("^the title on the Record details page is displayed as (.*)$")
-    public void verifyTitleTextAvailable(String title){
+    public void verifyTitleTextAvailable(String title) {
         Assertions.assertThat(recordDetailsPage.originalTitle.getText()).describedAs("No title available is not displayed as a text").isEqualToIgnoringCase(title);
     }
 
     @And("^the abstract on the Record details page is displayed as (.*)$")
-    public void verifyAbstractTextAvailable(String abstractText){
-      Assertions.assertThat(recordDetailsPage.abstractText.getText()).describedAs("Abstract is not equal to expected").isEqualToIgnoringCase(abstractText);
+    public void verifyAbstractTextAvailable(String abstractText) {
+        Assertions.assertThat(recordDetailsPage.abstractText.getText()).describedAs("Abstract is not equal to expected").isEqualToIgnoringCase(abstractText);
     }
 
     @Then("^show original abstract link is displayed$")
@@ -107,21 +109,50 @@ public class RecordDetailsStepDef {
     }
 
     @And("^user clicks on Show original abstract link$")
-    public void clickShowOriginalAbstractLink(){
+    public void clickShowOriginalAbstractLink() {
         recordDetailsPage.showOriginalAbstractLink.click();
     }
 
     @And("^original abstract is:$")
-    public void verifyOriginalAbstract(DataTable table){
+    public void verifyOriginalAbstract(DataTable table) {
         List<Map<String, String>> rows = table.asMaps(String.class, String.class);
         Map<String, String> data = rows.get(0);
         Assertions.assertThat(recordDetailsPage.originalAbstract.getText()).describedAs("Original abstract is not equal to expected").isEqualToIgnoringCase(data.get("originalAbstract"));
     }
 
     @And("^translated abstract is:$")
-    public void verifyTranslatedAbstract(DataTable table){
+    public void verifyTranslatedAbstract(DataTable table) {
         List<Map<String, String>> rows = table.asMaps(String.class, String.class);
         Map<String, String> data = rows.get(0);
         Assertions.assertThat(recordDetailsPage.translatedAbstract.getText()).describedAs("Translated abstract is not equal to expected").isEqualToIgnoringCase(data.get("translatedAbstract"));
     }
+
+    @And("^the pagination options have the following state:$")
+    public void verifyPaginationOptionsState(DataTable table) {
+        List<List<String>> data = table.asLists(String.class);
+        Assertions.assertThat(String.valueOf(recordDetailsPage.previous.isEnabled())).describedAs("Translated abstract is not equal to expected").isEqualTo(data.get(1).get(1));
+        Assertions.assertThat(String.valueOf(recordDetailsPage.next.isEnabled())).describedAs("Translated abstract is not equal to expected").isEqualTo(data.get(2).get(1));
+    }
+
+    @And("^user clicks on Next button on Record Details page$")
+    public void clickNextPaginationLink(){
+        recordDetailsPage.next.click();
+    }
+
+    @And("^user clicks on Previous button on Record Details page$")
+    public void clickPreviousPaginationLink(){
+        recordDetailsPage.previous.click();
+    }
+
+    @And("^user clicks on Back to Results link$")
+    public void clickBackToResultsLink(){
+        recordDetailsPage.backToResultsLink.click();
+    }
+
+    @And("^user selects 100 records from record selection$")
+    public void select100RecordsFromSelection(){
+        resultsPage.resultList.recordSelector.click();
+        resultsPage.resultList.rec100.click();
+    }
 }
+
