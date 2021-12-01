@@ -154,5 +154,17 @@ public class RecordDetailsStepDef {
         resultsPage.resultList.recordSelector.click();
         resultsPage.resultList.rec100.click();
     }
+
+    @And("^the link (.*) is visible on the page$")
+    public void verifyLinkIsVisible(String linkText){
+        Assertions.assertThat(recordDetailsPage.backToResultsLink.getText()).describedAs("Text is not equal to expected").isEqualToIgnoringCase(linkText);
+    }
+
+    @When("^user clicks on Back to Clipboard link$")
+    public void clickLink(){
+        recordDetailsPage.backToResultsLink.click();
+
+    }
+
 }
 

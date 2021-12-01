@@ -134,3 +134,16 @@ Feature: Record Details tests
     Then pagination label contains value 1 of 100 selected
     When user clicks on Back to Results link
     Then user is on Results Page
+
+  Scenario: Validate Back to Clipboard is shown when user opens a record from clipboard
+    Given user enters query dna and performs a search
+    Then the result set is not empty
+    And user selects records 1,2,3,4 from the records list on Results page and click on AddtoClipboard
+    And user opens Clipboard page
+    Then user is on Clipboard page
+    When user opens record #1 by clicking on title on Clipboard page
+    Then user is on Record Details page
+    And the link Back to Clipboard is visible on the page
+    When user clicks on Back to Clipboard link
+    Then user is on Clipboard page
+
