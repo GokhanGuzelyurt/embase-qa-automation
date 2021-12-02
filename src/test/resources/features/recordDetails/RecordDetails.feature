@@ -50,3 +50,46 @@ Feature: Record Details tests
     And user opens record #1 by clicking on title
     Then user is on Record Details page
     And authors text in Record Details page contain et al.
+
+  @C488691
+  Scenario: Validating when original title and translated title are available
+    Given user enters query L2011118590 and performs a search
+    Then the result set is not empty
+    And user opens record #1 by clicking on title
+    Then user is on Record Details page
+    Then show original title link is displayed
+    And user clicks on Show original link to verify:
+      | originalTitle                                                                                                                      | translatedTitle                                                                                                     |
+      | Exposição de pacientes da emergência pediátrica a exames de imagem, na atualidade e em tempos de COVID-19: Uma revisão integrativa | Exposure of pediatric emergency patients to imaging exams, nowadays and in times of covid-19: An integrative review |
+
+  @C488692
+  Scenario: Validate the title when no title is available
+    Given user enters query L281557567 and performs a search
+    Then the result set is not empty
+    And user opens record #1 by clicking on title
+    Then user is on Record Details page
+    And the title on the Record details page is displayed as [No title available]
+
+  @C488693
+  Scenario: Validate the abstract when no abstract is available
+    Given user enters query L2002408824 and performs a search
+    Then the result set is not empty
+    And user opens record #1 by clicking on title
+    Then user is on Record Details page
+    And the abstract on the Record details page is displayed as [No abstract available]
+
+  @C488694
+  Scenario: Validate when both original and translated abstract both are present
+    Given user enters query L2010501392 and performs a search
+    Then the result set is not empty
+    And user opens record #1 by clicking on title
+    Then user is on Record Details page
+    Then show original abstract link is displayed
+    And user clicks on Show original abstract link
+    Then original abstract is:
+      | originalAbstract                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+      | Introduction: La théorie et thérapie des états du moi (TEM) ont été développées par Watkins et Watkins, basées sur les travaux de Federn qui fut le premier à proposer le concept d’état du moi. Selon les Watkins la TEM est basée sur trois piliers : la psychanalyse, l'hypnose et le concept de dissociation de Janet. La TEM est une théorie et thérapie essentielle pour le traitement de la traumatisation complexe, en particulier des troubles dissociatifs. C'est aussi une thérapie utile pour d'autres types de difficultés et pathologies. Objectif: Cet article souhaite clarifier les fondements théoriques de la TEM ainsi que les contributions récentes de thérapeutes TEM, et comment de nouveaux concepts sur le trauma et la dissociation ont influencé et mis au défi la TEM. Méthodeetrésultats: Par une analyse de la littérature nous présentons les concepts principaux de la TEM, leurs forces et cohérence, ainsi que le manque de cohérence de certains de ces concepts. Le développement de la TEM s’étend sur plusieurs décennies et témoigne de la richesse de cette thérapie intégrative et du développement stimulant de la compréhension du trauma et de ses séquelles. Conclusion: Bien que les fondements théoriques de la TEM soient imparfaits, la TEM a développé un modèle intégratif de psychothérapie pour les personnes traumatisées qui est toujours valable de nos jours. La TEM devrait être honorée pour sa grande influence sur la psychotraumatologie moderne et sur le traitement du trouble dissociatif de l'identité. |
+    And translated abstract is:
+      | translatedAbstract                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+      | Introduction: Ego state theory (EST) and therapy was developed by Watkins and Watkins, based on Federn who first proposed the concept of ego state. The Watkins state that EST is based on three pillars: psychoanalysis, hypnosis and Janet's concept of dissociation. EST has been a major theory and therapy for the treatment of complex traumatization, in particular dissociative disorders, and is also a therapy helpful for other types of difficulties and pathologies. Objective: This paper aims at clarifying the theoretical background of EST, as well as recent inputs from EST therapists, and how new concepts on trauma and dissociation challenged and influenced modern EST. Method and results: After a thorough analysis of the literature, we provide with a detailed presentation of the main concepts of EST, their strengths and coherence, as well as the lack of coherence of some of these concepts. The development of EST stretches over several decades and attests to the richness of this integrative therapy and to the challenging development of the understanding of trauma and its sequalae. Conclusion: Even if the theoretical foundation of EST is imperfect, EST has developed an integrative model of psychotherapy for traumatized individuals that is still valuable today. EST should be acknowledged for its great influence on modern psychotraumatology and on the treatment of dissociative identity disorder. |
+
