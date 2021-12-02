@@ -1,5 +1,6 @@
 package po;
 
+import cucumber.runtime.junit.Assertions;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import org.openqa.selenium.By;
@@ -21,6 +22,8 @@ public class RecordDetailsPage extends BasePage {
 
     final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     SearchPage searchPage;
+
+   public static String EMAIL_TEXT_LABEL="The email will be sent from no_reply@embase.com";
 
     @FindBy(className = "es-color-white")
     public WebElementFacade recordTitle;
@@ -88,6 +91,50 @@ public class RecordDetailsPage extends BasePage {
     @FindBy(xpath="//*[@data-testid='abstract']//*[@data-testid='translated']")
     public WebElement translatedAbstract;
 
+    @FindBy(xpath = "//*[@data-testid='right-pane']//*[text()='Send']")
+    public WebElement sendBtn;
+
+    @FindBy(css="label[for='sendTo']")
+    public WebElement sendToLabelText;
+
+    @FindBy(css="label[for='cc']")
+    public WebElement ccLabelText;
+
+    @FindBy(css="label[for='subject']")
+    public WebElement subjectLabelText;
+
+    @FindBy(css="label[for='comments']")
+    public WebElement commentsLabelText;
+
+    @FindBy(css="label[for='content-selected-value']")
+    public WebElement contentLabelText;
+
+    @FindBy(css="[data-testid='email-from-notice']")
+    public WebElement emailNotificationText;
+
+    @FindBy(css="[id='sendTo']")
+    public WebElement sendToInputField;
+
+    @FindBy(css="[id='subject']")
+    public WebElement subjectInputField;
+
+    @FindBy(css="[data-testid='submit']")
+    public WebElement sendEmailBtn;
+
+    @FindBy(xpath = "//span[text()='HTML']/..")
+    public WebElement htmlFormatRadioBtn;
+
+    @FindBy(xpath="//span[text()='Text']/..")
+    public WebElement textFormatRadioBtn;
+
+    @FindBy(id = "subject-description")
+    public WebElement subjectAlertText;
+
+    @FindBy(css = "[id='message-box']")
+    public WebElement messageBoxSignIn;
+
+
+
     public boolean isORCIDHighlightingEnabled() {
         boolean flag = false;
         WebElement orcID = orcIDTitle.findElement(By.xpath("//mark[1]"));
@@ -119,6 +166,11 @@ public class RecordDetailsPage extends BasePage {
     public String getSourceVolumeText() {
         String sourceVolumeText = sourceVolume.getText();
         return sourceVolumeText;
+    }
+
+    public void clickBySpanText(String spanText){
+        WebElement element = getDriver().findElement(By.xpath("//*[@id='message-box']//span[text()='"+spanText+"']"));
+        element.click();
     }
 }
 

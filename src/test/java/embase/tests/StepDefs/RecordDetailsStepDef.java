@@ -163,8 +163,50 @@ public class RecordDetailsStepDef {
     @When("^user clicks on Back to Clipboard link$")
     public void clickLink(){
         recordDetailsPage.backToResultsLink.click();
+    }
+
+    @When("^user click on Send button on Record Details page$")
+    public void clickSendBtn(){
+        recordDetailsPage.sendBtn.click();
+    }
+
+    @Then("^user verifies the UI of Send Results modal$")
+    public void verifySendResultsModal(){
+        Assertions.assertThat(recordDetailsPage.sendToLabelText.getText()).describedAs("Send to label text is not equal to expected").isEqualToIgnoringCase("Send to");
+        Assertions.assertThat(recordDetailsPage.sendToInputField.getAttribute("value")).describedAs("Input text does not have default value").isEqualToIgnoringCase(CommonSteps.USER_EMAIL);
+        Assertions.assertThat(recordDetailsPage.ccLabelText.getText()).describedAs("cc label text is not equal to expected").isEqualToIgnoringCase("CC");
+        Assertions.assertThat(recordDetailsPage.subjectLabelText.getText()).describedAs("subject label text is not equal to expected").isEqualToIgnoringCase("Subject");
+        Assertions.assertThat(recordDetailsPage.commentsLabelText.getText()).describedAs("comment label text is not equal to expected").isEqualToIgnoringCase("Comments");
+        Assertions.assertThat(recordDetailsPage.htmlFormatRadioBtn.isDisplayed()).describedAs("HTML radio button is not displayed").isTrue();
+        Assertions.assertThat(recordDetailsPage.textFormatRadioBtn.isDisplayed()).describedAs("Text radio button is not displayed").isTrue();
+        Assertions.assertThat(recordDetailsPage.emailNotificationText.getText()).describedAs("Email text is not equal to expected").isEqualToIgnoringCase(recordDetailsPage.EMAIL_TEXT_LABEL);
+        Assertions.assertThat(recordDetailsPage.sendEmailBtn.isEnabled()).describedAs("SendEmail button isnot displayed").isTrue();
 
     }
 
+    @When("^user enters the subject as (.*) on Send Results modal$")
+    public void enterSubjectSendResultsModal(String subject){
+        recordDetailsPage.subjectInputField.sendKeys(subject);
+    }
+
+    @And("^clicks on Send button on Send Results Modal$")
+    public void clickSendResults(){
+        recordDetailsPage.sendEmailBtn.click();
+    }
+
+    @And("^a subject error message (.*) is displayed on Send Results Modal$")
+    public void subjectErrorMessageValidation(String subjectError){
+        Assertions.assertThat(recordDetailsPage.subjectAlertText.getText()).describedAs("Error message is not equal to expected").isEqualToIgnoringCase(subjectError);
+    }
+
+    @Then("^a message box on Record Details is displayed with the message (.*)$")
+    public void verifySignInMessage(String message){
+        Assertions.assertThat(recordDetailsPage.messageBoxSignIn.getText()).describedAs("Text message is not equal to expected").contains(message);
+    }
+
+    @When("^user clicks on (.*) on message box on Record Details page$")
+    public void clickBySpanText(String spanText){
+        recordDetailsPage.clickBySpanText(spanText);
+    }
 }
 
