@@ -132,9 +132,9 @@ public class RecordDetailsStepDef {
         if (data.get(1).get(0).equalsIgnoreCase("Previous")) {
             Assertions.assertThat(String.valueOf(recordDetailsPage.previous.isEnabled())).describedAs("Paginatoion state is not equal to expected").isEqualTo(data.get(1).get(1));
         } else if (data.get(1).get(0).equalsIgnoreCase("Next")) {
-            Assertions.assertThat(String.valueOf(recordDetailsPage.next.isEnabled())).describedAs("Pagination state is not equal to expected").isEqualTo(data.get(2).get(1));
+            Assertions.assertThat(String.valueOf(recordDetailsPage.next.isEnabled())).describedAs("Pagination state is not equal to expected").isEqualTo(data.get(1).get(1));
         } else if (data.get(2).get(0).equalsIgnoreCase("Previous")) {
-            Assertions.assertThat(String.valueOf(recordDetailsPage.previous.isEnabled())).describedAs("Pagination state is not equal to expected").isEqualTo(data.get(1).get(1));
+            Assertions.assertThat(String.valueOf(recordDetailsPage.previous.isEnabled())).describedAs("Pagination state is not equal to expected").isEqualTo(data.get(2).get(1));
         } else if (data.get(2).get(0).equalsIgnoreCase("Next")) {
             Assertions.assertThat(String.valueOf(recordDetailsPage.next.isEnabled())).describedAs("Pagination state is not equal to expected").isEqualTo(data.get(2).get(1));
         }
