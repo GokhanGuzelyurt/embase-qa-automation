@@ -93,3 +93,44 @@ Feature: Record Details tests
       | translatedAbstract                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
       | Introduction: Ego state theory (EST) and therapy was developed by Watkins and Watkins, based on Federn who first proposed the concept of ego state. The Watkins state that EST is based on three pillars: psychoanalysis, hypnosis and Janet's concept of dissociation. EST has been a major theory and therapy for the treatment of complex traumatization, in particular dissociative disorders, and is also a therapy helpful for other types of difficulties and pathologies. Objective: This paper aims at clarifying the theoretical background of EST, as well as recent inputs from EST therapists, and how new concepts on trauma and dissociation challenged and influenced modern EST. Method and results: After a thorough analysis of the literature, we provide with a detailed presentation of the main concepts of EST, their strengths and coherence, as well as the lack of coherence of some of these concepts. The development of EST stretches over several decades and attests to the richness of this integrative therapy and to the challenging development of the understanding of trauma and its sequalae. Conclusion: Even if the theoretical foundation of EST is imperfect, EST has developed an integrative model of psychotherapy for traumatized individuals that is still valuable today. EST should be acknowledged for its great influence on modern psychotraumatology and on the treatment of dissociative identity disorder. |
 
+  @C488698
+  Scenario: Validate pagination when user selects multiple records and clicks on View
+    Given user enters query dna and performs a search
+    Then the result set is not empty
+    And user selects records 1,2,3,4 from the records list on Results page and click on view
+    Then user is on Record Details page
+    And pagination label contains value 1 of 4 selected
+    And the pagination options have the following state:
+      | paginationOption | state |
+      | Previous         | false |
+      | Next             | true  |
+    When user clicks on Next button on Record Details page
+    Then pagination label contains value 2 of 4 selected
+    And the pagination options have the following state:
+      | paginationOption | state |
+      | Previous         | true  |
+      | Next             | true  |
+    When user clicks on Previous button on Record Details page
+    Then pagination label contains value 1 of 4 selected
+    When user clicks on Back to Results link
+    Then user is on Results Page
+
+  #adjust the wait for pagination label when 100 records are present
+  @C488699
+  Scenario: Validate pagination when user selects records from record selection and clicks on View
+    Given user enters query dna and performs a search
+    Then the result set is not empty
+    And user selects 100 records from record selection
+    And user clicks on View action link of Result Page
+    Then user is on Record Details page
+    Then pagination label contains value 1 of 100 selected
+    And the pagination options have the following state:
+      | paginationOption | state |
+      | Previous         | false |
+      | Next             | true  |
+    When user clicks on Next button on Record Details page
+    Then pagination label contains value 2 of 100 selected
+    When user clicks on Previous button on Record Details page
+    Then pagination label contains value 1 of 100 selected
+    When user clicks on Back to Results link
+    Then user is on Results Page

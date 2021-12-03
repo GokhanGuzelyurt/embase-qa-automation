@@ -81,6 +81,8 @@ public class ResultsPage extends BasePage {
     public WebElementFacade addToClipboardActionLink;
 
 
+
+
     public void waitForRecordSectionIsLoaded() {
         logger.info("Wait for please wait to vanish");
         logger.info("Wait if 0 results page is not displayed");
@@ -147,16 +149,22 @@ public class ResultsPage extends BasePage {
         switch (actionLinkName.toLowerCase().replace(" ", "")) {
             case "view":
                 viewActionLink.click();
+                break;
             case "export":
                 exportActionLink.click();
+                break;
             case "email":
                 emailActionLink.click();
+                break;
             case "order":
                 orderActionLink.click();
+                break;
             case "addtoclipboard":
                 addToClipboardActionLink.click();
+                break;
         }
     }
+
 
 }
 

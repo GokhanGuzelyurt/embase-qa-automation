@@ -6,12 +6,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import po.common.BasePage;
 import po.common.SearchPage;
 
 import java.lang.invoke.MethodHandles;
+import java.util.concurrent.TimeUnit;
 
 @DefaultUrl("page:recordDetails.page")
 public class RecordDetailsPage extends BasePage {
@@ -47,7 +50,7 @@ public class RecordDetailsPage extends BasePage {
     public WebElement next;
 
     @FindBy(xpath = "//*[@data-testid='pagination']//div[text() = ' of ']")
-    public WebElement paginationLabel;
+    public WebElementFacade paginationLabel;
 
     @FindBy(xpath = "//*[@data-testid='source']/span[1]")
     public WebElement sourceMagazine;
@@ -103,6 +106,7 @@ public class RecordDetailsPage extends BasePage {
     }
 
     public String getPaginationLabelText() {
+        waitFor(paginationLabel);
         String text = paginationLabel.getText();
         return text;
     }
