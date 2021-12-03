@@ -130,13 +130,13 @@ public class RecordDetailsStepDef {
     public void verifyPaginationOptionsState(DataTable table) {
                 List<List<String>> data = table.asLists(String.class);
         if (data.get(1).get(0).equalsIgnoreCase("Previous")) {
-            Assertions.assertThat(String.valueOf(recordDetailsPage.previous.isEnabled())).describedAs("Translated abstract is not equal to expected").isEqualTo(data.get(1).get(1));
+            Assertions.assertThat(String.valueOf(recordDetailsPage.previous.isEnabled())).describedAs("Paginatoion state is not equal to expected").isEqualTo(data.get(1).get(1));
         } else if (data.get(1).get(0).equalsIgnoreCase("Next")) {
-            Assertions.assertThat(String.valueOf(recordDetailsPage.next.isEnabled())).describedAs("Translated abstract is not equal to expected").isEqualTo(data.get(2).get(1));
+            Assertions.assertThat(String.valueOf(recordDetailsPage.next.isEnabled())).describedAs("Pagination state is not equal to expected").isEqualTo(data.get(2).get(1));
         } else if (data.get(2).get(0).equalsIgnoreCase("Previous")) {
-            Assertions.assertThat(String.valueOf(recordDetailsPage.previous.isEnabled())).describedAs("Translated abstract is not equal to expected").isEqualTo(data.get(1).get(1));
+            Assertions.assertThat(String.valueOf(recordDetailsPage.previous.isEnabled())).describedAs("Pagination state is not equal to expected").isEqualTo(data.get(1).get(1));
         } else if (data.get(2).get(0).equalsIgnoreCase("Next")) {
-            Assertions.assertThat(String.valueOf(recordDetailsPage.next.isEnabled())).describedAs("Translated abstract is not equal to expected").isEqualTo(data.get(2).get(1));
+            Assertions.assertThat(String.valueOf(recordDetailsPage.next.isEnabled())).describedAs("Pagination state is not equal to expected").isEqualTo(data.get(2).get(1));
         }
     }
 
