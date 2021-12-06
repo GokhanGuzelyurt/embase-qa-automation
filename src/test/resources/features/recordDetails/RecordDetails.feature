@@ -134,3 +134,72 @@ Feature: Record Details tests
     Then pagination label contains value 1 of 100 selected
     When user clicks on Back to Results link
     Then user is on Results Page
+
+  @C489215
+  Scenario: Validate Back to Clipboard is shown when user opens a record from clipboard
+    Given user enters query dna and performs a search
+    Then the result set is not empty
+    And user selects records 1,2,3,4 from the records list on Results page and click on AddtoClipboard
+    And user opens Clipboard page
+    Then user is on Clipboard page
+    When user opens record #1 by clicking on title on Clipboard page
+    Then user is on Record Details page
+    And the link Back to Clipboard is visible on the page
+    When user clicks on Back to Clipboard link
+    Then user is on Clipboard page
+
+  @C489216
+  Scenario: Verify the functionality of Send results UI on Record Details Page
+    Given user logs in as Default User
+    Then Quick search page is opened
+    And user opens Results page
+    And user enters query heart and performs a search
+    Then the result set is not empty
+    And user selects records 1,2 from the records list on Results page and click on view
+    Then user is on Record Details page
+    When user click on Send button on Record Details page
+    Then user verifies the UI of Send Results modal
+    When user enters the subject as test_send_option on Send Results modal
+    And clicks on Send button on Send Results Modal
+    Then user is on Record Details page
+
+  @C489217
+  Scenario: Verify that subject is mandatory on Send Results Page
+    Given user logs in as Default User
+    Then Quick search page is opened
+    And user opens Results page
+    And user enters query heart and performs a search
+    Then the result set is not empty
+    And user selects records 1,2 from the records list on Results page and click on view
+    Then user is on Record Details page
+    When user click on Send button on Record Details page
+    And clicks on Send button on Send Results Modal
+    Then a subject error message This field is required is displayed on Send Results Modal
+
+  @C489218
+  Scenario: Verify that send modal window will not open if user is not signed in
+    Given user enters query corona and performs a search
+    Then the result set is not empty
+    And user selects records 1,2 from the records list on Results page and click on view
+    Then user is on Record Details page
+    When user click on Send button on Record Details page
+    Then a message box on Record Details is displayed with the message To use this feature you must be a registered user of Embase.
+    When user clicks on Cancel on message box on Record Details page
+    Then user is on Record Details page
+
+  @C489219
+  Scenario: Verify that user can sign in from the sign in message box and open the Send Modal window
+    Given user enters query corona and performs a search
+    Then the result set is not empty
+    And user selects records 1,2 from the records list on Results page and click on view
+    Then user is on Record Details page
+    When user click on Send button on Record Details page
+    Then a message box on Record Details is displayed with the message To use this feature you must be a registered user of Embase.
+    When user clicks on Sign in on message box on Record Details page
+    Then user enters email id as embase_limited@elsevier.com and click Continue
+    Then Login page UI elements are displayed
+    And the disabled email value on login page is embase_limited@elsevier.com
+    And user enters password as embase_limited@elsevier.com1 and click SignIn
+    Then user is on Record Details page
+    When user click on Send button on Record Details page
+    Then user verifies the UI of Send Results modal
