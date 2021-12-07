@@ -214,5 +214,27 @@ public class RecordDetailsStepDef {
     public void clickBySpanText(String spanText){
         recordDetailsPage.clickBySpanText(spanText);
     }
+
+    @And("^full text link on Record Details page is displayed$")
+    public void verifyFullTextLink(){
+        Assertions.assertThat(recordDetailsPage.fullTextLinkRightPane.isDisplayed()).describedAs("Full text link is not displayed").isTrue();
+
+    }
+
+    @And("^Add to Clipboard link is present on Record Details page$")
+    public void addToClipBoardLink(){
+        Assertions.assertThat(recordDetailsPage.addToClipboardRightPane.isDisplayed()).describedAs("Add to Clipboard link is not present").isTrue();
+    }
+
+    @When("^user clicks on Add to Clipboard link on Record Details page$")
+    public void clickAddToCLipboard(){
+        recordDetailsPage.addToClipboardRightPane.click();
+    }
+
+    @Then("^Add to Clipboard link is disabled$")
+    public void verifyAddToClipboardDisabled(){
+        Assertions.assertThat(recordDetailsPage.addToClipboardRightPane.isEnabled()).describedAs("Add to clipboard is still enabled").isFalse();
+    }
+
 }
 

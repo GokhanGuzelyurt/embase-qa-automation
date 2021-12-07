@@ -26,4 +26,9 @@ public class ClipboardPageStepDef {
         clipboardPage.clickRecordByTitleOnClipboard(recordId);
     }
 
+    @And("^the title for record #(\\d*) on Clipboard page is (.*)$")
+    public void verifyTitleTextAvailableOnClipboardPage(int recordNumber,String title) {
+        Assertions.assertThat(clipboardPage.checkTitleByRecordNumber(recordNumber)).describedAs("Title is not equal to expected").isEqualToIgnoringCase(title);
+    }
+
 }

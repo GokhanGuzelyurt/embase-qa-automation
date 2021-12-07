@@ -133,6 +133,11 @@ public class RecordDetailsPage extends BasePage {
     @FindBy(css = "[id='message-box']")
     public WebElement messageBoxSignIn;
 
+    @FindBy(xpath="//*[@data-testid='right-pane']//*[@data-testid='full-text-link']")
+    public WebElement fullTextLinkRightPane;
+
+    @FindBy(xpath="//*[@data-testid='right-pane']//*[@data-testid='add-to-clipboard']")
+    public WebElement addToClipboardRightPane;
 
 
     public boolean isORCIDHighlightingEnabled() {
