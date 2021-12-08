@@ -136,9 +136,23 @@ public class RecordDetailsPage extends BasePage {
     @FindBy(xpath="//*[@data-testid='right-pane']//*[@data-testid='full-text-link']")
     public WebElement fullTextLinkRightPane;
 
+    @FindBy(xpath="//*[@data-testid='right-pane']//*[@data-testid='organization-specific-link']")
+    public WebElement organizationSpecificLinkRightPane;
+
     @FindBy(xpath="//*[@data-testid='right-pane']//*[@data-testid='add-to-clipboard']")
     public WebElement addToClipboardRightPane;
 
+    @FindBy(xpath="//*[@data-testid='right-pane']//*[@data-testid='similar-records']")
+    public WebElement similarRecordsRightPane;
+
+    @FindBy(xpath="//*[@data-testid='right-pane']//*[@data-testid='search-by-author']")
+    public WebElement searcAuthorsRightPane;
+
+    @FindBy(id="search-by-author-modal")
+    public WebElement searchByAuthorModal;
+
+    @FindBy(id="search-by-author-modal-label")
+    public WebElement searchByAuthorLabel;
 
     public boolean isORCIDHighlightingEnabled() {
         boolean flag = false;
@@ -177,5 +191,10 @@ public class RecordDetailsPage extends BasePage {
         WebElement element = getDriver().findElement(By.xpath("//*[@id='message-box']//span[text()='"+spanText+"']"));
         element.click();
     }
+
+    public void selectAuthorByText(String authorName){
+        getDriver().findElement(By.xpath("//span[@class='Checkbox-module_content__1T7Il'][text()='"+authorName+"']")).click();
+    }
+
 }
 

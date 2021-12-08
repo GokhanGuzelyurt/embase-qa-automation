@@ -218,7 +218,6 @@ public class RecordDetailsStepDef {
     @And("^full text link on Record Details page is displayed$")
     public void verifyFullTextLink(){
         Assertions.assertThat(recordDetailsPage.fullTextLinkRightPane.isDisplayed()).describedAs("Full text link is not displayed").isTrue();
-
     }
 
     @And("^Add to Clipboard link is present on Record Details page$")
@@ -234,6 +233,33 @@ public class RecordDetailsStepDef {
     @Then("^Add to Clipboard link is disabled$")
     public void verifyAddToClipboardDisabled(){
         Assertions.assertThat(recordDetailsPage.addToClipboardRightPane.isEnabled()).describedAs("Add to clipboard is still enabled").isFalse();
+    }
+
+    @When("^user clicks on Similar records link on Record Details Page$")
+    public void clickSimilarRecordsLink(){
+        recordDetailsPage.similarRecordsRightPane.click();
+    }
+
+    @When("^user clicks on Search by author link on Record Details Page$")
+    public void clickSearchByAuthorLink(){
+        recordDetailsPage.searcAuthorsRightPane.click();
+    }
+
+    @And("^Search by authors modal is displayed$")
+    public void verifySearchByAuthorModal(){
+    Assertions.assertThat(recordDetailsPage.searchByAuthorModal.isDisplayed()).describedAs("Search by author modal is not displayed").isTrue();
+    Assertions.assertThat(recordDetailsPage.searchByAuthorLabel.getText()).describedAs("The label is not equal to expected").isEqualToIgnoringCase("Search by author(s)");
+    }
+
+    @When("^user selects author (.*) and click on Search$")
+    public void selectAuthorRecordDetailsPage(String authorName){
+        recordDetailsPage.selectAuthorByText(authorName);
+        recordDetailsPage.sendEmailBtn.click();
+    }
+
+    @And("^organization link on Record Details page is displayed$")
+    public void verifyOrganizationLink(){
+        Assertions.assertThat(recordDetailsPage.organizationSpecificLinkRightPane.isDisplayed()).describedAs("Full text link is not displayed").isTrue();
     }
 
 }

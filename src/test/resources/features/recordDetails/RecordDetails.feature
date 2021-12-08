@@ -204,6 +204,7 @@ Feature: Record Details tests
     When user click on Send button on Record Details page
     Then user verifies the UI of Send Results modal
 
+  @C489277
   Scenario: Validate the full text link on Record Details page
     Given user enters query L2007119290 and performs a search
     Then the result set is not empty
@@ -211,6 +212,7 @@ Feature: Record Details tests
     Then user is on Record Details page
     And full text link on Record Details page is displayed
 
+  @C489278
   Scenario: Validate the add to clipboard link on Record Details page
     Given user enters query L2007119290 and performs a search
     Then the result set is not empty
@@ -223,4 +225,33 @@ Feature: Record Details tests
     When user opens Clipboard page
     Then the title for record #1 on Clipboard page is Circulating tumor DNA in the saliva of patients with head and neck cancer: A pilot report
 
+  @C489279
+  Scenario: Verify the functionality of similar records feature
+    Given user enters query L2011398489 and performs a search
+    Then the result set is not empty
+    When user opens record #1 by clicking on title
+    Then user is on Record Details page
+    When user clicks on Similar records link on Record Details Page
+    Then user is on Results Page
+    And search query is l2011398489/sim
+    And the result set is not empty
 
+  @C489280
+  Scenario: Verify search by author functionality
+    Given user enters query L2011398489 and performs a search
+    Then the result set is not empty
+    When user opens record #1 by clicking on title
+    Then user is on Record Details page
+    When user clicks on Search by author link on Record Details Page
+    Then Search by authors modal is displayed
+    When user selects author Jiang Z. and click on Search
+    Then user is on Results Page
+    And search query is 'jiang z.'/au
+
+  @C489281
+  Scenario: Validate the organization link on Record Details page
+    Given user enters query L2007119290 and performs a search
+    Then the result set is not empty
+    When user opens record #1 by clicking on title
+    Then user is on Record Details page
+    And organization link on Record Details page is displayed
