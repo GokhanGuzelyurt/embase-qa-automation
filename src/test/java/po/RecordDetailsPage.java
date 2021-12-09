@@ -23,7 +23,7 @@ public class RecordDetailsPage extends BasePage {
     final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     SearchPage searchPage;
 
-   public static String EMAIL_TEXT_LABEL="The email will be sent from no_reply@embase.com";
+    public static String EMAIL_TEXT_LABEL = "The email will be sent from no_reply@embase.com";
 
     @FindBy(className = "es-color-white")
     public WebElementFacade recordTitle;
@@ -88,43 +88,43 @@ public class RecordDetailsPage extends BasePage {
     @FindBy(xpath = "//*[@data-testid='abstract']//*[@data-testid='original']")
     public WebElement originalAbstract;
 
-    @FindBy(xpath="//*[@data-testid='abstract']//*[@data-testid='translated']")
+    @FindBy(xpath = "//*[@data-testid='abstract']//*[@data-testid='translated']")
     public WebElement translatedAbstract;
 
     @FindBy(xpath = "//*[@data-testid='right-pane']//*[text()='Send']")
     public WebElement sendBtn;
 
-    @FindBy(css="label[for='sendTo']")
+    @FindBy(css = "label[for='sendTo']")
     public WebElement sendToLabelText;
 
-    @FindBy(css="label[for='cc']")
+    @FindBy(css = "label[for='cc']")
     public WebElement ccLabelText;
 
-    @FindBy(css="label[for='subject']")
+    @FindBy(css = "label[for='subject']")
     public WebElement subjectLabelText;
 
-    @FindBy(css="label[for='comments']")
+    @FindBy(css = "label[for='comments']")
     public WebElement commentsLabelText;
 
-    @FindBy(css="label[for='content-selected-value']")
+    @FindBy(css = "label[for='content-selected-value']")
     public WebElement contentLabelText;
 
-    @FindBy(css="[data-testid='email-from-notice']")
+    @FindBy(css = "[data-testid='email-from-notice']")
     public WebElement emailNotificationText;
 
-    @FindBy(css="[id='sendTo']")
+    @FindBy(css = "[id='sendTo']")
     public WebElement sendToInputField;
 
-    @FindBy(css="[id='subject']")
+    @FindBy(css = "[id='subject']")
     public WebElement subjectInputField;
 
-    @FindBy(css="[data-testid='submit']")
+    @FindBy(css = "#send-via-email-modal [data-testid='submit']")
     public WebElement sendEmailBtn;
 
     @FindBy(xpath = "//span[text()='HTML']/..")
     public WebElement htmlFormatRadioBtn;
 
-    @FindBy(xpath="//span[text()='Text']/..")
+    @FindBy(xpath = "//span[text()='Text']/..")
     public WebElement textFormatRadioBtn;
 
     @FindBy(id = "subject-description")
@@ -133,6 +133,29 @@ public class RecordDetailsPage extends BasePage {
     @FindBy(css = "[id='message-box']")
     public WebElement messageBoxSignIn;
 
+    @FindBy(xpath = "//*[@data-testid='right-pane']//*[@data-testid='full-text-link']")
+    public WebElement fullTextLinkRightPane;
+
+    @FindBy(xpath = "//*[@data-testid='right-pane']//*[@data-testid='organization-specific-link']")
+    public WebElement organizationSpecificLinkRightPane;
+
+    @FindBy(xpath = "//*[@data-testid='right-pane']//*[@data-testid='add-to-clipboard']")
+    public WebElement addToClipboardRightPane;
+
+    @FindBy(xpath = "//*[@data-testid='right-pane']//*[@data-testid='similar-records']")
+    public WebElement similarRecordsRightPane;
+
+    @FindBy(xpath = "//*[@data-testid='right-pane']//*[@data-testid='search-by-author']")
+    public WebElement searchAuthorsRightPane;
+
+    @FindBy(id = "search-by-author-modal")
+    public WebElement searchByAuthorModal;
+
+    @FindBy(id = "search-by-author-modal-label")
+    public WebElement searchByAuthorLabel;
+
+    @FindBy(css = "#search-by-author-modal [data-testid='submit']")
+    public WebElement searchAuthorBtn;
 
 
     public boolean isORCIDHighlightingEnabled() {
@@ -168,9 +191,14 @@ public class RecordDetailsPage extends BasePage {
         return sourceVolumeText;
     }
 
-    public void clickBySpanText(String spanText){
-        WebElement element = getDriver().findElement(By.xpath("//*[@id='message-box']//span[text()='"+spanText+"']"));
+    public void clickBySpanText(String spanText) {
+        WebElement element = getDriver().findElement(By.xpath("//*[@id='message-box']//span[text()='" + spanText + "']"));
         element.click();
     }
+
+    public void selectAuthorByText(String authorName) {
+        getDriver().findElement(By.xpath("//span[@class='Checkbox-module_content__1T7Il'][text()='" + authorName + "']")).click();
+    }
+
 }
 

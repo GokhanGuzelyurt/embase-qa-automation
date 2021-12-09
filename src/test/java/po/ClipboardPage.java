@@ -41,5 +41,15 @@ public class ClipboardPage extends BasePage {
 
         }
     }
+
+    @Step
+    public String checkTitleByRecordNumber(int recordNumber){
+        logger.info("Check the title of the record Number#" + recordNumber);
+        List<WebElement> list = clipboardResults.findElements(By.cssSelector(".resultPreviewInner"));
+        String title= list.get(recordNumber - 1).findElement(By.xpath("//a[contains(@class,'hitsHighlighted')]")).getText();
+        return title;
+
+
+    }
 }
 
