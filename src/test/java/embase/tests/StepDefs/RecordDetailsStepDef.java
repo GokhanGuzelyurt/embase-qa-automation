@@ -254,7 +254,7 @@ public class RecordDetailsStepDef {
     @When("^user selects author (.*) and click on Search$")
     public void selectAuthorRecordDetailsPage(String authorName){
         recordDetailsPage.selectAuthorByText(authorName);
-        recordDetailsPage.sendEmailBtn.click();
+        recordDetailsPage.searchAuthorBtn.click();
     }
 
     @And("^organization link on Record Details page is displayed$")
