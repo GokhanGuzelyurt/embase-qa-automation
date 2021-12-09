@@ -118,7 +118,7 @@ public class RecordDetailsPage extends BasePage {
     @FindBy(css = "[id='subject']")
     public WebElement subjectInputField;
 
-    @FindBy(css = "#send-via-email-modal[data-testid='submit']")
+    @FindBy(css = "#send-via-email-modal [data-testid='submit']")
     public WebElement sendEmailBtn;
 
     @FindBy(xpath = "//span[text()='HTML']/..")
@@ -154,7 +154,7 @@ public class RecordDetailsPage extends BasePage {
     @FindBy(id = "search-by-author-modal-label")
     public WebElement searchByAuthorLabel;
 
-    @FindBy(css = "#search-by-author-modal[data-testid='submit']")
+    @FindBy(css = "#search-by-author-modal [data-testid='submit']")
     public WebElement searchAuthorBtn;
 
 
