@@ -242,7 +242,7 @@ public class RecordDetailsStepDef {
 
     @When("^user clicks on Search by author link on Record Details Page$")
     public void clickSearchByAuthorLink(){
-        recordDetailsPage.searcAuthorsRightPane.click();
+        recordDetailsPage.searchAuthorsRightPane.click();
     }
 
     @And("^Search by authors modal is displayed$")

@@ -146,7 +146,7 @@ public class RecordDetailsPage extends BasePage {
     public WebElement similarRecordsRightPane;
 
     @FindBy(xpath="//*[@data-testid='right-pane']//*[@data-testid='search-by-author']")
-    public WebElement searcAuthorsRightPane;
+    public WebElement searchAuthorsRightPane;
 
     @FindBy(id="search-by-author-modal")
     public WebElement searchByAuthorModal;
