@@ -128,7 +128,7 @@ public class RecordDetailsStepDef {
 
     @And("^the pagination options have the following state:$")
     public void verifyPaginationOptionsState(DataTable table) {
-                List<List<String>> data = table.asLists(String.class);
+        List<List<String>> data = table.asLists(String.class);
         if (data.get(1).get(0).equalsIgnoreCase("Previous")) {
             Assertions.assertThat(String.valueOf(recordDetailsPage.previous.isEnabled())).describedAs("Pagination state is not equal to expected").isEqualTo(data.get(1).get(1));
         } else if (data.get(1).get(0).equalsIgnoreCase("Next")) {
@@ -141,43 +141,43 @@ public class RecordDetailsStepDef {
     }
 
     @And("^user clicks on Next button on Record Details page$")
-    public void clickNextPaginationLink(){
+    public void clickNextPaginationLink() {
         recordDetailsPage.next.click();
     }
 
     @And("^user clicks on Previous button on Record Details page$")
-    public void clickPreviousPaginationLink(){
+    public void clickPreviousPaginationLink() {
         recordDetailsPage.previous.click();
     }
 
     @And("^user clicks on Back to Results link$")
-    public void clickBackToResultsLink(){
+    public void clickBackToResultsLink() {
         recordDetailsPage.backToResultsLink.click();
     }
 
     @And("^user selects 100 records from record selection$")
-    public void select100RecordsFromSelection(){
+    public void select100RecordsFromSelection() {
         resultsPage.resultList.recordSelector.click();
         resultsPage.resultList.rec100.click();
     }
 
     @And("^the link (.*) is visible on the page$")
-    public void verifyLinkIsVisible(String linkText){
+    public void verifyLinkIsVisible(String linkText) {
         Assertions.assertThat(recordDetailsPage.backToResultsLink.getText()).describedAs("Text is not equal to expected").isEqualToIgnoringCase(linkText);
     }
 
     @When("^user clicks on Back to Clipboard link$")
-    public void clickLink(){
+    public void clickLink() {
         recordDetailsPage.backToResultsLink.click();
     }
 
-    @When("^user click on Send button on Record Details page$")
-    public void clickSendBtn(){
-        recordDetailsPage.sendBtn.click();
-    }
+    @When("^user click on (.*) button on Record Details page$")
+    public void clickSendBtn(String actionName) {
+        recordDetailsPage.clickOnAction(actionName);
+     }
 
     @Then("^user verifies the UI of Send Results modal$")
-    public void verifySendResultsModal(){
+    public void verifySendResultsModal() {
         Assertions.assertThat(recordDetailsPage.sendToLabelText.getText()).describedAs("Send to label text is not equal to expected").isEqualToIgnoringCase("Send to");
         Assertions.assertThat(recordDetailsPage.sendToInputField.getAttribute("value")).describedAs("Input text does not have default value").isEqualToIgnoringCase(CommonSteps.USER_EMAIL);
         Assertions.assertThat(recordDetailsPage.ccLabelText.getText()).describedAs("cc label text is not equal to expected").isEqualToIgnoringCase("CC");
@@ -191,74 +191,74 @@ public class RecordDetailsStepDef {
     }
 
     @When("^user enters the subject as (.*) on Send Results modal$")
-    public void enterSubjectSendResultsModal(String subject){
+    public void enterSubjectSendResultsModal(String subject) {
         recordDetailsPage.subjectInputField.sendKeys(subject);
     }
 
     @And("^clicks on Send button on Send Results Modal$")
-    public void clickSendResults(){
+    public void clickSendResults() {
         recordDetailsPage.sendEmailBtn.click();
     }
 
     @And("^a subject error message (.*) is displayed on Send Results Modal$")
-    public void subjectErrorMessageValidation(String subjectError){
+    public void subjectErrorMessageValidation(String subjectError) {
         Assertions.assertThat(recordDetailsPage.subjectAlertText.getText()).describedAs("Error message is not equal to expected").isEqualToIgnoringCase(subjectError);
     }
 
     @Then("^a message box on Record Details is displayed with the message (.*)$")
-    public void verifySignInMessage(String message){
+    public void verifySignInMessage(String message) {
         Assertions.assertThat(recordDetailsPage.messageBoxSignIn.getText()).describedAs("Text message is not equal to expected").contains(message);
     }
 
     @When("^user clicks on (.*) on message box on Record Details page$")
-    public void clickBySpanText(String spanText){
+    public void clickBySpanText(String spanText) {
         recordDetailsPage.clickBySpanText(spanText);
     }
 
     @And("^full text link on Record Details page is displayed$")
-    public void verifyFullTextLink(){
+    public void verifyFullTextLink() {
         Assertions.assertThat(recordDetailsPage.fullTextLinkRightPane.isDisplayed()).describedAs("Full text link is not displayed").isTrue();
     }
 
     @And("^Add to Clipboard link is present on Record Details page$")
-    public void addToClipBoardLink(){
+    public void addToClipBoardLink() {
         Assertions.assertThat(recordDetailsPage.addToClipboardRightPane.isDisplayed()).describedAs("Add to Clipboard link is not present").isTrue();
     }
 
     @When("^user clicks on Add to Clipboard link on Record Details page$")
-    public void clickAddToCLipboard(){
+    public void clickAddToCLipboard() {
         recordDetailsPage.addToClipboardRightPane.click();
     }
 
     @Then("^Add to Clipboard link is disabled$")
-    public void verifyAddToClipboardDisabled(){
+    public void verifyAddToClipboardDisabled() {
         Assertions.assertThat(recordDetailsPage.addToClipboardRightPane.isEnabled()).describedAs("Add to clipboard is still enabled").isFalse();
     }
 
     @When("^user clicks on Similar records link on Record Details Page$")
-    public void clickSimilarRecordsLink(){
+    public void clickSimilarRecordsLink() {
         recordDetailsPage.similarRecordsRightPane.click();
     }
 
     @When("^user clicks on Search by author link on Record Details Page$")
-    public void clickSearchByAuthorLink(){
+    public void clickSearchByAuthorLink() {
         recordDetailsPage.searchAuthorsRightPane.click();
     }
 
     @And("^Search by authors modal is displayed$")
-    public void verifySearchByAuthorModal(){
-    Assertions.assertThat(recordDetailsPage.searchByAuthorModal.isDisplayed()).describedAs("Search by author modal is not displayed").isTrue();
-    Assertions.assertThat(recordDetailsPage.searchByAuthorLabel.getText()).describedAs("The label is not equal to expected").isEqualToIgnoringCase("Search by author(s)");
+    public void verifySearchByAuthorModal() {
+        Assertions.assertThat(recordDetailsPage.searchByAuthorModal.isDisplayed()).describedAs("Search by author modal is not displayed").isTrue();
+        Assertions.assertThat(recordDetailsPage.searchByAuthorLabel.getText()).describedAs("The label is not equal to expected").isEqualToIgnoringCase("Search by author(s)");
     }
 
     @When("^user selects author (.*) and click on Search$")
-    public void selectAuthorRecordDetailsPage(String authorName){
+    public void selectAuthorRecordDetailsPage(String authorName) {
         recordDetailsPage.selectAuthorByText(authorName);
         recordDetailsPage.searchAuthorBtn.click();
     }
 
     @And("^organization link on Record Details page is displayed$")
-    public void verifyOrganizationLink(){
+    public void verifyOrganizationLink() {
         Assertions.assertThat(recordDetailsPage.organizationSpecificLinkRightPane.isDisplayed()).describedAs("Full text link is not displayed").isTrue();
     }
 

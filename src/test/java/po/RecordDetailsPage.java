@@ -1,21 +1,18 @@
 package po;
 
-import cucumber.runtime.junit.Assertions;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
+import net.thucydides.core.annotations.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import po.common.BasePage;
 import po.common.SearchPage;
 
 import java.lang.invoke.MethodHandles;
-import java.util.concurrent.TimeUnit;
 
 @DefaultUrl("page:recordDetails.page")
 public class RecordDetailsPage extends BasePage {
@@ -91,8 +88,8 @@ public class RecordDetailsPage extends BasePage {
     @FindBy(xpath = "//*[@data-testid='abstract']//*[@data-testid='translated']")
     public WebElement translatedAbstract;
 
-    @FindBy(xpath = "//*[@data-testid='right-pane']//*[text()='Send']")
-    public WebElement sendBtn;
+    @FindBy(css = "[data-testid='right-pane'] [data-testid='send']")
+    public WebElement sendAction;
 
     @FindBy(css = "label[for='sendTo']")
     public WebElement sendToLabelText;
@@ -157,6 +154,9 @@ public class RecordDetailsPage extends BasePage {
     @FindBy(css = "#search-by-author-modal [data-testid='submit']")
     public WebElement searchAuthorBtn;
 
+    @FindBy(css = "[data-testid='right-pane'] [data-testid='print']")
+    public WebElementFacade printAction;
+
 
     public boolean isORCIDHighlightingEnabled() {
         boolean flag = false;
@@ -200,5 +200,16 @@ public class RecordDetailsPage extends BasePage {
         getDriver().findElement(By.xpath("//span[@class='Checkbox-module_content__1T7Il'][text()='" + authorName + "']")).click();
     }
 
+    @Step
+    public void clickOnAction(String actionName) {
+        switch (actionName.toLowerCase().replace(" ", "")) {
+            case "send":
+                sendAction.click();
+                break;
+            case "print":
+                printAction.click();
+                break;
+        }
+    }
 }
 
