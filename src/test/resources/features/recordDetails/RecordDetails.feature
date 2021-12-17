@@ -255,3 +255,11 @@ Feature: Record Details tests
     When user opens record #1 by clicking on title
     Then user is on Record Details page
     And organization link on Record Details page is displayed
+
+  @C498906
+  Scenario: Print action button can be clicked in Record details page
+    Given user enters query L2007119290 and performs a search
+    Then the result set is not empty
+    When user opens record #1 by clicking on title
+    Then user is on Record Details page
+    When user click on Print button on Record Details page

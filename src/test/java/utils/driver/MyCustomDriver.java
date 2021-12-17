@@ -23,7 +23,7 @@ public class MyCustomDriver implements DriverSource {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-extensions");
         options.addArguments("--verbose");
-
+        options.addArguments("--kiosk-printing");
 
         if (System.getenv("headless") != null && System.getenv("headless").equals("true")) {
             logger.info("Headless environment variable set to true. Headless ChromeDriver mode: true");
