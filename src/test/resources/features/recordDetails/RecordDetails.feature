@@ -264,6 +264,7 @@ Feature: Record Details tests
     Then user is on Record Details page
     When user click on Print button on Record Details page
 
+  @C499403
   Scenario: Collapsible section state is preserved in Record details page
     Given user enters query dna and performs a search
     Then the result set is not empty
