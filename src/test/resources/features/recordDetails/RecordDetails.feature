@@ -263,3 +263,16 @@ Feature: Record Details tests
     When user opens record #1 by clicking on title
     Then user is on Record Details page
     When user click on Print button on Record Details page
+
+  Scenario: Collapsible section state is preserved in Record details page
+    Given user enters query dna and performs a search
+    Then the result set is not empty
+    When user opens record #1 by clicking on title
+    Then user is on Record Details page
+    And content of section X is expanded in the Record details page
+    When user clicks on X section title in the Record details page
+    Then content of section X is collapsed in the Record details page
+    When user clicks on Back to Results link
+    And user opens record #2 by clicking on title
+    Then user is on Record Details page
+    And content of section X is collapsed in the Record details page
