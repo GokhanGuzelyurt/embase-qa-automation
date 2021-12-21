@@ -39,8 +39,8 @@ Feature: Elastic search queries
       | queries                    |
       | [23-11-2020]/sd            |
       | [2020-11-23]/sd            |
-      | [2021-11-23]/aip           |
-      | [23-11-2021]/aip           |
+      | [2021-04-14]/aip           |
+      | [14-04-2021]/aip           |
       | test AND '2020-10-30':ld   |
       | cancer AND '2020-10-01':ld |
       | public AND '2020-11-04':ld |
