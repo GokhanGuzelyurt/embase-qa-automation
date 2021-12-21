@@ -222,6 +222,8 @@ public class RecordDetailsPage extends BasePage {
 
     /**
      * @param sectionName is the visible text title for the collapsible section
+     *                    possible values are 'Abstract, Drug terms, Disease terms, Other terms,
+     *                    Author keywords, Additional information, Copyright'.
      * @return "collapse" when section is collapsed and "collapse show" when expanded
      */
     public String getCollapsibleSectionClassValue(String sectionName) {
