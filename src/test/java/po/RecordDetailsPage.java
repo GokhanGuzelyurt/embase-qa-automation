@@ -226,10 +226,10 @@ public class RecordDetailsPage extends BasePage {
      */
     public String getCollapsibleSectionClassValue(String sectionName) {
         WebElement collapsibleContent = getDriver().findElement(By.xpath("//*[@data-testid='collapsible']//*[text() = '" + sectionName + "']/../../following-sibling::div"));
-        long timeCounter = System.currentTimeMillis();
+        long waitStartTime = System.currentTimeMillis();
         // wait for collapsing animation to complete
         while (collapsibleContent.getAttribute("class").equalsIgnoreCase("collapsing")) {
-            if (System.currentTimeMillis() > timeCounter + 5000)
+            if (System.currentTimeMillis() > waitStartTime + 5000)
                 Assertions.fail("Stuck in 'collapsing' state for more than 5 seconds");
         }
         return collapsibleContent.getAttribute("class");
