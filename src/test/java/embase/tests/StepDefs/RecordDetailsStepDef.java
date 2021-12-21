@@ -275,7 +275,7 @@ public class RecordDetailsStepDef {
         } else if (expectedCollapsedState.equalsIgnoreCase("expanded")) {
             Assertions.assertThat(valueOfClassAttribute).describedAs("Section is not expanded in Record details page").isEqualTo("collapse show");
         } else {
-            Assertions.fail("Not a valid state: '" + expectedCollapsedState + "'. The only valid states are 'expanded' or 'collapsed'");
+            Assertions.fail("Not a valid expected state: '" + expectedCollapsedState + "'. The only valid states are 'expanded' or 'collapsed'");
         }
     }
 }
