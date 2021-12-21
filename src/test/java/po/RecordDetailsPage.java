@@ -219,6 +219,15 @@ public class RecordDetailsPage extends BasePage {
         getDriver().findElement(By.xpath("//*[@data-testid='collapsible']//*[text() = '" + sectionName + "']")).click();
     }
 
+    /**
+     * @param sectionName is the visible text title for the collapsible section
+     * @return "collapse" when section is collapsed and "collapse show" when expanded
+     */
+    public String getCollapsibleSectionClassValue(String sectionName) {
+        WebElement collapsibleContent = getDriver().findElement(By.xpath("//*[@data-testid='collapsible']//*[text() = '" + sectionName + "']/../../following-sibling::div"));
+        return collapsibleContent.getAttribute("class");
+    }
+
 
 }
 

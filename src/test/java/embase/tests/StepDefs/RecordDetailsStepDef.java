@@ -267,5 +267,16 @@ public class RecordDetailsStepDef {
         recordDetailsPage.clickCollapsibleSectionTitle(sectionName);
     }
 
+    @Then("^collapsible section (.*) is (.*) in the Record details page")
+    public void verifyCollapsibleSectionState(String sectionName, String expectedCollapsedState) {
+        String valueOfClassAttribute = recordDetailsPage.getCollapsibleSectionClassValue(sectionName);
+        if (expectedCollapsedState.equalsIgnoreCase("collapsed")) {
+            Assertions.assertThat(valueOfClassAttribute).describedAs("Section is not collapsed as expected in Record details page").isEqualTo("collapse");
+        } else if (expectedCollapsedState.equalsIgnoreCase("expanded")) {
+            Assertions.assertThat(valueOfClassAttribute).describedAs("Section is not expanded as expected in Record details page").isEqualTo("collapse show");
+        } else {
+            Assertions.fail("Not a valid state. The only valid states are 'expanded' or 'collapsed'");
+        }
+    }
 }
 

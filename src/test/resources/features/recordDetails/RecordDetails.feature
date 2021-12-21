@@ -269,12 +269,12 @@ Feature: Record Details tests
     Then the result set is not empty
     When user opens record #1 by clicking on title
     Then user is on Record Details page
-    And content of section X is expanded in the Record details page
+    And collapsible section Abstract is expanded in the Record details page
     When user clicks on collapsible section title Abstract of the Record details page
-    Then content of section X is collapsed in the Record details page
+    Then collapsible section Abstract is collapsed in the Record details page
     When user clicks on Back to Results link
     And user opens record #2 by clicking on title
     Then user is on Record Details page
-    And content of section X is collapsed in the Record details page
+    And collapsible section Abstract is collapsed in the Record details page
     When user clicks on collapsible section title Abstract of the Record details page
-    Then content of section X is expanded in the Record details page
+    Then collapsible section Abstract is expanded in the Record details page
