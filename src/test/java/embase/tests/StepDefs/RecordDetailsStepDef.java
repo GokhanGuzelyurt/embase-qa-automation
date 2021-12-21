@@ -174,7 +174,7 @@ public class RecordDetailsStepDef {
     @When("^user click on (.*) button on Record Details page$")
     public void clickSendBtn(String actionName) {
         recordDetailsPage.clickOnAction(actionName);
-     }
+    }
 
     @Then("^user verifies the UI of Send Results modal$")
     public void verifySendResultsModal() {
@@ -260,6 +260,11 @@ public class RecordDetailsStepDef {
     @And("^organization link on Record Details page is displayed$")
     public void verifyOrganizationLink() {
         Assertions.assertThat(recordDetailsPage.organizationSpecificLinkRightPane.isDisplayed()).describedAs("Full text link is not displayed").isTrue();
+    }
+
+    @When("^user clicks on collapsible section title (.*) of the Record details page")
+    public void clickCollapsibleSectionTitle(String sectionName) {
+        recordDetailsPage.clickCollapsibleSectionTitle(sectionName);
     }
 
 }

@@ -191,11 +191,13 @@ public class RecordDetailsPage extends BasePage {
         return sourceVolumeText;
     }
 
+    @Step
     public void clickBySpanText(String spanText) {
         WebElement element = getDriver().findElement(By.xpath("//*[@id='message-box']//span[text()='" + spanText + "']"));
         element.click();
     }
 
+    @Step
     public void selectAuthorByText(String authorName) {
         getDriver().findElement(By.xpath("//span[@class='Checkbox-module_content__1T7Il'][text()='" + authorName + "']")).click();
     }
@@ -211,5 +213,12 @@ public class RecordDetailsPage extends BasePage {
                 break;
         }
     }
+
+    @Step
+    public void clickCollapsibleSectionTitle(String sectionName) {
+        getDriver().findElement(By.xpath("//*[@data-testid='collapsible']//*[text() = '" + sectionName + "']")).click();
+    }
+
+
 }
 
