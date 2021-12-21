@@ -273,6 +273,7 @@ Feature: Record Details tests
     When user clicks on collapsible section title Abstract of the Record details page
     Then collapsible section Abstract is collapsed in the Record details page
     When user clicks on Back to Results link
+    Then user is on Results Page
     And user opens record #2 by clicking on title
     Then user is on Record Details page
     And collapsible section Abstract is collapsed in the Record details page

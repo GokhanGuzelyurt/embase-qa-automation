@@ -3,6 +3,7 @@ package po;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.Step;
+import org.assertj.core.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.Color;
@@ -225,6 +226,12 @@ public class RecordDetailsPage extends BasePage {
      */
     public String getCollapsibleSectionClassValue(String sectionName) {
         WebElement collapsibleContent = getDriver().findElement(By.xpath("//*[@data-testid='collapsible']//*[text() = '" + sectionName + "']/../../following-sibling::div"));
+        long timeCounter = System.currentTimeMillis();
+        // wait for collapsing animation to complete
+        while (collapsibleContent.getAttribute("class").equalsIgnoreCase("collapsing")) {
+            if (System.currentTimeMillis() > timeCounter + 5000)
+                Assertions.fail("Stuck in 'collapsing' state for more than 5 seconds");
+        }
         return collapsibleContent.getAttribute("class");
     }
 
