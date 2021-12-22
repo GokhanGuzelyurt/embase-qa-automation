@@ -3,21 +3,14 @@ package po;
 import net.serenitybdd.core.annotations.findby.By;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
-import net.thucydides.core.pages.components.Dropdown;
-import net.thucydides.core.webelements.Checkbox;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import po.common.BasePage;
-import po.sections.results.SearchHistory;
 
 import java.lang.invoke.MethodHandles;
-import java.nio.channels.Selector;
-import java.util.List;
 
 
 @DefaultUrl("page:citationInfo.page")
@@ -112,7 +105,6 @@ public class CitationInfoSearchPage extends BasePage {
 
     @FindBy(className = "Checkbox-module_root__1DisM")
     public WebElement authorVariantsCheckboxOptions;
-
 
 
     public void executeArticleSearch(String articleTitle, String authorName, String journalTitle, String journalTitleExact, String ABBRJournalTitle, String ABBRJournalTitleExact,

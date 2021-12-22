@@ -1,16 +1,25 @@
 package po.sections.results;
 
+import net.serenitybdd.core.pages.WebElementFacade;
+import net.thucydides.core.annotations.Step;
 import net.thucydides.core.webelements.Checkbox;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import po.common.BasePage;
 
-import java.awt.*;
+import java.lang.invoke.MethodHandles;
 import java.nio.channels.Selector;
 import java.util.List;
 
-public class ResultList {
+public class ResultList extends BasePage {
+
+    final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
+
     @FindBy(css = "#searchHitsText .search-hitcounts")
-    public WebElement searchHitCounts;
+    public WebElementFacade searchHitCounts;
 
     @FindBy(id = "setEmailAlertForLatest")
     public WebElement setEmailAlertLink;
@@ -27,9 +36,6 @@ public class ResultList {
     @FindBy(css = ".resultList .empty")
     public WebElement emptyList;
 
-//    @FindBy(css = "#recordsFound>li")
-//    public List<ResultPreviewItem> resultPreviewItems;
-
     @FindBy(id = "resultsLoadingBar")
     public WebElement resultsLoadingBar;
 
@@ -41,7 +47,7 @@ public class ResultList {
     public List checkAllCheckboxes;
 
     @FindBy(css = ".resultHeader .textButton")
-    public List recordActionsList;
+    public WebElement recordActionsList;
 
     @FindBy(css = ".extraNav previous")
     public WebElement previousButton;
@@ -56,10 +62,10 @@ public class ResultList {
     public WebElement nextButton;
 
     @FindBy(css = ".emb-checkbox.emb-checkbox-result")
-    public List recordListLabels;
+    public WebElement recordListLabels;
 
-    @FindBy(css = "input[name=record_id]")
-    public CheckboxGroup recordListChecks;
+    @FindBy(id = "recordsFound")
+    public WebElement recordsFoundList;
 
 //    @FindBy(css = ".pageIndex")
 //    public PageIndex pageIndex;
@@ -71,16 +77,16 @@ public class ResultList {
     public WebElement inProcessLabels;
 
     @FindBy(css = ".resultInfo>a")
-    public List titleLinks;
+    public WebElement titleLinks;
 
     @FindBy(id = "selectionAmount")
-    public Selector recordSelector;
+    public WebElement recordSelector;
 
     @FindBy(css = "option[disabled='disabled']")
-    public List disabledOpts;
+    public WebElement disabledOpts;
 
     @FindBy(css = "#selectionAmount option")
-    public List allOptions;
+    public WebElement allOptions;
 
     @FindBy(css = ".selectable.cur-d")
     public List recordsList;
@@ -114,4 +120,56 @@ public class ResultList {
 
     @FindBy(css = ".emailSubmit:first-of-type")
     public WebElement emailResultsButton;
+
+    @FindBy(id="initialSmall")
+    public WebElement rec100;
+
+
+    public int getResultsCount() {
+        return Integer.valueOf(searchHitCounts.getText().split(" ")[0].replace(",", ""));
+    }
+
+    public void clickRecordByTitle(int recordNumber) {
+        logger.info("Select the record #" + recordNumber);
+        List<WebElement> list = recordsFoundList.findElements(By.cssSelector(".resultPreviewInner"));
+        list.get(recordNumber - 1).findElement(By.xpath("//a[contains(@class,'hitsHighlighted')]")).click();
+    }
+
+    public String checkRecordContent(int recordNumber, String sourceName) {
+        logger.info("Check the record content #" + recordNumber);
+        List<WebElement> list = recordsFoundList.findElements(By.cssSelector(".resultPreviewInner"));
+        sourceName = list.get(recordNumber - 1).findElement(By.xpath("//span[contains(@class,'source') and contains(text(),'" + sourceName + "')]")).getText();
+        return sourceName;
+    }
+
+    @Step
+    public void selectResultListCheckboxForRecord(int recordNumber) {
+        logger.info("Select checkbox for record #" + recordNumber);
+        // TODO we used to have this scroll in JDI framework but we may want to drop it
+        scrollIntoView();
+        checkByScript(getResultListElementForRecord(recordNumber).findElement(By.cssSelector(".emb-checkbox.emb-checkbox-result")));
+    }
+
+
+    @Step
+    public void selectResultListCheckboxForMultipleRecords(int[] recordNumbers) {
+        logger.info("Selecting multiple records");
+        for(int recordNumber:recordNumbers)
+        checkByScript(getResultListElementForRecord(recordNumber).findElement(By.cssSelector(".emb-checkbox.emb-checkbox-result")));
+    }
+
+    @Step
+    public String getResultListAuthorsTextForRecord(int recordNumber) {
+        List<WebElement> list = getResultListElementForRecord(recordNumber).findElements(By.cssSelector(".author.fn.notranslate"));
+        String authorsText = "";
+        for (WebElement e : list) {
+            authorsText += e.getText();
+        }
+        logger.info("Authors text for result #" + recordNumber + " is: " + authorsText);
+        return authorsText;
+    }
+
+    private WebElement getResultListElementForRecord(int recordNumber) {
+        return recordsFoundList.findElements(By.xpath("//*[contains(@class,'resultPreviewItem')]")).get(recordNumber - 1);
+    }
 }

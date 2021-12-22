@@ -68,9 +68,11 @@ public class QuickSearchPage extends BasePage {
     @FindBy(css = ".circle")
     public WebElement searchTipsCloseButton;
 
+    @FindBy(className="fragmentSuggestions")
+    public WebElement autosuggestList;
+
 
     public void at() {
         Assertions.assertThat(showResultsButton.isDisplayed()).describedAs("Show Results button is not displayed").isTrue();
-
     }
 }

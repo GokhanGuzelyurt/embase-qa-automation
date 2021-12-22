@@ -1,13 +1,14 @@
 package embase.tests.StepDefs;
 
-import io.cucumber.datatable.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import io.cucumber.datatable.DataTable;
 import org.assertj.core.api.Assertions;
 import po.CitationInfoSearchPage;
 import po.ResultsPage;
 import po.common.SearchPage;
+
 import java.util.List;
 import java.util.Map;
 
@@ -43,16 +44,6 @@ public class CitationInfoSearchPageStepDef {
                 data.get("toYear"));
     }
 
-    @Then("^search query is (.*)$")
-    public void verifySearchQuery(String query) {
-        resultsPage.verifySearchQuery(query);
-    }
-
-    @And("^user is on Results Page$")
-    public void resultsPageIsOpened() {
-        resultsPage.open();
-    }
-
     @When("^user clicks Article search button$")
     public void ClickArticleSearchButton() {
         citationInfoSearchPage.clickArticleSearchButton();
@@ -77,7 +68,7 @@ public class CitationInfoSearchPageStepDef {
 
     }
 
-    @And("^user selects first result from the list$")
+    @And("^user selects all authors from the citation info authors list$")
     public void selectFirstResult() {
         citationInfoSearchPage.clickSelectAll();
     }

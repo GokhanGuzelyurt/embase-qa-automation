@@ -4,7 +4,6 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.assertj.core.api.Assertions;
-import po.CitationInfoSearchPage;
 import po.MedicalDeviceSearchPage;
 import po.ResultsPage;
 import po.common.SearchPage;
@@ -15,14 +14,10 @@ public class MedicalDeviceStepDef {
     SearchPage searchPage;
     ResultsPage resultsPage;
 
-    @When("^user clicks on (.*) icon$")
-    public void clickIcon(String iconName) {
-        medicalDeviceSearchPage.clickIcon(iconName);
 
-    }
-    @When("^user clicks on Add device name button$")
-    public void clickAddDeviceBtn(){
-        medicalDeviceSearchPage.AddDeviceNameButton.click();
+    @And("^user clicks on Add Synonym icon$")
+    public void clickAddSynonymIcon() {
+        medicalDeviceSearchPage.SynonymsBox.click();
     }
 
     @Then("^the title on the popup is (.*)$")
@@ -37,7 +32,7 @@ public class MedicalDeviceStepDef {
 
     @Then("^the Add device name popup is closed$")
     public void addDeviceModalClosed() {
-        Assertions.assertThat(medicalDeviceSearchPage.AddDeviceNamePopupDisplayed()).describedAs("The popup is still visible").isFalse();
+        Assertions.assertThat(medicalDeviceSearchPage.DeviceTagName.isDisplayed()).describedAs("The popup is still visible").isTrue();
     }
 
     @And("^user waits for synonyms to load$")
@@ -48,7 +43,7 @@ public class MedicalDeviceStepDef {
 
     @Then("^the general adverse effects popup is closed$")
     public void verifyGeneralEffectsModalClosed() {
-        Assertions.assertThat(medicalDeviceSearchPage.AddAdverseEffectsPopupDisplayed()).describedAs("The popup is still visible").isFalse();
+        Assertions.assertThat(medicalDeviceSearchPage.DeviceTagName.isDisplayed()).describedAs("The popup is still visible").isTrue();
 
     }
 
@@ -60,14 +55,9 @@ public class MedicalDeviceStepDef {
 
     @Then("^Medical device search page is opened$")
     public void medicalDevicePageOpened() {
-//        Assertions.assertThat(medicalDeviceSearchPage.isOpened()).describedAs("Medical device page is not opened").isTrue();
+        medicalDeviceSearchPage.shouldBeDisplayed();
     }
 
-    @Then("^the device autosuggestions list is displayed$")
-    public void deviceAutosuggestionsListDisplayed() {
-        medicalDeviceSearchPage.deviceSuggestionTermsDisplayed();
-
-    }
 
     @When("^user selects (.*) as the autosuggested device name from the list$")
     public void selectAutosuggestedTerm(String term) {
@@ -76,7 +66,7 @@ public class MedicalDeviceStepDef {
 
     @And("^that Adverse device effect checkbox is selected by default$")
     public void verifyAdverseDeviceEffectChkboxEnabled() {
-//        Assertions.assertThat(medicalDeviceSearchPage.AdverseDeviceEffectCheckBox.isChecked()).describedAs("The Adverse DeviceEffect checkbox is not enabled").isTrue();
+        Assertions.assertThat(medicalDeviceSearchPage.adverseDeviceEffectsChkBoxSelected()).describedAs("The Adverse DeviceEffect checkbox is not enabled").isTrue();
     }
 
     @When("^Emtree node (.*) is selected$")
@@ -90,14 +80,14 @@ public class MedicalDeviceStepDef {
         medicalDeviceSearchPage.clickEmtreeDeviceTerm(emtreeTerm);
     }
 
-    @When("^user clicks on Show Results$")
-    public void clickShowResults() {
-
-        medicalDeviceSearchPage.clickShowResultsBtn();
+    @And("^Emtree child node (.*) is selected$")
+    public void selectChildNode(String childNode) {
+        medicalDeviceSearchPage.clickEmtreeDeviceChildTerm(childNode);
     }
 
+
     @When("^check box (.*) is selected$")
-    public void selectCheckboxByText(String text) {
+    public void selectClinicalTrial(String text) {
         medicalDeviceSearchPage.clickChckBoxByText(text);
     }
 
@@ -119,12 +109,12 @@ public class MedicalDeviceStepDef {
 
     @Then("^the label (.*) is displayed for general adverse effects$")
     public void verifyGeneralAdverseEffectsLabel(String generalAdverseEffectsLabelName) {
-        Assertions.assertThat(medicalDeviceSearchPage.AdverseEffectsTagName.getText()).describedAs("The tag label of adverse effects is not equal to expected").isEqualTo(generalAdverseEffectsLabelName);
+        Assertions.assertThat(medicalDeviceSearchPage.checkTagName(generalAdverseEffectsLabelName)).describedAs("The tag label of adverse effects is not equal to expected").isEqualTo(generalAdverseEffectsLabelName);
     }
 
     @And("^user clicks on (.*) button at medical device page$")
     public void clickByBtnTxt(String btnText) {
-//        medicalDeviceSearchPage.clickByBtnText(btnText);
+        medicalDeviceSearchPage.clickByBtnText(btnText);
     }
 
     @And("^synonyms are added successfully$")
@@ -140,30 +130,26 @@ public class MedicalDeviceStepDef {
 
     @Then("^the specific device adverse effects popup is closed$")
     public void verifySpecificDeviceTermPopupClosed() {
-        Assertions.assertThat(medicalDeviceSearchPage.AddSpecificDEviceAdverseEffectsPopupDisplayed()).describedAs("The popup is still visible").isFalse();
+        Assertions.assertThat(medicalDeviceSearchPage.DeviceTagName.isDisplayed()).describedAs("The popup is still visible").isTrue();
 
     }
 
     @Then("^the label (.*) is displayed for device specific adverse effects$")
     public void verifySpecificAdverseEffectsTagName(String specifAdverseEffectsTagName) {
-        Assertions.assertThat(medicalDeviceSearchPage.DeviceSpecificEffectsTagName.getText()).describedAs("The tag label of adverse effects is not equal to expected").contains(specifAdverseEffectsTagName);
+        Assertions.assertThat(medicalDeviceSearchPage.specificAdverseEffectsText.getText()).describedAs("The tag label of adverse effects is not equal to expected").contains(specifAdverseEffectsTagName);
     }
 
-    @And("^Show Results button is disabled$")
-    public void verifyShowResultsDisabled() {
-        Assertions.assertThat(medicalDeviceSearchPage.ShowResultsBtn.isEnabled()).describedAs("Show Results button is not disabled").isFalse();
+
+    @When("^user selects the value Humans from the limits dropdown$")
+    public void selectValue() {
+        medicalDeviceSearchPage.selectHumanFromLimitsDropDown();
     }
 
-    @When("^user selects the value (.*) from the limits dropdown$")
-    public void selectValue(String dropDownValue) {
-        medicalDeviceSearchPage.selectFromLimitsDropDown(dropDownValue);
-    }
+    @When("^user selects publication years range from (.*) to (.*)$")
+    public void selectPubYearsRange(String startYear, String endYear) {
 
-//    @When("^user selects publication years range from '{str}' to '{str}'$")
-//    public void selectPubYearsRange(String startYear, String endYear) {
-//
-////        .fillPublicationYears(startYear, endYear);
-//    }
+        medicalDeviceSearchPage.fillPublicationYears(startYear, endYear);
+    }
 
     @When("^user clicks on DateRange picker and selects range from (.*) to (.*)$")
     public void selectDateRange(String startDate, String endDate) {
@@ -173,5 +159,23 @@ public class MedicalDeviceStepDef {
     @When("^user opens Medical Device search page$")
     public void openMedicalDevice() {
         medicalDeviceSearchPage.open();
+    }
+
+    @And("^Show results button is disabled$")
+    public void verifyShowResultsDisabled() {
+        Assertions.assertThat(medicalDeviceSearchPage.showResultsBtn.isEnabled()).describedAs("ShowResults Button is enabled").isFalse();
+    }
+
+    @When("^user clicks on Show Results$")
+    public void clickShowResults() {
+
+        medicalDeviceSearchPage.showResultsBtn.click();
+    }
+
+
+    @When("^user clicks on (.*) icon$")
+    public void clickIcon(String iconName) {
+        medicalDeviceSearchPage.clickIcon(iconName);
+
     }
 }

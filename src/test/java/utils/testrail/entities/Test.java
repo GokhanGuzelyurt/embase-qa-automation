@@ -1,5 +1,10 @@
 package utils.testrail.entities;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Test {
 
     private int id;
@@ -10,35 +15,5 @@ public class Test {
 //    private String custom_steps;
 
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getCase_id() {
-        return case_id;
-    }
-
-    public void setCase_id(int case_id) {
-        this.case_id = case_id;
-    }
-
-    public int getStatus_id() {
-        return status_id;
-    }
-
-    public void setStatus_id(int status_id) {
-        this.status_id = status_id;
-    }
-
-    public int getRun_id() {
-        return run_id;
-    }
-
-    public void setRun_id(int run_id) {
-        this.run_id = run_id;
-    }
 }

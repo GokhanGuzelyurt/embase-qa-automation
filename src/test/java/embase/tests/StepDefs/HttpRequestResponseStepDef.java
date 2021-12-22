@@ -15,14 +15,13 @@ import org.apache.http.client.params.ClientPNames;
 import org.apache.http.client.params.CookiePolicy;
 import org.apache.http.params.CoreConnectionPNames;
 import org.assertj.core.api.Assertions;
-import org.jruby.RubyProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
-import po.common.FileHelper;
-import po.common.StringHelper;
+import utils.FileHelper;
+import utils.StringHelper;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -34,7 +33,6 @@ import java.io.StringReader;
 import java.lang.invoke.MethodHandles;
 
 import static embase.tests.StepDefs.CommonSteps.*;
-import static java.lang.System.getProperty;
 
 
 public class HttpRequestResponseStepDef {
@@ -43,14 +41,13 @@ public class HttpRequestResponseStepDef {
     private Response response = null;
     private RequestSpecification request;
     private boolean printRequestToConsole = true;
-    private boolean printResponseToConsole = false;
+    private boolean printResponseToConsole = true;
     private int timeoutSeconds = 300;
     private String concatenatedBody;
     private String concatenatedUrl;
     private RestAssuredConfig config;
-    private Cookie cookie;
-    String apikey;
-
+    public Cookie sessionCookie;
+    private String prefTermId;
 
 
     @Before(order = 5)
@@ -66,13 +63,18 @@ public class HttpRequestResponseStepDef {
                             .setParam(ClientPNames.COOKIE_POLICY, CookiePolicy.BROWSER_COMPATIBILITY));
 
             RestAssured.baseURI = BASE_URL;
-
-            logger.info("Setting RestAssured baseURI to: " + BASE_URL);
+            logger.info("Setting RestAssured baseURI to: " + PUBLIC_API_DOMAIN);
 
             concatenatedBody = "";
             concatenatedUrl = "";
         }
+    }
 
+
+    @And("I extract the prefTermId")
+    public void extractPrefTermId() {
+        prefTermId = response.then().extract().path("prefTermId[0]").toString();
+        logger.info("prefTermId value is: " + prefTermId);
     }
 
     @Given("^I set the endpoint for the http request to (.*)$")
@@ -81,37 +83,38 @@ public class HttpRequestResponseStepDef {
         request.basePath(endpoint);
     }
 
-    @Given("^I concatenate the value (.*)to the URL$")
+    @Given("^I concatenate the value (.*) to the URL$")
     public void setConcatenatedRequestUrl(String value) {
         concatenatedUrl += value;
     }
 
+    @And("^I concatenate the extracted prefTermId to the URL$")
+    public void concatenatePrefTerm() {
+        concatenatedUrl += prefTermId;
+    }
 
     @Given("^I set the queryParam (.*) with value (.*)$")
     public void setRequestParam(String param, String value) {
         request.queryParam(param, value);
-
     }
 
     @Given("^I set the Public API endpoint for the http request to (.*)$")
     public void setPublicApiRequestEndpoint(String endpoint) {
         RestAssured.baseURI = PUBLIC_API_DOMAIN;
-        System.out.println(PUBLIC_API_DOMAIN);
+        logger.info(PUBLIC_API_DOMAIN);
         request = RestAssured.given().config(config);
-       request.basePath(endpoint);
-
-
+        request.basePath(endpoint);
     }
 
-//    @Given("I set the queryParam '{str}' with encoded value '{str}'")
-//    public void setRequestWithEncodedParam(String param, String value) {
-//        request.queryParam(param, StringHelper.urlEncode(value));
-//    }
-//
-//
+    @Deprecated
+    @Given("^I set the queryParam (.*) with encoded value (.*)$")
+    public void setRequestWithEncodedParam(String param, String value) {
+        request.queryParam(param, StringHelper.urlEncode(value));
+    }
+
     @Given("^I set the API KEY with value from properties file$")
     public void setRequestParamFromProperties() {
-        request.queryParam(apikey,API_KEY);
+        setRequestParam("apikey", API_KEY);
     }
 
     @Given("^I set the request header (.*) with value (.*)$")
@@ -121,45 +124,37 @@ public class HttpRequestResponseStepDef {
 
     @Given("^I set the request body with value (.*)$")
     public void setRequestBody(String body) {
-        concatenatedBody += body;
+        concatenatedBody = body;
         request.given().body(body);
     }
 
     @Given("^I concatenate the request body with value (.*)$")
     public void setConcatenatedRequestBody(String body) {
-        concatenatedBody += body;
+        concatenatedBody = body;
         request.given().body(concatenatedBody);
     }
 
-//    @Given("I concatenate the request body with content from file '{str}'")
-//    public void setConcatenatedRequestBodyFromFile(String fileName) {
-//        String body = FileHelper.readFile(fileName);
-//        setConcatenatedRequestBody(body);
-//    }
+    @Given("^I set the request body with content from file (.*)$")
+    public void setConcatenatedRequestBodyFromFile(String fileName) {
+        String body = FileHelper.readFile(fileName);
+        setRequestBody(body);
+    }
 
     @Given("^I concatenate the request body with URL encoded content from file (.*)$")
     public void setConcatenatedRequestBodyFromFileUrlEncoded(String fileName) {
         String body = FileHelper.readFile(fileName);
-        setConcatenatedRequestBody(StringHelper.urlEncode(body));
-
-
+        setRequestBody(StringHelper.urlEncode(body));
     }
-
-//
-//    @Given("I concatenate the request body with value from property '{str}'")
-//    public void setConcatenatedRequestBodyFromProperty(String property) {
-//        String propertyValue = PropertyReader.getProperty(property);
-//        setConcatenatedRequestBody(propertyValue);
-//    }
 
     @When("^I execute the http request with method (.*)$")
     public void executeHttpGetRequest(String method) {
-//        commonSteps.logger.info("Executing HTTP request with method: " + method);
+        logger.info("Executing HTTP request with method: " + method);
 
         if (printRequestToConsole)
             request.log().all();
 
         method = method.toUpperCase();
+
         switch (method) {
             case "GET":
                 response = request.get(concatenatedUrl);
@@ -195,21 +190,24 @@ public class HttpRequestResponseStepDef {
         Assertions.assertThat(response.getStatusCode()).describedAs("Status code is not equal to 200").isEqualTo(statusCode);
     }
 
-    @And("I capture cookies from the authentication method")
+    @And("^I capture cookies from the authentication method$")
     public void captureCookies() {
-        cookie = response.getDetailedCookie("SESSION");
+        sessionCookie = response.getDetailedCookie("SESSION");
+    }
 
-
+    @Given("I set a valid SESSION cookie")
+    public void setSessionCookie() {
+        setCookie();
     }
 
     @And("I set the cookies captured in the request body")
     public void setCookie() {
-        request.given().cookie(cookie);
+        request.given().cookie(sessionCookie);
     }
 
     @Then("^the response body contains element (.*) with value (.*)$")
     public void verifyResponseBodyElementValue(String element, String value) {
-        System.out.println(response.then().extract().body().xmlPath());
+        logger.info(response.then().extract().body().xmlPath().toString());
         try {
             String elementValueFromResponse = response.then().extract().path(element);
             Assertions.assertThat(elementValueFromResponse).describedAs("Element in response body does not match expected value").isEqualTo(value);
@@ -234,10 +232,11 @@ public class HttpRequestResponseStepDef {
     @Then("^the response body contains element (.*) with numeric value greater than (.*)$")
     public void verifyResponseBodyElementNumericValueGreater(String element, int value) {
         int elementValueFromResponse = Integer.parseInt(response.then().extract().path(element).toString());
-        System.out.println("The JSON response is" +elementValueFromResponse);
+        logger.info("The JSON response is " + elementValueFromResponse);
         Assertions.assertThat(elementValueFromResponse).describedAs("Element in response body does not match expected value").isGreaterThan(value);
     }
 
+    // TODO refactor - does not compile
 //    @Then("I save the value from element '{str}' in variable '{str}'")
 //    public void saveNumberOfHitsCountInMap(String element, String nameOfVariable) {
 //        valuesMap.put(nameOfVariable, response.then().extract().path(element).toString());
@@ -274,20 +273,13 @@ public class HttpRequestResponseStepDef {
         Assertions.assertThat(nodesAfterXpathEvaluation.getLength()).describedAs("No nodes found for xpath: " + xpath).isGreaterThan(0);
     }
 
-
-//    @And("^the response body contains (.*)$")
-//    public void verifyResponseBody(String responseQuery) {
-//        Assertions.assertThat(response.getBody().asString()).describedAs("Body does not contain").contains(responseQuery);
-//    }
-
     @And("^the JSON response body contains element (.*) with value (.*)$")
     public void validateJSONresponse(String element, String value) {
 
         // getting Json path as a string
         // List<String> jsonResponse=response.jsonPath().getList("$");
         String values = response.jsonPath().getString("" + element + "");
-        System.out.println(values);
-        logger.info("the values returned are" + values);
+        logger.info("the values returned are " + values);
         Assertions.assertThat(values).describedAs("Element value is not equal to expected").contains(value);
 
     }
@@ -318,6 +310,67 @@ public class HttpRequestResponseStepDef {
             e.printStackTrace();
         }
         return nodes;
+    }
+
+    @Then("the first suggested term is (.*)$")
+    public void verifyResponseBodyElementValue(String term) {
+        // this step checks if the main suggested term of a call to
+        // autosuggest matches the expected
+        try {
+            String elementValueFromResponse = response.then().extract().path("useTerm[0]");
+            logger.info("Extracted value: " + elementValueFromResponse);
+            if (elementValueFromResponse == null)
+                elementValueFromResponse = "null";
+
+            String status = "PASS";
+            if (!elementValueFromResponse.equals(term))
+                status = "FAIL";
+
+            // Saving results to a local csv file
+            // Columns are: expected, actual, status
+            FileHelper.addTextToFile("EmtreeResults.csv", "\n" + term + "," + elementValueFromResponse + "," + status);
+
+
+            Assertions.assertThat(elementValueFromResponse).describedAs("Element in response body does not match expected value").isEqualTo(term);
+        } catch (ClassCastException e) {
+            Assertions.fail("Could not parse response to find element: " + term);
+            // In case of error add a line to the local csv file
+            FileHelper.addTextToFile("EmtreeResults.csv", "\n" + term + "," + "ERROR" + "," + "ERROR");
+        }
+    }
+
+    @Then("the response body contains synonym (.*)$")
+    public void verifyResponseBodySynonym(String term) {
+        // this step is intended to check the content of a response from an emtree item
+        // and find is a synonym word is present in the list of synonyms
+
+        try {
+            int listSize = response.then().extract().jsonPath().getList("synonyms").size();
+            logger.info("LIST SIZE: " + listSize);
+
+            String elementValueFromResponse = "NULL";
+            String status = "FAIL";
+            for (int i = 0; i < listSize; i++) {
+                elementValueFromResponse = response.then().extract().path("synonyms[" + i + "]");
+                logger.info("Evaluating: " + elementValueFromResponse);
+                if (elementValueFromResponse.equals(term)) {
+                    status = "PASS";
+                    break;
+                } else {
+                    elementValueFromResponse = "NULL";
+                }
+            }
+            // Saving results to a local csv file
+            // expected, actual, status
+            FileHelper.addTextToFile("EmtreeResults.csv", "," + term + "," + elementValueFromResponse + "," + status);
+
+
+            Assertions.assertThat(elementValueFromResponse).describedAs("Element in response body does not match expected value").isEqualTo(term);
+        } catch (ClassCastException e) {
+            Assertions.fail("Could not parse response to find element with synonym: " + term);
+            // In case of error add a line to the local csv file
+            FileHelper.addTextToFile("EmtreeResults.csv", "," + term + "," + "ERROR" + "," + "ERROR");
+        }
     }
 
 

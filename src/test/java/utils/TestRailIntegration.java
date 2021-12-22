@@ -1,6 +1,8 @@
 package utils;
 
+import cucumber.api.Scenario;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.text.StringEscapeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import utils.testrail.TestRailHelper;
@@ -14,6 +16,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Properties;
 import java.util.stream.Collectors;
+
 
 public class TestRailIntegration {
 
@@ -32,6 +35,8 @@ public class TestRailIntegration {
 
     public static void main(String[] args) throws IOException {
         logger.info("Get feature files from TestRail.");
+        logger.info("TestRail Project ID: " + PROJECT_ID);
+        logger.info("TestRail Suite ID:" + SUITE_ID);
         FileUtils.forceMkdir(runPath);
         FileUtils.cleanDirectory(runPath);
         getAllFeatureFiles();
@@ -86,9 +91,9 @@ public class TestRailIntegration {
                 try {
                     Writer out = new BufferedWriter(new OutputStreamWriter(
                             new FileOutputStream(Paths.get(runPath.getPath(), f.getName()).toFile()), "UTF-8"));
-                    out.write(f.toString());
+                    out.write(StringEscapeUtils.unescapeHtml4(f.toString()));
                     out.close();
-                    logger.info(f.toString());
+                    logger.info(StringEscapeUtils.unescapeHtml4(f.toString()));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -115,5 +120,24 @@ public class TestRailIntegration {
             return Integer.parseInt(System.getenv("testRun"));
         }
         return Integer.parseInt(properties.getProperty("testRunId"));
+    }
+
+    public static String getScenarioDetails(Scenario scenario) {
+        if (isScenarioOutline(scenario)) {
+            return "Scenario Outline: " + scenario.getName() + "\nExample line:\n" + readExampleFromScenario(scenario);
+        } else {
+            return "Single Scenario: " + scenario.getName();
+        }
+    }
+
+    private static boolean isScenarioOutline(Scenario scenario) {
+        return scenario.getLines().size() > 1;
+    }
+
+    private static String readExampleFromScenario(Scenario scenario) {
+        int lineNumber = scenario.getLines().get(0);
+        String fileName = scenario.getUri().replace("file:", "");
+        logger.info("Getting example line " + lineNumber + " in file " + fileName);
+        return FileHelper.readLineFromFile(lineNumber, fileName);
     }
 }
