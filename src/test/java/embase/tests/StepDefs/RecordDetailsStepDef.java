@@ -174,7 +174,7 @@ public class RecordDetailsStepDef {
     @When("^user click on (.*) button on Record Details page$")
     public void clickSendBtn(String actionName) {
         recordDetailsPage.clickOnAction(actionName);
-     }
+    }
 
     @Then("^user verifies the UI of Send Results modal$")
     public void verifySendResultsModal() {
@@ -262,5 +262,21 @@ public class RecordDetailsStepDef {
         Assertions.assertThat(recordDetailsPage.organizationSpecificLinkRightPane.isDisplayed()).describedAs("Full text link is not displayed").isTrue();
     }
 
+    @When("^user clicks on collapsible section title (.*) of the Record details page")
+    public void clickCollapsibleSectionTitle(String sectionName) {
+        recordDetailsPage.clickCollapsibleSectionTitle(sectionName);
+    }
+
+    @Then("^collapsible section (.*) is (.*) in the Record details page")
+    public void verifyCollapsibleSectionState(String sectionName, String expectedCollapsedState) {
+        String valueOfClassAttribute = recordDetailsPage.getCollapsibleSectionClassValue(sectionName);
+        if (expectedCollapsedState.equalsIgnoreCase("collapsed")) {
+            Assertions.assertThat(valueOfClassAttribute).describedAs("Section is not collapsed in Record details page").isEqualTo("collapse");
+        } else if (expectedCollapsedState.equalsIgnoreCase("expanded")) {
+            Assertions.assertThat(valueOfClassAttribute).describedAs("Section is not expanded in Record details page").isEqualTo("collapse show");
+        } else {
+            Assertions.fail("Not a valid expected state: '" + expectedCollapsedState + "'. The only valid states are 'expanded' or 'collapsed'");
+        }
+    }
 }
 
