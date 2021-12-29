@@ -156,4 +156,20 @@ public class ResultsPageStepDef {
 
     }
 
+    @When("get the number of search results for original date format")
+    public void getTheNumberOfSearchResultsForOriginalDateFormat() {
+        resultsPage.waitForJStoLoad();
+        resultsPage.getTheNumberOfSearchResultsForOriginalDateFormat();
+    }
+
+    @When("get the number of search results for changed date format")
+    public void getTheNumberOfSearchResultsForChangedDateFormat() {
+        resultsPage.waitForJStoLoad();
+        resultsPage.getTheNumberOfSearchResultsForChangedDateFormat();
+    }
+
+    @Then("the same number of both search results")
+    public void theSameNumberOfBothSearchResults() {
+        resultsPage.theSameNumberOfBothSearchResults();
+    }
 }

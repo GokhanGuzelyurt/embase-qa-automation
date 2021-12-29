@@ -4,6 +4,7 @@ import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.Step;
 import org.assertj.core.api.Assertions;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,12 +17,15 @@ import po.sections.results.ResultList;
 import po.sections.search.SearchHistory;
 
 import java.lang.invoke.MethodHandles;
+import java.util.Arrays;
 import java.util.List;
 
 @DefaultUrl("page:results.page")
 public class ResultsPage extends BasePage {
     final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     SearchPage searchPage;
+    String resultForOriginalDateFormat;
+    String resultForChangedDateFormat;
 
     @FindBy(css = ".empty:not(#search_row_empty) p")
     public WebElementFacade recordSecWarnZero;
@@ -79,6 +83,9 @@ public class ResultsPage extends BasePage {
 
     @FindBy(id = "addToClipboardAction")
     public WebElementFacade addToClipboardActionLink;
+
+    @FindBy(css = ".search-hitcounts")
+    public WebElementFacade searchHitCounts;
 
 
 
@@ -165,6 +172,24 @@ public class ResultsPage extends BasePage {
         }
     }
 
+    private String getNumberOfSearchResults() {
+        logger.info("get number of search result");
+        List<String> numberOfSearchResults = Arrays.asList(searchHitCounts.getText().split(" "));
+        return numberOfSearchResults.get(0);
+    }
 
+    public void getTheNumberOfSearchResultsForChangedDateFormat() {
+        resultForChangedDateFormat = getNumberOfSearchResults();
+    }
+
+    public void getTheNumberOfSearchResultsForOriginalDateFormat() {
+        resultForOriginalDateFormat = getNumberOfSearchResults();
+    }
+
+    public void theSameNumberOfBothSearchResults() {
+        logger.info("assert that the number of search results is the same for both date format");
+        Assert.assertEquals("The search result after change date format " + resultForChangedDateFormat
+                        + " should be equal search result for original date format " + resultForOriginalDateFormat,
+                resultForOriginalDateFormat, resultForChangedDateFormat);
+    }
 }
-
