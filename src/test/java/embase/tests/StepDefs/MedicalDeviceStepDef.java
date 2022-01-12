@@ -117,6 +117,11 @@ public class MedicalDeviceStepDef {
         medicalDeviceSearchPage.clickByBtnText(btnText);
     }
 
+    @And("^user clicks on Add Synonym button of the Medical device page modal$")
+    public void clickAddSynonymMedicalDeviceModal() {
+        medicalDeviceSearchPage.addSynonymsModalBtn.click();
+    }
+
     @And("^synonyms are added successfully$")
     public void validateSynonymsAreAdded() {
 
