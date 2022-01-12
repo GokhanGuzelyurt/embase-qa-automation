@@ -15,7 +15,7 @@ public class MedicalDeviceStepDef {
     ResultsPage resultsPage;
 
 
-    @And("^user clicks on Add Synonym icon$")
+    @And("^user clicks on Add Synonym icon of Medical device page$")
     public void clickAddSynonymIcon() {
         medicalDeviceSearchPage.SynonymsBox.click();
     }

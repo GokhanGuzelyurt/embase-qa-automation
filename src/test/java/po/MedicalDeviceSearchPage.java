@@ -163,8 +163,8 @@ public class MedicalDeviceSearchPage extends BasePage {
     @FindBy(id = "synonym-operator")
     public WebElement synonymOperator;
 
-    @FindBy(id = "tippy-6")
-    public WebElementFacade synonymOperatorList;
+    @FindBy(css = ".tippy-content")
+    public WebElement synonymOperatorList;
 
 
     public boolean medicalDeviceLabelDisplayed() {

@@ -169,7 +169,7 @@ Feature: Medical Device tests
 
 
   @wip
-  Scenario: Adding synonyms for the medical device
+  Scenario: Medical device Synonym boolean operator list
     When user clicks on Add device name icon
     Then the title on the popup is Add device name
     When user enters the device name as thermometer
@@ -177,7 +177,7 @@ Feature: Medical Device tests
     And user clicks on Add device name button at medical device page
     Then the Add device name popup is closed
     And user waits for synonyms to load
-    When user clicks on Add Synonym icon
+    When user clicks on Add Synonym icon of Medical device page
     Then the title on the popup is Add device name synonyms
     When user clicks on Add Synonym button of the Medical device page modal
     And user clicks on the synonym operator button of the Medical device page
