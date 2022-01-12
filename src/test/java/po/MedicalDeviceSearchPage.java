@@ -160,6 +160,12 @@ public class MedicalDeviceSearchPage extends BasePage {
     @FindBy(id = "publication-year-to-options")
     public WebElement pubYearToOptions;
 
+    @FindBy(id = "synonym-operator")
+    public WebElement synonymOperator;
+
+    @FindBy(id = "tippy-6")
+    public WebElementFacade synonymOperatorList;
+
 
     public boolean medicalDeviceLabelDisplayed() {
         logger.info("Verify Medical device form label is displayed");

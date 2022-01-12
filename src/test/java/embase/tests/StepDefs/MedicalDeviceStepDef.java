@@ -122,9 +122,18 @@ public class MedicalDeviceStepDef {
         medicalDeviceSearchPage.addSynonymsModalBtn.click();
     }
 
+    @And("^user clicks on the synonym operator button of the Medical device page$")
+    public void clickSynonymOperator() {
+        medicalDeviceSearchPage.synonymOperator.click();
+    }
+
+    @Then("^the synonym operator list is visible in the Medical device page$")
+    public void verifySynonymOperatorListDisplayed() {
+        Assertions.assertThat(medicalDeviceSearchPage.synonymOperatorList.isDisplayed()).describedAs("Synonym operator list is not displayed").isTrue();
+    }
+
     @And("^synonyms are added successfully$")
     public void validateSynonymsAreAdded() {
-
         Assertions.assertThat(medicalDeviceSearchPage.SynonymTagName.isDisplayed()).describedAs("Synonyms are not displayed").isTrue();
     }
 
