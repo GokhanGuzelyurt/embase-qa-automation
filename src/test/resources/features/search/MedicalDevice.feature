@@ -167,9 +167,8 @@ Feature: Medical Device tests
     Then user is on Results Page
     And search query is ('bandages and dressings'/exp OR 'bandages and dressings':ti,ab OR 'bandages and dressings'/exp/'adverse device effect') AND [1-1-2000]/sd NOT [2-5-2010]/sd
 
-
-  @wip
-  Scenario: Medical device Synonym boolean operator list
+  @C506356
+  Scenario: Medical device Synonym boolean operator list is displayed
     When user clicks on Add device name icon
     Then the title on the popup is Add device name
     When user enters the device name as thermometer
