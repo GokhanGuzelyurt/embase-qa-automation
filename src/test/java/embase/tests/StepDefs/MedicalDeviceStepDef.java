@@ -15,7 +15,7 @@ public class MedicalDeviceStepDef {
     ResultsPage resultsPage;
 
 
-    @And("^user clicks on Add Synonym icon$")
+    @And("^user clicks on Add Synonym icon of Medical device page$")
     public void clickAddSynonymIcon() {
         medicalDeviceSearchPage.synonymsBox.click();
     }
@@ -115,6 +115,21 @@ public class MedicalDeviceStepDef {
     @And("^user clicks on (.*) button at medical device page$")
     public void clickByBtnTxt(String btnText) {
         medicalDeviceSearchPage.clickByBtnText(btnText);
+    }
+
+    @And("^user clicks on Add Synonym button of the Medical device page modal$")
+    public void clickAddSynonymMedicalDeviceModal() {
+        medicalDeviceSearchPage.addSynonymsModalBtn.click();
+    }
+
+    @And("^user clicks on the synonym operator button of the Medical device page$")
+    public void clickSynonymOperator() {
+        medicalDeviceSearchPage.synonymOperator.click();
+    }
+
+    @Then("^the synonym operator list is visible in the Medical device page$")
+    public void verifySynonymOperatorListDisplayed() {
+        Assertions.assertThat(medicalDeviceSearchPage.synonymOperatorList.isDisplayed()).describedAs("Synonym operator list is not displayed").isTrue();
     }
 
     @And("^synonyms are added successfully$")

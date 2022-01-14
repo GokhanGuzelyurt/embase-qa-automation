@@ -73,8 +73,8 @@ public class MedicalDeviceSearchPage extends BasePage {
     @FindBy(xpath = "//span[contains(@class ,'icon-text')]")
     public WebElement addSynonymsLink;
 
-    @FindBy(id = "add-synonym-button")
-    public WebElement addSynonymsBtn;
+    @FindBy(css = "#page-modal button span")
+    public WebElement addSynonymsModalBtn;
 
     @FindBy(css = ".els-autocomplete__suggestions-container")
     public List<WebElement> deviceSuggestionsList;
@@ -157,6 +157,13 @@ public class MedicalDeviceSearchPage extends BasePage {
     @FindBy(id = "publication-year-to-options")
     public WebElement pubYearToOptions;
 
+    @FindBy(id = "synonym-operator")
+    public WebElement synonymOperator;
+
+    @FindBy(css = ".tippy-content")
+    public WebElement synonymOperatorList;
+
+
     public boolean medicalDeviceLabelDisplayed() {
         logger.info("Verify Medical device form label is displayed");
         return medicalDeviceLabel.isDisplayed();
@@ -193,12 +200,6 @@ public class MedicalDeviceSearchPage extends BasePage {
         deviceNameSearchText.sendKeys(Keys.DELETE);
         deviceNameSearchText.sendKeys(deviceName);
     }
-
-
-    public void clickAddSynonymsBtn() {
-        addSynonymsBtn.click();
-    }
-
 
     public boolean AddDeviceNamePopupDisplayed() {
         return deviceNamePopUp.isDisplayed();
