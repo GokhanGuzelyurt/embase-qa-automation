@@ -315,3 +315,15 @@ Feature: Public API-External
     And the response body contains element 'service-error.status.statusCode' with value 'INVALID_INPUT'
     And the response body contains element 'service-error.status.statusText' with value 'Accept header value 'image/jpeg' is not valid for this resource'
 
+  @EMBASE-11917
+  Scenario: Search GET request to Public API hits results
+    Given I set the endpoint for the http request to /content/embase/article
+    And I set the queryParam count with value 100
+    And I set the queryParam start with value 1
+    And I set the queryParam sort with value entrydate
+    And I set the queryParam apikey with value 6196bbd774a02f6bcaf5b6f2f9e9c3a3
+    And I set the queryParam insttoken with value 12f6d639ad436c2288a67e900477930b
+    And I set the queryParam query with value L291073226
+    When I execute the http request with method GET
+    Then the status code of the response is 200
+    And the response body contains element header.hits with numeric value equal to 1
