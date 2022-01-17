@@ -3,6 +3,7 @@ package po;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.Step;
+import org.assertj.core.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.Color;
@@ -191,11 +192,13 @@ public class RecordDetailsPage extends BasePage {
         return sourceVolumeText;
     }
 
+    @Step
     public void clickBySpanText(String spanText) {
         WebElement element = getDriver().findElement(By.xpath("//*[@id='message-box']//span[text()='" + spanText + "']"));
         element.click();
     }
 
+    @Step
     public void selectAuthorByText(String authorName) {
         getDriver().findElement(By.xpath("//span[@class='Checkbox-module_content__1T7Il'][text()='" + authorName + "']")).click();
     }
@@ -211,5 +214,29 @@ public class RecordDetailsPage extends BasePage {
                 break;
         }
     }
+
+    @Step
+    public void clickCollapsibleSectionTitle(String sectionName) {
+        getDriver().findElement(By.xpath("//*[@data-testid='collapsible']//*[text() = '" + sectionName + "']")).click();
+    }
+
+    /**
+     * @param sectionName is the visible text title for the collapsible section
+     *                    possible values are 'Abstract, Drug terms, Disease terms, Other terms,
+     *                    Author keywords, Additional information, Copyright'.
+     * @return "collapse" when section is collapsed and "collapse show" when expanded
+     */
+    public String getCollapsibleSectionClassValue(String sectionName) {
+        WebElement collapsibleContent = getDriver().findElement(By.xpath("//*[@data-testid='collapsible']//*[text() = '" + sectionName + "']/../../following-sibling::div"));
+        // wait for collapsing animation to complete
+        long waitStartTime = System.currentTimeMillis();
+        while (collapsibleContent.getAttribute("class").equalsIgnoreCase("collapsing")) {
+            if (System.currentTimeMillis() > waitStartTime + 5000)
+                Assertions.fail("Stuck in 'collapsing' state for more than 5 seconds");
+        }
+        return collapsibleContent.getAttribute("class");
+    }
+
+
 }
 

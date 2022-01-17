@@ -37,7 +37,6 @@ public class MedicalDeviceSearchPage extends BasePage {
     @FindBy(id = "device-name-input")
     public WebElement DeviceNameSearchText;
 
-
     @FindBy(css = ".ModalContent-module_root__2Z_73 .PageModal_content___RVzo ModalContent-module_margin-md__2gac2")
     public WebElement DeviceNamePopUp;
 
@@ -74,8 +73,8 @@ public class MedicalDeviceSearchPage extends BasePage {
     @FindBy(xpath = "//span[contains(@class ,'icon-text')]")
     public WebElement AddSynonymsLink;
 
-    @FindBy(id = "add-synonym-button")
-    public WebElement AddSynonymsBtn;
+    @FindBy(css = "#page-modal button span")
+    public WebElement addSynonymsModalBtn;
 
     @FindBy(css = ".els-autocomplete__suggestions-container")
     public List<WebElement> DeviceSuggestionsList;
@@ -158,9 +157,14 @@ public class MedicalDeviceSearchPage extends BasePage {
     @FindBy(id = "publication-year-from-options")
     public WebElement pubYearFromOptions;
 
-
     @FindBy(id = "publication-year-to-options")
     public WebElement pubYearToOptions;
+
+    @FindBy(id = "synonym-operator")
+    public WebElement synonymOperator;
+
+    @FindBy(css = ".tippy-content")
+    public WebElement synonymOperatorList;
 
 
     public boolean medicalDeviceLabelDisplayed() {
@@ -201,12 +205,6 @@ public class MedicalDeviceSearchPage extends BasePage {
         DeviceNameSearchText.sendKeys(Keys.DELETE);
         DeviceNameSearchText.sendKeys(deviceName);
     }
-
-
-    public void clickAddSynonymsBtn() {
-        AddSynonymsBtn.click();
-    }
-
 
     public boolean AddDeviceNamePopupDisplayed() {
         return DeviceNamePopUp.isDisplayed();
