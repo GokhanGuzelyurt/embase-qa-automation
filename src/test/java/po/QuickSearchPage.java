@@ -76,7 +76,7 @@ public class QuickSearchPage extends BasePage {
         shouldBeDisplayed();
     }
 
-    public boolean verifyFieldName(String fieldName) {
+    public boolean isFieldNamePresent(String fieldName) {
         boolean flag = false;
         List<WebElement> frequentList = frequentFieldsList.findElements(By.xpath("*//span[@class='LinkButton-module_content__2F1Lc']"));
         List<WebElement> otherFields = otherFieldsList.findElements(By.xpath("*//span[@class='LinkButton-module_content__2F1Lc']"));
