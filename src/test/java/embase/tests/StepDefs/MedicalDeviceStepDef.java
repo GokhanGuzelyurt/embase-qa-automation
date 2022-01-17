@@ -17,7 +17,7 @@ public class MedicalDeviceStepDef {
 
     @And("^user clicks on Add Synonym icon of Medical device page$")
     public void clickAddSynonymIcon() {
-        medicalDeviceSearchPage.SynonymsBox.click();
+        medicalDeviceSearchPage.synonymsBox.click();
     }
 
     @Then("^the title on the popup is (.*)$")
@@ -32,7 +32,7 @@ public class MedicalDeviceStepDef {
 
     @Then("^the Add device name popup is closed$")
     public void addDeviceModalClosed() {
-        Assertions.assertThat(medicalDeviceSearchPage.DeviceTagName.isDisplayed()).describedAs("The popup is still visible").isTrue();
+        Assertions.assertThat(medicalDeviceSearchPage.deviceTagName.isDisplayed()).describedAs("The popup is still visible").isTrue();
     }
 
     @And("^user waits for synonyms to load$")
@@ -43,13 +43,13 @@ public class MedicalDeviceStepDef {
 
     @Then("^the general adverse effects popup is closed$")
     public void verifyGeneralEffectsModalClosed() {
-        Assertions.assertThat(medicalDeviceSearchPage.DeviceTagName.isDisplayed()).describedAs("The popup is still visible").isTrue();
+        Assertions.assertThat(medicalDeviceSearchPage.deviceTagName.isDisplayed()).describedAs("The popup is still visible").isTrue();
 
     }
 
     @Then("^the device name (.*) is displayed on the form$")
     public void verifyDeviceNameDisplayedOnForm(String deviceName) {
-        Assertions.assertThat(medicalDeviceSearchPage.DeviceTagName.getText()).describedAs("The device name displayed is not the same as device name selected").isEqualTo(deviceName);
+        Assertions.assertThat(medicalDeviceSearchPage.deviceTagName.getText()).describedAs("The device name displayed is not the same as device name selected").isEqualTo(deviceName);
     }
 
 
@@ -134,17 +134,18 @@ public class MedicalDeviceStepDef {
 
     @And("^synonyms are added successfully$")
     public void validateSynonymsAreAdded() {
-        Assertions.assertThat(medicalDeviceSearchPage.SynonymTagName.isDisplayed()).describedAs("Synonyms are not displayed").isTrue();
+
+        Assertions.assertThat(medicalDeviceSearchPage.synonymTagName.isDisplayed()).describedAs("Synonyms are not displayed").isTrue();
     }
 
     @Then("^validate that a list of specific device adverse effects are present$")
     public void verifySpecifAdverseEffectsTagList() {
-        Assertions.assertThat(medicalDeviceSearchPage.SpecificDeviceAdverseEffectsList.isDisplayed()).describedAs("DEvice Specific Adverse Effects Not Displayed").isTrue();
+        Assertions.assertThat(medicalDeviceSearchPage.specificDeviceAdverseEffectsList.isDisplayed()).describedAs("DEvice Specific Adverse Effects Not Displayed").isTrue();
     }
 
     @Then("^the specific device adverse effects popup is closed$")
     public void verifySpecificDeviceTermPopupClosed() {
-        Assertions.assertThat(medicalDeviceSearchPage.DeviceTagName.isDisplayed()).describedAs("The popup is still visible").isTrue();
+        Assertions.assertThat(medicalDeviceSearchPage.deviceTagName.isDisplayed()).describedAs("The popup is still visible").isTrue();
 
     }
 

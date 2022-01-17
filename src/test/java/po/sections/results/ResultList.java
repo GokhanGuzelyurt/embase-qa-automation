@@ -67,9 +67,6 @@ public class ResultList extends BasePage {
     @FindBy(id = "recordsFound")
     public WebElement recordsFoundList;
 
-//    @FindBy(css = ".pageIndex")
-//    public PageIndex pageIndex;
-
     @FindBy(css = ".hitEnd")
     public WebElement maxRec;
 
@@ -121,7 +118,7 @@ public class ResultList extends BasePage {
     @FindBy(css = ".emailSubmit:first-of-type")
     public WebElement emailResultsButton;
 
-    @FindBy(id="initialSmall")
+    @FindBy(id = "initialSmall")
     public WebElement rec100;
 
 
@@ -154,8 +151,8 @@ public class ResultList extends BasePage {
     @Step
     public void selectResultListCheckboxForMultipleRecords(int[] recordNumbers) {
         logger.info("Selecting multiple records");
-        for(int recordNumber:recordNumbers)
-        checkByScript(getResultListElementForRecord(recordNumber).findElement(By.cssSelector(".emb-checkbox.emb-checkbox-result")));
+        for (int recordNumber : recordNumbers)
+            checkByScript(getResultListElementForRecord(recordNumber).findElement(By.cssSelector(".emb-checkbox.emb-checkbox-result")));
     }
 
     @Step

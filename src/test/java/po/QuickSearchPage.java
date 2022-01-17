@@ -19,15 +19,8 @@ public class QuickSearchPage extends BasePage {
     @FindBy(id = "numberOfResults")
     public WebElement buttonHits;
 
-//    @FindBy(css = ".fragmentView")
-//    public UIList<FragmentView, EmbUIElement> searchInputList;
-//
-//    @FindBy(css = ".fragmentBox.fragmentFields")
-//    public UIList<FragmentView, EmbUIElement> fieldCodesList;
-
     @FindBy(css = ".fragmentBox.searchFragmentBox input")
     public List textFieldsList;
-
 
     @FindBy(css = ".trashButton")
     public List trashIconsList;
