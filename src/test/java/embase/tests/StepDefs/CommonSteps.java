@@ -112,7 +112,7 @@ public class CommonSteps {
 
     @After(order = 2)
     public void sendResults(Scenario scenario) {
-        if (TestRailIntegration.SEND_RESULTS_TESTRAIL.equals("true")) {
+        if (TestRailIntegration.SEND_RESULTS_TESTRAIL) {
             logger.info("Sending results to TestRail.");
 
             // create Result object
@@ -211,7 +211,7 @@ public class CommonSteps {
     }
 
     private void getBuildNumber() {
-        if (EMB_BUILD_NUMBER == null) {
+        if (EMB_BUILD_NUMBER == null && TestRailIntegration.SEND_RESULTS_TESTRAIL) {
             logger.info("setUp - go to /config page");
             loginPage.open();
             loginPage.loginDefaultUser();
