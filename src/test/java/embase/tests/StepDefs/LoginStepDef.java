@@ -11,7 +11,6 @@ public class LoginStepDef {
 
     LoginPage loginPage;
 
-
     @Then("Sign in button is displayed")
     public void signInBtnDisplayed() {
         loginPage.signInButton.waitUntilVisible().then().click();

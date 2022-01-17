@@ -16,6 +16,7 @@ import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import po.ConfigPage;
+import po.LoginPage;
 import po.common.BasePage;
 import utils.StringHelper;
 import utils.TestRailIntegration;
@@ -60,6 +61,7 @@ public class CommonSteps {
 
     BasePage basePage;
     ConfigPage configPage;
+    LoginPage loginPage;
 
     @Before(order = 1)
     public void setUp(Scenario scenario) {
@@ -80,15 +82,15 @@ public class CommonSteps {
         }
 
         if (!IS_BE_SCENARIO) {
-            // for FE scenarios
-            logger.info("FRONTEND SCENARIO, getting Build number from /config");
-            getBuildNumber();
-            logger.info("Build number EMB_BUILD_NUMBER: " + EMB_BUILD_NUMBER);
-
-            // reading values from the conf file
+            // reading values from the conf file for FE scenarios
             USER_EMAIL = getProperty("user.email");
             USER_PASSWORD = getProperty("user.password");
             SCREENSHOTS_FOLDER = getProperty("screenshotsFolderName");
+
+            // getting Build number for FE scenarios
+            logger.info("FRONTEND SCENARIO, getting Build number from /config");
+            getBuildNumber();
+            logger.info("Build number EMB_BUILD_NUMBER: " + EMB_BUILD_NUMBER);
         } else {
             // for BE scenarios
             PUBLIC_API_DOMAIN = getProperty("publicApiDomain");
@@ -110,7 +112,7 @@ public class CommonSteps {
 
     @After(order = 2)
     public void sendResults(Scenario scenario) {
-        if (TestRailIntegration.SEND_RESULTS_TESTRAIL.equals("true")) {
+        if (TestRailIntegration.SEND_RESULTS_TESTRAIL) {
             logger.info("Sending results to TestRail.");
 
             // create Result object
@@ -209,8 +211,10 @@ public class CommonSteps {
     }
 
     private void getBuildNumber() {
-        if (EMB_BUILD_NUMBER == null) {
+        if (EMB_BUILD_NUMBER == null && TestRailIntegration.SEND_RESULTS_TESTRAIL) {
             logger.info("setUp - go to /config page");
+            loginPage.open();
+            loginPage.loginDefaultUser();
             configPage.open();
             logger.info("setUp - get the build number");
             if (!configPage.find(By.xpath("//html/body")).getText().contains("Webapp")) {

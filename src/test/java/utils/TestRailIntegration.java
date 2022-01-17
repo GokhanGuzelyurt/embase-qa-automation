@@ -29,7 +29,7 @@ public class TestRailIntegration {
     public static String TESTRAIL_APIKEY = properties.getProperty("testRailApiKey");
     private static File runPath = Paths.get("src", "test", "resources", "features", "run").toFile();
     private static ArrayList<FeatureFile> featureFiles;
-    public static String SEND_RESULTS_TESTRAIL = properties.getProperty("sendResultsToTestRail");
+    public static boolean SEND_RESULTS_TESTRAIL = properties.getProperty("sendResultsToTestRail").equals("true");
     public static int RUN_ID = getRunId();
 
 

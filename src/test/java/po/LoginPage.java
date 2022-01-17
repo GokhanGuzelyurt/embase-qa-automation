@@ -5,10 +5,16 @@ import net.serenitybdd.core.pages.WebElementFacade;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import po.common.BasePage;
+
+import java.lang.invoke.MethodHandles;
 
 
 public class LoginPage extends BasePage {
+
+    final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     HeaderNavigation headerNavigation;
 
@@ -72,7 +78,7 @@ public class LoginPage extends BasePage {
 
     public void verifyPage() {
         loginTitle.waitUntilVisible().isDisplayed();
-//        logger.info("Verify the page 'Login' is displayed.");
+        logger.info("Verify the page 'Login' is displayed.");
         SoftAssertions.assertSoftly(softly -> {
             softly.assertThat(signInTitle.getText()).describedAs("Sign in title is wrong").isEqualTo("Sign in");
             softly.assertThat(loginTitle.getText()).describedAs("Login page title is wrong").isEqualTo("Enter your password to sign in to Embase");
