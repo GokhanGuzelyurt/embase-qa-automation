@@ -26,109 +26,106 @@ public class MedicalDeviceSearchPage extends BasePage {
     public WebElement searchTips;
 
     @FindBy(className = "wizard-title")
-    public WebElement MedicalDeviceLabel;
+    public WebElement medicalDeviceLabel;
 
     @FindBy(css = ".medical-device-name-section")
     public WebElement AddMedicalDeviceSection;
 
     @FindBy(id = "page-modal-label")
-    public WebElement ModalTitle;
+    public WebElement modalTitle;
 
     @FindBy(id = "device-name-input")
-    public WebElement DeviceNameSearchText;
+    public WebElement deviceNameSearchText;
 
     @FindBy(css = ".ModalContent-module_root__2Z_73 .PageModal_content___RVzo ModalContent-module_margin-md__2gac2")
-    public WebElement DeviceNamePopUp;
+    public WebElement deviceNamePopUp;
 
     @FindBy(css = ".modal-content adverse-reaction-modal")
-    public WebElement AdverseEffectPopUp;
+    public WebElement adverseEffectPopUp;
 
     @FindBy(css = ".modal-content specific-device-adverse-modal")
-    public WebElement SpecificDeviceEffectsPopUp;
+    public WebElement specificDeviceEffectsPopUp;
 
     @FindBy(className = "Tag-module_text__3dcY0")
-    public WebElement DeviceTagName;
+    public WebElement deviceTagName;
 
     @FindBy(className = "Tag-module_content__3E4R-")
     public WebElement tagNameGroup;
 
     @FindBy(css = ".specific-adverse-tag-wrapper")
-    public WebElement DeviceSpecificEffectsTagName;
+    public WebElement deviceSpecificEffectsTagName;
 
     @FindBy(css = ".synonym-tag")
-    public WebElement SynonymTagName;
+    public WebElement synonymTagName;
 
     @FindBy(id = "checkbox-adverse device effect")
-    public WebElement AdverseDeviceEffectCheckBox;
+    public WebElement adverseDeviceEffectCheckBox;
 
     @FindBy(id = "checkbox-clinical trial")
-    public WebElement ClinicalTrialCheckBox;
+    public WebElement clinicalTrialCheckBox;
 
     @FindBy(id = "checkbox-device comparison")
-    public WebElement DeviceComparisonCheckBox;
+    public WebElement deviceComparisonCheckBox;
 
     @FindBy(id = "checkbox-device economics")
-    public WebElement DeviceEconomicsCheckBox;
+    public WebElement deviceEconomicsCheckBox;
 
     @FindBy(xpath = "//span[contains(@class ,'icon-text')]")
-    public WebElement AddSynonymsLink;
+    public WebElement addSynonymsLink;
 
     @FindBy(css = "#page-modal button span")
     public WebElement addSynonymsModalBtn;
 
     @FindBy(css = ".els-autocomplete__suggestions-container")
-    public List<WebElement> DeviceSuggestionsList;
+    public List<WebElement> deviceSuggestionsList;
 
     @FindBy(id = "react-autowhatever-1")
-    public WebElement DeviceSuggestionsTermsList;
+    public WebElement deviceSuggestionsTermsList;
 
     @FindBy(className = "els-emtree")
-    public WebElement DeviceEmtreeNodesList;
+    public WebElement deviceEmtreeNodesList;
 
     @FindBy(css = ".els-emtree .els-emtree-list .term-holder")
-    public WebElement EmtreeTermList;
+    public WebElement emtreeTermList;
 
     @FindBy(css = ".els-emtree .els-emtree-list-item-content .child")
-    public WebElement AddToQueryIcon;
+    public WebElement addToQueryIcon;
 
     @FindBy(id = "synonym-switchers")
-    public WebElement SpecificDeviceAdverseEffectsList;
+    public WebElement specificDeviceAdverseEffectsList;
 
     @FindBy(css = ".Tag-module_content__3E4R- .LinkButton-module_root__2jLpv")
-    public WebElement EditDeviceIcon;
+    public WebElement editDeviceIcon;
 
     @FindBy(xpath = "//button[contains(@title,'Close')]")
-    public WebElement RemoveDeviceIcon;
-
-    @FindBy(css = "span.button-text")
-    public WebElement BtnTextValue;
+    public WebElement removeDeviceIcon;
 
     @FindBy(className = "PanelButton_content__3tpqy")
-    public WebElementFacade SynonymsBox;
+    public WebElementFacade synonymsBox;
 
     @FindBy(id = "study-limit-dropdown")
-    public WebElement LimitsDropdown;
+    public WebElement limitsDropdown;
 
     @FindBy(id = "study-limit-dropdown-options-Humans")
     public WebElement humanOption;
 
     @FindBy(xpath = "//span[text()='Records added to Embase (including end date) :']")
-    public WebElement RecordsAddedToEmbaseChkBox;
+    public WebElement recordsAddedToEmbaseChkBox;
 
     @FindBy(name = "daterangepicker_start")
-    public WebElement StartDate;
+    public WebElement startDate;
 
     @FindBy(name = "daterangepicker_end")
-    public WebElement EndDate;
+    public WebElement endDate;
 
     @FindBy(className = "date-range-picker")
-    public WebElement DateRangePicker;
+    public WebElement dateRangePicker;
 
     @FindBy(css = ".range_inputs")
-    public WebElement DateRangePickerDlgBox;
+    public WebElement dateRangePickerDlgBox;
 
     @FindBy(xpath = "//span[text()='Apply']")
-    public WebElement ApplyBtn;
+    public WebElement applyBtn;
 
     @FindBy(xpath = "//*[@id=\"root\"]/div[1]/div[3]/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[2]/div/span/span")
     public WebElement specificAdverseEffectsText;
@@ -169,7 +166,7 @@ public class MedicalDeviceSearchPage extends BasePage {
 
     public boolean medicalDeviceLabelDisplayed() {
         logger.info("Verify Medical device form label is displayed");
-        return MedicalDeviceLabel.isDisplayed();
+        return medicalDeviceLabel.isDisplayed();
     }
 
     public void clickIcon(String iconName) {
@@ -178,13 +175,11 @@ public class MedicalDeviceSearchPage extends BasePage {
         icon.click();
     }
 
-
     public void verifyIconLabelIsDisplayed(String iconLabel) {
         logger.info("Verify the label of the icon");
         WebElement ele = iconGroup.findElement(By.xpath("//span[contains(@class ,'PanelButton_content__3tpqy') and contains(text(),'" + iconLabel + "')]"));
         ele.click();
     }
-
 
     public void clickChckBoxByText(String text) {
         logger.info("Click on checkbox" + text);
@@ -194,36 +189,36 @@ public class MedicalDeviceSearchPage extends BasePage {
 
     public String verifyModalTitleName() {
         logger.info("Verify the title name");
-        return ModalTitle.getText();
+        return modalTitle.getText();
     }
 
 
     public void enterDeviceName(String deviceName) {
         logger.info("Enter the device name");
-        DeviceNameSearchText.click();
-        DeviceNameSearchText.sendKeys(Keys.CONTROL + "a");
-        DeviceNameSearchText.sendKeys(Keys.DELETE);
-        DeviceNameSearchText.sendKeys(deviceName);
+        deviceNameSearchText.click();
+        deviceNameSearchText.sendKeys(Keys.CONTROL + "a");
+        deviceNameSearchText.sendKeys(Keys.DELETE);
+        deviceNameSearchText.sendKeys(deviceName);
     }
 
     public boolean AddDeviceNamePopupDisplayed() {
-        return DeviceNamePopUp.isDisplayed();
+        return deviceNamePopUp.isDisplayed();
     }
 
 
     public boolean AddAdverseEffectsPopupDisplayed() {
-        return AdverseEffectPopUp.isDisplayed();
+        return adverseEffectPopUp.isDisplayed();
     }
 
 
     public boolean AddSpecificDEviceAdverseEffectsPopupDisplayed() {
-        return SpecificDeviceEffectsPopUp.isDisplayed();
+        return specificDeviceEffectsPopUp.isDisplayed();
     }
 
 
     public void clickAutoSuggestDeviceTerm(String term) {
 
-        List<WebElement> options = DeviceSuggestionsTermsList.findElements(By.className("suggestion-term"));
+        List<WebElement> options = deviceSuggestionsTermsList.findElements(By.className("suggestion-term"));
         for (WebElement option : options) {
             if (option.getText().equals(term)) {
                 option.click(); // click the desired option
@@ -236,7 +231,7 @@ public class MedicalDeviceSearchPage extends BasePage {
 
     public void clickOnEmtreeNode(String nodeName) {
         logger.info("Click on Emtree node " + nodeName);
-        List<WebElement> emtreeNodeList = DeviceEmtreeNodesList.findElements(By.className("term"));
+        List<WebElement> emtreeNodeList = deviceEmtreeNodesList.findElements(By.className("term"));
         for (WebElement emtreeNode : emtreeNodeList) {
             logger.info("Items are " + emtreeNode.getText());
             if (emtreeNode.getText().equals(nodeName)) {
@@ -249,7 +244,7 @@ public class MedicalDeviceSearchPage extends BasePage {
 
     public void clickEmtreeDeviceTerm(String nodeTerm) {
         logger.info("Click on Emtree term  " + nodeTerm);
-        WebElement nodeGrp = DeviceEmtreeNodesList.findElement(By.xpath("//*[text()[contains(.,'" + nodeTerm + "')]]"));
+        WebElement nodeGrp = deviceEmtreeNodesList.findElement(By.xpath("//*[text()[contains(.,'" + nodeTerm + "')]]"));
         logger.info("Medical device child " + nodeGrp.getText());
         nodeGrp.click();
 
@@ -258,7 +253,7 @@ public class MedicalDeviceSearchPage extends BasePage {
 
     public void clickEmtreeDeviceChildTerm(String childTerm) {
         logger.info("Click on Emtree term  " + childTerm);
-        List<WebElement> items = DeviceEmtreeNodesList.findElements(By.cssSelector(".child .term-holder"));
+        List<WebElement> items = deviceEmtreeNodesList.findElements(By.cssSelector(".child .term-holder"));
         for (WebElement emtreeNode : items) {
             if (emtreeNode.getText().equalsIgnoreCase(childTerm)) {
                 emtreeNode.click();
@@ -269,25 +264,25 @@ public class MedicalDeviceSearchPage extends BasePage {
 
     @Step
     public void clickEditDeviceIcon() {
-        EditDeviceIcon.click();
+        editDeviceIcon.click();
     }
 
     @Step
     public void clickRemoveDevice() {
-        RemoveDeviceIcon.click();
+        removeDeviceIcon.click();
     }
 
     @Step
     public void waitForSynonymsToLoad() {
-        if (SynonymsBox.getText().contains("synonyms")) {
-            SynonymsBox.isEnabled();
+        if (synonymsBox.getText().contains("synonyms")) {
+            synonymsBox.isEnabled();
         }
     }
 
     @Step
     public void selectHumanFromLimitsDropDown() {
-        if (LimitsDropdown.isEnabled()) {
-            LimitsDropdown.click();
+        if (limitsDropdown.isEnabled()) {
+            limitsDropdown.click();
             humanOption.click();
         }
     }
@@ -295,13 +290,13 @@ public class MedicalDeviceSearchPage extends BasePage {
     @Step
     public void selectDateRange(String startDate, String endDate) {
 
-        DateRangePicker.click();
-        if (DateRangePickerDlgBox.isDisplayed()) {
-            StartDate.sendKeys(Keys.CONTROL + "a");
-            StartDate.sendKeys(Keys.DELETE);
-            StartDate.sendKeys(startDate);
-            EndDate.sendKeys(endDate);
-            ApplyBtn.click();
+        dateRangePicker.click();
+        if (dateRangePickerDlgBox.isDisplayed()) {
+            this.startDate.sendKeys(Keys.CONTROL + "a");
+            this.startDate.sendKeys(Keys.DELETE);
+            this.startDate.sendKeys(startDate);
+            this.endDate.sendKeys(endDate);
+            applyBtn.click();
         }
     }
 
