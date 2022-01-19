@@ -14,7 +14,7 @@ import java.util.List;
 @DefaultUrl("page:quickSearch.page")
 public class QuickSearchPage extends BasePage {
 
-    @FindBy(id = "showResults")
+    @FindBy(css = "[data-testid='show-results-button']")
     public WebElement showResultsButton;
 
     @FindBy(css = "[data-testid='add-field']")
@@ -29,10 +29,7 @@ public class QuickSearchPage extends BasePage {
     @FindBy(css = "[data-testid='other-fields']")
     public WebElement otherFieldsList;
 
-    @FindBy(id = "numberOfResults")
-    public WebElement buttonHits;
-
-    @FindBy(id = "fragmentInput-0")
+    @FindBy(id = "fragments[0].value")
     public WebElement firstLine;
 
     @FindBy(id = "usePublicationRange")

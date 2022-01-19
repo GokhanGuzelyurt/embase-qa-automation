@@ -1,5 +1,6 @@
 package embase.tests.StepDefs;
 
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -50,11 +51,16 @@ public class QuickSearchPageStepDef {
 
     @Then("^(.*) is not a part of fields list on Quick Search Page$")
     public void verifyFieldNameIsNotPresent(String fieldName){
-        Assertions.assertThat(quickSearchPage.verifyFieldName(fieldName)).describedAs("'"+fieldName+"'is present").isFalse();
+        Assertions.assertThat(quickSearchPage.isFieldNamePresent(fieldName)).describedAs("'"+fieldName+"'is present").isFalse();
     }
 
     @Then("^(.*) is a part of fields list on Quick Search Page$")
     public void verifyFieldNameIsPresent(String fieldName){
-        Assertions.assertThat(quickSearchPage.verifyFieldName(fieldName)).describedAs("'"+fieldName+"'is present").isTrue();
+        Assertions.assertThat(quickSearchPage.isFieldNamePresent(fieldName)).describedAs("'"+fieldName+"'is present").isTrue();
+    }
+
+    @And("^user clicks on Show results button on quick search$")
+    public void clickShowResultsQuickSearch(){
+        quickSearchPage.showResultsButton.click();
     }
 }
