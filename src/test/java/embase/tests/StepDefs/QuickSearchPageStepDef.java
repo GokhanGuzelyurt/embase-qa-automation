@@ -49,12 +49,12 @@ public class QuickSearchPageStepDef {
     }
 
     @Then("^(.*) is not a part of fields list on Quick Search Page$")
-    public void verifyFieldNameIsNotPresent(String fieldName){
-        Assertions.assertThat(quickSearchPage.verifyFieldName(fieldName)).describedAs("'"+fieldName+"'is present").isFalse();
+    public void verifyFieldNameIsNotPresent(String fieldName) {
+        Assertions.assertThat(quickSearchPage.isFieldNamePresent(fieldName)).describedAs("'" + fieldName + "'is present").isFalse();
     }
 
     @Then("^(.*) is a part of fields list on Quick Search Page$")
-    public void verifyFieldNameIsPresent(String fieldName){
-        Assertions.assertThat(quickSearchPage.verifyFieldName(fieldName)).describedAs("'"+fieldName+"'is present").isTrue();
+    public void verifyFieldNameIsPresent(String fieldName) {
+        Assertions.assertThat(quickSearchPage.isFieldNamePresent(fieldName)).describedAs("'" + fieldName + "'is present").isTrue();
     }
 }
