@@ -2,6 +2,7 @@ package po;
 
 import net.thucydides.core.annotations.DefaultUrl;
 import org.assertj.core.api.Assertions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
@@ -16,14 +17,20 @@ public class QuickSearchPage extends BasePage {
     @FindBy(id = "showResults")
     public WebElement showResultsButton;
 
+    @FindBy(css = "[data-testid='add-field']")
+    public WebElement addFieldBtn;
+
+    @FindBy(id = "field-selector-header")
+    public WebElement fieldSelectorLabel;
+
+    @FindBy(css = "[data-testid='frequent-fields']")
+    public WebElement frequentFieldsList;
+
+    @FindBy(css = "[data-testid='other-fields']")
+    public WebElement otherFieldsList;
+
     @FindBy(id = "numberOfResults")
     public WebElement buttonHits;
-
-    @FindBy(css = ".fragmentBox.searchFragmentBox input")
-    public List textFieldsList;
-
-    @FindBy(css = ".trashButton")
-    public List trashIconsList;
 
     @FindBy(id = "fragmentInput-0")
     public WebElement firstLine;
@@ -61,11 +68,30 @@ public class QuickSearchPage extends BasePage {
     @FindBy(css = ".circle")
     public WebElement searchTipsCloseButton;
 
-    @FindBy(className="fragmentSuggestions")
+    @FindBy(className = "fragmentSuggestions")
     public WebElement autosuggestList;
 
 
     public void at() {
-        Assertions.assertThat(showResultsButton.isDisplayed()).describedAs("Show Results button is not displayed").isTrue();
+        shouldBeDisplayed();
+    }
+
+    public boolean isFieldNamePresent(String fieldName) {
+        boolean flag = false;
+        List<WebElement> frequentList = frequentFieldsList.findElements(By.xpath("*//span[@class='LinkButton-module_content__2F1Lc']"));
+        List<WebElement> otherFields = otherFieldsList.findElements(By.xpath("*//span[@class='LinkButton-module_content__2F1Lc']"));
+        for (WebElement fieldValue : frequentList) {
+            if ((fieldName).contains(fieldValue.getText())) {
+                flag = true;
+                break;
+            } else flag = false;
+        }
+        for (WebElement fieldValue : otherFields) {
+            if ((fieldName).contains(fieldValue.getText())) {
+                flag = true;
+                break;
+            } else flag = false;
+        }
+        return flag;
     }
 }

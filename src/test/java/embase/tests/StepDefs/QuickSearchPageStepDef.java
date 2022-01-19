@@ -37,4 +37,24 @@ public class QuickSearchPageStepDef {
         val = Integer.parseInt(substring);
         Assertions.assertThat(val).describedAs("Value is not greater than " + count).isGreaterThan(count);
     }
+
+    @When("^user clicks on Add field button on Quick Search Page$")
+    public void clickAddFieldBtn() {
+        quickSearchPage.addFieldBtn.click();
+    }
+
+    @Then("^Add field popup is opened on Quick Search Page$")
+    public void verifyAddFieldPopup() {
+        Assertions.assertThat(quickSearchPage.fieldSelectorLabel.isDisplayed()).describedAs("Add field popup is not displayed").isTrue();
+    }
+
+    @Then("^(.*) is not a part of fields list on Quick Search Page$")
+    public void verifyFieldNameIsNotPresent(String fieldName){
+        Assertions.assertThat(quickSearchPage.verifyFieldName(fieldName)).describedAs("'"+fieldName+"'is present").isFalse();
+    }
+
+    @Then("^(.*) is a part of fields list on Quick Search Page$")
+    public void verifyFieldNameIsPresent(String fieldName){
+        Assertions.assertThat(quickSearchPage.verifyFieldName(fieldName)).describedAs("'"+fieldName+"'is present").isTrue();
+    }
 }
