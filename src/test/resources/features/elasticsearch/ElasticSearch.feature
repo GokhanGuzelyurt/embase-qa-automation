@@ -62,7 +62,7 @@ Feature: Elastic search queries
       | '09-2019':dc               |
       | '2019':dc                  |
 
-  @EMBASE-13255
+  @C506450
   Scenario Outline: Date fields validation. Both date formats bring same number of results
     Given user opens Results page
     And user enters query <originalDateFormatQueries> and performs a search
