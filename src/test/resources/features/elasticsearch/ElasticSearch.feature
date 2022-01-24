@@ -62,7 +62,7 @@ Feature: Elastic search queries
       | '09-2019':dc               |
       | '2019':dc                  |
 
-  @EMBASE-12252 @C506426
+  @C506426
   Scenario: Verify fields on export dialog box for Word format
     When user opens Results page
     And user enters query [23-11-2020]/sd and performs a search
