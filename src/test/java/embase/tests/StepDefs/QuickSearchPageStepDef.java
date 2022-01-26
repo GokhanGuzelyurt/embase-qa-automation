@@ -93,5 +93,6 @@ public class QuickSearchPageStepDef {
     @And("^user selects (.*) from frequent field list on add field popup$")
     public void addNewField(String fieldName){
         quickSearchPage.selectFrequentFieldNameByText(fieldName);
-    }
+  
+  
 }
