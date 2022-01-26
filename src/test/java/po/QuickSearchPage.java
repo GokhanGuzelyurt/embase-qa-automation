@@ -20,6 +20,9 @@ public class QuickSearchPage extends BasePage {
     @FindBy(css = "[data-testid='add-field']")
     public WebElement addFieldBtn;
 
+    @FindBy(css = "[data-testid='fragments[0].change']")
+    public WebElement changeFieldBtn;
+
     @FindBy(id = "field-selector-header")
     public WebElement fieldSelectorLabel;
 
@@ -31,6 +34,9 @@ public class QuickSearchPage extends BasePage {
 
     @FindBy(id = "fragments[0].value")
     public WebElement firstLine;
+
+    @FindBy(id = "fragments[1].value")
+    public WebElement secondLine;
 
     @FindBy(id = "usePublicationRange")
     public Checkbox usePublicationRangeCheckBox;
@@ -90,5 +96,25 @@ public class QuickSearchPage extends BasePage {
             } else flag = false;
         }
         return flag;
+    }
+
+    public void selectFrequentFieldNameByText(String fieldName) {
+        List<WebElement> frequentList = frequentFieldsList.findElements(By.xpath("*//span[@class='LinkButton-module_content__2F1Lc']"));
+        for (WebElement fieldValue : frequentList) {
+           if(fieldValue.getText().equalsIgnoreCase(fieldName)){
+               fieldValue.click();
+               break;
+           }
+        }
+    }
+
+    public void selectOtherFieldNameByText(String fieldName) {
+        List<WebElement> otherFields = otherFieldsList.findElements(By.xpath("*//span[@class='LinkButton-module_content__2F1Lc']"));
+        for (WebElement fieldValue : otherFields) {
+            if(fieldValue.getText().equalsIgnoreCase(fieldName)){
+                fieldValue.click();
+                break;
+            }
+        }
     }
 }
