@@ -1,3 +1,4 @@
+@api @BE @skip
 Feature: Emtree-2022.01
 
   Background:
@@ -7,7 +8,7 @@ Feature: Emtree-2022.01
     And I execute the http request with method POST
     And I capture cookies from the authentication method
 
-  @EmtreeWipAdded
+  @C506457
   Scenario Outline: Verify that newly added Emtree terms from 2022.01 are present BE
     Given I set the endpoint for the http request to /rest/searchquery/term/autocomplete
     And I set the queryParam term with value <term>
