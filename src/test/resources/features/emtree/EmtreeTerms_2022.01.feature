@@ -1,4 +1,4 @@
-@api @BE @skip
+@api @BE @skip @emtree_2022
 Feature: Emtree-2022.01
 
   Background:
