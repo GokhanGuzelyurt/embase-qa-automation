@@ -1620,14 +1620,14 @@ Feature: Emtree-2022.01
     Examples:
       | term                                       |
       | aardvark (genus)                           |
-      | angioimmunoblastic T cell lymphoma*        |
+      | angioimmunoblastic T cell lymphoma         |
       | attention deficit hyperactivity disorder   |
-      | atypical hemolytic uraemic syndrome*       |
+      | atypical hemolytic uraemic syndrome        |
       | Cognitive Emotion Regulation Questionnaire |
       | ductal breast carcinoma                    |
       | edentulism                                 |
       | emotion regulation questionnaire           |
-      | fibroadenoma*                              |
+      | fibroadenoma                               |
       | genetic modification                       |
       | genotyping                                 |
       | gestational trophoblastic disease          |
@@ -1656,16 +1656,16 @@ Feature: Emtree-2022.01
       | social avoidance                           |
       | Sulfurisphaera tokodaii                    |
       | thoracic cancer                            |
-      | thoracic cancer r                          |
+      | thoracic cancer                            |
       | thoracic metastasis                        |
       | thoracic tumor                             |
       | thoracic tumor                             |
-      | two dimensional gel electrophoresis*       |
+      | two dimensional gel electrophoresis        |
       | understory                                 |
       | aardvark (genus)                           |
-      | angioimmunoblastic T cell lymphoma*        |
+      | angioimmunoblastic T cell lymphoma         |
       | attention deficit hyperactivity disorder   |
-      | atypical hemolytic uraemic syndrome*       |
+      | atypical hemolytic uraemic syndrome        |
       | Cognitive Emotion Regulation Questionnaire |
       | ductal breast carcinoma                    |
       | edentulism                                 |
