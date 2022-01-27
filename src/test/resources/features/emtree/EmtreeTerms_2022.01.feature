@@ -1624,7 +1624,7 @@ Feature: Emtree-2022.01
       | attention deficit hyperactivity disorder              |
       | atypical hemolytic uraemic syndrome                   |
       | Cognitive Emotion Regulation Questionnaire            |
-      | ductal breast carcinoma                               |
+      | ductal breast carcinoma insitu                        |
       | edentulism                                            |
       | emotion regulation questionnaire                      |
       | fibroadenoma                                          |
@@ -1678,7 +1678,7 @@ Feature: Emtree-2022.01
       | fazirsiran                                            |
       | firolimogene autotemcel                               |
       | fostroxacitabine bralpamide                           |
-      | grapiprant*     c                                     |
+      | grapiprant                                            |
       | homatropine methylbromide plus hydrocodone bitartrate |
       | homeobox protein Nkx-2.2                              |
       | Human papilloma virus vaccine                         |
@@ -1689,7 +1689,7 @@ Feature: Emtree-2022.01
       | ivabradine                                            |
       | laruparetigene zovaparvovec                           |
       | mupirocin                                             |
-      | neuronal migration protein                            |
+      | neuronal migration protein doublecortin               |
       | olitigaltin                                           |
       | onternabez                                            |
       | pegipanermin                                          |
