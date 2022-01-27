@@ -1703,5 +1703,4 @@ Feature: Emtree-2022.01
       | thoracic metastasis                        |
       | thoracic tumor                             |
       | thoracic tumor                             |
-      | two dimensional gel electrophoresis*       |
       | understory                                 |
