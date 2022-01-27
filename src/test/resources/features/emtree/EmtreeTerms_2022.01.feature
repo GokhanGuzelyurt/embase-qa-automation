@@ -1624,7 +1624,7 @@ Feature: Emtree-2022.01
       | attention deficit hyperactivity disorder              |
       | atypical hemolytic uraemic syndrome                   |
       | Cognitive Emotion Regulation Questionnaire            |
-      | ductal breast carcinoma insitu                        |
+      | ductal breast carcinoma in situ                       |
       | edentulism                                            |
       | emotion regulation questionnaire                      |
       | fibroadenoma                                          |
