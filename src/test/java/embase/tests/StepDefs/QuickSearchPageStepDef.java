@@ -94,6 +94,5 @@ public class QuickSearchPageStepDef {
     public void addNewField(String fieldName){
         quickSearchPage.selectFrequentFieldNameByText(fieldName);
   
-  
-}
+    }
 }

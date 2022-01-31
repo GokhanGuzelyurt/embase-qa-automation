@@ -7,6 +7,7 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import net.serenitybdd.core.environment.EnvironmentSpecificConfiguration;
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.util.EnvironmentVariables;
@@ -266,5 +267,10 @@ public class CommonSteps {
     public void userVerifiesThatUrlContains(String uri) {
         String currentUrl = driver.getCurrentUrl();
         Assert.assertTrue("The Url " + currentUrl + " does not contain '" + uri + "'", currentUrl.contains(uri));
+    }
+
+    @When("^user clicks on (.*)$")
+    public void clickOn(String button) {
+        basePage.clickOn(button);
     }
 }
