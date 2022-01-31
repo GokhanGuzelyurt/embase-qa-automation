@@ -62,3 +62,19 @@ Feature: Elastic search queries
       | '09-2019':dc               |
       | '2019':dc                  |
 
+  @C506452
+  Scenario: Verify fields on export dialog box for Word format
+    When user opens Results page
+    And user enters query [23-11-2020]/sd and performs a search
+    And user selects records 1 from the records list on Results page and click on export
+    And user selects Format MS Word in export window
+    And user selects checkbox Title in export window
+    And user selects checkbox Author names in export window
+    And user selects checkbox Author address in export window
+    And user selects checkbox Editors in export window
+    And user selects checkbox Source title in export window
+    And user clicks on Export button in modal window
+    And user switches to 2 window
+    Then user verifies that text is displayed: Export ready for download
+    And user verifies that text is displayed: Download
+    And user verifies that url contains /search/download

@@ -4,11 +4,14 @@ package embase.tests.StepDefs;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
 import net.serenitybdd.core.environment.EnvironmentSpecificConfiguration;
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.util.EnvironmentVariables;
 import org.apache.commons.lang3.reflect.FieldUtils;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -33,10 +36,7 @@ import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class CommonSteps {
 
@@ -249,4 +249,22 @@ public class CommonSteps {
         }
     }
 
+    @Then("^user verifies that text is displayed: (.*)$")
+    public void userVerifiesThatTextIsDisplayed(String text) {
+        basePage.userVerifiesThatTextIsDisplayed(text);
+    }
+
+    @And("user switches to {int} window")
+    public void userSwitchesToSecondWindow(int index) {
+        Set<String> windowHandles = driver.getWindowHandles();
+        List<String> windowString = new ArrayList<>(windowHandles);
+        String window = windowString.get(index - 1);
+        driver.switchTo().window(window);
+    }
+
+    @And("^user verifies that url contains (.*)$")
+    public void userVerifiesThatUrlContains(String uri) {
+        String currentUrl = driver.getCurrentUrl();
+        Assert.assertTrue("The Url " + currentUrl + " does not contain '" + uri + "'", currentUrl.contains(uri));
+    }
 }
