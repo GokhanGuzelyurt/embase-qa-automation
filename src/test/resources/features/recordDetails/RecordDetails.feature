@@ -280,3 +280,29 @@ Feature: Record Details tests
     And collapsible section Abstract is collapsed in the Record details page
     When user clicks on collapsible section title Abstract of the Record details page
     Then collapsible section Abstract is expanded in the Record details page
+
+  @C506718
+  Scenario Outline: Record details page does not crash on specific query <query>
+    Given user enters query <query> and performs a search
+    Then the result set is not empty
+    And user opens record #1 by clicking on title
+    Then user is on Record Details page
+    And Back to results link is displayed and enabled
+    And pagination links are disabled on Record details page
+    And pagination label contains value 1 of 1
+    And title field is not empty on record details page
+    And view author address button is present on Record details page
+    Examples:
+      | query      |
+      | L372446238 |
+      | L14033922  |
+      | L6007386   |
+      | L18010735  |
+      | L280905581 |
+      | L19179790  |
+      | L18121875  |
+      | L5074324   |
+      | L18112053  |
+      | L5006289   |
+      | L19047480  |
+
