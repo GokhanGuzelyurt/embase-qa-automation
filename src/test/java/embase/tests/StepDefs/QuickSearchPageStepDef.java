@@ -62,6 +62,7 @@ public class QuickSearchPageStepDef {
     public void verifyAddFieldPopup() {
         Assertions.assertThat(quickSearchPage.fieldSelectorLabel.isDisplayed()).describedAs("Add field popup is not displayed").isTrue();
     }
+
     @Then("^Change field popup is opened on quick search page$")
     public void verifyChangeFieldPopup() {
         Assertions.assertThat(quickSearchPage.fieldSelectorLabel.isDisplayed()).describedAs("Change field popup is not displayed").isTrue();
@@ -69,32 +70,34 @@ public class QuickSearchPageStepDef {
     }
 
     @Then("^(.*) is not a part of fields list on Quick Search Page$")
-    public void verifyFieldNameIsNotPresent(String fieldName){
-        Assertions.assertThat(quickSearchPage.isFieldNamePresent(fieldName)).describedAs("'"+fieldName+"'is present").isFalse();
+    public void verifyFieldNameIsNotPresent(String fieldName) {
+        Assertions.assertThat(quickSearchPage.isFieldNamePresent(fieldName)).describedAs("'" + fieldName + "'is present").isFalse();
     }
 
     @Then("^(.*) is a part of fields list on Quick Search Page$")
-    public void verifyFieldNameIsPresent(String fieldName){
-        Assertions.assertThat(quickSearchPage.isFieldNamePresent(fieldName)).describedAs("'"+fieldName+"'is present").isTrue();
+    public void verifyFieldNameIsPresent(String fieldName) {
+        Assertions.assertThat(quickSearchPage.isFieldNamePresent(fieldName)).describedAs("'" + fieldName + "'is present").isTrue();
     }
 
     @And("^user clicks on Show results button on quick search$")
-    public void clickShowResultsQuickSearch(){
+    public void clickShowResultsQuickSearch() {
         quickSearchPage.showResultsButton.click();
     }
 
     @And("^user selects (.*) from frequent field list on change field popup$")
-    public void editDefaultField(String fieldName){
+    public void editDefaultField(String fieldName) {
         quickSearchPage.selectFrequentFieldNameByText(fieldName);
     }
+
     @And("^user selects (.*) from other field list on change field popup$")
-    public void editFromOtherFieldList(String fieldName){
+    public void editFromOtherFieldList(String fieldName) {
         quickSearchPage.selectOtherFieldNameByText(fieldName);
     }
+
     @And("^user selects (.*) from frequent field list on add field popup$")
-    public void addNewField(String fieldName){
+    public void addNewField(String fieldName) {
         quickSearchPage.selectFrequentFieldNameByText(fieldName);
-  
-  
-}
+
+
+    }
 }
