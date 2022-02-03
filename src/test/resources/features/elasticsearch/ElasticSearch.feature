@@ -78,3 +78,12 @@ Feature: Elastic search queries
     Then user verifies that text is displayed: Export ready for download
     And user verifies that text is displayed: Download
     And user verifies that url contains /search/download
+
+  @C506719
+  Scenario Outline: Results can be 0 when searching for <query>
+    Given user opens Results page
+    And user enters query <query> and performs a search
+    Then the result set is empty
+    Examples:
+      | query              |
+      | l610882955 AND bsc |
