@@ -1,3 +1,4 @@
+@api @BE @skip @emtree_2022
 Feature: Emtree-2022.01
 
   Background:
@@ -7,7 +8,7 @@ Feature: Emtree-2022.01
     And I execute the http request with method POST
     And I capture cookies from the authentication method
 
-  @EmtreeWipAdded
+  @C506457
   Scenario Outline: Verify that newly added Emtree terms from 2022.01 are present BE
     Given I set the endpoint for the http request to /rest/searchquery/term/autocomplete
     And I set the queryParam term with value <term>
@@ -1606,3 +1607,102 @@ Feature: Emtree-2022.01
       | xeroderma pigmentosum variant                                              |
       | years of potential life lost                                               |
       | zooxanthellae                                                              |
+
+  @C506474
+  Scenario Outline: Verify that changed Emtree terms from 2022.01 are present in BE
+    Given I set the endpoint for the http request to /rest/searchquery/term/autocomplete
+    And I set the queryParam term with value <term>
+    And I set the queryParam limit with value 10
+    And I set a valid SESSION cookie
+    When I execute the http request with method GET
+    Then the status code of the response is 200
+    And the first suggested term is <term>
+    Examples:
+      | term                                                  |
+      | aardvark (genus)                                      |
+      | angioimmunoblastic T cell lymphoma                    |
+      | attention deficit hyperactivity disorder              |
+      | atypical hemolytic uraemic syndrome                   |
+      | Cognitive Emotion Regulation Questionnaire            |
+      | ductal breast carcinoma in situ                       |
+      | edentulism                                            |
+      | emotion regulation questionnaire                      |
+      | fibroadenoma                                          |
+      | genetic modification                                  |
+      | genotyping                                            |
+      | gestational trophoblastic disease                     |
+      | hammertoe                                             |
+      | intestinal metaplasia                                 |
+      | invasive mole                                         |
+      | left ventricular aneurysm                             |
+      | malignant cardiac tumor                               |
+      | malignant mediastinal tumor                           |
+      | metastatic carcinoma of the heart                     |
+      | mucinous cystadenoma                                  |
+      | nucleic acid amplification techniques                 |
+      | open sea                                              |
+      | Orthobornavirus                                       |
+      | paraneoplastic endocrine syndrome                     |
+      | PC-9/ER cells                                         |
+      | place of birth                                        |
+      | pleura malignancy                                     |
+      | prescribing error                                     |
+      | retained surgical item                                |
+      | reticuloendothelial tumor                             |
+      | Saccharolobus shibatae                                |
+      | Saccharolobus solfataricus                            |
+      | SARS-CoV-2 VUI-21APR-01                               |
+      | satsuma (orange)                                      |
+      | social avoidance                                      |
+      | Sulfurisphaera tokodaii                               |
+      | thoracic cancer                                       |
+      | thoracic cancer                                       |
+      | thoracic metastasis                                   |
+      | thoracic tumor                                        |
+      | thoracic tumor                                        |
+      | two dimensional gel electrophoresis                   |
+      | understory                                            |
+      | aguracingene cadoparvovec                             |
+      | angiotropin                                           |
+      | anselamimab                                           |
+      | bavunalimab                                           |
+      | botaretigene sparoparvovec                            |
+      | ciltacabtagene autoleucel                             |
+      | dinutuximab                                           |
+      | domofenogene zalfaparvovec                            |
+      | doxecitine                                            |
+      | dust mite extract                                     |
+      | efprezimod alfa                                       |
+      | endoplasmic reticulum chaperone BiP                   |
+      | etuvetidigene autotemcel                              |
+      | fazirsiran                                            |
+      | firolimogene autotemcel                               |
+      | fostroxacitabine bralpamide                           |
+      | grapiprant                                            |
+      | homatropine methylbromide plus hydrocodone bitartrate |
+      | homeobox protein Nkx-2.2                              |
+      | Human papilloma virus vaccine                         |
+      | hydroxyethyl starch                                   |
+      | idrevloride                                           |
+      | ifezuntirgene inilparvovec                            |
+      | iopofosine i 131                                      |
+      | ivabradine                                            |
+      | laruparetigene zovaparvovec                           |
+      | mupirocin                                             |
+      | neuronal migration protein doublecortin               |
+      | olitigaltin                                           |
+      | onternabez                                            |
+      | pegipanermin                                          |
+      | pivekimab sunirine                                    |
+      | pruxelutamide                                         |
+      | rebemadlin                                            |
+      | sirolimus                                             |
+      | testosterone buciclate                                |
+      | tosatoxumab                                           |
+      | tozinameran                                           |
+      | ulenistamab                                           |
+      | virus entry inhibitor                                 |
+      | zegocractin                                           |
+      | zenuzolac                                             |
+      | zinpentraxin alfa                                     |
+
