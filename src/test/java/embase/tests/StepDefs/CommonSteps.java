@@ -255,7 +255,7 @@ public class CommonSteps {
         basePage.verifyTextDisplayed(text);
     }
 
-    @And("user switches to {int} window")
+    @And("^user switches to (\\d+)(?:st|nd|rd|th) window$")
     public void userSwitchesToSecondWindow(int index) {
         Set<String> windowHandles = driver.getWindowHandles();
         List<String> windowString = new ArrayList<>(windowHandles);

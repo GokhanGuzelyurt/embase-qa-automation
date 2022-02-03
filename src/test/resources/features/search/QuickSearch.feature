@@ -76,7 +76,7 @@ Feature: Quick Search tests
   @C506491
   Scenario: Validate that the Search tips goes to Q&A page
     When user clicks on Search tips
-    And user switches to 2 window
+    And user switches to 2nd window
     Then user verifies that text is displayed: Elsevier Support Center
     And user verifies that text is displayed: How do I search in Embase?
     And user verifies that text is displayed: Quick search
