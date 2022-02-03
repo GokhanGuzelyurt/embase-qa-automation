@@ -71,7 +71,7 @@ public class BasePage extends PageObject {
         return wait.until(jQueryLoad) && wait.until(jsLoad);
     }
 
-    public void userVerifiesThatTextIsDisplayed(String text) {
+    public void verifyTextDisplayed(String text) {
         waitForJStoLoad();
         Assert.assertTrue("The page is not contain text '" + text + "'", body.getText().contains(text));
     }

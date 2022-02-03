@@ -251,8 +251,8 @@ public class CommonSteps {
     }
 
     @Then("^user verifies that text is displayed: (.*)$")
-    public void userVerifiesThatTextIsDisplayed(String text) {
-        basePage.userVerifiesThatTextIsDisplayed(text);
+    public void verifyTextDisplayed(String text) {
+        basePage.verifyTextDisplayed(text);
     }
 
     @And("user switches to {int} window")
