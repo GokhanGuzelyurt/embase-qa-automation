@@ -17,7 +17,7 @@ public class EmtreePageStepDef {
     @When("^user opens Emtree page$")
     public void openEmtreePage() {
         emtreePage.open();
-        emtreePage.waitFor(emtrePage.termInputTextField);
+        emtreePage.waitFor(emtreePage.termInputTextField);
     }
 
     @When("^user enters Emtree query (.*) in Emtree page$")
