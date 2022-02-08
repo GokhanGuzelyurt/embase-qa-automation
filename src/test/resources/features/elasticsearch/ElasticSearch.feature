@@ -62,6 +62,15 @@ Feature: Elastic search queries
       | '09-2019':dc               |
       | '2019':dc                  |
 
+  @C506719
+  Scenario Outline: Results can be 0 when searching for <query>
+    Given user opens Results page
+    And user enters query <query> and performs a search
+    Then the result set is empty
+    Examples:
+      | query              |
+      | l610882955 AND bsc |
+
   @C506452
   Scenario: Verify fields on export dialog box for Word format
     When user opens Results page
