@@ -183,7 +183,7 @@ public class ResultsPage extends BasePage {
         CommonSteps.setTestCaseVariable(variableName, getNumberOfSearchResults());
     }
 
-    public void theSameNumberOfBothSearchResults(String variableNameFirst, String variableNameSecond) {
+    public void verifyTheSameNumberOfBothSearchResults(String variableNameFirst, String variableNameSecond) {
         String first = CommonSteps.testCaseVariables.get(variableNameFirst);
         String second = CommonSteps.testCaseVariables.get(variableNameSecond);
         logger.info("assert that the number of search results is the same for both date format");

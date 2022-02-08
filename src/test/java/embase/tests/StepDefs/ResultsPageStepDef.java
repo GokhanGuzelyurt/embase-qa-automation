@@ -170,7 +170,7 @@ public class ResultsPageStepDef {
     }
 
     @Then("^the same number of search results for (.*) date and (.*) date$")
-    public void theSameNumberOfBothSearchResults(String variableNameFirst, String variableNameSecond) {
-        resultsPage.theSameNumberOfBothSearchResults(variableNameFirst, variableNameSecond);
+    public void verifyTheSameNumberOfBothSearchResults(String variableNameFirst, String variableNameSecond) {
+        resultsPage.verifyTheSameNumberOfBothSearchResults(variableNameFirst, variableNameSecond);
     }
 }
