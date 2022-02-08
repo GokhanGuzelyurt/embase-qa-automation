@@ -21,12 +21,12 @@ import java.lang.invoke.MethodHandles;
 import java.util.Arrays;
 import java.util.List;
 
+import static embase.tests.StepDefs.CommonSteps.testCaseVariables;
+
 @DefaultUrl("page:results.page")
 public class ResultsPage extends BasePage {
     final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     SearchPage searchPage;
-    String resultForOriginalDateFormat;
-    String resultForChangedDateFormat;
 
     @FindBy(css = ".empty:not(#search_row_empty) p")
     public WebElementFacade recordSecWarnZero;
@@ -181,17 +181,14 @@ public class ResultsPage extends BasePage {
 
     public void getTheNumberOfSearchResultsForDateFormat(String variableName) {
         CommonSteps.setTestCaseVariable(variableName, getNumberOfSearchResults());
-//        resultForChangedDateFormat = getNumberOfSearchResults();
-    }
-
-    public void getTheNumberOfSearchResultsForOriginalDateFormat() {
-//        resultForOriginalDateFormat = getNumberOfSearchResults();
     }
 
     public void theSameNumberOfBothSearchResults(String variableNameFirst, String variableNameSecond) {
+        String first = CommonSteps.testCaseVariables.get(variableNameFirst);
+        String second = CommonSteps.testCaseVariables.get(variableNameSecond);
         logger.info("assert that the number of search results is the same for both date format");
-        Assert.assertEquals("The search result after change date format " + variableNameSecond
-                        + " should be equal search result for original date format " + variableNameFirst,
-                variableNameFirst, variableNameSecond);
+        Assert.assertEquals("The search result after change date format " + second
+                        + " should be equal search result for original date format " + first,
+                first, second);
     }
 }

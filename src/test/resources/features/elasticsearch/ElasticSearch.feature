@@ -82,11 +82,11 @@ Feature: Elastic search queries
     Examples:
       | originalDateFormatQueries  | changedDateFormatQueries   |
       | [23-11-2020]/sd            | [2020-11-23]/sd            |
-#      | [2021-11-23]/aip           | [23-11-2021]/aip           |
-#      | test AND '2020-10-30':ld   | test AND '30-10-2020':ld   |
-#      | cancer AND '2020-10-01':ld | cancer AND '01-10-2020':ld |
-#      | public AND '2020-11-04':ld | public AND '04-11-2020':ld |
-#      | '2020-01-31':pd            | '31-01-2020':pd            |
-#      | '2020-10':pd               | '10-2020':pd               |
-#      | '2019-09-19':dc            | '19-09-2019':dc            |
-#      | '2019-09':dc               | '09-2019':dc               |
+      | [2021-11-23]/aip           | [23-11-2021]/aip           |
+      | test AND '2020-10-30':ld   | test AND '30-10-2020':ld   |
+      | cancer AND '2020-10-01':ld | cancer AND '01-10-2020':ld |
+      | public AND '2020-11-04':ld | public AND '04-11-2020':ld |
+      | '2020-01-31':pd            | '31-01-2020':pd            |
+      | '2020-10':pd               | '10-2020':pd               |
+      | '2019-09-19':dc            | '19-09-2019':dc            |
+      | '2019-09':dc               | '09-2019':dc               |
