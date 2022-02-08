@@ -68,3 +68,20 @@ Feature: Quick Search tests
     And user clicks on Show results button on quick search
     Then user is on Results Page
     And search query is heart:ab OR heart:ti
+
+  Scenario: Validate footer contents
+    Then validate that footer elements are present:
+      | footerElement | text                 | link                                                                                            |
+      | elsevierLogo  | n/a                  | https://www.elsevier.com/                                                                       |
+      | relxLogo      | n/a                  | https://www.relx.com/                                                                           |
+      | linkAbout     | About Embase         | https://www.elsevier.com/solutions/embase-biomedical-research                                   |
+      | linkLSS       | LSS                  | https://www.elsevier.com/rd-solutions/pharma-and-life-sciences-solutions                        |
+      | linkNews      | News                 | https://service.elsevier.com/app/answers/detail/a_id/29534/p/10882/supporthub/embase/related/1/ |
+      | linkHelp      | Help                 | https://service.elsevier.com/app/home/supporthub/embase                                         |
+      | linkWebinars  | Webinars             | https://service.elsevier.com/app/answers/detail/a_id/29878/supporthub/embase/kw/webinar/        |
+      | linkContact   | Contact support team | https://service.elsevier.com/app/contact/supporthub/embase/                                     |
+      | linkTerms     | Terms and conditions | https://www.elsevier.com/legal/elsevier-website-terms-and-conditions                            |
+      | linkPrivacy   | Privacy policy       | https://www.elsevier.com/legal/privacy-policy                                                   |
+      |               |                      |                                                                                                 |
+      |               |                      |                                                                                                 |
+      |               |                      |                                                                                                 |
