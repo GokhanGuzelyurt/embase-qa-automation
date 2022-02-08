@@ -74,6 +74,9 @@ public class QuickSearchPage extends BasePage {
     @FindBy(className = "fragmentSuggestions")
     public WebElement autosuggestList;
 
+    @FindBy(id = "fragments[1].operator.value")
+    public WebElement operatorDropdown;
+
 
     public void at() {
         shouldBeDisplayed();
@@ -101,20 +104,27 @@ public class QuickSearchPage extends BasePage {
     public void selectFrequentFieldNameByText(String fieldName) {
         List<WebElement> frequentList = frequentFieldsList.findElements(By.xpath("*//span[@class='LinkButton-module_content__2F1Lc']"));
         for (WebElement fieldValue : frequentList) {
-           if(fieldValue.getText().equalsIgnoreCase(fieldName)){
-               fieldValue.click();
-               break;
-           }
+            if (fieldValue.getText().equalsIgnoreCase(fieldName)) {
+                fieldValue.click();
+                break;
+            }
         }
     }
 
     public void selectOtherFieldNameByText(String fieldName) {
         List<WebElement> otherFields = otherFieldsList.findElements(By.xpath("*//span[@class='LinkButton-module_content__2F1Lc']"));
         for (WebElement fieldValue : otherFields) {
-            if(fieldValue.getText().equalsIgnoreCase(fieldName)){
+            if (fieldValue.getText().equalsIgnoreCase(fieldName)) {
                 fieldValue.click();
                 break;
             }
         }
+    }
+
+    public void selectOperatorByText(String text) {
+        operatorDropdown.click();
+        WebElement operatorText = operatorDropdown.findElement(By.xpath("//span[contains(@class,'SelectPopover_optionText__2Nd3v')and contains(text(),'" + text + "')]"));
+        operatorText.click();
+
     }
 }

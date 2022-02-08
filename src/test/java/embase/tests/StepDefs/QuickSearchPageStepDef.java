@@ -97,7 +97,10 @@ public class QuickSearchPageStepDef {
     @And("^user selects (.*) from frequent field list on add field popup$")
     public void addNewField(String fieldName) {
         quickSearchPage.selectFrequentFieldNameByText(fieldName);
+    }
 
-
+    @And("^user selects (.*) operator for second line query$")
+    public void selectOperatorValue(String operator) {
+        quickSearchPage.selectOperatorByText(operator);
     }
 }
