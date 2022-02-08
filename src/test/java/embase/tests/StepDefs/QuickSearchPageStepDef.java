@@ -116,10 +116,8 @@ public class QuickSearchPageStepDef {
     public void validateFooter(DataTable table) {
         quickSearchPage.waitForJStoLoad();
         List<Map<String, String>> rows = table.asMaps(String.class, String.class);
-        //   Map<String, String> data = rows.get(0);
 
         for (Map<String, String> data : rows) {
-
             switch (data.get("footerElement")) {
                 case "elsevierLogo":
                     Assertions.assertThat(footer.elsevierLogo.isPresent()).describedAs("elsevierLogo is not present").isTrue();
