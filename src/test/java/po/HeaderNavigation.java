@@ -10,7 +10,6 @@ public class HeaderNavigation extends BasePage {
     @FindBy(id = "header-holder")
     public WebElement headerHolder;
 
-
     @FindBy(id = "header-btn-sign-in")
     public WebElementFacade signInButton;
 

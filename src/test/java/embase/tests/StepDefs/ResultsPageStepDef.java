@@ -30,6 +30,13 @@ public class ResultsPageStepDef {
         Assertions.assertThat(resultsPage.resultList.getResultsCount()).describedAs("Result is empty").isGreaterThan(0);
     }
 
+    @Then("^the result set is empty$")
+    public void iVerifyResultIsEmpty() {
+        resultsPage.waitForJStoLoad();
+        logger.info("Count is " + resultsPage.resultList.getResultsCount());
+        Assertions.assertThat(resultsPage.resultList.getResultsCount()).describedAs("Result is not empty").isEqualTo(0);
+    }
+
     @Then("^record #(\\d*) of the results list contains (.*) in authors$")
     public void verifyResultListAuthors(int recordNumber, String expectedText) {
         Assertions.assertThat(resultsPage.resultList.getResultListAuthorsTextForRecord(recordNumber)).describedAs("Results list element does not contain expected text").contains(expectedText);

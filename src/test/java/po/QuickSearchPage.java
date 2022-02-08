@@ -2,6 +2,7 @@ package po;
 
 import net.thucydides.core.annotations.DefaultUrl;
 import org.assertj.core.api.Assertions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
@@ -13,27 +14,29 @@ import java.util.List;
 @DefaultUrl("page:quickSearch.page")
 public class QuickSearchPage extends BasePage {
 
-    @FindBy(id = "showResults")
+    @FindBy(css = "[data-testid='show-results-button']")
     public WebElement showResultsButton;
 
-    @FindBy(id = "numberOfResults")
-    public WebElement buttonHits;
+    @FindBy(css = "[data-testid='add-field']")
+    public WebElement addFieldBtn;
 
-//    @FindBy(css = ".fragmentView")
-//    public UIList<FragmentView, EmbUIElement> searchInputList;
-//
-//    @FindBy(css = ".fragmentBox.fragmentFields")
-//    public UIList<FragmentView, EmbUIElement> fieldCodesList;
+    @FindBy(css = "[data-testid='fragments[0].change']")
+    public WebElement changeFieldBtn;
 
-    @FindBy(css = ".fragmentBox.searchFragmentBox input")
-    public List textFieldsList;
+    @FindBy(id = "field-selector-header")
+    public WebElement fieldSelectorLabel;
 
+    @FindBy(css = "[data-testid='frequent-fields']")
+    public WebElement frequentFieldsList;
 
-    @FindBy(css = ".trashButton")
-    public List trashIconsList;
+    @FindBy(css = "[data-testid='other-fields']")
+    public WebElement otherFieldsList;
 
-    @FindBy(id = "fragmentInput-0")
+    @FindBy(id = "fragments[0].value")
     public WebElement firstLine;
+
+    @FindBy(id = "fragments[1].value")
+    public WebElement secondLine;
 
     @FindBy(id = "usePublicationRange")
     public Checkbox usePublicationRangeCheckBox;
@@ -68,11 +71,50 @@ public class QuickSearchPage extends BasePage {
     @FindBy(css = ".circle")
     public WebElement searchTipsCloseButton;
 
-    @FindBy(className="fragmentSuggestions")
+    @FindBy(className = "fragmentSuggestions")
     public WebElement autosuggestList;
 
 
     public void at() {
-        Assertions.assertThat(showResultsButton.isDisplayed()).describedAs("Show Results button is not displayed").isTrue();
+        shouldBeDisplayed();
+    }
+
+    public boolean isFieldNamePresent(String fieldName) {
+        boolean flag = false;
+        List<WebElement> frequentList = frequentFieldsList.findElements(By.xpath("*//span[@class='LinkButton-module_content__2F1Lc']"));
+        List<WebElement> otherFields = otherFieldsList.findElements(By.xpath("*//span[@class='LinkButton-module_content__2F1Lc']"));
+        for (WebElement fieldValue : frequentList) {
+            if ((fieldName).contains(fieldValue.getText())) {
+                flag = true;
+                break;
+            } else flag = false;
+        }
+        for (WebElement fieldValue : otherFields) {
+            if ((fieldName).contains(fieldValue.getText())) {
+                flag = true;
+                break;
+            } else flag = false;
+        }
+        return flag;
+    }
+
+    public void selectFrequentFieldNameByText(String fieldName) {
+        List<WebElement> frequentList = frequentFieldsList.findElements(By.xpath("*//span[@class='LinkButton-module_content__2F1Lc']"));
+        for (WebElement fieldValue : frequentList) {
+           if(fieldValue.getText().equalsIgnoreCase(fieldName)){
+               fieldValue.click();
+               break;
+           }
+        }
+    }
+
+    public void selectOtherFieldNameByText(String fieldName) {
+        List<WebElement> otherFields = otherFieldsList.findElements(By.xpath("*//span[@class='LinkButton-module_content__2F1Lc']"));
+        for (WebElement fieldValue : otherFields) {
+            if(fieldValue.getText().equalsIgnoreCase(fieldName)){
+                fieldValue.click();
+                break;
+            }
+        }
     }
 }
