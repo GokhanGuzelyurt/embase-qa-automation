@@ -81,7 +81,6 @@ public class ResultsPage extends BasePage {
     public WebElementFacade addToClipboardActionLink;
 
 
-
     public void waitForRecordSectionIsLoaded() {
         logger.info("Wait for please wait to vanish");
         logger.info("Wait if 0 results page is not displayed");
@@ -163,6 +162,7 @@ public class ResultsPage extends BasePage {
                 break;
         }
     }
+
 
 }
 
