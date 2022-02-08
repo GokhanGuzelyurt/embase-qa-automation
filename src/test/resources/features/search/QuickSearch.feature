@@ -71,17 +71,17 @@ Feature: Quick Search tests
 
   Scenario: Validate footer contents
     Then validate that footer elements are present:
-      | footerElement | text                 | link                                                                                            |
-      | elsevierLogo  | n/a                  | https://www.elsevier.com/                                                                       |
-      | relxLogo      | n/a                  | https://www.relx.com/                                                                           |
-      | linkAbout     | About Embase         | https://www.elsevier.com/solutions/embase-biomedical-research                                   |
-      | linkLSS       | LSS                  | https://www.elsevier.com/rd-solutions/pharma-and-life-sciences-solutions                        |
-      | linkNews      | News                 | https://service.elsevier.com/app/answers/detail/a_id/29534/p/10882/supporthub/embase/related/1/ |
-      | linkHelp      | Help                 | https://service.elsevier.com/app/home/supporthub/embase                                         |
-      | linkWebinars  | Webinars             | https://service.elsevier.com/app/answers/detail/a_id/29878/supporthub/embase/kw/webinar/        |
-      | linkContact   | Contact support team | https://service.elsevier.com/app/contact/supporthub/embase/                                     |
-      | linkTerms     | Terms and conditions | https://www.elsevier.com/legal/elsevier-website-terms-and-conditions                            |
-      | linkPrivacy   | Privacy policy       | https://www.elsevier.com/legal/privacy-policy                                                   |
-      |               |                      |                                                                                                 |
-      |               |                      |                                                                                                 |
-      |               |                      |                                                                                                 |
+      | footerElement | text                                                                                                                           | link                                                                                            |
+      | elsevierLogo  | n/a                                                                                                                            | https://www.elsevier.com/                                                                       |
+      | relxLogo      | n/a                                                                                                                            | https://www.relx.com/                                                                           |
+      | linkAbout     | About Embase                                                                                                                   | https://www.elsevier.com/solutions/embase-biomedical-research                                   |
+      | linkLSS       | LSS                                                                                                                            | https://www.elsevier.com/rd-solutions/pharma-and-life-sciences-solutions                        |
+      | linkNews      | News                                                                                                                           | https://service.elsevier.com/app/answers/detail/a_id/29534/p/10882/supporthub/embase/related/1/ |
+      | linkHelp      | Help                                                                                                                           | https://service.elsevier.com/app/home/supporthub/embase                                         |
+      | linkWebinars  | Webinars                                                                                                                       | https://service.elsevier.com/app/answers/detail/a_id/29878/supporthub/embase/kw/webinar/        |
+      | linkContact   | Contact support team                                                                                                           | https://service.elsevier.com/app/contact/supporthub/embase/                                     |
+      | linkTerms     | Terms and conditions                                                                                                           | https://www.elsevier.com/legal/elsevier-website-terms-and-conditions                            |
+      | linkPrivacy   | Privacy policy                                                                                                                 | https://www.elsevier.com/legal/privacy-policy                                                   |
+      | cookieText    | We use cookies to help provide and enhance our service and tailor content. By continuing you agree to the use of cookies.      |                                                                                                 |
+      | copyrightText | Copyright © 2022 Elsevier Limited except certain content provided by third parties. Embase is a trademark of Elsevier Limited. |                                                                                                 |
+      | useOfCookies  | use of cookies                                                                                                                 | https://www.elsevier.com/solutions/embase-biomedical-research/learn-and-support/cookies         |
