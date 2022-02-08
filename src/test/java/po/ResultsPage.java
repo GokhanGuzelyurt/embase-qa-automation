@@ -80,16 +80,6 @@ public class ResultsPage extends BasePage {
     @FindBy(id = "addToClipboardAction")
     public WebElementFacade addToClipboardActionLink;
 
-    @FindBy(css = ".embsDropdownLabel")
-    public WebElementFacade embsDropdownLabel;
-
-    @FindBy(id = "modalContent")
-    public WebElementFacade modalContent;
-
-    @FindBy(id = "modalControl")
-    public WebElementFacade modalControl;
-
-
 
 
     public void waitForRecordSectionIsLoaded() {
@@ -174,19 +164,5 @@ public class ResultsPage extends BasePage {
         }
     }
 
-
-    public void userSelectsFormatInExportWindow(String format) {
-        embsDropdownLabel.click();
-        WebElement elementFormat = embsDropdownLabel.findElement(By.xpath("//*[@id='modalContent']//ul/li/span[contains(text(), '"+format+"')]"));
-        elementFormat.click();
-    }
-
-    public void userSelectsCheckboxFieldNameInExportWindow(String label) {
-        checkByScript(modalContent.findElement(By.xpath("//label/span[contains(text(), '"+label+"')]")));
-    }
-
-    public void userClicksOnButtonInModalWindow(String button) {
-        modalControl.findElement(By.xpath("//*[contains(text(), '"+button+"')]/parent::a")).click();
-    }
 }
 

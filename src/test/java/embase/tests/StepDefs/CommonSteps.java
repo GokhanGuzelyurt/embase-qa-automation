@@ -263,12 +263,6 @@ public class CommonSteps {
         driver.switchTo().window(window);
     }
 
-    @And("^user verifies that url contains (.*)$")
-    public void userVerifiesThatUrlContains(String uri) {
-        String currentUrl = driver.getCurrentUrl();
-        Assert.assertTrue("The Url " + currentUrl + " does not contain '" + uri + "'", currentUrl.contains(uri));
-    }
-
     @When("^user clicks on (.*)$")
     public void clickOn(String button) {
         basePage.clickOn(button);
