@@ -7,6 +7,7 @@ import cucumber.api.java.en.When;
 import io.cucumber.datatable.DataTable;
 import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.api.Assertions;
+import org.openqa.selenium.By;
 import po.QuickSearchPage;
 import po.sections.Footer;
 
@@ -130,6 +131,11 @@ public class QuickSearchPageStepDef {
                 case "copyrightText":
                     Assertions.assertThat(footer.copyrightInfo.getText()).describedAs("Text does not match").isEqualTo(data.get("text"));
                     break;
+                case "linkUseOfCookies" :
+                    Assertions.assertThat(footer.cookiesLink.getText()).describedAs("Text does not match").isEqualTo(data.get("text"));
+                    Assertions.assertThat(footer.cookiesLink.getAttribute("href")).describedAs("Link does not match").isEqualTo(data.get("link"));
+                    break;
+
 
 
             }

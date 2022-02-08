@@ -28,4 +28,9 @@ public class Footer extends BasePage {
     @FindBy(id = "footer-copyright")
     public WebElement copyrightInfo;
 
+    @FindBy(css = "#footer-cookies a")
+    public WebElementFacade cookiesLink;
+
+
+
 }
