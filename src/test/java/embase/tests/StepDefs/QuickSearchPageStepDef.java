@@ -4,14 +4,21 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import io.cucumber.datatable.DataTable;
 import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.api.Assertions;
 import po.QuickSearchPage;
+import po.sections.Footer;
+
+import java.util.List;
+import java.util.Map;
 
 
 public class QuickSearchPageStepDef {
 
     QuickSearchPage quickSearchPage;
+    Footer footer;
+
 
     @Then("Quick search page is opened")
     public void verifyQuickSearchPage() {
@@ -97,6 +104,24 @@ public class QuickSearchPageStepDef {
     @And("^user selects (.*) from frequent field list on add field popup$")
     public void addNewField(String fieldName) {
         quickSearchPage.selectFrequentFieldNameByText(fieldName);
+    }
+
+    // this step is custom made to work only on the footer elements
+    @Then("validate that footer elements are present:")
+    public void validateFooter(DataTable table) {
+        quickSearchPage.waitForJStoLoad();
+        List<Map<String, String>> rows = table.asMaps(String.class, String.class);
+        //   Map<String, String> data = rows.get(0);
+
+        for (Map<String, String> data : rows) {
+
+            switch (data.get("footerElement")) {
+                case "elsevierLogo":
+                    Assertions.assertThat(footer.elsevierLogo.isPresent()).describedAs("elsevierLogo is not present").isTrue();
+                    Assertions.assertThat(footer.elsevierLogo.getAttribute("href")).describedAs("Link does not match").isEqualTo(data.get("link"));
+                    // quickSearchPage.getFooter().elsevierLogo.getAttribute("href").equals(data.get(""));
+            }
+        }
 
 
     }

@@ -1,7 +1,6 @@
 package po;
 
 import net.thucydides.core.annotations.DefaultUrl;
-import org.assertj.core.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -101,17 +100,17 @@ public class QuickSearchPage extends BasePage {
     public void selectFrequentFieldNameByText(String fieldName) {
         List<WebElement> frequentList = frequentFieldsList.findElements(By.xpath("*//span[@class='LinkButton-module_content__2F1Lc']"));
         for (WebElement fieldValue : frequentList) {
-           if(fieldValue.getText().equalsIgnoreCase(fieldName)){
-               fieldValue.click();
-               break;
-           }
+            if (fieldValue.getText().equalsIgnoreCase(fieldName)) {
+                fieldValue.click();
+                break;
+            }
         }
     }
 
     public void selectOtherFieldNameByText(String fieldName) {
         List<WebElement> otherFields = otherFieldsList.findElements(By.xpath("*//span[@class='LinkButton-module_content__2F1Lc']"));
         for (WebElement fieldValue : otherFields) {
-            if(fieldValue.getText().equalsIgnoreCase(fieldName)){
+            if (fieldValue.getText().equalsIgnoreCase(fieldName)) {
                 fieldValue.click();
                 break;
             }

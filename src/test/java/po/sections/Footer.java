@@ -1,5 +1,6 @@
 package po.sections;
 
+import net.serenitybdd.core.pages.WebElementFacade;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
@@ -12,11 +13,11 @@ import java.util.List;
 public class Footer extends BasePage {
     final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-    @FindBy(id = "footer-nonsolus")
-    public WebElement elsevierLogo;
+    @FindBy(css = "#footer-nonsolus a")
+    public WebElementFacade elsevierLogo;
 
     @FindBy(id = "footer-relx")
-    public WebElement relxLogo;
+    public WebElementFacade relxLogo;
 
     @FindBy(css = "#footer-links ul li")
     public List<WebElement> listOfLinks;
