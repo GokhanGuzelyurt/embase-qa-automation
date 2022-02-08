@@ -119,7 +119,19 @@ public class QuickSearchPageStepDef {
                 case "elsevierLogo":
                     Assertions.assertThat(footer.elsevierLogo.isPresent()).describedAs("elsevierLogo is not present").isTrue();
                     Assertions.assertThat(footer.elsevierLogo.getAttribute("href")).describedAs("Link does not match").isEqualTo(data.get("link"));
-                    // quickSearchPage.getFooter().elsevierLogo.getAttribute("href").equals(data.get(""));
+                    break;
+                case "relxLogo":
+                    Assertions.assertThat(footer.relxLogo.isPresent()).describedAs("relxLogo is not present").isTrue();
+                    Assertions.assertThat(footer.relxLogo.getAttribute("href")).describedAs("Link does not match").isEqualTo(data.get("link"));
+                    break;
+                case "cookieText":
+                    Assertions.assertThat(footer.cookiesInfo.getText()).describedAs("Text does not match").isEqualTo(data.get("text"));
+                    break;
+                case "copyrightText":
+                    Assertions.assertThat(footer.copyrightInfo.getText()).describedAs("Text does not match").isEqualTo(data.get("text"));
+                    break;
+
+
             }
         }
 

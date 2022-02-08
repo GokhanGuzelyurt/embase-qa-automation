@@ -16,7 +16,7 @@ public class Footer extends BasePage {
     @FindBy(css = "#footer-nonsolus a")
     public WebElementFacade elsevierLogo;
 
-    @FindBy(id = "footer-relx")
+    @FindBy(css = "#footer-relx a")
     public WebElementFacade relxLogo;
 
     @FindBy(css = "#footer-links ul li")
