@@ -69,7 +69,8 @@ Feature: Quick Search tests
     Then user is on Results Page
     And search query is heart:ab OR heart:ti
 
-  Scenario: Validate footer contents
+  @C506783
+  Scenario: Validate footer text and links
     Then validate that footer elements are present:
       | footerElement    | text                                                                                                                           | link                                                                                            |
       | elsevierLogo     | n/a                                                                                                                            | https://www.elsevier.com/                                                                       |

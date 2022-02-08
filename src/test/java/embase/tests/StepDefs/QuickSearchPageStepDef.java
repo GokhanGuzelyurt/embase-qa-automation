@@ -8,15 +8,19 @@ import io.cucumber.datatable.DataTable;
 import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.api.Assertions;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import po.QuickSearchPage;
 import po.sections.Footer;
 
+import java.lang.invoke.MethodHandles;
 import java.util.List;
 import java.util.Map;
 
 
 public class QuickSearchPageStepDef {
-
+    final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     QuickSearchPage quickSearchPage;
     Footer footer;
 
@@ -131,13 +135,23 @@ public class QuickSearchPageStepDef {
                 case "copyrightText":
                     Assertions.assertThat(footer.copyrightInfo.getText()).describedAs("Text does not match").isEqualTo(data.get("text"));
                     break;
-                case "linkUseOfCookies" :
+                case "linkUseOfCookies":
                     Assertions.assertThat(footer.cookiesLink.getText()).describedAs("Text does not match").isEqualTo(data.get("text"));
                     Assertions.assertThat(footer.cookiesLink.getAttribute("href")).describedAs("Link does not match").isEqualTo(data.get("link"));
                     break;
-
-
-
+            }
+            if (data.get("footerElement").contains("linkList")) {
+                boolean foundInListOfElements = false;
+                for (WebElement e : footer.listOfLinks) {
+                    if (data.get("text").equals(e.getText())) {
+                        Assertions.assertThat(e.findElement(By.cssSelector("a")).getAttribute("href")).describedAs("Link does not match").isEqualTo(data.get("link"));
+                        foundInListOfElements = true;
+                        break;
+                    }
+                }
+                if (!foundInListOfElements) {
+                    Assertions.fail("Element not found in list of elements: " + data.get("footerElement"));
+                }
             }
         }
 

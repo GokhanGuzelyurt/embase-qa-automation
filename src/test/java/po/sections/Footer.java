@@ -32,5 +32,4 @@ public class Footer extends BasePage {
     public WebElementFacade cookiesLink;
 
 
-
 }
