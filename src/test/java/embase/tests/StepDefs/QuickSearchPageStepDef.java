@@ -140,6 +140,7 @@ public class QuickSearchPageStepDef {
                     Assertions.assertThat(footer.cookiesLink.getAttribute("href")).describedAs("Link does not match").isEqualTo(data.get("link"));
                     break;
             }
+            // this will check all items inside the link list, identified with linkList prefix in the feature file
             if (data.get("footerElement").contains("linkList")) {
                 boolean foundInListOfElements = false;
                 for (WebElement e : footer.listOfLinks) {
