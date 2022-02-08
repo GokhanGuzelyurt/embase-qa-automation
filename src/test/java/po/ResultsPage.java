@@ -1,5 +1,6 @@
 package po;
 
+import embase.tests.StepDefs.CommonSteps;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.Step;
@@ -178,18 +179,19 @@ public class ResultsPage extends BasePage {
         return numberOfSearchResults.get(0);
     }
 
-    public void getTheNumberOfSearchResultsForChangedDateFormat() {
-        resultForChangedDateFormat = getNumberOfSearchResults();
+    public void getTheNumberOfSearchResultsForDateFormat(String variableName) {
+        CommonSteps.setTestCaseVariable(variableName, getNumberOfSearchResults());
+//        resultForChangedDateFormat = getNumberOfSearchResults();
     }
 
     public void getTheNumberOfSearchResultsForOriginalDateFormat() {
-        resultForOriginalDateFormat = getNumberOfSearchResults();
+//        resultForOriginalDateFormat = getNumberOfSearchResults();
     }
 
-    public void theSameNumberOfBothSearchResults() {
+    public void theSameNumberOfBothSearchResults(String variableNameFirst, String variableNameSecond) {
         logger.info("assert that the number of search results is the same for both date format");
-        Assert.assertEquals("The search result after change date format " + resultForChangedDateFormat
-                        + " should be equal search result for original date format " + resultForOriginalDateFormat,
-                resultForOriginalDateFormat, resultForChangedDateFormat);
+        Assert.assertEquals("The search result after change date format " + variableNameSecond
+                        + " should be equal search result for original date format " + variableNameFirst,
+                variableNameFirst, variableNameSecond);
     }
 }

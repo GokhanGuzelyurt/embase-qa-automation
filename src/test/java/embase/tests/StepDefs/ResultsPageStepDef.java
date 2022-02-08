@@ -156,20 +156,20 @@ public class ResultsPageStepDef {
 
     }
 
-    @When("get the number of search results for original date format")
-    public void getTheNumberOfSearchResultsForOriginalDateFormat() {
+//    @When("get the number of search results for original date format")
+//    public void getTheNumberOfSearchResultsForOriginalDateFormat() {
+//        resultsPage.waitForJStoLoad();
+//        resultsPage.getTheNumberOfSearchResultsForOriginalDateFormat();
+//    }
+
+    @When("^get the number of search results for (.*) date format$")
+    public void getTheNumberOfSearchResultsForChangedDateFormat(String variableName) {
         resultsPage.waitForJStoLoad();
-        resultsPage.getTheNumberOfSearchResultsForOriginalDateFormat();
+        resultsPage.getTheNumberOfSearchResultsForDateFormat(variableName);
     }
 
-    @When("get the number of search results for changed date format")
-    public void getTheNumberOfSearchResultsForChangedDateFormat() {
-        resultsPage.waitForJStoLoad();
-        resultsPage.getTheNumberOfSearchResultsForChangedDateFormat();
-    }
-
-    @Then("the same number of both search results")
-    public void theSameNumberOfBothSearchResults() {
-        resultsPage.theSameNumberOfBothSearchResults();
+    @Then("^the same number of search results for (.*) date and (.*) date$")
+    public void theSameNumberOfBothSearchResults(String variableNameFirst, String variableNameSecond) {
+        resultsPage.theSameNumberOfBothSearchResults(variableNameFirst, variableNameSecond);
     }
 }
