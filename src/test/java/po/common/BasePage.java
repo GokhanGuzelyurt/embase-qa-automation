@@ -3,6 +3,7 @@ package po.common;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Step;
+import org.assertj.core.api.Assertions;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -82,5 +83,10 @@ public class BasePage extends PageObject {
 
     public void clickOnButton(String button) {
         body.findElement(By.xpath("//*[contains(text(), '"+button+"')]/ancestor::button")).click();
+    }
+
+    public void verifyThatCheckboxIsNotClickable(String checkbox) {
+        String disabled = body.findElement(By.xpath("//*[contains(text(), '"+checkbox+"')]/ancestor::label/input")).getAttribute("disabled");
+        Assert.assertEquals("The checkbox " + checkbox + " should be not clickable", "true", disabled);
     }
 }

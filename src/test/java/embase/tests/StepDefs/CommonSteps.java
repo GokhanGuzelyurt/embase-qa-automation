@@ -268,8 +268,13 @@ public class CommonSteps {
         basePage.clickOn(button);
     }
 
-    @When("^user clicks on button (.*)$")
+    @When("^user clicks (.*) button$")
     public void clickOnButton(String button) {
         basePage.clickOnButton(button);
+    }
+
+    @Then("^user verifies that checkbox (.*) is not clickable$")
+    public void verifyThatCheckboxIsNotClickable(String checkbox) {
+        basePage.verifyThatCheckboxIsNotClickable(checkbox);
     }
 }

@@ -101,7 +101,7 @@ Feature: Quick Search tests
 
 
   Scenario: Text validation in "Limit to" section
-    When user clicks on button Limit to
+    When user clicks Limit to button
     Then user verifies that text is displayed: Publication years
     And user verifies that text is displayed: Records added to Embase
     And user verifies that text is displayed: Evidence Based Medicine
@@ -112,4 +112,11 @@ Feature: Quick Search tests
     And user verifies that text is displayed: Meta Analysis
 
   Scenario: Has all individual limits disabled if search terms are empty
-    When user clicks on button Limit to
+    When user clicks Limit to button
+    Then user verifies that checkbox Publication years is not clickable
+    And user verifies that checkbox Records added to Embase is not clickable
+    And user verifies that checkbox Cochrane Review is not clickable
+    And user verifies that checkbox Controlled Clinical Trial is not clickable
+    And user verifies that checkbox Systematic Review is not clickable
+    And user verifies that checkbox Randomized Controlled Trial is not clickable
+    And user verifies that checkbox Meta Analysis is not clickable
