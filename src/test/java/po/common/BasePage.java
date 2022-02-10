@@ -3,6 +3,8 @@ package po.common;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Step;
+import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,6 +22,9 @@ public class BasePage extends PageObject {
 
     @FindBy(css = "._pendo-close-guide")
     public WebElementFacade pendoBannerClose;
+
+    @FindBy(css = "body")
+    public WebElement body;
 
     @Step
     public void closePendoBanner() {
@@ -66,5 +71,12 @@ public class BasePage extends PageObject {
         return wait.until(jQueryLoad) && wait.until(jsLoad);
     }
 
+    public void verifyTextDisplayed(String text) {
+        waitForJStoLoad();
+        Assert.assertTrue("The page is not contain text '" + text + "'", body.getText().contains(text));
+    }
 
+    public void clickOn(String button) {
+        body.findElement(By.xpath("//*[contains(text(), '"+button+"')]/parent::a")).click();
+    }
 }

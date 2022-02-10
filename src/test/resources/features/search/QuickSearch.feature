@@ -68,3 +68,15 @@ Feature: Quick Search tests
     And user clicks on Show results button on quick search
     Then user is on Results Page
     And search query is heart:ab OR heart:ti
+
+  @C506490
+  Scenario: Validate that the search page contain Search tips
+    Then user verifies that text is displayed: Search tips
+
+  @C506491
+  Scenario: Validate that the Search tips goes to Q&A page
+    When user clicks on Search tips
+    And user switches to 2nd window
+    Then user verifies that text is displayed: Elsevier Support Center
+    And user verifies that text is displayed: How do I search in Embase?
+    And user verifies that text is displayed: Quick search
