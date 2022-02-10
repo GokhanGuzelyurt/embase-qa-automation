@@ -4,6 +4,7 @@ import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Step;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -70,8 +71,12 @@ public class BasePage extends PageObject {
         return wait.until(jQueryLoad) && wait.until(jsLoad);
     }
 
-    public void userVerifiesThatTextIsDisplayed(String text) {
+    public void verifyTextDisplayed(String text) {
         waitForJStoLoad();
         Assert.assertTrue("The page is not contain text '" + text + "'", body.getText().contains(text));
+    }
+
+    public void clickOn(String button) {
+        body.findElement(By.xpath("//*[contains(text(), '"+button+"')]/parent::a")).click();
     }
 }

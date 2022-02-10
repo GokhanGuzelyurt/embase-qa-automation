@@ -163,18 +163,4 @@ public class ResultsPageStepDef {
 
     }
 
-    @And("^user selects Format (.*) in export window$")
-    public void userSelectsFormatInExportWindow(String format) {
-        resultsPage.userSelectsFormatInExportWindow(format);
-    }
-
-    @And("^user selects checkbox (.*) in export window$")
-    public void userSelectsCheckboxFieldNameInExportWindow(String checkbox) {
-            resultsPage.userSelectsCheckboxFieldNameInExportWindow(checkbox);
-    }
-
-    @And("^user clicks on (.*) button in modal window$")
-    public void userClicksOnButtonInModalWindow(String button) {
-        resultsPage.userClicksOnButtonInModalWindow(button);
-    }
 }

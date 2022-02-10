@@ -7,6 +7,7 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import net.serenitybdd.core.environment.EnvironmentSpecificConfiguration;
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.util.EnvironmentVariables;
@@ -250,11 +251,11 @@ public class CommonSteps {
     }
 
     @Then("^user verifies that text is displayed: (.*)$")
-    public void userVerifiesThatTextIsDisplayed(String text) {
-        basePage.userVerifiesThatTextIsDisplayed(text);
+    public void verifyTextDisplayed(String text) {
+        basePage.verifyTextDisplayed(text);
     }
 
-    @And("user switches to {int} window")
+    @And("^user switches to (\\d+)(?:st|nd|rd|th) window$")
     public void userSwitchesToSecondWindow(int index) {
         Set<String> windowHandles = driver.getWindowHandles();
         List<String> windowString = new ArrayList<>(windowHandles);
@@ -262,9 +263,8 @@ public class CommonSteps {
         driver.switchTo().window(window);
     }
 
-    @And("^user verifies that url contains (.*)$")
-    public void userVerifiesThatUrlContains(String uri) {
-        String currentUrl = driver.getCurrentUrl();
-        Assert.assertTrue("The Url " + currentUrl + " does not contain '" + uri + "'", currentUrl.contains(uri));
+    @When("^user clicks on (.*)$")
+    public void clickOn(String button) {
+        basePage.clickOn(button);
     }
 }
