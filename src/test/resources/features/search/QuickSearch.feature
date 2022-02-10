@@ -69,6 +69,36 @@ Feature: Quick Search tests
     Then user is on Results Page
     And search query is heart:ab OR heart:ti
 
+  @C506783
+  Scenario: Validate footer text and links
+    Then validate that footer elements are present:
+      | footerElement    | text                                                                                                                           | link                                                                                            |
+      | elsevierLogo     | n/a                                                                                                                            | https://www.elsevier.com/                                                                       |
+      | relxLogo         | n/a                                                                                                                            | https://www.relx.com/                                                                           |
+      | linkListAbout    | About Embase                                                                                                                   | https://www.elsevier.com/solutions/embase-biomedical-research                                   |
+      | linkListLSS      | LSS                                                                                                                            | https://www.elsevier.com/rd-solutions/pharma-and-life-sciences-solutions                        |
+      | linkListNews     | News                                                                                                                           | https://service.elsevier.com/app/answers/detail/a_id/29534/p/10882/supporthub/embase/related/1/ |
+      | linkListHelp     | Help                                                                                                                           | https://service.elsevier.com/app/home/supporthub/embase                                         |
+      | linkListWebinars | Webinars                                                                                                                       | https://service.elsevier.com/app/answers/detail/a_id/29878/supporthub/embase/kw/webinar/        |
+      | linkListContact  | Contact support team                                                                                                           | https://service.elsevier.com/app/contact/supporthub/embase/                                     |
+      | linkListTerms    | Terms and conditions                                                                                                           | https://www.elsevier.com/legal/elsevier-website-terms-and-conditions                            |
+      | linkListPrivacy  | Privacy policy                                                                                                                 | https://www.elsevier.com/legal/privacy-policy                                                   |
+      | cookieText       | We use cookies to help provide and enhance our service and tailor content. By continuing you agree to the use of cookies.      |                                                                                                 |
+      | copyrightText    | Copyright © 2022 Elsevier Limited except certain content provided by third parties. Embase is a trademark of Elsevier Limited. |                                                                                                 |
+      | linkUseOfCookies | use of cookies                                                                                                                 | https://www.elsevier.com/solutions/embase-biomedical-research/learn-and-support/cookies         |
+
+ @C506490
+  Scenario: Validate that the search page contain Search tips
+    Then user verifies that text is displayed: Search tips
+
+  @C506491
+  Scenario: Validate that the Search tips goes to Q&A page
+    When user clicks on Search tips
+    And user switches to 2nd window
+    Then user verifies that text is displayed: Elsevier Support Center
+    And user verifies that text is displayed: How do I search in Embase?
+    And user verifies that text is displayed: Quick search
+
 
   Scenario: Text validation in "Limit to" section
     When user clicks on button Limit to
