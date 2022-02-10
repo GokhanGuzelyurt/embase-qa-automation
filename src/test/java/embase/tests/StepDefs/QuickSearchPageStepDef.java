@@ -4,14 +4,26 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import io.cucumber.datatable.DataTable;
 import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.api.Assertions;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import po.QuickSearchPage;
+import po.sections.Footer;
+
+import java.lang.invoke.MethodHandles;
+import java.util.List;
+import java.util.Map;
 
 
 public class QuickSearchPageStepDef {
-
+    final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     QuickSearchPage quickSearchPage;
+    Footer footer;
+
 
     @Then("Quick search page is opened")
     public void verifyQuickSearchPage() {
@@ -97,6 +109,50 @@ public class QuickSearchPageStepDef {
     @And("^user selects (.*) from frequent field list on add field popup$")
     public void addNewField(String fieldName) {
         quickSearchPage.selectFrequentFieldNameByText(fieldName);
+    }
+
+    // this step is custom made to work only on the footer elements
+    @Then("validate that footer elements are present:")
+    public void validateFooter(DataTable table) {
+        quickSearchPage.waitForJStoLoad();
+        List<Map<String, String>> rows = table.asMaps(String.class, String.class);
+
+        for (Map<String, String> data : rows) {
+            switch (data.get("footerElement")) {
+                case "elsevierLogo":
+                    Assertions.assertThat(footer.elsevierLogo.isPresent()).describedAs("elsevierLogo is not present").isTrue();
+                    Assertions.assertThat(footer.elsevierLogo.getAttribute("href")).describedAs("Link does not match").isEqualTo(data.get("link"));
+                    break;
+                case "relxLogo":
+                    Assertions.assertThat(footer.relxLogo.isPresent()).describedAs("relxLogo is not present").isTrue();
+                    Assertions.assertThat(footer.relxLogo.getAttribute("href")).describedAs("Link does not match").isEqualTo(data.get("link"));
+                    break;
+                case "cookieText":
+                    Assertions.assertThat(footer.cookiesInfo.getText()).describedAs("Text does not match").isEqualTo(data.get("text"));
+                    break;
+                case "copyrightText":
+                    Assertions.assertThat(footer.copyrightInfo.getText()).describedAs("Text does not match").isEqualTo(data.get("text"));
+                    break;
+                case "linkUseOfCookies":
+                    Assertions.assertThat(footer.cookiesLink.getText()).describedAs("Text does not match").isEqualTo(data.get("text"));
+                    Assertions.assertThat(footer.cookiesLink.getAttribute("href")).describedAs("Link does not match").isEqualTo(data.get("link"));
+                    break;
+            }
+            // this will check all items inside the link list, identified with linkList prefix in the feature file
+            if (data.get("footerElement").contains("linkList")) {
+                boolean foundInListOfElements = false;
+                for (WebElement e : footer.listOfLinks) {
+                    if (data.get("text").equals(e.getText())) {
+                        Assertions.assertThat(e.findElement(By.cssSelector("a")).getAttribute("href")).describedAs("Link does not match").isEqualTo(data.get("link"));
+                        foundInListOfElements = true;
+                        break;
+                    }
+                }
+                if (!foundInListOfElements) {
+                    Assertions.fail("Element not found in list of elements: " + data.get("footerElement"));
+                }
+            }
+        }
 
 
     }
