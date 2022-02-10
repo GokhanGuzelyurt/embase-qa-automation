@@ -68,3 +68,18 @@ Feature: Quick Search tests
     And user clicks on Show results button on quick search
     Then user is on Results Page
     And search query is heart:ab OR heart:ti
+
+
+  Scenario: Text validation in "Limit to" section
+    When user clicks on button Limit to
+    Then user verifies that text is displayed: Publication years
+    And user verifies that text is displayed: Records added to Embase
+    And user verifies that text is displayed: Evidence Based Medicine
+    And user verifies that text is displayed: Cochrane Review
+    And user verifies that text is displayed: Controlled Clinical Trial
+    And user verifies that text is displayed: Systematic Review
+    And user verifies that text is displayed: Randomized Controlled Trial
+    And user verifies that text is displayed: Meta Analysis
+
+  Scenario: Has all individual limits disabled if search terms are empty
+    When user clicks on button Limit to

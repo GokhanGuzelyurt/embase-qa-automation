@@ -4,11 +4,15 @@ package embase.tests.StepDefs;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import net.serenitybdd.core.environment.EnvironmentSpecificConfiguration;
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.util.EnvironmentVariables;
 import org.apache.commons.lang3.reflect.FieldUtils;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -249,4 +253,13 @@ public class CommonSteps {
         }
     }
 
+    @Then("^user verifies that text is displayed: (.*)$")
+    public void verifyTextDisplayed(String text) {
+        basePage.verifyTextDisplayed(text);
+    }
+
+    @When("^user clicks on button (.*)$")
+    public void clickOnButton(String button) {
+        basePage.clickOnButton(button);
+    }
 }
