@@ -156,4 +156,39 @@ public class QuickSearchPageStepDef {
 
 
     }
+
+    @Then("^user verifies that options (.*) is enabled$")
+    public void verifyThatOptionsIsEnabled(String optionsLabel) {
+        quickSearchPage.verifyThatOptionsIsEnabled(optionsLabel);
+    }
+
+    @Then("^user verifies that select (.*) is enabled$")
+    public void verifyThatSelectIsEnabled(String selectLabel) {
+        quickSearchPage.verifyThatSelectIsEnabled(selectLabel);
+    }
+
+    @Then("^user verifies that checkbox (.*) is not clickable$")
+    public void verifyThatCheckboxIsNotClickable(String checkbox) {
+        quickSearchPage.verifyThatCheckboxIsNotClickable(checkbox);
+    }
+
+    @And("^user select (.*) checkbox$")
+    public void selectCheckbox(String checkbox) {
+        quickSearchPage.selectCheckbox(checkbox);
+    }
+
+    @And("^user clicks (.*) option$")
+    public void clickOnOption(String option) {
+        quickSearchPage.clickOnOption(option);
+    }
+
+    @Then("^user verifies that (.*) drop-down is limited to the next year$")
+    public void verifyThatDropDownIsLimitedToTheNextYear(String optionLabel) {
+        quickSearchPage.verifyThatDropDownIsLimitedToTheNextYear(optionLabel);
+    }
+
+    @Then("^user verifies that (.*) drop-down contains (.*)$")
+    public void verifyThatDropDownContains(String optionLabel, String value) {
+        quickSearchPage.verifyThatDropDownContains(optionLabel, value);
+    }
 }

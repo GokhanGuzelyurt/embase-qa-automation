@@ -120,3 +120,30 @@ Feature: Quick Search tests
     And user verifies that checkbox Systematic Review is not clickable
     And user verifies that checkbox Randomized Controlled Trial is not clickable
     And user verifies that checkbox Meta Analysis is not clickable
+
+  Scenario: Search limit is only enabled and effective when corresponding checkbox is turned on and enabled
+    When user enters query heart attack on quick search page
+    And user clicks Limit to button
+    And user select Publication years checkbox
+    And user select Records added to Embase checkbox
+    Then user verifies that options From is enabled
+    And user verifies that options To is enabled
+    And user verifies that select Select date is enabled
+
+  Scenario Outline: Max available year (MAX_YEAR) in <option> is always limited to the next year
+    When user enters query heart attack on quick search page
+    And user clicks Limit to button
+    And user select Publication years checkbox
+    And user clicks <option> option
+    Then user verifies that <option> drop-down is limited to the next year
+    Examples:
+    | option |
+    | From   |
+    | To     |
+
+  Scenario: The option From contains Min year "< 1966"
+    When user enters query heart attack on quick search page
+    And user clicks Limit to button
+    And user select Publication years checkbox
+    And user clicks From option
+    Then user verifies that From drop-down contains < 1966

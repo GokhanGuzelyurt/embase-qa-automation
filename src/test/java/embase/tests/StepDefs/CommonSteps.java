@@ -272,9 +272,4 @@ public class CommonSteps {
     public void clickOnButton(String button) {
         basePage.clickOnButton(button);
     }
-
-    @Then("^user verifies that checkbox (.*) is not clickable$")
-    public void verifyThatCheckboxIsNotClickable(String checkbox) {
-        basePage.verifyThatCheckboxIsNotClickable(checkbox);
-    }
 }

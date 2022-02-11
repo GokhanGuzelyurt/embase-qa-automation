@@ -84,9 +84,4 @@ public class BasePage extends PageObject {
     public void clickOnButton(String button) {
         body.findElement(By.xpath("//*[contains(text(), '"+button+"')]/ancestor::button")).click();
     }
-
-    public void verifyThatCheckboxIsNotClickable(String checkbox) {
-        String disabled = body.findElement(By.xpath("//*[contains(text(), '"+checkbox+"')]/ancestor::label/input")).getAttribute("disabled");
-        Assert.assertEquals("The checkbox " + checkbox + " should be not clickable", "true", disabled);
-    }
 }

@@ -1,6 +1,7 @@
 package po;
 
 import net.thucydides.core.annotations.DefaultUrl;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,6 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 import po.common.BasePage;
 
 import java.awt.*;
+import java.time.LocalDate;
 import java.util.List;
 
 @DefaultUrl("page:quickSearch.page")
@@ -73,6 +75,9 @@ public class QuickSearchPage extends BasePage {
     @FindBy(className = "fragmentSuggestions")
     public WebElement autosuggestList;
 
+    @FindBy(css = "[class*=SelectOptions-module_label]")
+    public List<WebElement> selectOptions;
+
 
     public void at() {
         shouldBeDisplayed();
@@ -115,5 +120,46 @@ public class QuickSearchPage extends BasePage {
                 break;
             }
         }
+    }
+
+    public void verifyThatCheckboxIsNotClickable(String checkbox) {
+        String disabled = body.findElement(By.xpath("//*[contains(text(), '"+checkbox+"')]/ancestor::label/input")).getAttribute("disabled");
+        Assert.assertTrue("The checkbox " + checkbox + " should be not clickable", Boolean.parseBoolean(disabled));
+    }
+
+    public void selectCheckbox(String checkbox) {
+        body.findElement(By.xpath("//*[contains(text(), '"+checkbox+"')]/ancestor::label")).click();
+    }
+
+    public void verifyThatOptionsIsEnabled(String optionsLabel) {
+        String disabled = body.findElement(By.xpath("//label[contains(text(), '"+optionsLabel+"')]/following-sibling::button")).getAttribute("disabled");
+        Assert.assertFalse("The options " + optionsLabel + " should be not enabled", Boolean.parseBoolean(disabled));
+    }
+
+    public void verifyThatSelectIsEnabled(String selectLabel) {
+        String disabled = body.findElement(By.xpath("//label[contains(text(), '"+selectLabel+"')]/preceding-sibling::input")).getAttribute("disabled");
+        Assert.assertFalse("The select " + selectLabel + " should be not enabled", Boolean.parseBoolean(disabled));
+    }
+
+    public void clickOnOption(String option) {
+        body.findElement(By.xpath("//label[contains(text(), '"+option+"')]/following-sibling::button")).click();
+    }
+
+    public void verifyThatDropDownIsLimitedToTheNextYear(String optionLabel) {
+        String option = selectOptions.get(0).getText();
+        int nextYear = getNextYear();
+        Assert.assertEquals("The "+optionLabel+" drop-down should limited to the next year" , String.valueOf(nextYear), option);
+    }
+
+    private int getNextYear() {
+        LocalDate now = LocalDate.now();
+        LocalDate nextYear = now.plusYears(1);
+        return nextYear.getYear();
+    }
+
+    public void verifyThatDropDownContains(String optionLabel, String value) {
+        boolean option = selectOptions.contains(value);
+        Assert.assertTrue("The "+optionLabel+" drop-down should contain " +value, option);
+
     }
 }
