@@ -73,6 +73,9 @@ public class QuickSearchPage extends BasePage {
     @FindBy(className = "fragmentSuggestions")
     public WebElement autosuggestList;
 
+    @FindBy(id = "fragments[1].operator.value")
+    public WebElement operatorDropdown;
+
 
     public void at() {
         shouldBeDisplayed();
@@ -115,5 +118,12 @@ public class QuickSearchPage extends BasePage {
                 break;
             }
         }
+    }
+
+    public void selectOperatorByText(String text) {
+        operatorDropdown.click();
+        WebElement operatorText = operatorDropdown.findElement(By.xpath("//span[contains(@class,'SelectPopover_optionText__2Nd3v')and contains(text(),'" + text + "')]"));
+        operatorText.click();
+
     }
 }
