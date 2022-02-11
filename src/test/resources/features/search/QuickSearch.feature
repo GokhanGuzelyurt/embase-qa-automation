@@ -93,7 +93,7 @@ Feature: Quick Search tests
 
   @C506491
   Scenario: Validate that the Search tips goes to Q&A page
-    When user clicks on Search tips
+    When user clicks on Search tips link
     And user switches to 2nd window
     Then user verifies that text is displayed: Elsevier Support Center
     And user verifies that text is displayed: How do I search in Embase?
@@ -147,3 +147,27 @@ Feature: Quick Search tests
     And user select Publication years checkbox
     And user clicks From option
     Then user verifies that From drop-down contains < 1966
+
+  Scenario: Default pre-selected years range: [MAX_YEAR - 10, MAX_YEAR].
+    When user enters query heart attack on quick search page
+    And user clicks Limit to button
+    And user select Publication years checkbox
+    Then user verifies that From default pre-selected years MAX_YEAR - 10
+    And user verifies that To default pre-selected years MAX_YEAR
+
+  Scenario: Min year of "To" is limited to current value of "From" select.
+    When user enters query heart attack on quick search page
+    And user clicks Limit to button
+    And user select Publication years checkbox
+    And user sets From option to 2020
+    And user clicks To option
+    Then user verifies that To min year is 2020
+
+  Scenario: "From" value is bigger than "To" value then "To" value is automatically set to "From" value
+    When user enters query heart attack on quick search page
+    And user clicks Limit to button
+    And user select Publication years checkbox
+    And user sets From option to 2010
+    And user sets To option to 2012
+    And user sets From option to 2020
+    Then user verifies that To option selected 2020

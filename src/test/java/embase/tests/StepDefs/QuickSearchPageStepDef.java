@@ -191,4 +191,29 @@ public class QuickSearchPageStepDef {
     public void verifyThatDropDownContains(String optionLabel, String value) {
         quickSearchPage.verifyThatDropDownContains(optionLabel, value);
     }
+
+    @Then("^user verifies that (.*) default pre-selected years MAX_YEAR - (.*)$")
+    public void verifyThatDefaultPreSelectedYearsMaxMinus(String optionLabel, int value) {
+        quickSearchPage.verifyThatDefaultPreSelectedYearsMaxMinus(optionLabel, value);
+    }
+
+    @And("^user verifies that (.*) default pre-selected years MAX_YEAR$")
+    public void verifyThatDefaultPreSelectedYearsMax(String optionLabel) {
+        quickSearchPage.verifyThatDefaultPreSelectedYearsMax(optionLabel);
+    }
+
+    @Then("^user verifies that (.*) min year is (.*)$")
+    public void verifyThatMinYearIs(String optionLabel, int value) {
+        quickSearchPage.verifyThatMinYearIs(optionLabel, value);
+    }
+
+    @And("^user sets (.*) option to (.*)$")
+    public void setsOptionTo(String optionLabel, String value) {
+        quickSearchPage.setsOptionTo(optionLabel, value);
+    }
+
+    @Then("^user verifies that (.*) option selected (.*)$")
+    public void verifyThatOptionSelected(String optionLabel, int value) {
+        quickSearchPage.verifyThatOptionSelected(optionLabel, value);
+    }
 }
