@@ -1,7 +1,6 @@
 package po;
 
 import net.thucydides.core.annotations.DefaultUrl;
-import org.assertj.core.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

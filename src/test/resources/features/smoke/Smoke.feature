@@ -5,6 +5,7 @@ Feature: Smoke tests
     Given user opens Embase application
     Then Quick search page is opened
 
+  @C506741
   Scenario: Verify Search by wildcard and orcid returns results
     When user opens Results page
     And user enters query ?:oc and performs a search
