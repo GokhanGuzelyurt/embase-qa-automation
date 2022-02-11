@@ -99,7 +99,7 @@ Feature: Quick Search tests
     And user verifies that text is displayed: How do I search in Embase?
     And user verifies that text is displayed: Quick search
 
-
+  @C507036
   Scenario: Text validation in "Limit to" section
     When user clicks Limit to button
     Then user verifies that text is displayed: Publication years
@@ -111,6 +111,7 @@ Feature: Quick Search tests
     And user verifies that text is displayed: Randomized Controlled Trial
     And user verifies that text is displayed: Meta Analysis
 
+  @C507037
   Scenario: Has all individual limits disabled if search terms are empty
     When user clicks Limit to button
     Then user verifies that checkbox Publication years is not clickable
@@ -121,6 +122,7 @@ Feature: Quick Search tests
     And user verifies that checkbox Randomized Controlled Trial is not clickable
     And user verifies that checkbox Meta Analysis is not clickable
 
+  @C507038
   Scenario: Search limit is only enabled and effective when corresponding checkbox is turned on and enabled
     When user enters query heart attack on quick search page
     And user clicks Limit to button
@@ -130,6 +132,7 @@ Feature: Quick Search tests
     And user verifies that options To is enabled
     And user verifies that select Select date is enabled
 
+  @C507039
   Scenario Outline: Max available year (MAX_YEAR) in <option> is always limited to the next year
     When user enters query heart attack on quick search page
     And user clicks Limit to button
@@ -141,6 +144,7 @@ Feature: Quick Search tests
     | From   |
     | To     |
 
+  @C507040
   Scenario: The option From contains Min year "< 1966"
     When user enters query heart attack on quick search page
     And user clicks Limit to button
@@ -148,6 +152,7 @@ Feature: Quick Search tests
     And user clicks From option
     Then user verifies that From drop-down contains < 1966
 
+  @C507041
   Scenario: Default pre-selected years range: [MAX_YEAR - 10, MAX_YEAR].
     When user enters query heart attack on quick search page
     And user clicks Limit to button
@@ -155,6 +160,7 @@ Feature: Quick Search tests
     Then user verifies that From default pre-selected years MAX_YEAR - 10
     And user verifies that To default pre-selected years MAX_YEAR
 
+  @C507042
   Scenario: Min year of "To" is limited to current value of "From" select.
     When user enters query heart attack on quick search page
     And user clicks Limit to button
@@ -163,6 +169,7 @@ Feature: Quick Search tests
     And user clicks To option
     Then user verifies that To min year is 2020
 
+  @C507043
   Scenario: "From" value is bigger than "To" value then "To" value is automatically set to "From" value
     When user enters query heart attack on quick search page
     And user clicks Limit to button
