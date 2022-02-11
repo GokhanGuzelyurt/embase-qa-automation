@@ -69,6 +69,22 @@ Feature: Quick Search tests
     Then user is on Results Page
     And search query is heart:ab OR heart:ti
 
+  @C506782
+  Scenario Outline: Validate operators on Quick Search page
+    When user enters query heart on quick search page
+    And user clicks on Add field button on Quick Search Page
+    And user selects Title from frequent field list on add field popup
+    And user enters second line query heart on quick search page
+    And user selects <operator_Name> operator for second line query
+    And user clicks on Show results button on quick search
+    Then user is on Results Page
+    And search query is <results_Query>
+    Examples:
+      | operator_Name | results_Query                       |
+      | AND           | ('heart'/exp OR heart) AND heart:ti |
+      | NOT           | ('heart'/exp OR heart) NOT heart:ti |
+      | OR            | 'heart'/exp OR heart OR heart:ti    |
+
   @C506783
   Scenario: Validate footer text and links
     Then validate that footer elements are present:
@@ -87,7 +103,7 @@ Feature: Quick Search tests
       | copyrightText    | Copyright © 2022 Elsevier Limited except certain content provided by third parties. Embase is a trademark of Elsevier Limited. |                                                                                                 |
       | linkUseOfCookies | use of cookies                                                                                                                 | https://www.elsevier.com/solutions/embase-biomedical-research/learn-and-support/cookies         |
 
- @C506490
+  @C506490
   Scenario: Validate that the search page contain Search tips
     Then user verifies that text is displayed: Search tips
 

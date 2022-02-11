@@ -153,8 +153,11 @@ public class QuickSearchPageStepDef {
                 }
             }
         }
+    }
 
-
+    @And("^user selects (.*) operator for second line query$")
+    public void selectOperatorValue(String operator) {
+        quickSearchPage.selectOperatorByText(operator);
     }
 
     @Then("^user verifies that options (.*) is enabled$")
