@@ -86,8 +86,8 @@ Feature: Quick Search tests
       | cookieText       | We use cookies to help provide and enhance our service and tailor content. By continuing you agree to the use of cookies.      |                                                                                                 |
       | copyrightText    | Copyright © 2022 Elsevier Limited except certain content provided by third parties. Embase is a trademark of Elsevier Limited. |                                                                                                 |
       | linkUseOfCookies | use of cookies                                                                                                                 | https://www.elsevier.com/solutions/embase-biomedical-research/learn-and-support/cookies         |
- 
- @C506490
+
+  @C506490
   Scenario: Validate that the search page contain Search tips
     Then user verifies that text is displayed: Search tips
 
