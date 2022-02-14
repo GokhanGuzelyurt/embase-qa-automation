@@ -115,31 +115,37 @@ Feature: Quick Search tests
     And user verifies that text is displayed: How do I search in Embase?
     And user verifies that text is displayed: Quick search
 
-
+  @C507045
   Scenario: Validate that the search page contain "Reset form" button
     Then user verifies that text is displayed: Reset form
 
+  @C507046
   Scenario: Validate that the "Reset form" button is disabled
     Then user verifies the Reset form button is disabled
 
+  @C507047
   Scenario: "Reset form" button is enabled when Limit section is expanded
     When user clicks Limit to button
     Then user verifies the Reset form button is enabled
 
+  @C507048
   Scenario: "Reset form" button is enabled when New field is added
     When user clicks Add field button
     And user selects Title from frequent field list on add field popup
     Then user verifies the Reset form button is enabled
 
+  @C507049
   Scenario: "Reset form" button is enabled when entering query
     When user enters query heart on quick search page
     Then user verifies the Reset form button is enabled
 
+  @C507050
   Scenario: "Reset form" button is enabled when Field type is changed from "Broad search" to "All fields"
     When user clicks on Change field button on quick search page
     And user selects All fields from frequent field list on change field popup
     Then user verifies the Reset form button is enabled
 
+  @C507051
   Scenario: Returns the form to the default state
     When user clicks on Change field button on quick search page
     And user selects All fields from frequent field list on change field popup
