@@ -120,4 +120,8 @@ Feature: Quick Search tests
     Then user verifies that text is displayed: Reset form
 
   Scenario: Validate that the "Reset form" button is disabled
-    Then user verifies the "Reset form" is disabled
+    Then user verifies the Reset form button is disabled
+
+  Scenario: "Reset form" button is enabled when Limit section is expanded
+    When user clicks on Limit to
+    Then user verifies the Reset form button is enabled
