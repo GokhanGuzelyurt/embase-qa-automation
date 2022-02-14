@@ -114,3 +114,10 @@ Feature: Quick Search tests
     Then user verifies that text is displayed: Elsevier Support Center
     And user verifies that text is displayed: How do I search in Embase?
     And user verifies that text is displayed: Quick search
+
+
+  Scenario: Validate that the search page contain "Reset form" button
+    Then user verifies that text is displayed: Reset form
+
+  Scenario: Validate that the "Reset form" button is disabled
+    Then user verifies the "Reset form" is disabled
