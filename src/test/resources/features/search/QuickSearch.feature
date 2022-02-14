@@ -109,7 +109,7 @@ Feature: Quick Search tests
 
   @C506491
   Scenario: Validate that the Search tips goes to Q&A page
-    When user clicks on Search tips
+    When user clicks on Search tips element by text
     And user switches to 2nd window
     Then user verifies that text is displayed: Elsevier Support Center
     And user verifies that text is displayed: How do I search in Embase?
@@ -123,5 +123,32 @@ Feature: Quick Search tests
     Then user verifies the Reset form button is disabled
 
   Scenario: "Reset form" button is enabled when Limit section is expanded
-    When user clicks on Limit to
+    When user clicks Limit to button
     Then user verifies the Reset form button is enabled
+
+  Scenario: "Reset form" button is enabled when New field is added
+    When user clicks Add field button
+    And user selects Title from frequent field list on add field popup
+    Then user verifies the Reset form button is enabled
+
+  Scenario: "Reset form" button is enabled when entering query
+    When user enters query heart on quick search page
+    Then user verifies the Reset form button is enabled
+
+  Scenario: "Reset form" button is enabled when Field type is changed from "Broad search" to "All fields"
+    When user clicks on Change field button on quick search page
+    And user selects All fields from frequent field list on change field popup
+    Then user verifies the Reset form button is enabled
+
+  Scenario: Returns the form to the default state
+    When user clicks on Change field button on quick search page
+    And user selects All fields from frequent field list on change field popup
+    And user clicks Add field button
+    And user selects Title from frequent field list on add field popup
+    And user clicks Limit to button
+    And user clicks Reset form button
+    Then user verifies the Reset form button is disabled
+    And user verifies that text is displayed: Broad search
+    And user verifies that text is not displayed: Title
+    And user verifies that text is not displayed: Publication years
+    And user verifies that text is not displayed: Evidence Based Medicine

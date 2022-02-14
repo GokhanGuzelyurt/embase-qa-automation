@@ -132,4 +132,9 @@ public class QuickSearchPage extends BasePage {
         String disabled = body.findElement(By.xpath("//*[contains(text(), '"+buttonName+"')]/parent::button")).getAttribute("disabled");
         Assert.assertTrue("The button " + buttonName + " should be not enabled", Boolean.parseBoolean(disabled));
     }
+
+    public void verifyTheButtonIsEnabled(String buttonName) {
+        String disabled = body.findElement(By.xpath("//*[contains(text(), '"+buttonName+"')]/parent::button")).getAttribute("disabled");
+        Assert.assertFalse("The button " + buttonName + " should be not disabled", Boolean.parseBoolean(disabled));
+    }
 }

@@ -164,4 +164,9 @@ public class QuickSearchPageStepDef {
     public void verifyTheButtonIsDisabled(String buttonName) {
         quickSearchPage.verifyTheButtonIsDisabled(buttonName);
     }
+
+    @Then("^user verifies the (.*) button is enabled$")
+    public void verifyTheButtonIsEnabled(String buttonName) {
+        quickSearchPage.verifyTheButtonIsEnabled(buttonName);
+    }
 }
