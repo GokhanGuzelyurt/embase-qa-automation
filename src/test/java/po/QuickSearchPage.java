@@ -133,6 +133,16 @@ public class QuickSearchPage extends BasePage {
 
     }
 
+    public void verifyTheButtonIsDisabled(String buttonName) {
+        String disabled = body.findElement(By.xpath("//*[contains(text(), '"+buttonName+"')]/parent::button")).getAttribute("disabled");
+        Assert.assertTrue("The button " + buttonName + " should be not enabled", Boolean.parseBoolean(disabled));
+    }
+
+    public void verifyTheButtonIsEnabled(String buttonName) {
+        String disabled = body.findElement(By.xpath("//*[contains(text(), '"+buttonName+"')]/parent::button")).getAttribute("disabled");
+        Assert.assertFalse("The button " + buttonName + " should be not disabled", Boolean.parseBoolean(disabled));
+    }
+
     public void verifyThatCheckboxIsNotClickable(String checkbox) {
         String disabled = body.findElement(By.xpath("//*[contains(text(), '"+checkbox+"')]/ancestor::label/input")).getAttribute("disabled");
         Assert.assertTrue("The checkbox " + checkbox + " should be not clickable", Boolean.parseBoolean(disabled));
@@ -197,7 +207,7 @@ public class QuickSearchPage extends BasePage {
 
     public void setsOptionTo(String optionLabel, String value) {
         clickOnOption(optionLabel);
-        clickOn(value);
+        clicksOnElementByText(value);
     }
 
     public void verifyThatOptionSelected(String optionLabel, int value) {

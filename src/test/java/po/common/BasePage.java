@@ -85,7 +85,12 @@ public class BasePage extends PageObject {
         body.findElement(By.xpath("//*[contains(text(), '"+button+"')]/ancestor::button")).click();
     }
 
-    public void clickOn(String element) {
-        body.findElement(By.xpath("//*[contains(text(), '"+element+"')]")).click();
+    public void clicksOnElementByText(String text) {
+        body.findElement(By.xpath("//*[contains(text(), '"+text+"')]")).click();
+    }
+
+    public void verifyTextIsNotDisplayed(String text) {
+        waitForJStoLoad();
+        Assert.assertFalse("The page should not contain text '" + text + "'", body.getText().contains(text));
     }
 }

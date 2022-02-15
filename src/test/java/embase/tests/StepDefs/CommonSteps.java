@@ -273,8 +273,13 @@ public class CommonSteps {
         basePage.clickOnButton(button);
     }
 
-    @And("^user clicks on (.*)$")
-    public void clicksOn(String element) {
-        basePage.clickOn(element);
+    @And("^user clicks on (.*) element by text$")
+    public void clicksOnElementByText(String text) {
+        basePage.clicksOnElementByText(text);
+    }
+
+    @And("^user verifies that text is not displayed: (.*)$")
+    public void verifyTextIsNotDisplayed(String text) {
+        basePage.verifyTextIsNotDisplayed(text);
     }
 }
