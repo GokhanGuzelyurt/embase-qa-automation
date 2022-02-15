@@ -1,6 +1,7 @@
 package po;
 
 import net.thucydides.core.annotations.DefaultUrl;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -125,5 +126,15 @@ public class QuickSearchPage extends BasePage {
         WebElement operatorText = operatorDropdown.findElement(By.xpath("//span[contains(@class,'SelectPopover_optionText__2Nd3v')and contains(text(),'" + text + "')]"));
         operatorText.click();
 
+    }
+
+    public void verifyTheButtonIsDisabled(String buttonName) {
+        String disabled = body.findElement(By.xpath("//*[contains(text(), '"+buttonName+"')]/parent::button")).getAttribute("disabled");
+        Assert.assertTrue("The button " + buttonName + " should be not enabled", Boolean.parseBoolean(disabled));
+    }
+
+    public void verifyTheButtonIsEnabled(String buttonName) {
+        String disabled = body.findElement(By.xpath("//*[contains(text(), '"+buttonName+"')]/parent::button")).getAttribute("disabled");
+        Assert.assertFalse("The button " + buttonName + " should be not disabled", Boolean.parseBoolean(disabled));
     }
 }

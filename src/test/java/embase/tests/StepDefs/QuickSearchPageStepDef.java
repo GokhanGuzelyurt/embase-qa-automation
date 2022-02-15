@@ -159,4 +159,14 @@ public class QuickSearchPageStepDef {
     public void selectOperatorValue(String operator) {
         quickSearchPage.selectOperatorByText(operator);
     }
+
+    @Then("^user verifies the (.*) button is disabled$")
+    public void verifyTheButtonIsDisabled(String buttonName) {
+        quickSearchPage.verifyTheButtonIsDisabled(buttonName);
+    }
+
+    @Then("^user verifies the (.*) button is enabled$")
+    public void verifyTheButtonIsEnabled(String buttonName) {
+        quickSearchPage.verifyTheButtonIsEnabled(buttonName);
+    }
 }

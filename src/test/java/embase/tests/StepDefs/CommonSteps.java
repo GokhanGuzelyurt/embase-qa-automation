@@ -263,8 +263,23 @@ public class CommonSteps {
         driver.switchTo().window(window);
     }
 
-    @When("^user clicks on (.*)$")
-    public void clickOn(String button) {
-        basePage.clickOn(button);
+    @When("^user clicks on (.*) link$")
+    public void clickOnLink(String link) {
+        basePage.clickOnLink(link);
+    }
+
+    @When("^user clicks (.*) button$")
+    public void clickOnButton(String button) {
+        basePage.clickOnButton(button);
+    }
+
+    @And("^user clicks on (.*) element by text$")
+    public void clicksOnElementByText(String text) {
+        basePage.clicksOnElementByText(text);
+    }
+
+    @And("^user verifies that text is not displayed: (.*)$")
+    public void verifyTextIsNotDisplayed(String text) {
+        basePage.verifyTextIsNotDisplayed(text);
     }
 }
