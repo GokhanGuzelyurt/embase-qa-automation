@@ -9,6 +9,8 @@ import org.openqa.selenium.support.ui.Select;
 import po.common.BasePage;
 
 import java.awt.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @DefaultUrl("page:quickSearch.page")
@@ -77,6 +79,9 @@ public class QuickSearchPage extends BasePage {
     @FindBy(id = "fragments[1].operator.value")
     public WebElement operatorDropdown;
 
+    @FindBy(css = "[class*=SelectOptions-module_label]")
+    public List<WebElement> selectOptions;
+
 
     public void at() {
         shouldBeDisplayed();
@@ -136,5 +141,77 @@ public class QuickSearchPage extends BasePage {
     public void verifyTheButtonIsEnabled(String buttonName) {
         String disabled = body.findElement(By.xpath("//*[contains(text(), '"+buttonName+"')]/parent::button")).getAttribute("disabled");
         Assert.assertFalse("The button " + buttonName + " should be not disabled", Boolean.parseBoolean(disabled));
+    }
+
+    public void verifyThatCheckboxIsNotClickable(String checkbox) {
+        String disabled = body.findElement(By.xpath("//*[contains(text(), '"+checkbox+"')]/ancestor::label/input")).getAttribute("disabled");
+        Assert.assertTrue("The checkbox " + checkbox + " should be not clickable", Boolean.parseBoolean(disabled));
+    }
+
+    public void selectCheckbox(String checkbox) {
+        body.findElement(By.xpath("//*[contains(text(), '"+checkbox+"')]/ancestor::label")).click();
+    }
+
+    public void verifyThatOptionsIsEnabled(String optionsLabel) {
+        String disabled = body.findElement(By.xpath("//label[contains(text(), '"+optionsLabel+"')]/following-sibling::button")).getAttribute("disabled");
+        Assert.assertFalse("The options " + optionsLabel + " should be not enabled", Boolean.parseBoolean(disabled));
+    }
+
+    public void verifyThatSelectIsEnabled(String selectLabel) {
+        String disabled = body.findElement(By.xpath("//label[contains(text(), '"+selectLabel+"')]/preceding-sibling::input")).getAttribute("disabled");
+        Assert.assertFalse("The select " + selectLabel + " should be not enabled", Boolean.parseBoolean(disabled));
+    }
+
+    public void clickOnOption(String option) {
+        body.findElement(By.xpath("//label[contains(text(), '"+option+"')]/following-sibling::button")).click();
+    }
+
+    public void verifyThatDropDownIsLimitedToTheNextYear(String optionLabel) {
+        String option = selectOptions.get(0).getText();
+        int nextYear = getNextYear();
+        Assert.assertEquals("The "+optionLabel+" drop-down should limited to the next year" , String.valueOf(nextYear), option);
+    }
+
+    private int getNextYear() {
+        LocalDate now = LocalDate.now();
+        LocalDate nextYear = now.plusYears(1);
+        return nextYear.getYear();
+    }
+
+    public void verifyThatDropDownContains(String optionLabel, String value) {
+        List<String> listOfOptions = new ArrayList<>();
+        for(WebElement selectOption : selectOptions) {
+            listOfOptions.add(selectOption.getText());
+        }
+        boolean equal = listOfOptions.contains(value);
+        Assert.assertTrue("The "+optionLabel+" drop-down should contain " +value, equal);
+    }
+
+    public void verifyThatDefaultPreSelectedYearsMaxMinus(String optionLabel, int value) {
+        int nextYear = getNextYear();
+        int expected = nextYear - value;
+        String option = body.findElement(By.xpath("//label[contains(text(), '"+optionLabel+"')]/following-sibling::button")).getText();
+        Assert.assertEquals("The "+optionLabel+" should default pre-selected " +expected, String.valueOf(expected), option);
+    }
+
+    public void verifyThatDefaultPreSelectedYearsMax(String optionLabel) {
+        int nextYear = getNextYear();
+        String option = body.findElement(By.xpath("//label[contains(text(), '"+optionLabel+"')]/following-sibling::button")).getText();
+        Assert.assertEquals("The "+optionLabel+" should default pre-selected " +nextYear, String.valueOf(nextYear), option);
+    }
+
+    public void verifyThatMinYearIs(String optionLabel, int expected) {
+        String option = selectOptions.get(selectOptions.size()-1).getText();
+        Assert.assertEquals("The "+optionLabel+" should default pre-selected " +expected, String.valueOf(expected), option);
+    }
+
+    public void setsOptionTo(String optionLabel, String value) {
+        clickOnOption(optionLabel);
+        clicksOnElementByText(value);
+    }
+
+    public void verifyThatOptionSelected(String optionLabel, int value) {
+        String option = body.findElement(By.xpath("//label[contains(text(), '"+optionLabel+"')]/following-sibling::button")).getText();
+        Assert.assertEquals("The "+optionLabel+" should selected " +value, String.valueOf(value), option);
     }
 }

@@ -169,4 +169,64 @@ public class QuickSearchPageStepDef {
     public void verifyTheButtonIsEnabled(String buttonName) {
         quickSearchPage.verifyTheButtonIsEnabled(buttonName);
     }
+
+    @Then("^user verifies that options (.*) is enabled$")
+    public void verifyThatOptionsIsEnabled(String optionsLabel) {
+        quickSearchPage.verifyThatOptionsIsEnabled(optionsLabel);
+    }
+
+    @Then("^user verifies that select (.*) is enabled$")
+    public void verifyThatSelectIsEnabled(String selectLabel) {
+        quickSearchPage.verifyThatSelectIsEnabled(selectLabel);
+    }
+
+    @Then("^user verifies that checkbox (.*) is not clickable$")
+    public void verifyThatCheckboxIsNotClickable(String checkbox) {
+        quickSearchPage.verifyThatCheckboxIsNotClickable(checkbox);
+    }
+
+    @And("^user select (.*) checkbox$")
+    public void selectCheckbox(String checkbox) {
+        quickSearchPage.selectCheckbox(checkbox);
+    }
+
+    @And("^user clicks (.*) option$")
+    public void clickOnOption(String option) {
+        quickSearchPage.clickOnOption(option);
+    }
+
+    @Then("^user verifies that (.*) drop-down is limited to the next year$")
+    public void verifyThatDropDownIsLimitedToTheNextYear(String optionLabel) {
+        quickSearchPage.verifyThatDropDownIsLimitedToTheNextYear(optionLabel);
+    }
+
+    @Then("^user verifies that (.*) drop-down contains (.*)$")
+    public void verifyThatDropDownContains(String optionLabel, String value) {
+        quickSearchPage.verifyThatDropDownContains(optionLabel, value);
+    }
+
+    @Then("^user verifies that (.*) default pre-selected years MAX_YEAR - (.*)$")
+    public void verifyThatDefaultPreSelectedYearsMaxMinus(String optionLabel, int value) {
+        quickSearchPage.verifyThatDefaultPreSelectedYearsMaxMinus(optionLabel, value);
+    }
+
+    @And("^user verifies that (.*) default pre-selected years MAX_YEAR$")
+    public void verifyThatDefaultPreSelectedYearsMax(String optionLabel) {
+        quickSearchPage.verifyThatDefaultPreSelectedYearsMax(optionLabel);
+    }
+
+    @Then("^user verifies that (.*) min year is (.*)$")
+    public void verifyThatMinYearIs(String optionLabel, int value) {
+        quickSearchPage.verifyThatMinYearIs(optionLabel, value);
+    }
+
+    @And("^user sets (.*) option to (.*)$")
+    public void setsOptionTo(String optionLabel, String value) {
+        quickSearchPage.setsOptionTo(optionLabel, value);
+    }
+
+    @Then("^user verifies that (.*) option selected (.*)$")
+    public void verifyThatOptionSelected(String optionLabel, int value) {
+        quickSearchPage.verifyThatOptionSelected(optionLabel, value);
+    }
 }

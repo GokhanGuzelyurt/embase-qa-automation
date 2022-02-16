@@ -84,7 +84,7 @@ Feature: Quick Search tests
       | AND           | ('heart'/exp OR heart) AND heart:ti |
       | NOT           | ('heart'/exp OR heart) NOT heart:ti |
       | OR            | 'heart'/exp OR heart OR heart:ti    |
-      
+
   @C506783
   Scenario: Validate footer text and links
     Then validate that footer elements are present:
@@ -114,6 +114,86 @@ Feature: Quick Search tests
     Then user verifies that text is displayed: Elsevier Support Center
     And user verifies that text is displayed: How do I search in Embase?
     And user verifies that text is displayed: Quick search
+
+  @C507036
+  Scenario: Text validation in "Limit to" section
+    When user clicks Limit to button
+    Then user verifies that text is displayed: Publication years
+    And user verifies that text is displayed: Records added to Embase
+    And user verifies that text is displayed: Evidence Based Medicine
+    And user verifies that text is displayed: Cochrane Review
+    And user verifies that text is displayed: Controlled Clinical Trial
+    And user verifies that text is displayed: Systematic Review
+    And user verifies that text is displayed: Randomized Controlled Trial
+    And user verifies that text is displayed: Meta Analysis
+
+  @C507037
+  Scenario: Has all individual limits disabled if search terms are empty
+    When user clicks Limit to button
+    Then user verifies that checkbox Publication years is not clickable
+    And user verifies that checkbox Records added to Embase is not clickable
+    And user verifies that checkbox Cochrane Review is not clickable
+    And user verifies that checkbox Controlled Clinical Trial is not clickable
+    And user verifies that checkbox Systematic Review is not clickable
+    And user verifies that checkbox Randomized Controlled Trial is not clickable
+    And user verifies that checkbox Meta Analysis is not clickable
+
+  @C507038
+  Scenario: Search limit is only enabled and effective when corresponding checkbox is turned on and enabled
+    When user enters query heart attack on quick search page
+    And user clicks Limit to button
+    And user select Publication years checkbox
+    And user select Records added to Embase checkbox
+    Then user verifies that options From is enabled
+    And user verifies that options To is enabled
+    And user verifies that select Select date is enabled
+
+  @C507039
+  Scenario Outline: Max available year (MAX_YEAR) in <option> is always limited to the next year
+    When user enters query heart attack on quick search page
+    And user clicks Limit to button
+    And user select Publication years checkbox
+    And user clicks <option> option
+    Then user verifies that <option> drop-down is limited to the next year
+    Examples:
+    | option |
+    | From   |
+    | To     |
+
+  @C507040
+  Scenario: The option From contains Min year "< 1966"
+    When user enters query heart attack on quick search page
+    And user clicks Limit to button
+    And user select Publication years checkbox
+    And user clicks From option
+    Then user verifies that From drop-down contains < 1966
+
+  @C507041
+  Scenario: Default pre-selected years range: [MAX_YEAR - 10, MAX_YEAR].
+    When user enters query heart attack on quick search page
+    And user clicks Limit to button
+    And user select Publication years checkbox
+    Then user verifies that From default pre-selected years MAX_YEAR - 10
+    And user verifies that To default pre-selected years MAX_YEAR
+
+  @C507042
+  Scenario: Min year of "To" is limited to current value of "From" select.
+    When user enters query heart attack on quick search page
+    And user clicks Limit to button
+    And user select Publication years checkbox
+    And user sets From option to 2020
+    And user clicks To option
+    Then user verifies that To min year is 2020
+
+  @C507043
+  Scenario: "From" value is bigger than "To" value then "To" value is automatically set to "From" value
+    When user enters query heart attack on quick search page
+    And user clicks Limit to button
+    And user select Publication years checkbox
+    And user sets From option to 2010
+    And user sets To option to 2012
+    And user sets From option to 2020
+    Then user verifies that To option selected 2020
 
   @C507045
   Scenario: Validate that the search page contain "Reset form" button
