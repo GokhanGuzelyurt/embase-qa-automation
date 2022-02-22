@@ -8,6 +8,7 @@ import io.cucumber.datatable.DataTable;
 import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.api.Assertions;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,6 +42,7 @@ public class QuickSearchPageStepDef {
         quickSearchPage.firstLine.click();
         quickSearchPage.firstLine.clear();
         quickSearchPage.firstLine.sendKeys(query);
+        quickSearchPage.firstLine.sendKeys(Keys.ENTER);
     }
 
     @Given("^user enters second line query (.*) on quick search page$")

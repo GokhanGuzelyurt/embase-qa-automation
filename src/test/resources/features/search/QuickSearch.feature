@@ -156,9 +156,9 @@ Feature: Quick Search tests
     And user clicks <option> option
     Then user verifies that <option> drop-down is limited to the next year
     Examples:
-    | option |
-    | From   |
-    | To     |
+      | option |
+      | From   |
+      | To     |
 
   @C507040
   Scenario: The option From contains Min year "< 1966"
@@ -238,3 +238,19 @@ Feature: Quick Search tests
     And user verifies that text is not displayed: Title
     And user verifies that text is not displayed: Publication years
     And user verifies that text is not displayed: Evidence Based Medicine
+
+  @C507076
+  Scenario Outline: Verify query building syntax
+    When user clicks on Change field button on quick search page
+    And user selects <field_name> from frequent field list on change field popup
+    And user enters query <query> on quick search page
+    And user clicks on Show results button on quick search
+    Then search query is <results_query>
+    Examples:
+      | query                          | field_name             | results_query                                 |
+      | red blood                      | Title                  | 'red blood':ti                                |
+      | red blood next/25 dna          | Title or Abstract      | ('red blood' NEXT/25 dna):ab,ti               |
+      | vascular disease or dna        | Emtree term - exploded | 'vascular disease'/exp OR 'dna'/exp           |
+      | 'heart attack'                 | All fields             | 'heart attack'                                |
+      | blood and DNA                  | Broad search           | ('blood'/exp OR blood) AND ('dna'/exp OR dna) |
+      | "young adults" AND "teenagers" | Author keywords        | 'young adults':kw AND 'teenagers':kw          |
