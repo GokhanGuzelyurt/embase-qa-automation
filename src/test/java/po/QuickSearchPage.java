@@ -22,6 +22,9 @@ public class QuickSearchPage extends BasePage {
     @FindBy(css = "[data-testid='add-field']")
     public WebElement addFieldBtn;
 
+    @FindBy(css = "[data-testid='show-full-query']")
+    public WebElement displayFullQueryBtn;
+
     @FindBy(css = "[data-testid='fragments[0].change']")
     public WebElement changeFieldBtn;
 
@@ -82,6 +85,8 @@ public class QuickSearchPage extends BasePage {
     @FindBy(css = "[class*=SelectOptions-module_label]")
     public List<WebElement> selectOptions;
 
+    @FindBy(css = "button[data-testid='page-modal-alternative'] span")
+    public WebElement copyQueryModalBtn;
 
     public void at() {
         shouldBeDisplayed();
