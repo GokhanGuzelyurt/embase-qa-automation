@@ -248,4 +248,9 @@ public class QuickSearchPageStepDef {
     public void verifyThatOptionSelected(String optionLabel, int value) {
         quickSearchPage.verifyThatOptionSelected(optionLabel, value);
     }
+
+    @Then("^user verifies that all suggestion rows contains (.*)$")
+    public void verifyThatOptionSelected(String text) {
+        quickSearchPage.verifyAllSuggestionRowsContains(text);
+    }
 }

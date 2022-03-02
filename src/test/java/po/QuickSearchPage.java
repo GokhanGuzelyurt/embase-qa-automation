@@ -85,6 +85,9 @@ public class QuickSearchPage extends BasePage {
     @FindBy(css = "[class*=SelectOptions-module_label]")
     public List<WebElement> selectOptions;
 
+    @FindBy(css = "ul[role=listbox]")
+    public WebElement suggestionList;
+
     @FindBy(css = "button[data-testid='page-modal-alternative'] span")
     public WebElement copyQueryModalBtn;
 
@@ -218,5 +221,11 @@ public class QuickSearchPage extends BasePage {
     public void verifyThatOptionSelected(String optionLabel, int value) {
         String option = body.findElement(By.xpath("//label[contains(text(), '"+optionLabel+"')]/following-sibling::button")).getText();
         Assert.assertEquals("The "+optionLabel+" should selected " +value, String.valueOf(value), option);
+    }
+
+    public void verifyAllSuggestionRowsContains(String text) {
+        for (WebElement suggestionRow : suggestionList.findElements(By.cssSelector("ul[role=listbox] li div[class=row]>div[class=col]>span:nth-child(1)"))) {
+            Assert.assertTrue(suggestionRow.getText().toLowerCase().contains(text));
+        }
     }
 }
