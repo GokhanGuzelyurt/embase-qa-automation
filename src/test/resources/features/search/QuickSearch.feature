@@ -3,6 +3,9 @@ Feature: Quick Search tests
 
   Background: Home page
     Given user opens Embase application
+    And Quick search page is opened
+    And user opens Results page
+    And user opens Quick Search page
     Then Quick search page is opened
 
   @C506417
@@ -265,5 +268,10 @@ Feature: Quick Search tests
   Scenario: [FE] Fields with autosuggest
     When user types query heart OR DNA on quick search page
     Then user verifies that all suggestion rows contains dna
-    When user types query DNA OR heart on quick search page
+    When user clears search
+    And user types query DNA OR heart on quick search page
     Then user verifies that all suggestion rows contains heart
+    And user verifies 2 suggestion row count is 2,147,834
+    When user clicks on 2 suggestion row
+    And user clicks on Show results button on quick search
+    And search query is 'dna'/exp OR dna OR 'heart disease'/exp OR 'heart disease'
