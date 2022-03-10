@@ -193,4 +193,9 @@ public class MedicalDeviceStepDef {
         medicalDeviceSearchPage.clickIcon(iconName);
 
     }
+
+    @Then("^the label on the popup is Add adverse effects$")
+    public void verifyLabelAddAdverseEffects(){
+        Assertions.assertThat(medicalDeviceSearchPage.addAdverseEffectsLabel.getText()).describedAs("Label value is not equal to expected").contains("Add adverse effects");
+    }
 }

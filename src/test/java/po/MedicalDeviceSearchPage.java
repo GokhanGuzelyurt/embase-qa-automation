@@ -136,7 +136,7 @@ public class MedicalDeviceSearchPage extends BasePage {
     @FindBy(css = ".PanelButton_root__1JTb7 .btn-open-synonyms-modal")
     public WebElement addSynonymsIcon;
 
-    @FindBy(id = "show-results-button")
+    @FindBy(css = "[data-testid='show-results-button']")
     public WebElement showResultsBtn;
 
     @FindBy(className = "Checkbox-module_root__1DisM")
@@ -148,7 +148,7 @@ public class MedicalDeviceSearchPage extends BasePage {
     @FindBy(id = "publication-year-from")
     public WebElement pubYearFrom;
 
-    @FindBy(id = "publication-year-to")
+    @FindBy(id="publication-year-to-selected-value")
     public WebElement pubYearTo;
 
     @FindBy(id = "publication-year-from-options")
@@ -157,11 +157,14 @@ public class MedicalDeviceSearchPage extends BasePage {
     @FindBy(id = "publication-year-to-options")
     public WebElement pubYearToOptions;
 
-    @FindBy(id = "synonym-operator")
+    @FindBy(id = "synonyms-operator")
     public WebElement synonymOperator;
 
     @FindBy(css = ".tippy-content")
     public WebElement synonymOperatorList;
+
+    @FindBy(id="generic-adverse-effects-query-modal-label")
+    public WebElement addAdverseEffectsLabel;
 
 
     public boolean medicalDeviceLabelDisplayed() {
@@ -218,7 +221,7 @@ public class MedicalDeviceSearchPage extends BasePage {
 
     public void clickAutoSuggestDeviceTerm(String term) {
 
-        List<WebElement> options = deviceSuggestionsTermsList.findElements(By.className("suggestion-term"));
+        List<WebElement> options = getDriver().findElements(By.xpath("//div[@class='col']"));
         for (WebElement option : options) {
             if (option.getText().equals(term)) {
                 option.click(); // click the desired option
@@ -322,6 +325,7 @@ public class MedicalDeviceSearchPage extends BasePage {
         if (!fromYear.isEmpty()) {
             pubYearFrom.click();
             pubYearFromOptions.findElement(By.buttonText(fromYear)).click();
+            waitForJStoLoad();
         }
 
         if (!toYear.isEmpty()) {
