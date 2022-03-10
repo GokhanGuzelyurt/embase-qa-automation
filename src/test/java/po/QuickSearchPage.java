@@ -219,4 +219,9 @@ public class QuickSearchPage extends BasePage {
         String option = body.findElement(By.xpath("//label[contains(text(), '"+optionLabel+"')]/following-sibling::button")).getText();
         Assert.assertEquals("The "+optionLabel+" should selected " +value, String.valueOf(value), option);
     }
+
+    public void clickShowResultsBtn(){
+        waitForJStoLoad();
+        showResultsButton.click();
+    }
 }

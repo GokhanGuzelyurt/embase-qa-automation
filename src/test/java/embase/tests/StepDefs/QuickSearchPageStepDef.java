@@ -112,7 +112,7 @@ public class QuickSearchPageStepDef {
 
     @And("^user clicks on Show results button on quick search$")
     public void clickShowResultsQuickSearch() {
-        quickSearchPage.showResultsButton.click();
+        quickSearchPage.clickShowResultsBtn();
     }
 
     @And("^user selects (.*) from frequent field list on change field popup$")
