@@ -82,8 +82,8 @@ Feature: Quick Search tests
     Examples:
       | operator_Name | results_Query                       |
       | AND           | ('heart'/exp OR heart) AND heart:ti |
-#      | NOT           | ('heart'/exp OR heart) NOT heart:ti |
-#      | OR            | 'heart'/exp OR heart OR heart:ti    |
+      | NOT           | ('heart'/exp OR heart) NOT heart:ti |
+      | OR            | 'heart'/exp OR heart OR heart:ti    |
 
   @C506783
   Scenario: Validate footer text and links
