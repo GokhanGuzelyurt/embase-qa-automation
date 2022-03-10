@@ -37,6 +37,13 @@ public class QuickSearchPageStepDef {
         quickSearchPage.open();
     }
 
+    @Given("^user types query (.*) on quick search page$")
+    public void typeQueryQuickSearch(String query) {
+        quickSearchPage.firstLine.click();
+        quickSearchPage.firstLine.clear();
+        quickSearchPage.firstLine.sendKeys(query);
+    }
+
     @Given("^user enters query (.*) on quick search page$")
     public void enterQueryQuickSearch(String query) {
         quickSearchPage.firstLine.click();
@@ -67,9 +74,19 @@ public class QuickSearchPageStepDef {
         quickSearchPage.addFieldBtn.click();
     }
 
+    @When("^user clicks on Display Full Query button on quick search page$")
+    public void clickDisplayFullQueryBtn() {
+        quickSearchPage.displayFullQueryBtn.click();
+    }
+
     @When("^user clicks on Change field button on quick search page$")
     public void clickChangeFieldBtn() {
         quickSearchPage.changeFieldBtn.click();
+    }
+
+    @Then("^Copy query popup button is present on Quick Search Page$")
+    public void verifyCopyQueryPopupButton() {
+        Assertions.assertThat(quickSearchPage.copyQueryModalBtn.isDisplayed()).describedAs("Copy query popup button is not displayed").isTrue();
     }
 
     @Then("^Add field popup is opened on Quick Search Page$")

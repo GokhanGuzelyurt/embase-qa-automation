@@ -254,3 +254,9 @@ Feature: Quick Search tests
       | 'heart attack'                 | All fields             | 'heart attack'                                |
       | blood and DNA                  | Broad search           | ('blood'/exp OR blood) AND ('dna'/exp OR dna) |
       | "young adults" AND "teenagers" | Author keywords        | 'young adults':kw AND 'teenagers':kw          |
+
+  @C507139
+  Scenario: [FE] Add a "Copy" button on the window after clicking on "Display Full Query"
+    When user types query heart on quick search page
+    And user clicks on Display Full Query button on quick search page
+    Then Copy query popup button is present on Quick Search Page
