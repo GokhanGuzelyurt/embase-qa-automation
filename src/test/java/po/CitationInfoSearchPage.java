@@ -55,7 +55,7 @@ public class CitationInfoSearchPage extends BasePage {
     @FindBy(id = "is-publication-year")
     public WebElement publicationYearsCheckBox;
 
-    @FindBy(id = "show-results-button")
+    @FindBy(css = "[data-testid='show-results-button']")
     public WebElement showResultButton;
 
     @FindBy(xpath = "//span[contains(@class,'LinkButton-module_content__2F1Lc')][contains(text(),'More citation fields')]")
