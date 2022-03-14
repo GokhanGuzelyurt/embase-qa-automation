@@ -102,7 +102,7 @@ Feature: Citation Information tests
     When user enters Citation Information
       | articleTitle | authorName | journalTitle | journalTitleExact | ABBRJournalTitle | ABBRJournalTitleExact | ISSN | CODEN | DOI | volume | issue | firstPage | pubYears | fromYear | toYear |
       | heart        |            |              |                   |                  |                       |      |       |     |        |       |           | true     |          |        |
-    Then search query is 'heart':ti AND [2011-2021]/py
+    Then search query is 'heart':ti AND [2012-2022]/py
 
   @C477719
   Scenario: Verify that Citation search form returns results on the second search round
