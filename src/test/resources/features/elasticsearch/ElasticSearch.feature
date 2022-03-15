@@ -87,3 +87,23 @@ Feature: Elastic search queries
     Then user verifies that text is displayed: Export ready for download
     And user verifies that text is displayed: Download
     And user verifies that url contains /search/download
+
+  @C506453
+  Scenario Outline: Date fields validation. Both date formats bring same number of results
+    Given user opens Results page
+    And user enters query <originalDateFormatQueries> and performs a search
+    When get the number of search results for original date format
+    And user enters query <changedDateFormatQueries> and performs a search
+    And get the number of search results for changed date format
+    Then the same number of search results for original date and changed date
+    Examples:
+      | originalDateFormatQueries  | changedDateFormatQueries   |
+      | [23-11-2020]/sd            | [2020-11-23]/sd            |
+      | [2021-11-23]/aip           | [23-11-2021]/aip           |
+      | test AND '2020-10-30':ld   | test AND '30-10-2020':ld   |
+      | cancer AND '2020-10-01':ld | cancer AND '01-10-2020':ld |
+      | public AND '2020-11-04':ld | public AND '04-11-2020':ld |
+      | '2020-01-31':pd            | '31-01-2020':pd            |
+      | '2020-10':pd               | '10-2020':pd               |
+      | '2019-09-19':dc            | '19-09-2019':dc            |
+      | '2019-09':dc               | '09-2019':dc               |

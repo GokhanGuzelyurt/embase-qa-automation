@@ -1,5 +1,6 @@
 package embase.tests.StepDefs;
 
+import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import po.AdvancedSearchPage;
 import po.ResultsPage;
@@ -15,4 +16,9 @@ public class AdvancedSearchPageStepDef {
         advancedSearchPage.open();
     }
 
+    @Then("^user is on Advanced Search Page$")
+    public void verifyAdvancedSearchPage(){
+        advancedSearchPage.shouldBeDisplayed();
+        resultsPage.searchField.isDisplayed();
+    }
 }
