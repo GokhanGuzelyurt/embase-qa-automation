@@ -179,8 +179,7 @@ public class QuickSearchPage extends BasePage {
 
     private int getNextYear() {
         LocalDate now = LocalDate.now();
-        LocalDate nextYear = now.plusYears(1);
-        return nextYear.getYear();
+        return now.getYear();
     }
 
     public void verifyThatDropDownContains(String optionLabel, String value) {
