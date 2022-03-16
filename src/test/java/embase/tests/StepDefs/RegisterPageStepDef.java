@@ -1,6 +1,7 @@
 package embase.tests.StepDefs;
 
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.When;
 import po.HeaderNavigation;
 
 
@@ -12,6 +13,5 @@ public class RegisterPageStepDef {
     public void clickSignInButton() {
         headerNavigation.signInButton.waitUntilVisible();
         headerNavigation.signInButton.click();
-
     }
 }
