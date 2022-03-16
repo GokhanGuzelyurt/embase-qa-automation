@@ -1,9 +1,11 @@
 package po;
 
+import embase.tests.StepDefs.CommonSteps;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.Step;
 import org.assertj.core.api.Assertions;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,7 +18,10 @@ import po.sections.results.ResultList;
 import po.sections.search.SearchHistory;
 
 import java.lang.invoke.MethodHandles;
+import java.util.Arrays;
 import java.util.List;
+
+import static embase.tests.StepDefs.CommonSteps.testCaseVariables;
 
 @DefaultUrl("page:results.page")
 public class ResultsPage extends BasePage {
@@ -79,6 +84,9 @@ public class ResultsPage extends BasePage {
 
     @FindBy(id = "addToClipboardAction")
     public WebElementFacade addToClipboardActionLink;
+
+    @FindBy(css = ".search-hitcounts")
+    public WebElementFacade searchHitCounts;
 
 
     public void waitForRecordSectionIsLoaded() {
@@ -163,6 +171,22 @@ public class ResultsPage extends BasePage {
         }
     }
 
+    private String getNumberOfSearchResults() {
+        logger.info("get number of search result");
+        List<String> numberOfSearchResults = Arrays.asList(searchHitCounts.getText().split(" "));
+        return numberOfSearchResults.get(0);
+    }
 
+    public void getTheNumberOfSearchResultsForDateFormat(String variableName) {
+        CommonSteps.setTestCaseVariable(variableName, getNumberOfSearchResults());
+    }
+
+    public void verifyTheSameNumberOfBothSearchResults(String variableNameFirst, String variableNameSecond) {
+        String first = CommonSteps.testCaseVariables.get(variableNameFirst);
+        String second = CommonSteps.testCaseVariables.get(variableNameSecond);
+        logger.info("assert that the number of search results is the same for both date format");
+        Assert.assertEquals("The search result after change date format " + second
+                        + " should be equal search result for original date format " + first,
+                first, second);
+    }
 }
-

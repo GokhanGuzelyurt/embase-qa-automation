@@ -163,4 +163,14 @@ public class ResultsPageStepDef {
 
     }
 
+    @When("^get the number of search results for (.*) date format$")
+    public void getTheNumberOfSearchResultsForChangedDateFormat(String variableName) {
+        resultsPage.waitForJStoLoad();
+        resultsPage.getTheNumberOfSearchResultsForDateFormat(variableName);
+    }
+
+    @Then("^the same number of search results for (.*) date and (.*) date$")
+    public void verifyTheSameNumberOfBothSearchResults(String variableNameFirst, String variableNameSecond) {
+        resultsPage.verifyTheSameNumberOfBothSearchResults(variableNameFirst, variableNameSecond);
+    }
 }
