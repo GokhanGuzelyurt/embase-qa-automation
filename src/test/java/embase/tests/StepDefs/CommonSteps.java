@@ -263,10 +263,11 @@ public class CommonSteps {
         driver.switchTo().window(window);
     }
 
-    @When("^user clicks on (.*) link$")
-    public void clickOnLink(String link) {
-        basePage.clickOnLink(link);
-    }
+    // This method is creating ambiguity
+//    @When("^user clicks on (.*) link$")
+//    public void clickOnLink(String link) {
+//        basePage.clickOnLink(link);
+//    }
 
     @When("^user clicks (.*) button$")
     public void clickOnButton(String button) {

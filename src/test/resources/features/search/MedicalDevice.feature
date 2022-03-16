@@ -6,7 +6,7 @@ Feature: Medical Device tests
     Then Quick search page is opened
     And user opens Medical Device search page
 
-  @C467180
+  @C477465
   Scenario: Adding a new device
     When user clicks on Add device name icon
     Then the title on the popup is Add device name
@@ -15,7 +15,7 @@ Feature: Medical Device tests
     Then the Add device name popup is closed
     And the device name medical thermometer is displayed on the form
 
-  @C467181
+  @C477466
   Scenario: Adding synonyms for the medical device
     When user clicks on Add device name icon
     Then the title on the popup is Add device name
@@ -25,7 +25,7 @@ Feature: Medical Device tests
     Then the Add device name popup is closed
     And the device name medical thermometer is displayed on the form
     And user waits for synonyms to load
-    When user clicks on Add Synonym icon
+    When user clicks on Add Synonym icon of Medical device page
     Then the title on the popup is Add device name synonyms
     When user clicks on synonyms button at medical device page
     Then Medical device search page is opened
@@ -33,7 +33,7 @@ Feature: Medical Device tests
     Then user is on Results Page
     And the result set is not empty
 
-  @C467182
+  @C477467
   Scenario: Validating that adverse device effect checkbox is selected by default
     When user clicks on Add device name icon
     Then the title on the popup is Add device name
@@ -45,7 +45,7 @@ Feature: Medical Device tests
     Then user is on Results Page
     And search query is 'medical thermometer'/exp OR 'medical thermometer':ti,ab OR 'medical thermometer'/exp/'adverse device effect'
 
-  @C467183
+  @C477468
   Scenario: Selecting the device name from Emtree
     When user clicks on Add device name icon
     Then the title on the popup is Add device name
@@ -59,7 +59,7 @@ Feature: Medical Device tests
     Then the result set is not empty
     And search query is 'bipolar implant'/exp OR 'bipolar implant':ti,ab OR 'bipolar implant'/exp/'adverse device effect'
 
-  @C467184
+  @C477469
   Scenario: Selecting the device name and subheadings checkboxes in the medical device
     When user clicks on Add device name icon
     Then the title on the popup is Add device name
@@ -70,9 +70,9 @@ Feature: Medical Device tests
     And check box Device comparison is selected
     When user clicks on results button at medical device page
     Then the result set is not empty
-    And search query is 'medical thermometer'/exp OR 'medical thermometer':ti,ab OR 'medical thermometer'/exp/'adverse device effect','clinical trial','device comparison'
+    And search query is 'medical thermometer'/exp OR 'medical thermometer':ti,ab OR 'medical thermometer'/exp/'adverse device effect','device comparison','clinical trial'
 
-  @C467185
+  @C477470
   Scenario: Editing the device name on medical device search form
     When user clicks on Add device name icon
     Then the title on the popup is Add device name
@@ -86,7 +86,7 @@ Feature: Medical Device tests
     Then the Add device name popup is closed
     And the device name cardiac rhythm management device is displayed on the form
 
-  @C467186
+  @C477471
   Scenario: Removing the device name on medical device search form
     When user clicks on Add device name icon
     Then the title on the popup is Add device name
@@ -98,7 +98,7 @@ Feature: Medical Device tests
     When user clicks on close icon to remove the device name
     And Show results button is disabled
 
-  @C467187
+  @C477472
   Scenario:Adding general adverse reactions on medical devices
     When user clicks on Add device name icon
     When user enters the device name as medical thermometer
@@ -106,7 +106,7 @@ Feature: Medical Device tests
     Then the Add device name popup is closed
     And the device name medical thermometer is displayed on the form
     When user clicks on Add/Edit default adverse effects syntax icon
-    Then the title on the popup is Add adverse effects
+    Then the label on the popup is Add adverse effects
     When user clicks on Add query snippet button at medical device page
     Then the general adverse effects popup is closed
     And the label General device adverse effect syntax is displayed for general adverse effects
@@ -114,7 +114,7 @@ Feature: Medical Device tests
     Then user is on Results Page
     And the result set is not empty
 
-  @C467188
+  @C477473
   Scenario: Adding device specific adverse  effects to medical devices
     When user clicks on Add device name icon
     When user enters the device name as medical thermometer
@@ -132,7 +132,7 @@ Feature: Medical Device tests
     Then user is on Results Page
     And the result set is not empty
 
-  @C467189
+  @C477474
   Scenario: Adding limit options on the medical device page
     When user clicks on Add device name icon
     And user enters the device name as medical thermometer
@@ -143,7 +143,7 @@ Feature: Medical Device tests
     Then user is on Results Page
     And search query is ('medical thermometer'/exp OR 'medical thermometer':ti,ab OR 'medical thermometer'/exp/'adverse device effect') AND [humans]/lim
 
-  @C467190
+  @C477475
   Scenario:  Searching for medical devices articles in a selected publication years range
     When user clicks on Add device name icon
     And user enters the device name as bandages and dressings
@@ -155,7 +155,7 @@ Feature: Medical Device tests
     Then user is on Results Page
     And search query is ('bandages and dressings'/exp OR 'bandages and dressings':ti,ab OR 'bandages and dressings'/exp/'adverse device effect') AND [1990-2005]/py
 
-  @C467191
+  @C477476
   Scenario: Selecting date range by date Picker
     When user clicks on Add device name icon
     And user enters the device name as bandages and dressings
@@ -165,7 +165,7 @@ Feature: Medical Device tests
     And user clicks on DateRange picker and selects range from 01-01-2000 to 01-05-2010
     Then user clicks on Show Results
     Then user is on Results Page
-    And search query is ('bandages and dressings'/exp OR 'bandages and dressings':ti,ab OR 'bandages and dressings'/exp/'adverse device effect') AND [1-1-2000]/sd NOT [2-5-2010]/sd
+    And search query is ('bandages and dressings'/exp OR 'bandages and dressings':ti,ab OR 'bandages and dressings'/exp/'adverse device effect') AND [01-01-2000]/sd NOT [02-05-2010]/sd
 
   @C506356
   Scenario: Medical device Synonym boolean operator list is displayed

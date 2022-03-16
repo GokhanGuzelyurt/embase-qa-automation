@@ -185,8 +185,7 @@ public class QuickSearchPage extends BasePage {
 
     private int getNextYear() {
         LocalDate now = LocalDate.now();
-        LocalDate nextYear = now.plusYears(1);
-        return nextYear.getYear();
+        return now.getYear();
     }
 
     public void verifyThatDropDownContains(String optionLabel, String value) {
@@ -224,6 +223,11 @@ public class QuickSearchPage extends BasePage {
     public void verifyThatOptionSelected(String optionLabel, int value) {
         String option = body.findElement(By.xpath("//label[contains(text(), '"+optionLabel+"')]/following-sibling::button")).getText();
         Assert.assertEquals("The "+optionLabel+" should selected " +value, String.valueOf(value), option);
+    }
+
+    public void clickShowResultsBtn(){
+        waitForJStoLoad();
+        showResultsButton.click();
     }
 
     public void verifyAllSuggestionRowsContains(String text) {

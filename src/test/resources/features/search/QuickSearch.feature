@@ -17,7 +17,7 @@ Feature: Quick Search tests
 
   @C506446
   Scenario: Validate that the default search is broad search
-    When user enters query heart attack on quick search page
+    When user types query heart attack on quick search page
     And user clicks on Show results button on quick search
     Then user is on Results Page
     And search query is 'heart attack'/exp OR 'heart attack' OR (('heart'/exp OR heart) AND attack)
@@ -27,7 +27,7 @@ Feature: Quick Search tests
     When user clicks on Change field button on quick search page
     Then Change field popup is opened on quick search page
     And user selects <field> from frequent field list on change field popup
-    And user enters query <query> on quick search page
+    And user types query <query> on quick search page
     And user clicks on Show results button on quick search
     Then user is on Results Page
     And search query is <results_query>
@@ -45,7 +45,7 @@ Feature: Quick Search tests
     When user clicks on Change field button on quick search page
     Then Change field popup is opened on quick search page
     And user selects <field> from other field list on change field popup
-    And user enters query <query> on quick search page
+    And user types query <query> on quick search page
     And user clicks on Show results button on quick search
     Then user is on Results Page
     And search query is <results_query>
@@ -64,7 +64,7 @@ Feature: Quick Search tests
     When user clicks on Change field button on quick search page
     Then Change field popup is opened on quick search page
     And user selects Abstract from other field list on change field popup
-    And user enters query heart on quick search page
+    And user types query heart on quick search page
     And user clicks on Add field button on Quick Search Page
     And user selects Title from frequent field list on add field popup
     And user enters second line query heart on quick search page
@@ -74,7 +74,7 @@ Feature: Quick Search tests
 
   @C506782
   Scenario Outline: Validate operators on Quick Search page
-    When user enters query heart on quick search page
+    When user types query heart attack on quick search page
     And user clicks on Add field button on Quick Search Page
     And user selects Title from frequent field list on add field popup
     And user enters second line query heart on quick search page
@@ -143,7 +143,7 @@ Feature: Quick Search tests
 
   @C507038
   Scenario: Search limit is only enabled and effective when corresponding checkbox is turned on and enabled
-    When user enters query heart attack on quick search page
+    When user types query heart attack on quick search page
     And user clicks Limit to button
     And user select Publication years checkbox
     And user select Records added to Embase checkbox
@@ -153,7 +153,7 @@ Feature: Quick Search tests
 
   @C507039
   Scenario Outline: Max available year (MAX_YEAR) in <option> is always limited to the next year
-    When user enters query heart attack on quick search page
+    When user types query heart attack on quick search page
     And user clicks Limit to button
     And user select Publication years checkbox
     And user clicks <option> option
@@ -165,7 +165,7 @@ Feature: Quick Search tests
 
   @C507040
   Scenario: The option From contains Min year "< 1966"
-    When user enters query heart attack on quick search page
+    When user types query heart attack on quick search page
     And user clicks Limit to button
     And user select Publication years checkbox
     And user clicks From option
@@ -173,7 +173,7 @@ Feature: Quick Search tests
 
   @C507041
   Scenario: Default pre-selected years range: [MAX_YEAR - 10, MAX_YEAR].
-    When user enters query heart attack on quick search page
+    When user types query heart attack on quick search page
     And user clicks Limit to button
     And user select Publication years checkbox
     Then user verifies that From default pre-selected years MAX_YEAR - 10
@@ -181,7 +181,7 @@ Feature: Quick Search tests
 
   @C507042
   Scenario: Min year of "To" is limited to current value of "From" select.
-    When user enters query heart attack on quick search page
+    When user types query heart attack on quick search page
     And user clicks Limit to button
     And user select Publication years checkbox
     And user sets From option to 2020
@@ -190,7 +190,7 @@ Feature: Quick Search tests
 
   @C507043
   Scenario: "From" value is bigger than "To" value then "To" value is automatically set to "From" value
-    When user enters query heart attack on quick search page
+    When user types query heart attack on quick search page
     And user clicks Limit to button
     And user select Publication years checkbox
     And user sets From option to 2010
@@ -219,7 +219,7 @@ Feature: Quick Search tests
 
   @C507049
   Scenario: "Reset form" button is enabled when entering query
-    When user enters query heart on quick search page
+    When user types query heart attack on quick search page
     Then user verifies the Reset form button is enabled
 
   @C507050
@@ -246,7 +246,7 @@ Feature: Quick Search tests
   Scenario Outline: Verify query building syntax
     When user clicks on Change field button on quick search page
     And user selects <field_name> from frequent field list on change field popup
-    And user enters query <query> on quick search page
+    And user types query <query> on quick search page
     And user clicks on Show results button on quick search
     Then search query is <results_query>
     Examples:
