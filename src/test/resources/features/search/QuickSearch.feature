@@ -271,7 +271,7 @@ Feature: Quick Search tests
     When user clears search
     And user types query DNA OR heart on quick search page
     Then user verifies that all suggestion rows contains heart
-    And user verifies 2 suggestion row count is 2,147,834
+    And user verifies 2 suggestion row count is not empty
     When user clicks on 2 suggestion row
     And user clicks on Show results button on quick search
     And search query is 'dna'/exp OR dna OR 'heart disease'/exp OR 'heart disease'

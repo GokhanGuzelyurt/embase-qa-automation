@@ -264,8 +264,8 @@ public class QuickSearchPageStepDef {
         quickSearchPage.selectSuggestionRow(rowIndex);
     }
 
-    @Then("^user verifies (\\d*) suggestion row count is (.*)$")
-    public void veritySuggestionCount(Integer rowIndex, String count) {
-        quickSearchPage.verifySuggestionCount(rowIndex, count);
+    @Then("^user verifies (\\d*) suggestion row count is not empty$")
+    public void veritySuggestionIsNotEmpty(Integer rowIndex) {
+        quickSearchPage.veritySuggestionIsNotEmpty(rowIndex);
     }
 }

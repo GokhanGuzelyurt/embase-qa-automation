@@ -226,7 +226,6 @@ public class QuickSearchPage extends BasePage {
     }
 
     public void clickShowResultsBtn(){
-        waitForJStoLoad();
         showResultsButton.click();
     }
 
@@ -237,10 +236,10 @@ public class QuickSearchPage extends BasePage {
         }
     }
 
-    public void verifySuggestionCount(Integer index, String count) {
-        Assert.assertTrue(suggestionList.findElements(
+    public void veritySuggestionIsNotEmpty(Integer index) {
+        Assert.assertFalse(suggestionList.findElements(
                 By.cssSelector("ul[role=listbox] li>div[class*=row] div[class*=row]>div[class*='col-auto']"))
-                .get(index).getText().contains(count));
+                .get(index).getText().isEmpty());
     }
 
     public void selectSuggestionRow(Integer rowIndex) {
