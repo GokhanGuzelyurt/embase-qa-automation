@@ -52,6 +52,11 @@ public class QuickSearchPageStepDef {
         quickSearchPage.firstLine.sendKeys(Keys.ENTER);
     }
 
+    @When("^user clears search$")
+    public void clearSearch() {
+        quickSearchPage.buttonClear.click();
+    }
+
     @Given("^user enters second line query (.*) on quick search page$")
     public void enterSecondLineQuery(String query) {
         quickSearchPage.secondLine.click();
@@ -247,5 +252,20 @@ public class QuickSearchPageStepDef {
     @Then("^user verifies that (.*) option selected (.*)$")
     public void verifyThatOptionSelected(String optionLabel, int value) {
         quickSearchPage.verifyThatOptionSelected(optionLabel, value);
+    }
+
+    @Then("^user verifies that all suggestion rows contains (.*)$")
+    public void verifyThatOptionSelected(String text) {
+        quickSearchPage.verifyAllSuggestionRowsContains(text);
+    }
+
+    @When("^user clicks on (\\d*) suggestion row$")
+    public void verifyThatOptionSelected(Integer rowIndex) {
+        quickSearchPage.selectSuggestionRow(rowIndex);
+    }
+
+    @Then("^user verifies (\\d*) suggestion row count is not empty$")
+    public void veritySuggestionIsNotEmpty(Integer rowIndex) {
+        quickSearchPage.veritySuggestionIsNotEmpty(rowIndex);
     }
 }

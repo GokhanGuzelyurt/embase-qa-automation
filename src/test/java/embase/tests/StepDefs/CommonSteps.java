@@ -283,4 +283,9 @@ public class CommonSteps {
     public void verifyTextIsNotDisplayed(String text) {
         basePage.verifyTextIsNotDisplayed(text);
     }
+
+    @When("^user waits (\\d*) seconds$")
+    public void waitSomeSeconds(Integer secs) {
+        basePage.waitSomeSeconds(secs);
+    }
 }
