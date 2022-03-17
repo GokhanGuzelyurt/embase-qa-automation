@@ -227,26 +227,26 @@ Feature: Record Details tests
 
   @C489279
   Scenario: Verify the functionality of similar records feature
-    Given user enters query L2011398489 and performs a search
+    Given user enters query L2005607816 and performs a search
     Then the result set is not empty
     When user opens record #1 by clicking on title
     Then user is on Record Details page
     When user clicks on Similar records link on Record Details Page
     Then user is on Results Page
-    And search query is l2011398489/sim
+    And search query is L2005607816/sim
     And the result set is not empty
 
   @C489280
   Scenario: Verify search by author functionality
-    Given user enters query L2011398489 and performs a search
+    Given user enters query L2005607816 and performs a search
     Then the result set is not empty
     When user opens record #1 by clicking on title
     Then user is on Record Details page
     When user clicks on Search by author link on Record Details Page
     Then Search by authors modal is displayed
-    When user selects author Jiang Z. and click on Search
+    When user selects author Kuny C.V. and click on Search
     Then user is on Results Page
-    And search query is 'jiang z.'/au
+    And search query is 'kuny c.v.'/au
 
   @C489281
   Scenario: Validate the organization link on Record Details page
