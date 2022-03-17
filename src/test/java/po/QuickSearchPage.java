@@ -179,6 +179,12 @@ public class QuickSearchPage extends BasePage {
 
     private int getNextYear() {
         LocalDate now = LocalDate.now();
+        LocalDate nextYear = now.plusYears(1);
+        return nextYear.getYear();
+    }
+
+    private int getCurrentYear() {
+        LocalDate now = LocalDate.now();
         return now.getYear();
     }
 
@@ -192,16 +198,16 @@ public class QuickSearchPage extends BasePage {
     }
 
     public void verifyThatDefaultPreSelectedYearsMaxMinus(String optionLabel, int value) {
-        int nextYear = getNextYear();
-        int expected = nextYear - value;
+        int currentYear = getCurrentYear();
+        int expected = currentYear - value;
         String option = body.findElement(By.xpath("//label[contains(text(), '"+optionLabel+"')]/following-sibling::button")).getText();
         Assert.assertEquals("The "+optionLabel+" should default pre-selected " +expected, String.valueOf(expected), option);
     }
 
     public void verifyThatDefaultPreSelectedYearsMax(String optionLabel) {
-        int nextYear = getNextYear();
+        int currentYear = getCurrentYear();
         String option = body.findElement(By.xpath("//label[contains(text(), '"+optionLabel+"')]/following-sibling::button")).getText();
-        Assert.assertEquals("The "+optionLabel+" should default pre-selected " +nextYear, String.valueOf(nextYear), option);
+        Assert.assertEquals("The "+optionLabel+" should default pre-selected " +currentYear, String.valueOf(currentYear), option);
     }
 
     public void verifyThatMinYearIs(String optionLabel, int expected) {
