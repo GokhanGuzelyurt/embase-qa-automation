@@ -67,3 +67,15 @@ Feature: XmlGateway version 2 test cases
     Then the status code of the response is 200
     And the response body contains element embaseidlist.query with value 'preprint'/it
     And the response body contains element embaseidlist.hitstart with value 1
+
+  @C531896
+  Scenario: Verify query with a special character and space runs succesfully in xmlgateway
+    Given I set the endpoint for the http request to /xmlgateway/v2
+    And I set the queryParam search_query with value dna
+
+    And I set the request header Client-Authorization with value ZW1iYXNlX2xpbWl0ZWRAZWxzZXZpZXIuY29tOmVtYmFzZV9saW1pdGVkQGVsc2V2aWVyLmNvbTE
+    And I set the request header Client-Institution with value EM_TST_ACC1, EM_TST_DEP0
+    When I execute the http request with method GET
+    Then the status code of the response is 200
+    And the response body contains element embaseidlist.query with value dna
+    And the response body contains element embaseidlist.hitstart with value 1
