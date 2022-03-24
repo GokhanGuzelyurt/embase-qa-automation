@@ -88,6 +88,14 @@ public class ResultsPage extends BasePage {
     @FindBy(css = ".search-hitcounts")
     public WebElementFacade searchHitCounts;
 
+    @FindBy(id = "pager")
+    public WebElement pageField;
+
+    @FindBy(id = "go")
+    public WebElement goButton;
+
+    @FindBy(css = "[data-action='feedbackMessage']")
+    public WebElement feedbackMessage;
 
     public void waitForRecordSectionIsLoaded() {
         logger.info("Wait for please wait to vanish");
@@ -188,5 +196,20 @@ public class ResultsPage extends BasePage {
         Assert.assertEquals("The search result after change date format " + second
                         + " should be equal search result for original date format " + first,
                 first, second);
+    }
+
+    public void goToSpecPage(String pageNumber){
+        pageField.clear();
+        pageField.sendKeys(pageNumber);
+        if (goButton.isDisplayed()) {
+            goButton.click();
+        }
+    }
+    public boolean isFeedbackMsg() {
+       boolean isEmpty= getDriver().findElements(By.xpath("//span[text()='Unexpected exception during search. Please try again later.']")).isEmpty();
+       if (isEmpty){ // text is not present
+           return  true;
+       }
+       else return false; // text is present
     }
 }

@@ -173,4 +173,12 @@ public class ResultsPageStepDef {
     public void verifyTheSameNumberOfBothSearchResults(String variableNameFirst, String variableNameSecond) {
         resultsPage.verifyTheSameNumberOfBothSearchResults(variableNameFirst, variableNameSecond);
     }
+    @When("^user goes to (.*) page$")
+    public void goToPage(String pageNumber) {
+        resultsPage.goToSpecPage(pageNumber);
+    }
+    @Then("^no warning message is displayed$")
+    public void verifyFeedbackMsg(){
+        Assertions.assertThat(resultsPage.isFeedbackMsg()).describedAs("Feed back message is displayed").isTrue();
+    }
 }
