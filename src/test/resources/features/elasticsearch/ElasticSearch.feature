@@ -93,7 +93,7 @@ Feature: Elastic search queries
 
 
   @C531895
-  Scenario: Verify paginating records over 10k does not cause erro on results page
+  Scenario: Verify paginating records over 10k does not cause error on results page
     Given user opens Results page
     And user enters query dna and performs a search
     When user goes to 402 page
