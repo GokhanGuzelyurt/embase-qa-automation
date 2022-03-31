@@ -255,7 +255,7 @@ public class CommonSteps {
         basePage.verifyTextDisplayed(text);
     }
 
-    @And("^user switches to (.*) window$")
+    @And("^user switches to (.*) tab$")
     public void userSwitchesToSecondWindow(String title) {
         String currentWindow = driver.getWindowHandle();
         for (String winHandle : driver.getWindowHandles()) {
