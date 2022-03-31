@@ -265,9 +265,9 @@ Feature: Quick Search tests
     Then Copy query popup button is present on Quick Search Page
 
   @C507692
-  Scenario: Fields with autosuggest
+  Scenario:Fields with autosuggest
     When user types query heart OR DNA on quick search page
-    Then user verifies tha t all suggestion rows contains dna
+    Then user verifies that all suggestion rows contains dna
     When user clears search
     And user types query DNA OR heart on quick search page
     Then user verifies that all suggestion rows contains heart
