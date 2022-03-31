@@ -83,7 +83,8 @@ Feature: Elastic search queries
     And user selects checkbox Editors in export window
     And user selects checkbox Source title in export window
     And user clicks on Export button in modal window
-    And user switches to 2 window
+    And user waits 1 seconds
+    And user switches to Embase - Download window
     Then user verifies that text is displayed: Export ready for download
     And user verifies that text is displayed: Download
     And user verifies that url contains /search/download

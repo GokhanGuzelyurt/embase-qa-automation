@@ -255,12 +255,22 @@ public class CommonSteps {
         basePage.verifyTextDisplayed(text);
     }
 
-    @And("^user switches to (\\d+)(?:st|nd|rd|th) window$")
-    public void userSwitchesToSecondWindow(int index) {
-        Set<String> windowHandles = driver.getWindowHandles();
-        List<String> windowString = new ArrayList<>(windowHandles);
-        String window = windowString.get(index - 1);
-        driver.switchTo().window(window);
+    @And("^user switches to (.*) window$")
+    public void userSwitchesToSecondWindow(String title) {
+        String currentWindow = driver.getWindowHandle();
+        for (String winHandle : driver.getWindowHandles()) {
+            if (driver.switchTo().window(winHandle).getTitle().equals(title)) {
+                break;
+            } else {
+                driver.switchTo().window(currentWindow);
+            }
+        }
+    }
+
+    @And("^user verifies that url contains (.*)$")
+    public void userVerifiesThatUrlContains(String uri) {
+        String currentUrl = driver.getCurrentUrl();
+        Assert.assertTrue("The Url " + currentUrl + " does not contain '" + uri + "'", currentUrl.contains(uri));
     }
 
     // This method is creating ambiguity
@@ -285,7 +295,7 @@ public class CommonSteps {
     }
 
     @When("^user waits (\\d*) seconds$")
-    public void waitSomeSeconds(Integer secs) {
-        basePage.waitSomeSeconds(secs);
+    public void waitSomeSeconds(Integer secs) throws InterruptedException {
+        Thread.sleep(secs * 1000);
     }
 }
