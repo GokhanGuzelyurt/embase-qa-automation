@@ -17,5 +17,4 @@ public class HeaderNavigation extends BasePage {
         signInButton.waitUntilVisible();
         signInButton.click();
     }
-
 }

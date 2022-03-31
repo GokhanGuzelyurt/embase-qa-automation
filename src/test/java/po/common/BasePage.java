@@ -1,5 +1,6 @@
 package po.common;
 
+import jnr.ffi.annotations.In;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Step;
@@ -55,6 +56,10 @@ public class BasePage extends PageObject {
 
     public boolean waitForJStoLoad() {
         return waitForJStoLoad(30);
+    }
+
+    public void waitSomeSeconds(Integer secs) {
+        waitABit(secs);
     }
 
     public boolean waitForJStoLoad(int timeoutSeconds) {

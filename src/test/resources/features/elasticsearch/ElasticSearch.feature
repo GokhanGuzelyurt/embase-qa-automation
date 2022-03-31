@@ -107,3 +107,12 @@ Feature: Elastic search queries
       | '2020-10':pd               | '10-2020':pd               |
       | '2019-09-19':dc            | '19-09-2019':dc            |
       | '2019-09':dc               | '09-2019':dc               |
+
+   @C531895
+    Scenario: Verify paginating records over 10k does not cause erro on results page
+      Given user opens Results page
+      And user enters query dna and performs a search
+      When user goes to 402 page
+      Then no warning message is displayed
+      When user goes to 900 page
+      Then no warning message is displayed

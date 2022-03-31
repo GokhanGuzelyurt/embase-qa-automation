@@ -85,8 +85,14 @@ public class QuickSearchPage extends BasePage {
     @FindBy(css = "[class*=SelectOptions-module_label]")
     public List<WebElement> selectOptions;
 
+    @FindBy(css = "ul[role=listbox]")
+    public WebElement suggestionList;
+
     @FindBy(css = "button[data-testid='page-modal-alternative'] span")
     public WebElement copyQueryModalBtn;
+
+    @FindBy(xpath = "//button[@title=\"Clear\"]")
+    public WebElement buttonClear;
 
     public void at() {
         shouldBeDisplayed();
@@ -226,7 +232,23 @@ public class QuickSearchPage extends BasePage {
     }
 
     public void clickShowResultsBtn(){
-        waitForJStoLoad();
         showResultsButton.click();
+    }
+
+    public void verifyAllSuggestionRowsContains(String text) {
+        for (WebElement suggestionRow : suggestionList.findElements(
+                By.cssSelector("ul[role=listbox] li div[class*=row]>div[class=col]>span:nth-child(1)"))) {
+            Assert.assertTrue(suggestionRow.getText().toLowerCase().contains(text));
+        }
+    }
+
+    public void veritySuggestionIsNotEmpty(Integer index) {
+        Assert.assertFalse(suggestionList.findElements(
+                By.cssSelector("ul[role=listbox] li>div[class*=row] div[class*=row]>div[class*='col-auto']"))
+                .get(index).getText().isEmpty());
+    }
+
+    public void selectSuggestionRow(Integer rowIndex) {
+        suggestionList.findElements(By.cssSelector("ul[role=listbox] li div[class*=row]")).get(rowIndex).click();
     }
 }
