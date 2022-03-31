@@ -259,15 +259,15 @@ Feature: Quick Search tests
       | "young adults" AND "teenagers" | Author keywords        | 'young adults':kw AND 'teenagers':kw          |
 
   @C507139
-  Scenario: [FE] Add a "Copy" button on the window after clicking on "Display Full Query"
+  Scenario: Add a "Copy" button on the window after clicking on "Display Full Query"
     When user types query heart on quick search page
     And user clicks on Display Full Query button on quick search page
     Then Copy query popup button is present on Quick Search Page
 
   @C507692
-  Scenario: [FE] Fields with autosuggest
+  Scenario: Fields with autosuggest
     When user types query heart OR DNA on quick search page
-    Then user verifies that all suggestion rows contains dna
+    Then user verifies tha t all suggestion rows contains dna
     When user clears search
     And user types query DNA OR heart on quick search page
     Then user verifies that all suggestion rows contains heart
