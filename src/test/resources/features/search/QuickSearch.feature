@@ -74,7 +74,7 @@ Feature: Quick Search tests
 
   @C506782
   Scenario Outline: Validate operators on Quick Search page
-    When user types query heart attack on quick search page
+    When user types query 'heart infarction' on quick search page
     And user clicks on Add field button on Quick Search Page
     And user selects Title from frequent field list on add field popup
     And user enters second line query heart on quick search page
@@ -83,10 +83,10 @@ Feature: Quick Search tests
     Then user is on Results Page
     And search query is <results_Query>
     Examples:
-      | operator_Name | results_Query                       |
-      | AND           | ('heart'/exp OR heart) AND heart:ti |
-      | NOT           | ('heart'/exp OR heart) NOT heart:ti |
-      | OR            | 'heart'/exp OR heart OR heart:ti    |
+      | operator_Name | results_Query                                               |
+      | AND           | ('heart infarction'/exp OR 'heart infarction') AND heart:ti |
+      | NOT           | ('heart infarction'/exp OR 'heart infarction') NOT heart:ti |
+      | OR            | 'heart infarction'/exp OR 'heart infarction' OR heart:ti    |
 
   @C506783
   Scenario: Validate footer text and links

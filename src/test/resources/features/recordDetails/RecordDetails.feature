@@ -115,23 +115,21 @@ Feature: Record Details tests
     When user clicks on Back to Results link
     Then user is on Results Page
 
-  #adjust the wait for pagination label when 100 records are present
   @C488699
   Scenario: Validate pagination when user selects records from record selection and clicks on View
     Given user enters query dna and performs a search
     Then the result set is not empty
-    And user selects 100 records from record selection
-    And user clicks on View action link of Result Page
+    And user selects records 1,2,3,4,5,6,7 from the records list on Results page and click on view
     Then user is on Record Details page
-    Then pagination label contains value 1 of 100 selected
+    Then pagination label contains value 1 of 7 selected
     And the pagination options have the following state:
       | paginationOption | state |
       | Previous         | false |
       | Next             | true  |
     When user clicks on Next button on Record Details page
-    Then pagination label contains value 2 of 100 selected
+    Then pagination label contains value 2 of 7 selected
     When user clicks on Previous button on Record Details page
-    Then pagination label contains value 1 of 100 selected
+    Then pagination label contains value 1 of 7 selected
     When user clicks on Back to Results link
     Then user is on Results Page
 
@@ -305,4 +303,12 @@ Feature: Record Details tests
       | L18112053  |
       | L5006289   |
       | L19047480  |
+
+  @C532728
+  Scenario: Validate the full text link on Record Details page for documents without DOI in Embase but resolved on SD
+    Given user enters query L40295626 and performs a search
+    Then the result set is not empty
+    When user opens record #1 by clicking on title
+    Then user is on Record Details page
+    And full text link on Record Details page is displayed
 

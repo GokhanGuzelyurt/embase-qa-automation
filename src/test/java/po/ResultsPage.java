@@ -122,7 +122,6 @@ public class ResultsPage extends BasePage {
 
     @Step
     public void verifySearchQuery(String expectedQuery) {
-        pleaseWaitPanel.waitUntilNotVisible();
         searchField.waitUntilVisible();
         waitForJStoLoad();
         Assertions.assertThat(searchField.getValue()).describedAs("Search field is not equal to expected").isEqualToIgnoringCase(expectedQuery);
