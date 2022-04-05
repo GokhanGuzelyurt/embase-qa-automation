@@ -44,7 +44,7 @@ spec:
 
         string(name: 'includeTags', defaultValue: '@testrail', description: 'Cucumber tags')
 
-        string(name: 'testRun', defaultValue: '2515', description: 'TestRail run')
+        string(name: 'testRun', defaultValue: '3681', description: 'TestRail run')
 
         choice(name: 'driver', choices: ['chrome', 'firefox'], description: 'Webdriver')
   }
