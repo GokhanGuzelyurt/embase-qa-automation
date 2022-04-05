@@ -25,8 +25,8 @@ Feature: Citation Information tests
   Scenario: Verify search query for Citation search: Journal title (+exact)
     Given user opens Citation Information search page
     When user enters Citation Information
-      | articleTitle | authorName | journalTitle    | journalTitleExact | ABBRJournalTitle | ABBRJournalTitleExact | ISSN | CODEN | DOI | volume | issue | firstPage | pubYears | fromYear | toYear |
-      |              |            | atherosclerosis | true              |                  |                       |      |       |     |        |       |           |          |          |        |
+      | articleTitle | authorName | journalTitle | journalTitleExact | ABBRJournalTitle | ABBRJournalTitleExact | ISSN | CODEN | DOI | volume | issue | firstPage | pubYears | fromYear | toYear |
+      |              |            | atherosclerosis          | true              |                  |                       |      |       |     |        |       |           |          |          |        |
     Then search query is 'atherosclerosis'/jt
     And user opens Citation Information search page
     When user enters Citation Information

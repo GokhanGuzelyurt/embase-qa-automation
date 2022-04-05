@@ -112,8 +112,8 @@ public class CitationInfoSearchPage extends BasePage {
         logger.info("Fills in the search query, clicks the Search button");
         enterArticleSearchQuery(articleTitle, authorName, journalTitle, journalTitleExact, ABBRJournalTitle,
                 ABBRJournalTitleExact, ISSN, CODEN, DOI, volume, issue, firstPage, pubYears, fromYear, toYear);
+        scrollIntoView();
         clickArticleSearchButton();
-        resultsPage.waitForRecordSectionIsLoaded();
 //        return resultsPage.searchHistory.getFirstRowNumber();
     }
 
@@ -204,6 +204,7 @@ public class CitationInfoSearchPage extends BasePage {
 
     public void clickArticleSearchButton() {
         logger.info("Clicks Search button");
+        waitForJStoLoad();
         showResultButton.click();
     }
 

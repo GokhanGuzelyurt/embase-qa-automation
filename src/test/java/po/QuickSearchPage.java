@@ -79,7 +79,7 @@ public class QuickSearchPage extends BasePage {
     @FindBy(className = "fragmentSuggestions")
     public WebElement autosuggestList;
 
-    @FindBy(id = "fragments[1].operator.value")
+    @FindBy(id = "fragments[1].operator")
     public WebElement operatorDropdown;
 
     @FindBy(css = "[class*=SelectOptions-module_label]")
@@ -139,7 +139,7 @@ public class QuickSearchPage extends BasePage {
 
     public void selectOperatorByText(String text) {
         operatorDropdown.click();
-        WebElement operatorText = operatorDropdown.findElement(By.xpath("//span[contains(@class,'SelectPopover_optionText__2Nd3v')and contains(text(),'" + text + "')]"));
+        WebElement operatorText = operatorDropdown.findElement(By.xpath("//span[contains(@class,'els-select-popover__option__label')and contains(text(),'" + text + "')]"));
         operatorText.click();
 
     }
