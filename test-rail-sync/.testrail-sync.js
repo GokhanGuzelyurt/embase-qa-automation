@@ -4,8 +4,8 @@ module.exports = {
     user: 'autotest@quosa.com',
     password: 'q0aHai6jAalmaixZibT7-w3mxw/QiQmzdO0ZwU2Iw',  // password or api key
     filters: {
-      plan_id: '3345', // required: the project's plan id
-      run_id: '3346',  // optional: a test run
+      plan_id: '3696', // required: the project's plan id
+      run_id: '3697',  // optional: a test run
                    // if not set, all the runs in the plan will be included
       // custom_status: [3, 4] // optional list of whitelisted status (testcases that don't have 1 of thoses statuses won't be synced)
                      // 3 = Approved
