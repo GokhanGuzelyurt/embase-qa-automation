@@ -71,6 +71,24 @@ Feature: Elastic search queries
       | query              |
       | l610882955 AND bsc |
 
+  @C506452
+  Scenario: Verify fields on export dialog box for Word format
+    When user opens Results page
+    And user enters query [23-11-2020]/sd and performs a search
+    And user selects records 1 from the records list on Results page and click on export
+    And user selects Format MS Word in export window
+    And user selects checkbox Title in export window
+    And user selects checkbox Author names in export window
+    And user selects checkbox Author address in export window
+    And user selects checkbox Editors in export window
+    And user selects checkbox Source title in export window
+    And user clicks on Export button in modal window
+    And user waits 1 seconds
+    And user switches to Embase - Download tab
+    Then user verifies that text is displayed: Export ready for download
+    And user verifies that text is displayed: Download
+    And user verifies that url contains /search/download
+
   @C506453
   Scenario Outline: Date fields validation. Both date formats bring same number of results
     Given user opens Results page
@@ -91,11 +109,25 @@ Feature: Elastic search queries
       | '2019-09-19':dc            | '19-09-2019':dc            |
       | '2019-09':dc               | '09-2019':dc               |
 
-   @C531895
-    Scenario: Verify paginating records over 10k does not cause erro on results page
-      Given user opens Results page
-      And user enters query dna and performs a search
-      When user goes to 402 page
-      Then no warning message is displayed
-      When user goes to 900 page
-      Then no warning message is displayed
+
+  @C531895
+  Scenario: Verify paginating records over 10k does not cause error on results page
+    Given user opens Results page
+    And user enters query dna and performs a search
+    When user goes to 402 page
+    Then no warning message is displayed
+    When user goes to 900 page
+    Then no warning message is displayed
+
+  @C531984
+  Scenario Outline: Verify the publication date range
+    Given user opens Results page
+    And user enters query <pubDate> and performs a search
+    When get the number of search results for original date format
+    And user enters query <changedFormatPubDate> and performs a search
+    And get the number of search results for changed date format
+    Then the same number of search results for original date and changed date
+    Examples:
+      | pubDate                       | changedFormatPubDate          |
+      | [01-03-2020 to 31-08-2020]/pd | [2020-03-01 to 2020-08-31]/pd |
+      | [2019-01 to 2020-01]/pd       | [01-2019 to 01-2020]/pd       |

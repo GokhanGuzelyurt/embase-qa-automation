@@ -1,6 +1,6 @@
 
 def testImage        =   'markhobson/maven-chrome:jdk-8'
-def upstreamProjectString = BRANCH_NAME == 'ID+' ? 'embase-webapp/' : ''
+def upstreamProjectString = BRANCH_NAME == 'main' ? 'embase-webapp/' : ''
 
 pipeline {
   agent {
@@ -44,13 +44,13 @@ spec:
 
         string(name: 'includeTags', defaultValue: '@testrail', description: 'Cucumber tags')
 
-        string(name: 'testRun', defaultValue: '2515', description: 'TestRail run')
+        string(name: 'testRun', defaultValue: '3681', description: 'TestRail run')
 
         choice(name: 'driver', choices: ['chrome', 'firefox'], description: 'Webdriver')
   }
 
     triggers {
-        cron( BRANCH_NAME == 'ID+' ? 'H 00 * * 1-5' : '')
+        cron( BRANCH_NAME == 'main' ? 'H 00 * * 1-5' : '')
         upstream(upstreamProjects: "${upstreamProjectString}", threshold: hudson.model.Result.SUCCESS)
     }
 
@@ -73,7 +73,7 @@ spec:
 
                 env.environment = 'default'
                 env.includeTags = '@smokeFE'
-                env.testRun = '2669'
+                env.testRun = '3681'
               }
             }
           }

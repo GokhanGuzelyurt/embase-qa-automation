@@ -97,6 +97,15 @@ public class ResultsPage extends BasePage {
     @FindBy(css = "[data-action='feedbackMessage']")
     public WebElement feedbackMessage;
 
+    @FindBy(css = ".embsDropdownLabel")
+    public WebElementFacade embsDropdownLabel;
+
+    @FindBy(id = "modalContent")
+    public WebElementFacade modalContent;
+
+    @FindBy(id = "modalControl")
+    public WebElementFacade modalControl;
+
     public void waitForRecordSectionIsLoaded() {
         logger.info("Wait for please wait to vanish");
         logger.info("Wait if 0 results page is not displayed");
@@ -210,5 +219,19 @@ public class ResultsPage extends BasePage {
            return  true;
        }
        else return false; // text is present
+    }
+
+    public void userSelectsFormatInExportWindow(String format) {
+        embsDropdownLabel.click();
+        WebElement elementFormat = embsDropdownLabel.findElement(By.xpath("//*[@id='modalContent']//ul/li/span[contains(text(), '"+format+"')]"));
+        elementFormat.click();
+    }
+
+    public void userSelectsCheckboxFieldNameInExportWindow(String label) {
+        checkByScript(modalContent.findElement(By.xpath("//label/span[contains(text(), '"+label+"')]")));
+    }
+
+    public void userClicksOnButtonInModalWindow(String button) {
+        modalControl.findElement(By.xpath("//*[contains(text(), '"+button+"')]/parent::a")).click();
     }
 }
