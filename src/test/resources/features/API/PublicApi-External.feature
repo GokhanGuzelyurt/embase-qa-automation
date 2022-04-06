@@ -333,21 +333,21 @@ Feature: Public API-External
     | Medline Overlap         | L2014915757 |
     | French local collection | L2004683256 |
 
-  @tcid:533330 @untested
+  @C533330
   Scenario Outline: Search GET request to Public API hits results
-    Given I set the endpoint for the http request to /content/embase/article
+    Given I set the Public API endpoint for the http request to /content/embase/article
+    And I set the queryParam httpaccept with value application/json
     And I set the queryParam count with value 100
-    And I set the queryParam start with value <Start>
     And I set the queryParam sort with value entrydate
+    And I set the queryParam start with value <Start>
+    And I set the queryParam query with value blood AND cancer AND 2004:py
     And I set the queryParam apikey with value 6196bbd774a02f6bcaf5b6f2f9e9c3a3
     And I set the queryParam insttoken with value 12f6d639ad436c2288a67e900477930b
-    And I set the queryParam query with value L2004683256
-    And I set the queryParam httpaccept with value application/json
     When I execute the http request with method GET
     Then the status code of the response is 200
-    And the response body contains element 'itemInfo' with value equal to <Start>
+    And the response body contains element header.hits with numeric value greater than <hits>
     Examples:
-      | Start                   | itemInfo    |
+      | Start                   | hits        |
       | 1                       | 200         |
       | 201                     | 200         |
       | 401                     | 200         |
