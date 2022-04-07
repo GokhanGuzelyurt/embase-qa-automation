@@ -298,4 +298,9 @@ public class CommonSteps {
     public void waitSomeSeconds(Integer secs) throws InterruptedException {
         Thread.sleep(secs * 1000);
     }
+
+    @And("^user gets (.*) value from url$")
+    public void userGetFromUrl(String variable) {
+        basePage.userGetFromUrl(variable);
+    }
 }

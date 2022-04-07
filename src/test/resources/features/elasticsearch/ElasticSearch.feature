@@ -131,3 +131,22 @@ Feature: Elastic search queries
       | pubDate                       | changedFormatPubDate          |
       | [01-03-2020 to 31-08-2020]/pd | [2020-03-01 to 2020-08-31]/pd |
       | [2019-01 to 2020-01]/pd       | [01-2019 to 01-2020]/pd       |
+
+  Scenario: Create export records REST. The job ID should be changed
+    When user opens Results page
+    And user enters query [23-11-2020]/sd and performs a search
+    And user selects records 1 from the records list on Results page and click on export
+    And user selects Format MS Word in export window
+    And user selects checkbox Title in export window
+    And user selects checkbox Author names in export window
+    And user selects checkbox Author address in export window
+    And user selects checkbox Editors in export window
+    And user selects checkbox Source title in export window
+    And user clicks on Export button in modal window
+    And user waits 1 seconds
+    And user switches to Embase - Download tab
+    And user clicks on Download element by text
+    And user gets job value from url
+    Then user verifies that text is displayed: Export ready for download
+    And user verifies that text is displayed: Download
+    And user verifies that url contains /search/download

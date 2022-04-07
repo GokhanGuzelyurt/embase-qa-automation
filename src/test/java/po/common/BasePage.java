@@ -1,5 +1,6 @@
 package po.common;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import jnr.ffi.annotations.In;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
@@ -98,4 +99,12 @@ public class BasePage extends PageObject {
         waitForJStoLoad();
         Assert.assertFalse("The page should not contain text '" + text + "'", body.getText().contains(text));
     }
+
+    public void userGetFromUrl(String variable) {
+        String url = driver.getCurrentUrl();
+        String[] extract = variable.split("=", 4);
+        String[] extractedID = extract[2].split("&", 2);
+        String id = extractedID[0];
+    }
+
 }
