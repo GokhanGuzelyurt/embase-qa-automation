@@ -299,8 +299,14 @@ public class CommonSteps {
         Thread.sleep(secs * 1000);
     }
 
-    @And("^user gets (.*) value from url$")
-    public void userGetFromUrl(String variable) {
-        basePage.userGetFromUrl(variable);
+    @And("^user set variable (.*) from url$")
+    public void userSetVarJobIdFromUrl(String varName) {
+        basePage.userSetVarJobIdFromUrl(varName);
     }
+
+    @And("^user reloads page$")
+    public void userReloadsPage() {
+        basePage.userReloadsPage();
+    }
+
 }

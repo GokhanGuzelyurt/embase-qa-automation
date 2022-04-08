@@ -1,11 +1,8 @@
 package po.common;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import jnr.ffi.annotations.In;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Step;
-import org.assertj.core.api.Assertions;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -18,10 +15,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.invoke.MethodHandles;
+import java.util.Arrays;
+
+import static embase.tests.StepDefs.CommonSteps.setTestCaseVariable;
 
 public class BasePage extends PageObject {
     final static Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     WebDriver driver;
+    String extractedID;
 
     @FindBy(css = "._pendo-close-guide")
     public WebElementFacade pendoBannerClose;
@@ -100,11 +101,16 @@ public class BasePage extends PageObject {
         Assert.assertFalse("The page should not contain text '" + text + "'", body.getText().contains(text));
     }
 
-    public void userGetFromUrl(String variable) {
-        String url = driver.getCurrentUrl();
-        String[] extract = variable.split("=", 4);
-        String[] extractedID = extract[2].split("&", 2);
-        String id = extractedID[0];
+    public void userSetVarJobIdFromUrl(String varName) {
+        String url = getDriver().getCurrentUrl();
+        String[] splitUrl = url.split("=", 4);
+        String[] extract = splitUrl[1].split("&", 2);
+        extractedID = extract[0];
+        setTestCaseVariable(varName, extractedID);
+        System.out.println(extractedID);
     }
 
+    public void userReloadsPage() {
+        getDriver().navigate().refresh();
+    }
 }

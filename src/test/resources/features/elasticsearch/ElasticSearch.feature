@@ -132,6 +132,7 @@ Feature: Elastic search queries
       | [01-03-2020 to 31-08-2020]/pd | [2020-03-01 to 2020-08-31]/pd |
       | [2019-01 to 2020-01]/pd       | [01-2019 to 01-2020]/pd       |
 
+  @BE
   Scenario: Create export records REST. The job ID should be changed
     When user opens Results page
     And user enters query [23-11-2020]/sd and performs a search
@@ -145,8 +146,15 @@ Feature: Elastic search queries
     And user clicks on Export button in modal window
     And user waits 1 seconds
     And user switches to Embase - Download tab
-    And user clicks on Download element by text
-    And user gets job value from url
-    Then user verifies that text is displayed: Export ready for download
-    And user verifies that text is displayed: Download
-    And user verifies that url contains /search/download
+    And user clicks on download button on Export page
+    And user set variable job_id from url
+    And I set the Public API endpoint for the http request to /rest/spring/export/records
+    And I set the queryParam apikey with value 6196bbd774a02f6bcaf5b6f2f9e9c3a3
+    And I set the queryParam insttoken with value 12f6d639ad436c2288a67e900477930b
+    And I set the request header Content-Type with value application/x-www-form-urlencoded
+    When I execute the http request with method POST
+    And user waits 1 seconds
+    And user reloads page
+    And user waits 5 seconds
+    And user set variable job_id_chaged from url
+#    And user waits 5 seconds
