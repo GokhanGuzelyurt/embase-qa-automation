@@ -132,28 +132,22 @@ Feature: Elastic search queries
       | [01-03-2020 to 31-08-2020]/pd | [2020-03-01 to 2020-08-31]/pd |
       | [2019-01 to 2020-01]/pd       | [01-2019 to 01-2020]/pd       |
 
-  @BE
+  @BE @C533342
   Scenario: Create export records REST. The job ID should be changed
     When user opens Results page
     And user enters query [23-11-2020]/sd and performs a search
     And user selects records 1 from the records list on Results page and click on export
     And user selects Format MS Word in export window
     And user selects checkbox Title in export window
-    And user selects checkbox Author names in export window
-    And user selects checkbox Author address in export window
-    And user selects checkbox Editors in export window
-    And user selects checkbox Source title in export window
     And user clicks on Export button in modal window
     And I set the endpoint for the http request to /rest/spring/export/records
-    And I capture UI cookies
-    And I set the UI cookies captured in the request body
+    And I capture session UI cookies
+    And I set the session UI cookies captured in the request body
     And user switches to Embase - Download tab
-    And user clicks on download button on Export page
-    And user set variable job_id from url
+    And user set variable job_id from download url
     And I set the request body with content from file \jsonFiles\records.json
     And I set the request header Content-Type with value application/json
-    When I execute the http request with method POST
-    And user waits 1 seconds
+    And I execute the http request with method POST
     And user reloads page
-    And user waits 1 seconds
-    And user set variable job_id_changed from url
+    And user set variable job_id_changed from download url
+    Then user checks that job_id and job_id_changed values do not match

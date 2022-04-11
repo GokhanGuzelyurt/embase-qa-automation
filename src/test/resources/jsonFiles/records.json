@@ -1,23 +1,19 @@
 {
   "orderBy": "PUBLICATION_DATE",
   "records": [
-    "string"
+    "L2005607816"
   ],
-  "batchSelection": {
-    "count": 0,
-    "offset": 0
-  },
   "preferences": {
-    "openUrlEnabled": false,
-    "defaultExportEnabled": false,
-    "formatValue": "RIS_RECORDS",
-    "outputTypeValue": "string",
+    "formatValue": "MS_WORD_RECORDS",
     "customFieldValues": [
-      "string"
+      "1"
     ],
     "additionalOptions": {
-      "includeSearchQuery": false,
-      "includeHighlightedResults": false
-    }
+      "includeHighlightedResults": false,
+      "includeSearchQuery": false
+    },
+    "openUrlEnabled": false,
+    "defaultExportEnabled": false,
+    "outputTypeValue": "custom"
   }
 }

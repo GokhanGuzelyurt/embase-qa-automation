@@ -52,7 +52,8 @@ public class HttpRequestResponseStepDef {
     private String concatenatedUrl;
     private RestAssuredConfig config;
     public Cookie sessionCookie;
-    public Set<org.openqa.selenium.Cookie> sessionUICookie;
+    public org.openqa.selenium.Cookie sessionUICookie;
+    public org.openqa.selenium.Cookie jsessionUICookie;
     private List restAssuredCookies = new ArrayList();
     private String prefTermId;
 
@@ -209,14 +210,13 @@ public class HttpRequestResponseStepDef {
 
     @And("I set the cookies captured in the request body")
     public void setCookie() {
-        System.out.println(sessionCookie);
         request.given().cookie(String.valueOf(sessionCookie));
     }
 
-    @And("I set the UI cookies captured in the request body")
-    public void setUICookie() {
-        System.out.println(restAssuredCookies);
-        request.given().cookies(new Cookies(restAssuredCookies));
+    @And("I set the session UI cookies captured in the request body")
+    public void setSessionUICookie() {
+        request.given().cookie(String.valueOf(sessionUICookie));
+        request.given().cookie(String.valueOf(jsessionUICookie));
     }
 
     @Then("^the response body contains element (.*) with value (.*)$")
@@ -387,11 +387,9 @@ public class HttpRequestResponseStepDef {
         }
     }
 
-    @And("I capture UI cookies")
-    public void captureUICookies() {
-        sessionUICookie = getDriver().manage().getCookies();
-        for (org.openqa.selenium.Cookie cookie : sessionUICookie) {
-            restAssuredCookies.add(new io.restassured.http.Cookie.Builder(cookie.getName(), cookie.getValue()).build());
-        }
+    @And("I capture session UI cookies")
+    public void captureSessionUICookies() {
+        sessionUICookie = getDriver().manage().getCookieNamed("SESSION");
+        jsessionUICookie = getDriver().manage().getCookieNamed("JSESSIONID");
     }
 }

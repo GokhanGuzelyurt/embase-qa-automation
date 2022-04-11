@@ -299,13 +299,18 @@ public class CommonSteps {
         Thread.sleep(secs * 1000);
     }
 
-    @And("^user set variable (.*) from url$")
-    public void userSetVarJobIdFromUrl(String varName) {
-        basePage.userSetVarJobIdFromUrl(varName);
+    @And("^user set variable (.*) from download url$")
+    public void userSetVarJobIdFromDownloadUrl(String varName) {
+        basePage.userSetVarJobIdFromDownloadUrl(varName);
     }
 
     @And("^user reloads page$")
     public void userReloadsPage() {
         basePage.userReloadsPage();
+    }
+
+    @Then("^user checks that (.*) and (.*) values do not match$")
+    public void checksThatValuesDoNotMatch(String var1, String var2) {
+        basePage.checksThatValuesDoNotMatch(var1, var2);
     }
 }

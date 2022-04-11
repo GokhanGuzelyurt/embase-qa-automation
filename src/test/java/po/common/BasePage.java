@@ -18,6 +18,7 @@ import java.lang.invoke.MethodHandles;
 import java.util.Arrays;
 
 import static embase.tests.StepDefs.CommonSteps.setTestCaseVariable;
+import static embase.tests.StepDefs.CommonSteps.testCaseVariables;
 
 public class BasePage extends PageObject {
     final static Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
@@ -29,6 +30,9 @@ public class BasePage extends PageObject {
 
     @FindBy(css = "body")
     public WebElement body;
+
+    @FindBy(css = "a.basebutton")
+    public WebElement baseButton;
 
     @Step
     public void closePendoBanner() {
@@ -101,16 +105,21 @@ public class BasePage extends PageObject {
         Assert.assertFalse("The page should not contain text '" + text + "'", body.getText().contains(text));
     }
 
-    public void userSetVarJobIdFromUrl(String varName) {
-        String url = getDriver().getCurrentUrl();
-        String[] splitUrl = url.split("=", 4);
+    public void userSetVarJobIdFromDownloadUrl(String varName) {
+        String urlHref = baseButton.getAttribute("href");
+        String[] splitUrl = urlHref.split("=", 4);
         String[] extract = splitUrl[1].split("&", 2);
         extractedID = extract[0];
         setTestCaseVariable(varName, extractedID);
-        System.out.println(extractedID);
     }
 
     public void userReloadsPage() {
         getDriver().navigate().refresh();
+    }
+
+    public void checksThatValuesDoNotMatch(String var1, String var2) {
+        String variable1 = testCaseVariables.get(var1);
+        String variable2 = testCaseVariables.get(var2);
+        Assert.assertNotEquals("The "+variable1+" should not be equal "+variable2+" ;", variable1, variable2);
     }
 }
