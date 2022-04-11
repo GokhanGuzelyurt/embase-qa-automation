@@ -53,7 +53,7 @@ public class HttpRequestResponseStepDef {
     private RestAssuredConfig config;
     public Cookie sessionCookie;
     public Set<org.openqa.selenium.Cookie> sessionUICookie;
-    List restAssuredCookies = new ArrayList();
+    private List restAssuredCookies = new ArrayList();
     private String prefTermId;
 
 
@@ -215,8 +215,8 @@ public class HttpRequestResponseStepDef {
 
     @And("I set the UI cookies captured in the request body")
     public void setUICookie() {
-//        request.given().cookies(new Cookies(restAssuredCookies));
-        request.spec(RestAssured.requestSpecification).cookies(new Cookies(restAssuredCookies));
+        System.out.println(restAssuredCookies);
+        request.given().cookies(new Cookies(restAssuredCookies));
     }
 
     @Then("^the response body contains element (.*) with value (.*)$")
@@ -386,7 +386,6 @@ public class HttpRequestResponseStepDef {
             FileHelper.addTextToFile("EmtreeResults.csv", "," + term + "," + "ERROR" + "," + "ERROR");
         }
     }
-
 
     @And("I capture UI cookies")
     public void captureUICookies() {
