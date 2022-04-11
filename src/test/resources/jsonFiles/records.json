@@ -1,0 +1,23 @@
+{
+  "orderBy": "PUBLICATION_DATE",
+  "records": [
+    "string"
+  ],
+  "batchSelection": {
+    "count": 0,
+    "offset": 0
+  },
+  "preferences": {
+    "openUrlEnabled": false,
+    "defaultExportEnabled": false,
+    "formatValue": "RIS_RECORDS",
+    "outputTypeValue": "string",
+    "customFieldValues": [
+      "string"
+    ],
+    "additionalOptions": {
+      "includeSearchQuery": false,
+      "includeHighlightedResults": false
+    }
+  }
+}

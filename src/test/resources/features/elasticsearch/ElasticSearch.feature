@@ -150,10 +150,10 @@ Feature: Elastic search queries
     And user switches to Embase - Download tab
     And user clicks on download button on Export page
     And user set variable job_id from url
+    And I set the request body with content from file \jsonFiles\records.json
     And I set the request header Content-Type with value application/json
     When I execute the http request with method POST
     And user waits 1 seconds
     And user reloads page
     And user waits 1 seconds
     And user set variable job_id_changed from url
-#    And user waits 5 seconds

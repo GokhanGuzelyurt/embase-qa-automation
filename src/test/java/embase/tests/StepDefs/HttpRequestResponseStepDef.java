@@ -390,7 +390,6 @@ public class HttpRequestResponseStepDef {
     @And("I capture UI cookies")
     public void captureUICookies() {
         sessionUICookie = getDriver().manage().getCookies();
-        System.out.println(sessionUICookie);
         for (org.openqa.selenium.Cookie cookie : sessionUICookie) {
             restAssuredCookies.add(new io.restassured.http.Cookie.Builder(cookie.getName(), cookie.getValue()).build());
         }
