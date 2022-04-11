@@ -144,6 +144,8 @@ Feature: Elastic search queries
     And user selects checkbox Editors in export window
     And user selects checkbox Source title in export window
     And user clicks on Export button in modal window
+    And I capture UI cookies
+    And I set the UI cookies captured in the request body
     And user waits 1 seconds
     And user switches to Embase - Download tab
     And user clicks on download button on Export page
@@ -151,7 +153,6 @@ Feature: Elastic search queries
     And I set the Public API endpoint for the http request to /rest/spring/export/records
     And I set the queryParam apikey with value 6196bbd774a02f6bcaf5b6f2f9e9c3a3
     And I set the queryParam insttoken with value 12f6d639ad436c2288a67e900477930b
-    And I set the request header Content-Type with value application/x-www-form-urlencoded
     When I execute the http request with method POST
     And user waits 1 seconds
     And user reloads page

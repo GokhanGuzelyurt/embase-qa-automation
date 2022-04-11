@@ -308,5 +308,4 @@ public class CommonSteps {
     public void userReloadsPage() {
         basePage.userReloadsPage();
     }
-
 }

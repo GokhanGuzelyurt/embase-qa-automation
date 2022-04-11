@@ -9,6 +9,7 @@ import io.restassured.RestAssured;
 import io.restassured.config.HttpClientConfig;
 import io.restassured.config.RestAssuredConfig;
 import io.restassured.http.Cookie;
+import io.restassured.http.Cookies;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.apache.http.client.params.ClientPNames;
@@ -31,8 +32,12 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import java.io.StringReader;
 import java.lang.invoke.MethodHandles;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 import static embase.tests.StepDefs.CommonSteps.*;
+import static net.serenitybdd.core.Serenity.getDriver;
 
 
 public class HttpRequestResponseStepDef {
@@ -47,6 +52,8 @@ public class HttpRequestResponseStepDef {
     private String concatenatedUrl;
     private RestAssuredConfig config;
     public Cookie sessionCookie;
+    public Set<org.openqa.selenium.Cookie> sessionUICookie;
+    List restAssuredCookies = new ArrayList();
     private String prefTermId;
 
 
@@ -202,7 +209,14 @@ public class HttpRequestResponseStepDef {
 
     @And("I set the cookies captured in the request body")
     public void setCookie() {
-        request.given().cookie(sessionCookie);
+        System.out.println(sessionCookie);
+        request.given().cookie(String.valueOf(sessionCookie));
+    }
+
+    @And("I set the UI cookies captured in the request body")
+    public void setUICookie() {
+//        request.given().cookies(new Cookies(restAssuredCookies));
+        request.spec(RestAssured.requestSpecification).cookies(new Cookies(restAssuredCookies));
     }
 
     @Then("^the response body contains element (.*) with value (.*)$")
@@ -374,4 +388,12 @@ public class HttpRequestResponseStepDef {
     }
 
 
+    @And("I capture UI cookies")
+    public void captureUICookies() {
+        sessionUICookie = getDriver().manage().getCookies();
+        System.out.println(sessionUICookie);
+        for (org.openqa.selenium.Cookie cookie : sessionUICookie) {
+            restAssuredCookies.add(new io.restassured.http.Cookie.Builder(cookie.getName(), cookie.getValue()).build());
+        }
+    }
 }
