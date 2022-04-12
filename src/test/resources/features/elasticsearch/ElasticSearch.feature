@@ -151,3 +151,13 @@ Feature: Elastic search queries
     And user reloads page
     And user set variable job_id_changed from download url
     Then user checks that job_id and job_id_changed values do not match
+
+  @C533342
+  Scenario: Create export records. It should provide you with the document according to your UI selection.
+    When user opens Results page
+    And user enters query [23-11-2020]/sd and performs a search
+    And user selects records 1 from the records list on Results page and click on export
+    And user selects Format MS Word in export window
+    And user selects checkbox Title in export window
+    And user clicks on Export button in modal window
+    Then user checks downloaded \jsonFiles\export.xls document contains First Name
