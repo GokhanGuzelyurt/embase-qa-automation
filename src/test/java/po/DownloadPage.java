@@ -1,21 +1,32 @@
 package po;
 
 import net.serenitybdd.core.pages.PageObject;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.w3c.dom.Document;
+import utils.FileHelper;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DownloadPage extends PageObject {
+    private static String BASE_RESOURCES_PATH = "src/test/resources/";
+
     @FindBy(css = "[class*='basebutton']")
     public WebElement baseButton;
 
@@ -24,38 +35,96 @@ public class DownloadPage extends PageObject {
     }
 
     public void checksDownloadedDocumentContains(String fileName, String value) {
-//        String fileData = FileHelper.readFile(fileName);
-//        System.out.println(fileData);
-//        Assert.assertTrue("File "+fileName+" does not contain value "+value, fileData.contains(value));
-        String fileData = null;
+        List fileDataList = new ArrayList<>();
+        if (fileName.contains("docx")) {
+            fileDataList.add(readDocxFile(fileName));
+        }
+        if (fileName.contains("xlsx")) {
+            fileDataList.add(readXLS(fileName));
+        }
+        if (fileName.contains("pdf")) {
+            fileDataList.add(readPDFFile(fileName));
+        }
+        if (fileName.contains("xml")) {
+            fileDataList.add(readXMLFile(fileName));
+        }
+        if (fileName.contains("txt") || fileName.contains("csv") || fileName.contains("ris")) {
+            fileDataList.add(FileHelper.readFile(fileName));
+        }
+        Assert.assertTrue("File "+fileName+" does not contain value "+value, fileDataList.toString().contains(value));
+    }
+
+    public static List readXLS(String fileName) {
+        List fileDataList = new ArrayList<>();
         try {
-            fileData = readXLS(fileName);
+            FileInputStream fis = new FileInputStream(BASE_RESOURCES_PATH + fileName);
+            XSSFWorkbook wb = new XSSFWorkbook(fis);
+            XSSFSheet sheet = wb.getSheetAt(0);
+
+            FormulaEvaluator formulaEvaluator = wb.getCreationHelper().createFormulaEvaluator();
+            for (Row row : sheet) {
+                for (Cell cell : row) {
+                    switch (formulaEvaluator.evaluateInCell(cell).getCellType()) {
+                        case NUMERIC:
+                            fileDataList.add(cell.getNumericCellValue());
+                            break;
+                        case STRING:
+                            fileDataList.add(cell.getStringCellValue());
+                            break;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return fileDataList;
+    }
+
+    public static List readDocxFile(String fileName) {
+        List fileDataList = new ArrayList<>();
+        try {
+            FileInputStream fis = new FileInputStream(BASE_RESOURCES_PATH + fileName);
+            XWPFDocument document = new XWPFDocument(fis);
+            List<XWPFParagraph> paragraphs = document.getParagraphs();
+
+            for (XWPFParagraph para : paragraphs) {
+                fileDataList.add(para.getText());
+            }
+            fis.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return fileDataList;
+    }
+
+    private List readPDFFile(String fileName) {
+        List fileDataList = new ArrayList<>();
+        try {
+            PDDocument document = PDDocument.load(new File(BASE_RESOURCES_PATH + fileName));
+            if (!document.isEncrypted()) {
+                PDFTextStripper stripper = new PDFTextStripper();
+                fileDataList.add(stripper.getText(document));
+            }
+            document.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        assert fileData != null;
-        Assert.assertTrue("File "+fileName+" does not contain value "+value, fileData.contains(value));
+        return fileDataList;
     }
 
-    public static String readXLS(String fileName) throws IOException {
-        FileInputStream fis=new FileInputStream("src/test/resources/" + fileName);
-        HSSFWorkbook wb=new HSSFWorkbook(fis);
-        HSSFSheet sheet=wb.getSheetAt(0);
-
-        List fileData = new ArrayList<>();
-        FormulaEvaluator formulaEvaluator=wb.getCreationHelper().createFormulaEvaluator();
-        for(Row row: sheet) {
-            for(Cell cell: row) {
-                switch (formulaEvaluator.evaluateInCell(cell).getCellType()) {
-                    case NUMERIC:
-                        fileData.add(cell.getNumericCellValue());
-                        break;
-                    case STRING:
-                        fileData.add(cell.getStringCellValue());
-                        break;
-                }
-            }
+    private String readXMLFile(String fileName) {
+        String fileDataList = "";
+        try {
+            File file = new File(BASE_RESOURCES_PATH + fileName);
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            Document doc = db.parse(file);
+            fileDataList = doc.getDocumentElement().getTextContent();
+            return fileDataList;
         }
-        return String.valueOf(fileData);
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return fileDataList;
     }
 }

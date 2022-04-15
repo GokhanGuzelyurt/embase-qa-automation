@@ -152,12 +152,26 @@ Feature: Elastic search queries
     And user set variable job_id_changed from download url
     Then user checks that job_id and job_id_changed values do not match
 
-  @C533342
-  Scenario: Create export records. It should provide you with the document according to your UI selection.
+  @C543360
+  Scenario Outline: Create export records. It should provide you with the document according to your UI selection.
     When user opens Results page
     And user enters query [23-11-2020]/sd and performs a search
     And user selects records 1 from the records list on Results page and click on export
-    And user selects Format MS Word in export window
-    And user selects checkbox Title in export window
+    And user selects Format <Format> in export window
+    And user selects checkbox <checkbox> in export window
     And user clicks on Export button in modal window
-    Then user checks downloaded \jsonFiles\export.xls document contains First Name
+    And user waits 2 seconds
+    And user switches to Embase - Download tab
+    And user verifies that text is displayed: Download
+    And user clicks on download button on Export page
+    And user waits 2 seconds
+    Then user checks downloaded <FilePath> document contains <Text>
+    Examples:
+      | Format     | FilePath     | checkbox | Text |
+      | MS Excel   | \downloads\records.xlsx  | Title    | TITLE,Fitness profiles of elite male Italian teams handball players |
+      | MS Word    | \downloads\records.docx  | Title    | TITLE,Fitness profiles of elite male Italian teams handball players |
+      | PDF        | \downloads\records.pdf   | Title    | TITLE,Fitness profiles of elite male Italian teams handball players |
+      | XML        | \downloads\records.xml   | skip     | Fitness profiles of elite male Italian teams handball players       |
+      | Plain Text | \downloads\records.txt   | Title    | TITLE,Fitness profiles of elite male Italian teams handball players |
+      | CSV        | \downloads\records.csv   | Title    | TITLE,Fitness profiles of elite male Italian teams handball players |
+      | RIS format | \downloads\records.ris   | skip     | Fitness profiles of elite male Italian teams handball players       |

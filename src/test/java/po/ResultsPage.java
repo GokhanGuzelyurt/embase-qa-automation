@@ -228,7 +228,8 @@ public class ResultsPage extends BasePage {
     }
 
     public void userSelectsCheckboxFieldNameInExportWindow(String label) {
-        checkByScript(modalContent.findElement(By.xpath("//label/span[contains(text(), '"+label+"')]")));
+        if (!label.contains("skip"))
+            checkByScript(modalContent.findElement(By.xpath("//label/span[contains(text(), '"+label+"')]")));
     }
 
     public void userClicksOnButtonInModalWindow(String button) {
