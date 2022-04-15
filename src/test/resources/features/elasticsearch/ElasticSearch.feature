@@ -167,7 +167,7 @@ Feature: Elastic search queries
     And user waits 2 seconds
     Then user checks downloaded <FilePath> document contains <Text>
     Examples:
-      | Format     | FilePath     | checkbox | Text |
+      | Format     | FilePath                 | checkbox | Text |
       | MS Excel   | \downloads\records.xlsx  | Title    | TITLE,Fitness profiles of elite male Italian teams handball players |
       | MS Word    | \downloads\records.docx  | Title    | TITLE,Fitness profiles of elite male Italian teams handball players |
       | PDF        | \downloads\records.pdf   | Title    | TITLE,Fitness profiles of elite male Italian teams handball players |
