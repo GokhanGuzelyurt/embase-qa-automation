@@ -145,7 +145,7 @@ Feature: Elastic search queries
     And I set the session UI cookies captured in the request body
     And user switches to Embase - Download tab
     And user set variable job_id from download url
-    And I set the request body with content from file \jsonFiles\records.json
+    And I set the request body with content from file \jsonFiles\MS_WORD_RECORDS.json
     And I set the request header Content-Type with value application/json
     And I execute the http request with method POST
     And user reloads page
@@ -175,3 +175,33 @@ Feature: Elastic search queries
       | Plain Text | \downloads\records.txt   | Title    | TITLE,Fitness profiles of elite male Italian teams handball players |
       | CSV        | \downloads\records.csv   | Title    | TITLE,Fitness profiles of elite male Italian teams handball players |
       | RIS format | \downloads\records.ris   | skip     | Fitness profiles of elite male Italian teams handball players       |
+
+  @BE @C543361
+  Scenario Outline: Create export records. It should provide the document according to REST data.
+    When user opens Results page
+    And user enters query [23-11-2020]/sd and performs a search
+    And user selects records 1 from the records list on Results page and click on export
+    And user selects Format <Format> in export window
+    And user selects checkbox <checkbox> in export window
+    And user clicks on Export button in modal window
+    And user waits 1 seconds
+    And I set the endpoint for the http request to /rest/spring/export/records
+    And I capture session UI cookies
+    And I set the session UI cookies captured in the request body
+    And user switches to Embase - Download tab
+    And I set the request body with content from file \jsonFiles\<bodyFormatValue>.json
+    And I set the request header Content-Type with value application/json
+    And I execute the http request with method POST
+    And user reloads page
+    And user clicks on download button on Export page
+    And user waits 2 seconds
+    Then user checks downloaded <FilePath> document contains <Text>
+    Examples:
+      | Format     | bodyFormatValue     | FilePath                 | checkbox | Text |
+      | MS Excel   | EXCEL_ROW_RECORDS   | \downloads\records.xlsx  | Title    | SOURCE,Current Issues in Molecular Biology |
+      | MS Word    | MS_WORD_RECORDS     | \downloads\records.docx  | Title    | SOURCE,Current Issues in Molecular Biology |
+      | PDF        | PDF_RECORDS         | \downloads\records.pdf   | Title    | SOURCE,Current Issues in Molecular Biology |
+      | XML        | XML_RECORDS         | \downloads\records.xml   | skip     | Current Issues in Molecular Biology        |
+      | Plain Text | TEXT_RECORDS        | \downloads\records.txt   | Title    | SOURCE,Current Issues in Molecular Biology |
+      | CSV        | CSV_ROW_RECORDS     | \downloads\records.csv   | Title    | SOURCE,Current Issues in Molecular Biology |
+      | RIS format | RIS_RECORDS         | \downloads\records.ris   | skip     | Current Issues in Molecular Biology        |

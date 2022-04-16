@@ -4,16 +4,14 @@
     "L2005607816"
   ],
   "preferences": {
-    "formatValue": "MS_WORD_RECORDS",
-    "customFieldValues": [
-      "1"
-    ],
+    "formatValue": "XML_RECORDS",
+    "customFieldValues": null,
     "additionalOptions": {
       "includeHighlightedResults": false,
       "includeSearchQuery": false
     },
     "openUrlEnabled": false,
     "defaultExportEnabled": false,
-    "outputTypeValue": "custom"
+    "outputTypeValue": null
   }
 }

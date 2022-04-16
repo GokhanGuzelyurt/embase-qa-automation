@@ -1,0 +1,19 @@
+{
+  "orderBy": "PUBLICATION_DATE",
+  "records": [
+    "L2005607816"
+  ],
+  "preferences": {
+    "formatValue": "PDF_RECORDS",
+    "customFieldValues": [
+      "6"
+    ],
+    "additionalOptions": {
+      "includeHighlightedResults": false,
+      "includeSearchQuery": false
+    },
+    "openUrlEnabled": false,
+    "defaultExportEnabled": false,
+    "outputTypeValue": "custom"
+  }
+}
