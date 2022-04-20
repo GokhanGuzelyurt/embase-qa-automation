@@ -6,6 +6,7 @@ import net.thucydides.core.annotations.DefaultUrl;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import po.common.BasePage;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class PicoSearchPage extends BasePage {
     @FindBy(css = "[data-testid='show-results-button']")
     public WebElement showResultsBtnPico;
 
-    @FindBy(css = "[date-testid='synonyms-modifier']")
+    @FindBy(css = "[data-testid='synonyms-modifier']")
     public WebElement synonymsModifier;
 
     @FindBy(id = "emtree-term-input")
@@ -39,7 +40,7 @@ public class PicoSearchPage extends BasePage {
     @FindBy(css = "[data-testid='emtree-root']")
     public WebElement emtreeRoot;
 
-    @FindBy(id="synonyms-editor")
+    @FindBy(id = "synonyms-editor")
     public WebElement synonymsEditor;
 
     @FindBy(xpath = "//*[@data-testid='fragments[intervention]']//*[@title='Remove field']")
@@ -48,16 +49,16 @@ public class PicoSearchPage extends BasePage {
     @FindBy(xpath = "//*[@data-testid='fragments[comparison]']//*[@title='Remove field']")
     public WebElement comparisonDeleteIcon;
 
-    @FindBy(css="div[data-testid='emtree-item'].selected")
+    @FindBy(css = "div[data-testid='emtree-item'].selected")
     public WebElement highlightedNode;
 
     @FindBy(className = "Form_sidePane__1GMJk")
     public WebElement sidePanelPico;
 
-    @FindBy(xpath= "//*[contains(@class,'CheckBoxSwitcher_checkAll__1CEeS')]//input")
+    @FindBy(xpath = "//*[contains(@class,'CheckBoxSwitcher_checkAll__1CEeS')]//input")
     public WebElement synonymsEditorCheckAllCheckBox;
 
-    @FindBy(xpath ="//*[@id='page-modal']//*[contains(@class,'PageModalContent_scroll__-5XOu')]")
+    @FindBy(xpath = "//*[@id='page-modal']//*[contains(@class,'PageModalContent_scroll__-5XOu')]")
     public WebElement displayFullQueryTextBox;
 
     public boolean isAutoSuggestDeviceTerm(String term) {
@@ -72,7 +73,6 @@ public class PicoSearchPage extends BasePage {
     }
 
     public void selectAutoSuggestionTermByText(String text) {
-        System.out.println("The text is" + text);
         List<WebElement> options = autoSuggestionsBox.findElements(By.xpath("//div[@class='col']"));
         for (WebElement option : options) {
             if (option.getText().contains(text)) {
@@ -103,58 +103,58 @@ public class PicoSearchPage extends BasePage {
     }
 
     public String validateTagName(String tagName) {
-        WebElement btntext= getDriver().findElement(By.xpath("*[@data-testid='tag-section']//*[contains(text(),'"+tagName+"')]"));
+        WebElement btntext = getDriver().findElement(By.xpath("//*[@data-testid='tag-section']//*[contains(text(),'" + tagName + "')]"));
         return btntext.getText();
     }
 
     public void clickAddToQueryInEmtreeByText(String text) {
-        WebElement ele = emtreeRoot.findElement(By.xpath("//*[contains(text(),'"+text+"')]/parent::*/parent::*//*[@class='actions']//*"));
+        WebElement ele = emtreeRoot.findElement(By.xpath("//*[contains(text(),'" + text + "')]/parent::*/parent::*//*[@class='actions']//*"));
         System.out.println("Clicked element is" + ele);
         ele.click();
     }
 
-    public boolean isSynonymsCheckBoxesUnselected(){
+    public boolean isSynonymsCheckBoxesUnselected() {
         boolean flag = false;
-    List<WebElement> options= synonymsEditor.findElements(By.xpath("//*[@class='Checkbox-module_input__8n1sr']"));
-    for(WebElement option :options){
-        if (option.isSelected()){
-            flag= true;
+        List<WebElement> options = synonymsEditor.findElements(By.xpath("//*[@class='Checkbox-module_input__8n1sr']"));
+        for (WebElement option : options) {
+            if (option.isSelected()) {
+                flag = true;
+            }
         }
-    }
         return flag;
     }
 
-    public void clickCheckAllSynonymsCheckBox(){
+    public void clickCheckAllSynonymsCheckBox() {
         waitForJStoLoad(10);
-        WebElement ele= synonymsEditor.findElement(By.xpath("//*[@data-testid='synonyms-editor-check-all']"));
-        System.out.println("Text is "+ele.getText());
+        WebElement ele = synonymsEditor.findElement(By.xpath("//*[@data-testid='synonyms-editor-check-all']"));
+        System.out.println("Text is " + ele.getText());
         ele.click();
     }
 
-    public List<String> validateLabels(){
+    public List<String> validateLabels() {
         waitSomeSeconds(20);
-        List<WebElement> labels= getDriver().findElements(By.xpath("//label[contains(@class,'InputBase-module_label__2hdal')]"));
-        List<String> labelTexts= new ArrayList<>();
-        for(WebElement label: labels){
+        List<WebElement> labels = getDriver().findElements(By.xpath("//label[contains(@class,'InputBase-module_label__2hdal')]"));
+        List<String> labelTexts = new ArrayList<>();
+        for (WebElement label : labels) {
             String[] labelValues = label.getText().split("e.g.");
             String labelValue = labelValues[0];
-            System.out.println("label value is"+ labelValue);
-        labelTexts.add(labelValue);
+            System.out.println("label value is" + labelValue);
+            labelTexts.add(labelValue);
         }
         return labelTexts;
 
     }
 
-    public String getConcatenatedTagTexts(){
+    public String getConcatenatedTagTexts() {
         List<WebElement> tags = getDriver().findElements(By.xpath("//*[@data-testid='fragments[population]']//*[@data-testid='tag-section']"));
         String tagTexts = null;
-        for (WebElement tag:tags){
+        for (WebElement tag : tags) {
             tagTexts.concat(tag.getText());
         }
         return tagTexts;
     }
 
-    public void clickEmtreeNodePICO(String text){
+    public void clickEmtreeNodePICO(String text) {
         List<WebElement> items = getDriver().findElements(By.xpath("//*[@class='els-emtree']//*[@data-testid='emtree-term-holder']"));
         for (WebElement emtreeNode : items) {
             if (emtreeNode.getText().equalsIgnoreCase(text)) {
@@ -164,24 +164,25 @@ public class PicoSearchPage extends BasePage {
         }
 
     }
-    public void clickAddToQueryPICO(String childTerm){
-            List<WebElement> items = getDriver().findElements(By.xpath("//*[@class='els-emtree']//*[@data-testid='emtree-term-holder']"));
-            for (WebElement emtreeNode : items) {
-                if (emtreeNode.getText().equalsIgnoreCase(childTerm)) {
-                    emtreeNode.click();
-                    System.out.println("click on +");
-                    emtreeNode.findElement(By.cssSelector(".actions .Icon-module_root__3r_4i")).click();// click the plus option
-                    break;
-                }
+
+    public void clickAddToQueryPICO(String childTerm) {
+        List<WebElement> items = getDriver().findElements(By.xpath("//*[@class='els-emtree']//*[@data-testid='emtree-term-holder']"));
+        for (WebElement emtreeNode : items) {
+            if (emtreeNode.getText().equalsIgnoreCase(childTerm)) {
+                emtreeNode.click();
+                System.out.println("click on +");
+                emtreeNode.findElement(By.cssSelector(".actions .Icon-module_root__3r_4i")).click();// click the plus option
+                break;
             }
         }
+    }
 
-      public String getHighlightedNodeValue(){
-        String highlightedNode= getDriver().findElement(By.cssSelector("div[data-testid='emtree-item'].selected")).getText();
-        return  highlightedNode;
+    public String getHighlightedNodeValue() {
+        String highlightedNode = getDriver().findElement(By.cssSelector("div[data-testid='emtree-item'].selected")).getText();
+        return highlightedNode;
 
-      }
-            }
+    }
+}
 
 
 

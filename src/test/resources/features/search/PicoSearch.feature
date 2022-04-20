@@ -21,7 +21,7 @@ Feature: Pico Search tests
   Scenario: Term is prefilled when free-text modifier is opened for editing
     When user enters diabetes in population text box
     And user selects Use diabetes as a free term from autosuggestions list
-    Then tag heart- :all is displayed in PICO text box
+    Then tag diabetes :all is displayed in PICO text box
     When user clicks on down arrow of the free term
     When user clicks Edit free term text button
     Then text diabetes is displayed in population text box
@@ -48,7 +48,7 @@ Feature: Pico Search tests
     Then Show results button is enabled on PICO
 
   @C531902
-  Scenario Outline:tn,dn options is added to synonyms
+  Scenario Outline: tn,dn options is added to synonyms
     When user enters heart in outcome text box
     And user selects heart from autosuggestions list
     And user clicks Add 4 synonyms button
@@ -61,7 +61,7 @@ Feature: Pico Search tests
   @C532721
   Scenario: focus removed from PICO token when other Emtree node is selected
     Given user enters congenital cancer in emtree search input
-    Then autosuggestions list is displayed on PICO
+    And autosuggestions list is displayed on PICO
     And user selects congenital cancer from autosuggestions list
     And congenital cancer is highlighted in emtree on PICO
     When user clicks on Emtree node congenital tumor on PICO
