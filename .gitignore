@@ -25,3 +25,5 @@ embase-e2e/embase-e2e.iws
 *.log
 
 /src/test/resources/features/run/
+
+test-rail-sync/node_modules
