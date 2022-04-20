@@ -74,7 +74,6 @@ Feature: Pico Search tests
     And the result set is not empty
     And search query is 'congenital cancer'/exp OR 'fetal tumor'/exp
 
-
   Scenario: switch ON/OFF synonyms
     When user enters heart in outcome text box
     And user selects heart from autosuggestions list
