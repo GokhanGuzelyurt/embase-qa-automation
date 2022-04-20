@@ -79,19 +79,19 @@ public class BasePage extends PageObject {
 
     public void verifyTextDisplayed(String text) {
         waitForJStoLoad();
-        Assert.assertTrue("The page is not contain text '" + text + "'", body.getText().contains(text));
+        Assert.assertTrue("The page does not contain text '" + text + "'", body.getText().contains(text));
     }
 
     public void clickOnLink(String link) {
-        body.findElement(By.xpath("//*[contains(text(), '"+link+"')]/parent::a")).click();
+        body.findElement(By.xpath("//*[contains(text(), '" + link + "')]/parent::a")).click();
     }
 
     public void clickOnButton(String button) {
-        body.findElement(By.xpath("//*[contains(text(), '"+button+"')]/ancestor::button")).click();
+        body.findElement(By.xpath("//*[contains(text(), '" + button + "')]/ancestor::button")).click();
     }
 
     public void clicksOnElementByText(String text) {
-        body.findElement(By.xpath("//*[contains(text(), '"+text+"')]")).click();
+        body.findElement(By.xpath("//*[contains(text(), '" + text + "')]")).click();
     }
 
     public void verifyTextIsNotDisplayed(String text) {
