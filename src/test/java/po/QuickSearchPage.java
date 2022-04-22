@@ -259,4 +259,8 @@ public class QuickSearchPage extends BasePage {
     public void clickOnLimitsToButton() {
         limitsToggle.click();
     }
+
+    public void userClicksOnSomewhere() {
+        body.click();
+    }
 }
