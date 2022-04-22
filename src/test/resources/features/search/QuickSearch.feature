@@ -177,6 +177,8 @@ Feature: Quick Search tests
     And user waits 2 seconds
     And user clicks somewhere
     And user waits 2 seconds
+    And user verifies that text is not displayed: use:
+    And user verifies that text is not displayed: Synonym for
     And user clicks on Limit to
     And user select Publication years checkbox
     Then user verifies that From default pre-selected years MAX_YEAR - 10
@@ -188,6 +190,8 @@ Feature: Quick Search tests
     And user waits 2 seconds
     And user clicks somewhere
     And user waits 2 seconds
+    And user verifies that text is not displayed: use:
+    And user verifies that text is not displayed: Synonym for
     And user clicks on Limit to
     And user select Publication years checkbox
     And user sets From option to 2020
