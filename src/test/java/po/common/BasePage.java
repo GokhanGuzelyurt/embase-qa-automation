@@ -6,10 +6,7 @@ import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Step;
 import org.assertj.core.api.Assertions;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -97,5 +94,9 @@ public class BasePage extends PageObject {
     public void verifyTextIsNotDisplayed(String text) {
         waitForJStoLoad();
         Assert.assertFalse("The page should not contain text '" + text + "'", body.getText().contains(text));
+    }
+
+    public void clicksOnTAB() {
+        body.sendKeys(Keys.TAB);
     }
 }
