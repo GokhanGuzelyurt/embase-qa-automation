@@ -174,7 +174,8 @@ Feature: Quick Search tests
   @C507041
   Scenario: Default pre-selected years range: [MAX_YEAR - 10, MAX_YEAR].
     When user types query heart attack on quick search page
-    And user clicks Limit to button
+    And user waits 1 seconds
+    And user clicks on Limit to
     And user select Publication years checkbox
     Then user verifies that From default pre-selected years MAX_YEAR - 10
     And user verifies that To default pre-selected years MAX_YEAR
