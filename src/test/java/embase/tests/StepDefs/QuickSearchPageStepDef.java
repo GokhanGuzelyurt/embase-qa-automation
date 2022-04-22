@@ -268,4 +268,9 @@ public class QuickSearchPageStepDef {
     public void veritySuggestionIsNotEmpty(Integer rowIndex) {
         quickSearchPage.veritySuggestionIsNotEmpty(rowIndex);
     }
+
+    @Then("user clicks on Limit to")
+    public void clickOnLimitsToButton() {
+        quickSearchPage.clickOnLimitsToButton();
+    }
 }
