@@ -95,7 +95,7 @@ public class QuickSearchPage extends BasePage {
     @FindBy(xpath = "//button[@title=\"Clear\"]")
     public WebElement buttonClear;
 
-    @FindBy(css = "[data-testid='limits-toggle']")
+    @FindBy(css = "#collapsible-1 [data-testid='limits-toggle']")
     public WebElementFacade limitsToggle;
 
     public void at() {
