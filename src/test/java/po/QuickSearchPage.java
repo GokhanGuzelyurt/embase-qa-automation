@@ -95,8 +95,8 @@ public class QuickSearchPage extends BasePage {
     @FindBy(xpath = "//button[@title=\"Clear\"]")
     public WebElement buttonClear;
 
-    @FindBy(css = "#collapsible-1 [data-testid='limits-toggle']")
-    public List<WebElement> limitsToggle;
+    @FindBy(css = "[data-testid='limits-toggle']")
+    public WebElement limitsToggle;
 
     public void at() {
         shouldBeDisplayed();
@@ -257,10 +257,7 @@ public class QuickSearchPage extends BasePage {
     }
 
     public void clickOnLimitsToButton() {
-        System.out.println(limitsToggle.size());
-        limitsToggle.forEach(System.out::println);
-
-        limitsToggle.get(0).click();
+        limitsToggle.click();
     }
 
     public void userClicksSomewhere() {
