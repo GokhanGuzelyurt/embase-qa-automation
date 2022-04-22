@@ -87,7 +87,6 @@ public class BasePage extends PageObject {
     }
 
     public void clickOnButton(String button) {
-        body.findElement(By.xpath("//*[contains(text(), '"+button+"')]/ancestor::button")).isDisplayed();
         body.findElement(By.xpath("//*[contains(text(), '"+button+"')]/ancestor::button")).click();
     }
 
