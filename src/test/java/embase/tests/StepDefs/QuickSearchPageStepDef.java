@@ -274,8 +274,8 @@ public class QuickSearchPageStepDef {
         quickSearchPage.clickOnLimitsToButton();
     }
 
-    @And("user clicks on somewhere")
-    public void userClicksOnSomewhere() {
-        quickSearchPage.userClicksOnSomewhere();
+    @And("user clicks somewhere")
+    public void userClicksSomewhere() {
+        quickSearchPage.userClicksSomewhere();
     }
 }

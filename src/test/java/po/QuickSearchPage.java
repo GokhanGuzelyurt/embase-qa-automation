@@ -260,7 +260,7 @@ public class QuickSearchPage extends BasePage {
         limitsToggle.click();
     }
 
-    public void userClicksOnSomewhere() {
+    public void userClicksSomewhere() {
         body.click();
     }
 }
