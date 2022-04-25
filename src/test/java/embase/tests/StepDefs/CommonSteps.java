@@ -298,4 +298,9 @@ public class CommonSteps {
     public void waitSomeSeconds(Integer secs) throws InterruptedException {
         Thread.sleep(secs * 1000);
     }
+
+    @And("user presses Tab key")
+    public void pressesTabKey() {
+        basePage.pressesTabKey();
+    }
 }
