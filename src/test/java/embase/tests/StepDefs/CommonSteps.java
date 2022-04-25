@@ -299,8 +299,8 @@ public class CommonSteps {
         Thread.sleep(secs * 1000);
     }
 
-    @And("user clicks on TAB")
-    public void clicksOnTAB() {
-        basePage.clicksOnTAB();
+    @And("user press Tab key")
+    public void pressTabKey() {
+        basePage.pressTabKey();
     }
 }

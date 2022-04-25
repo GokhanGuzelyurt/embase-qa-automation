@@ -186,7 +186,7 @@ Feature: Quick Search tests
   @C507042
   Scenario: Min year of "To" is limited to current value of "From" select.
     When user types query heart attack on quick search page
-    And user clicks on TAB
+    And user press Tab key
     And user clicks Limit to button
     And user select Publication years checkbox
     And user sets From option to 2020
@@ -196,7 +196,7 @@ Feature: Quick Search tests
   @C507043
   Scenario: "From" value is bigger than "To" value then "To" value is automatically set to "From" value
     When user types query heart attack on quick search page
-    And user clicks on TAB
+    And user press Tab key
     And user clicks Limit to button
     And user select Publication years checkbox
     And user sets From option to 2010
