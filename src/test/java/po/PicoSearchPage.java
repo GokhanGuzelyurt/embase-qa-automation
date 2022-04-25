@@ -126,9 +126,13 @@ public class PicoSearchPage extends BasePage {
 
     public void clickCheckAllSynonymsCheckBox() {
         waitForJStoLoad(10);
-        WebElement ele = synonymsEditor.findElement(By.xpath("//*[@data-testid='synonyms-editor-check-all']"));
-        System.out.println("Text is " + ele.getText());
-        ele.click();
+        if(synonymsEditor.isDisplayed()) {
+//            WebElement ele = synonymsEditor.findElement(By.xpath("//*[@data-testid='synonyms-editor-check-all']"));
+            WebElement ele= getDriver().findElement(By.xpath("//span[contains(text(),'Select all synonyms')]"));
+            System.out.println("Text is " + ele.getText());
+            scrollIntoView();
+            ele.click();
+        }
     }
 
     public List<String> validateLabels() {

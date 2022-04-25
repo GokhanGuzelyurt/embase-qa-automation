@@ -74,22 +74,23 @@ Feature: Pico Search tests
     And the result set is not empty
     And search query is 'congenital cancer'/exp OR 'fetal tumor'/exp
 
-    #This test case has to be maintained, will update it in the next iteration
-#  Scenario: switch ON/OFF synonyms
-#    When user enters heart in outcome text box
-#    And user selects heart from autosuggestions list
-#    And user clicks Add 4 synonyms button
-#    Then synonyms popover is displayed
-#    And user clicks on down arrow of the synonym term
-#    And user clicks Remove synonyms button
-##    Then synonyms popover is closed
-#    When user clicks on down arrow of the free term
-#    And user clicks Add synonyms button
-#    And user clicks 4 synonyms :all button
-#    Then synonyms popover is displayed
-#    When user unselects Select all synonyms checkbox in the right panel
-#    Then user verifies that text is displayed: Add 4 synonyms
-#    And all the checkboxes are unselected in the synonyms right panel
+  @C531903
+  Scenario: switch ON/OFF synonyms
+    When user enters heart in outcome text box
+    And user selects heart from autosuggestions list
+    And user clicks Add 4 synonyms button
+    Then synonyms popover is displayed
+    And user verifies that text is displayed: Select all synonyms
+    And user clicks on down arrow of the synonym term
+    And user clicks Remove synonyms button
+    And user verifies that text is not displayed: Select all synonyms
+    When user clicks on down arrow of the free term
+    And user clicks Add synonyms button
+    And user clicks 4 synonyms :all button
+    Then synonyms popover is displayed
+    When user unselects Select all synonyms checkbox in the right panel
+    Then user verifies that text is displayed: Add 4 synonyms
+    And all the checkboxes are unselected in the synonyms right panel
 
   @C531904
   Scenario Outline: PICO lines are restored in the initial order after reset
@@ -115,6 +116,5 @@ Feature: Pico Search tests
     And add to query for Emtree node 3' o benzyltrifluridine is selected
     And user clicks on Display Full Query button on PICO search page
     Then query '5 (2 bromovinyl) 2` deoxyuridine'/exp OR '3` o benzyltrifluridine'/exp is displayed when display full query link is clicked
-
 
 
