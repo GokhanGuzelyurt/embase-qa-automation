@@ -132,7 +132,7 @@ Feature: Citation Information tests
       | authorLastName | authorFirstName | firstNameInitials | Affiliation | ORCID |
       | Smith          | John            | J.                | Chicago     |       |
     And user selects all authors from the citation info authors list
-    And user clicks on Add to Search button
-    And user clicks Article search button
+    And user clicks Add to search button
+    And user clicks on Show results button on citation search
     Then search query is 'smith,john'/an
 
