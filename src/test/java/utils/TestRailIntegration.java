@@ -102,7 +102,7 @@ public class TestRailIntegration {
 
 
     public static int getCaseIdFromScenarioTags(Collection<String> sourceTagNames) {
-        List<String> caseIds = sourceTagNames.stream().filter(t -> t.matches("@C\\d+")).collect(Collectors.toList());
+        List<String> caseIds = sourceTagNames.stream().filter(t -> t.matches("@(?:C|tcid:)\\d+")).collect(Collectors.toList());
         return Integer.parseInt(caseIds.get(0).replaceAll("[^0-9]", ""));
     }
 
