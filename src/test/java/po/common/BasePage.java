@@ -96,7 +96,7 @@ public class BasePage extends PageObject {
         Assert.assertFalse("The page should not contain text '" + text + "'", body.getText().contains(text));
     }
 
-    public void pressTabKey() {
+    public void pressesTabKey() {
         body.sendKeys(Keys.TAB);
     }
 }
