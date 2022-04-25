@@ -4,10 +4,7 @@ import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Step;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -15,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.invoke.MethodHandles;
-import java.util.Arrays;
 
 import static embase.tests.StepDefs.CommonSteps.setTestCaseVariable;
 import static embase.tests.StepDefs.CommonSteps.testCaseVariables;
@@ -103,6 +99,10 @@ public class BasePage extends PageObject {
     public void verifyTextIsNotDisplayed(String text) {
         waitForJStoLoad();
         Assert.assertFalse("The page should not contain text '" + text + "'", body.getText().contains(text));
+    }
+
+    public void pressesTabKey() {
+        body.sendKeys(Keys.TAB);
     }
 
     public void userSetVarJobIdFromDownloadUrl(String varName) {

@@ -144,6 +144,7 @@ Feature: Quick Search tests
   @C507038
   Scenario: Search limit is only enabled and effective when corresponding checkbox is turned on and enabled
     When user types query heart attack on quick search page
+    And user presses Tab key
     And user clicks Limit to button
     And user select Publication years checkbox
     And user select Records added to Embase checkbox
@@ -154,6 +155,7 @@ Feature: Quick Search tests
   @C507039
   Scenario Outline: Max available year (MAX_YEAR) in <option> is always limited to the next year
     When user types query heart attack on quick search page
+    And user presses Tab key
     And user clicks Limit to button
     And user select Publication years checkbox
     And user clicks <option> option
@@ -166,6 +168,7 @@ Feature: Quick Search tests
   @C507040
   Scenario: The option From contains Min year "< 1966"
     When user types query heart attack on quick search page
+    And user presses Tab key
     And user clicks Limit to button
     And user select Publication years checkbox
     And user clicks From option
@@ -174,6 +177,7 @@ Feature: Quick Search tests
   @C507041
   Scenario: Default pre-selected years range: [MAX_YEAR - 10, MAX_YEAR].
     When user types query heart attack on quick search page
+    And user presses Tab key
     And user clicks Limit to button
     And user select Publication years checkbox
     Then user verifies that From default pre-selected years MAX_YEAR - 10
@@ -182,6 +186,7 @@ Feature: Quick Search tests
   @C507042
   Scenario: Min year of "To" is limited to current value of "From" select.
     When user types query heart attack on quick search page
+    And user presses Tab key
     And user clicks Limit to button
     And user select Publication years checkbox
     And user sets From option to 2020
@@ -191,6 +196,7 @@ Feature: Quick Search tests
   @C507043
   Scenario: "From" value is bigger than "To" value then "To" value is automatically set to "From" value
     When user types query heart attack on quick search page
+    And user presses Tab key
     And user clicks Limit to button
     And user select Publication years checkbox
     And user sets From option to 2010

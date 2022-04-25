@@ -1,5 +1,6 @@
 package po;
 
+import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -93,6 +94,9 @@ public class QuickSearchPage extends BasePage {
 
     @FindBy(xpath = "//button[@title=\"Clear\"]")
     public WebElement buttonClear;
+
+    @FindBy(css = "[data-testid='limits-toggle']")
+    public WebElement limitsToggle;
 
     public void at() {
         shouldBeDisplayed();
@@ -250,5 +254,13 @@ public class QuickSearchPage extends BasePage {
 
     public void selectSuggestionRow(Integer rowIndex) {
         suggestionList.findElements(By.cssSelector("ul[role=listbox] li div[class*=row]")).get(rowIndex).click();
+    }
+
+    public void clickOnLimitsToButton() {
+        limitsToggle.click();
+    }
+
+    public void userClicksSomewhere() {
+        body.click();
     }
 }

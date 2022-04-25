@@ -299,6 +299,11 @@ public class CommonSteps {
         Thread.sleep(secs * 1000);
     }
 
+    @And("user presses Tab key")
+    public void pressesTabKey() {
+        basePage.pressesTabKey();
+    }
+
     @And("^user set variable (.*) from download url$")
     public void userSetVarJobIdFromDownloadUrl(String varName) {
         basePage.userSetVarJobIdFromDownloadUrl(varName);
