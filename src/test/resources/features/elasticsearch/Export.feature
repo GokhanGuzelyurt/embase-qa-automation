@@ -30,6 +30,7 @@ Feature: Export queries
     When user opens Results page
     And user enters query [23-11-2020]/sd and performs a search
     And user selects records 1 from the records list on Results page and click on export
+    And user saves title from records 1 to variable titleText
     And user selects Format <Format> in export window
     And user selects checkbox <checkbox> in export window
     And user clicks on Export button in modal window
@@ -40,14 +41,14 @@ Feature: Export queries
     And user waits 2 seconds
     Then user checks downloaded <FilePath> document contains <Text>
     Examples:
-      | Format     | FilePath                 | checkbox | Text |
-      | MS Excel   | \downloads\records.xlsx  | Title    | TITLE,Fitness profiles of elite male Italian teams handball players |
-      | MS Word    | \downloads\records.docx  | Title    | TITLE,Fitness profiles of elite male Italian teams handball players |
-      | PDF        | \downloads\records.pdf   | Title    | TITLE,Fitness profiles of elite male Italian teams handball players |
-      | XML        | \downloads\records.xml   | skip     | Fitness profiles of elite male Italian teams handball players       |
-      | Plain Text | \downloads\records.txt   | Title    | TITLE,Fitness profiles of elite male Italian teams handball players |
-      | CSV        | \downloads\records.csv   | Title    | TITLE,Fitness profiles of elite male Italian teams handball players |
-      | RIS format | \downloads\records.ris   | skip     | Fitness profiles of elite male Italian teams handball players       |
+      | Format     | FilePath                 | checkbox | Text                                                                |
+      | MS Excel   | \downloads\records.xlsx  | Title    | TITLE,titleText                                                     |
+      | MS Word    | \downloads\records.docx  | Title    | TITLE,titleText                                                     |
+      | PDF        | \downloads\records.pdf   | Title    | TITLE,titleText                                                     |
+      | XML        | \downloads\records.xml   | skip     | titleText                                                           |
+      | Plain Text | \downloads\records.txt   | Title    | TITLE,titleText                                                     |
+      | CSV        | \downloads\records.csv   | Title    | TITLE,titleText                                                     |
+      | RIS format | \downloads\records.ris   | skip     | titleText                                                           |
 
   @BE @C543361
   Scenario Outline: Create export records. It should provide the document according to REST data.

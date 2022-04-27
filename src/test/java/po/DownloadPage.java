@@ -24,6 +24,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static embase.tests.StepDefs.CommonSteps.testCaseVariables;
+
 public class DownloadPage extends PageObject {
     private static String BASE_RESOURCES_PATH = "src/test/resources/";
 
@@ -34,7 +36,7 @@ public class DownloadPage extends PageObject {
         baseButton.click();
     }
 
-    public void checksDownloadedDocumentContains(String fileName, String value) {
+    public void checksDownloadedDocumentContains(String fileName, String text) {
         List fileDataList = new ArrayList<>();
         if (fileName.contains("docx")) {
             fileDataList.add(readDocxFile(fileName));
@@ -51,7 +53,13 @@ public class DownloadPage extends PageObject {
         if (fileName.contains("txt") || fileName.contains("csv") || fileName.contains("ris")) {
             fileDataList.add(FileHelper.readFile(fileName));
         }
-        Assert.assertTrue("File "+fileName+" does not contain value "+value, fileDataList.toString().contains(value));
+
+        String value = text;
+        if (testCaseVariables.get(text) != null) {
+            value = testCaseVariables.get(text);
+        }
+        String fileData = fileDataList.toString().replace("\n", " ").replace("\r", " ").replace("  ", " ");
+        Assert.assertTrue("File "+fileName+" does not contain value "+value, fileData.contains(value));
     }
 
     public static List readXLS(String fileName) {
@@ -97,19 +105,19 @@ public class DownloadPage extends PageObject {
         return fileDataList;
     }
 
-    private List readPDFFile(String fileName) {
-        List fileDataList = new ArrayList<>();
+    private String readPDFFile(String fileName) {
+        String fileData = "";
         try {
             PDDocument document = PDDocument.load(new File(BASE_RESOURCES_PATH + fileName));
             if (!document.isEncrypted()) {
                 PDFTextStripper stripper = new PDFTextStripper();
-                fileDataList.add(stripper.getText(document));
+                fileData = stripper.getText(document);
             }
             document.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return fileDataList;
+        return fileData;
     }
 
     private String readXMLFile(String fileName) {
