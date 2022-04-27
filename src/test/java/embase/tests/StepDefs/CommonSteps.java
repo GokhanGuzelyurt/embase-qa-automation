@@ -304,7 +304,7 @@ public class CommonSteps {
         basePage.pressesTabKey();
     }
 
-    @And("^user set variable (.*) from download url$")
+    @And("^user saves download url job id to variable (.*)$")
     public void userSetVarJobIdFromDownloadUrl(String varName) {
         basePage.userSetVarJobIdFromDownloadUrl(varName);
     }
