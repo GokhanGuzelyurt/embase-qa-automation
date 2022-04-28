@@ -1,4 +1,18 @@
+let path = require('path')
+let fs = require('fs')
+// put files visible for actual test runner
+let featuresDir        = path.join(__dirname, '..', 'src', 'test', 'resources', 'features', 'testrail-sync')
+// keep step definitions folder inside the subproject not to mess with java code
+let stepDefinitionsDir = path.join(__dirname, 'features', 'step_definitions')
+fs.mkdirSync(featuresDir,        {recursive: true})
+fs.mkdirSync(stepDefinitionsDir, {recursive: true})
+
 module.exports = {
+  featuresDir,
+  stepDefinitionsDir,
+  directoryStructure: {
+    type: 'section:slug',
+  },
   testrail: {
     host: 'https://elss.testrail.com',
     user: 'autotest@quosa.com',
@@ -11,6 +25,9 @@ module.exports = {
                      // 3 = Approved
                      // 4 = Approved to automate
     }
+  },
+  gherkinFormatterOptions: {
+    capitalizeStepsFirstChar: false,
   },
   /* Optional: default testcase attributes when pushing new testcases to TestRail
   newTestCase: {
