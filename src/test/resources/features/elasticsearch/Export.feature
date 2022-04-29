@@ -1,11 +1,11 @@
-@export
+@export @BE
 Feature: Export queries
 
   Background: Home page
     Given user opens Embase application
     And Quick search page is opened
 
-  @BE @C533342
+  @C533342
   Scenario: Create export records REST. The job ID should be changed
     When user opens Results page
     And user enters query [23-11-2020]/sd and performs a search
@@ -14,7 +14,7 @@ Feature: Export queries
     And user selects checkbox Title in export window
     And user clicks on Export button in modal window
     And I set the endpoint for the http request to /rest/spring/export/records
-    And I capture session UI cookies
+    And user captures session UI cookies
     And I set the session UI cookies captured in the request body
     And user switches to Embase - Download tab
     And user saves download url job id to variable job_id
@@ -50,7 +50,7 @@ Feature: Export queries
       | CSV        | \downloads\records.csv   | Title    | TITLE,titleText                                                     |
       | RIS format | \downloads\records.ris   | skip     | titleText                                                           |
 
-  @BE @C543361
+  @C543361
   Scenario Outline: Create export records. It should provide the document according to REST data.
     When user opens Results page
     And user enters query [23-11-2020]/sd and performs a search
@@ -60,7 +60,7 @@ Feature: Export queries
     And user clicks on Export button in modal window
     And user waits 1 seconds
     And I set the endpoint for the http request to /rest/spring/export/records
-    And I capture session UI cookies
+    And user captures session UI cookies
     And I set the session UI cookies captured in the request body
     And user switches to Embase - Download tab
     And I set the request body with content from file \jsonFiles\<bodyFormatValue>.json

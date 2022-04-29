@@ -387,7 +387,7 @@ public class HttpRequestResponseStepDef {
         }
     }
 
-    @And("I capture session UI cookies")
+    @And("user captures session UI cookies")
     public void captureSessionUICookies() {
         sessionUICookie = getDriver().manage().getCookieNamed("SESSION");
         jsessionUICookie = getDriver().manage().getCookieNamed("JSESSIONID");
