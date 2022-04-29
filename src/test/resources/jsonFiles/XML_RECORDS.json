@@ -1,0 +1,17 @@
+{
+  "orderBy": "PUBLICATION_DATE",
+  "records": [
+    "L2005607816"
+  ],
+  "preferences": {
+    "formatValue": "XML_RECORDS",
+    "customFieldValues": null,
+    "additionalOptions": {
+      "includeHighlightedResults": false,
+      "includeSearchQuery": false
+    },
+    "openUrlEnabled": false,
+    "defaultExportEnabled": false,
+    "outputTypeValue": null
+  }
+}

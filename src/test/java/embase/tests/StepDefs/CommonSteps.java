@@ -303,4 +303,19 @@ public class CommonSteps {
     public void pressesTabKey() {
         basePage.pressesTabKey();
     }
+
+    @And("^user saves download url job id to variable (.*)$")
+    public void userSetVarJobIdFromDownloadUrl(String varName) {
+        basePage.userSetVarJobIdFromDownloadUrl(varName);
+    }
+
+    @And("^user reloads page$")
+    public void userReloadsPage() {
+        basePage.userReloadsPage();
+    }
+
+    @Then("^user checks that (.*) and (.*) values do not match$")
+    public void checksThatValuesDoNotMatch(String var1, String var2) {
+        basePage.checksThatValuesDoNotMatch(var1, var2);
+    }
 }
