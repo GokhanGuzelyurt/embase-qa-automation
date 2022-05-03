@@ -117,4 +117,16 @@ Feature: Pico Search tests
     And user clicks on Display Full Query button on PICO search page
     Then query '5 (2 bromovinyl) 2` deoxyuridine'/exp OR '3` o benzyltrifluridine'/exp is displayed when display full query link is clicked
 
+  @C544502
+  Scenario: Term added from the Emtree pane should respect active input cursor position
+    When user enters diabetes in population text box
+    And user selects Use diabetes as a free term from autosuggestions list
+    Then tag diabetes :all is displayed in PICO text box
+    Then user enters congenital cancer in emtree search input
+    And user selects congenital cancer from autosuggestions list
+    Then tag OR is displayed in PICO text box
+    And tag congenital cancer /exp is displayed in PICO text box
+    And user clicks on Show results button on PICO search
+    Then search query is diabetes OR 'congenital cancer'/exp
+
 

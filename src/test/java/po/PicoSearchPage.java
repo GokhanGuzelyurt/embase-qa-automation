@@ -61,6 +61,9 @@ public class PicoSearchPage extends BasePage {
     @FindBy(xpath = "//*[@id='page-modal']//*[contains(@class,'PageModalContent_scroll__-5XOu')]")
     public WebElement displayFullQueryTextBox;
 
+    @FindBy(css="[data-testid='default-search-strategy-toggle']")
+    public WebElement strategyDropdown;
+
     public boolean isAutoSuggestDeviceTerm(String term) {
         boolean flag = false;
         List<WebElement> options = autoSuggestionsBox.findElements(By.cssSelector("ul[role=listbox] li div[class*=row]>div[class=col]>span:nth-child(1)"));
