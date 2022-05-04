@@ -129,4 +129,28 @@ Feature: Pico Search tests
     And user clicks on Show results button on PICO search
     Then search query is diabetes OR 'congenital cancer'/exp
 
+  @C544507
+  Scenario: PICO allows to group terms with parentheses
+    When user enters diabetes and (human OR animal) in population text box
+    And user clicks somewhere
+    Then tag diabetes and (human or animal) :all is displayed in PICO text box
+    And user clicks on Show results button on PICO search
+    Then search query is 'diabetes and (human or animal)'
 
+  @C544508
+  Scenario: Verify on PICO default strategy selector can be changed
+     Given user enters diabetes in population text box
+     And user selects diabetes from autosuggestions list
+     Then tag diabetes mellitus /exp is displayed in PICO text box
+     When user clicks on default strategy change dropdown
+     And user selects Major focus from strategy drop down
+     And user enters insulin in population text box
+     And user selects insulin from autosuggestions list
+     Then tag insulin /mj is displayed in PICO text box
+     And user clicks Add 30 synonyms button
+     When user clicks on Show results button on PICO search
+     Then user is on Results Page
+     And search query is 'diabetes mellitus'/exp OR 'insulin'/mj OR 'actrapid insulin' OR 'actrapid mc' OR 'cross linked insulin' OR 'destripeptide insulin' OR 'fish insulin' OR 'humilin' OR 'iletin ii' OR 'immunoinsulin' OR 'in 105' OR 'in105' OR 'initard' OR 'insulin' OR 'insulin (animal source)' OR 'insulin actrapid' OR 'insulin hnc' OR 'insulin novo actrapid' OR 'insulin snc' OR 'insulina pronta lilly' OR 'insuline' OR 'insulinum' OR 'iodinated insulin' OR 'iszilin' OR 'maxirapid' OR 'monotard human' OR 'monotard insulin' OR 'neusulin' OR 'novolin' OR 'oralin' OR 'oro insulin' OR 'teleost insulin'
+     
+
+     
