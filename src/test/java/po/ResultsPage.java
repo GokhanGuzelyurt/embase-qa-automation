@@ -245,4 +245,10 @@ public class ResultsPage extends BasePage {
         String extractedTitles = recordsTitles.getText();
         setTestCaseVariable(varName, extractedTitles);
     }
+
+    public void selectsRecordsFromTheRecordsListInResultPage(int recordsNum) {
+        for (int i = 0; i < recordsNum; i++) {
+            checkByScript(recordsFoundList.findElements(By.className("emb-checkbox-result")).get(i));
+        }
+    }
 }
