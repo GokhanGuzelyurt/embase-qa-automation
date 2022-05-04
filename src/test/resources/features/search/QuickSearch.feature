@@ -113,7 +113,7 @@ Feature: Quick Search tests
   @C506491
   Scenario: Validate that the Search tips goes to Q&A page
     When user clicks on Search tips element by text
-    And user switches to Embase - Download tab
+    And user switches to How do I search in Embase? - Elsevier Support Center tab
     Then user verifies that text is displayed: Elsevier Support Center
     And user verifies that text is displayed: How do I search in Embase?
     And user verifies that text is displayed: Quick search
