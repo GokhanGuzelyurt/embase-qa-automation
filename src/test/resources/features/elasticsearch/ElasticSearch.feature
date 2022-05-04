@@ -114,7 +114,7 @@ Feature: Elastic search queries
       | [01-03-2020 to 31-08-2020]/pd | [2020-03-01 to 2020-08-31]/pd |
       | [2019-01 to 2020-01]/pd       | [01-2019 to 01-2020]/pd       |
 
-  @C506452
+  @C544506
   Scenario: Verify In a modal window displayed count of records instead of undefined
     When user opens Results page
     And user enters query [23-11-2020]/sd and performs a search
