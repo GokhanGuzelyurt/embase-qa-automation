@@ -196,4 +196,9 @@ public class ResultsPageStepDef {
     public void userClicksOnButtonInModalWindow(String button) {
         resultsPage.userClicksOnButtonInModalWindow(button);
     }
+
+    @And("^user saves title from records (.*) to variable (.*)")
+    public void savesTitleFromRecordsToVar(String recordNum, String varName) {
+        resultsPage.savesTitleFromRecordsToVar(recordNum, varName);
+    }
 }

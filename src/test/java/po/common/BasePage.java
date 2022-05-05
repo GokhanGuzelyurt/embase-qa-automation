@@ -1,10 +1,8 @@
 package po.common;
 
-import jnr.ffi.annotations.In;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Step;
-import org.assertj.core.api.Assertions;
 import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
@@ -15,15 +13,22 @@ import org.slf4j.LoggerFactory;
 
 import java.lang.invoke.MethodHandles;
 
+import static embase.tests.StepDefs.CommonSteps.setTestCaseVariable;
+import static embase.tests.StepDefs.CommonSteps.testCaseVariables;
+
 public class BasePage extends PageObject {
     final static Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     WebDriver driver;
+    String extractedID;
 
     @FindBy(css = "._pendo-close-guide")
     public WebElementFacade pendoBannerClose;
 
     @FindBy(css = "body")
     public WebElement body;
+
+    @FindBy(css = "a.basebutton")
+    public WebElement baseButton;
 
     @Step
     public void closePendoBanner() {
@@ -98,5 +103,23 @@ public class BasePage extends PageObject {
 
     public void pressesTabKey() {
         body.sendKeys(Keys.TAB);
+    }
+
+    public void userSetVarJobIdFromDownloadUrl(String varName) {
+        String urlHref = baseButton.getAttribute("href");
+        String[] splitUrl = urlHref.split("=", 4);
+        String[] extract = splitUrl[1].split("&", 2);
+        extractedID = extract[0];
+        setTestCaseVariable(varName, extractedID);
+    }
+
+    public void userReloadsPage() {
+        getDriver().navigate().refresh();
+    }
+
+    public void checksThatValuesDoNotMatch(String var1, String var2) {
+        String variable1 = testCaseVariables.get(var1);
+        String variable2 = testCaseVariables.get(var2);
+        Assert.assertNotEquals("The "+variable1+" should not be equal "+variable2+" ;", variable1, variable2);
     }
 }

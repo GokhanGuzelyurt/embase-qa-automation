@@ -21,6 +21,7 @@ import java.lang.invoke.MethodHandles;
 import java.util.Arrays;
 import java.util.List;
 
+import static embase.tests.StepDefs.CommonSteps.setTestCaseVariable;
 import static embase.tests.StepDefs.CommonSteps.testCaseVariables;
 
 @DefaultUrl("page:results.page")
@@ -105,6 +106,9 @@ public class ResultsPage extends BasePage {
 
     @FindBy(id = "modalControl")
     public WebElementFacade modalControl;
+
+    @FindBy(id = "recordsFound")
+    public WebElement recordsFoundList;
 
     public void waitForRecordSectionIsLoaded() {
         logger.info("Wait for please wait to vanish");
@@ -228,10 +232,17 @@ public class ResultsPage extends BasePage {
     }
 
     public void userSelectsCheckboxFieldNameInExportWindow(String label) {
-        checkByScript(modalContent.findElement(By.xpath("//label/span[contains(text(), '"+label+"')]")));
+        if (!label.contains("skip"))
+            checkByScript(modalContent.findElement(By.xpath("//label/span[contains(text(), '"+label+"')]")));
     }
 
     public void userClicksOnButtonInModalWindow(String button) {
         modalControl.findElement(By.xpath("//*[contains(text(), '"+button+"')]/parent::a")).click();
+    }
+
+    public void savesTitleFromRecordsToVar(String recordNum, String varName) {
+        WebElement recordsTitles = recordsFoundList.findElements(By.cssSelector(".resultInfo a")).get(Integer.parseInt(recordNum) - 1);
+        String extractedTitles = recordsTitles.getText();
+        setTestCaseVariable(varName, extractedTitles);
     }
 }

@@ -9,6 +9,7 @@ import io.restassured.RestAssured;
 import io.restassured.config.HttpClientConfig;
 import io.restassured.config.RestAssuredConfig;
 import io.restassured.http.Cookie;
+import io.restassured.http.Cookies;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.apache.http.client.params.ClientPNames;
@@ -31,8 +32,12 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import java.io.StringReader;
 import java.lang.invoke.MethodHandles;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 import static embase.tests.StepDefs.CommonSteps.*;
+import static net.serenitybdd.core.Serenity.getDriver;
 
 
 public class HttpRequestResponseStepDef {
@@ -47,6 +52,9 @@ public class HttpRequestResponseStepDef {
     private String concatenatedUrl;
     private RestAssuredConfig config;
     public Cookie sessionCookie;
+    public org.openqa.selenium.Cookie sessionUICookie;
+    public org.openqa.selenium.Cookie jsessionUICookie;
+    private List restAssuredCookies = new ArrayList();
     private String prefTermId;
 
 
@@ -202,7 +210,13 @@ public class HttpRequestResponseStepDef {
 
     @And("I set the cookies captured in the request body")
     public void setCookie() {
-        request.given().cookie(sessionCookie);
+        request.given().cookie(String.valueOf(sessionCookie));
+    }
+
+    @And("I set the session UI cookies captured in the request body")
+    public void setSessionUICookie() {
+        request.given().cookie(String.valueOf(sessionUICookie));
+        request.given().cookie(String.valueOf(jsessionUICookie));
     }
 
     @Then("^the response body contains element (.*) with value (.*)$")
@@ -373,5 +387,9 @@ public class HttpRequestResponseStepDef {
         }
     }
 
-
+    @And("user captures session UI cookies")
+    public void captureSessionUICookies() {
+        sessionUICookie = getDriver().manage().getCookieNamed("SESSION");
+        jsessionUICookie = getDriver().manage().getCookieNamed("JSESSIONID");
+    }
 }
