@@ -21,7 +21,7 @@ Feature: Pico Search tests
   Scenario: Term is prefilled when free-text modifier is opened for editing
     When user enters diabetes in population text box
     And user selects Use diabetes as a free term from autosuggestions list
-    Then tag diabetes :all is displayed in PICO text box
+    And tag diabetes :all is displayed in PICO text box
     When user clicks on down arrow of the free term
     When user clicks Edit free term text button
     Then text diabetes is displayed in population text box
@@ -40,10 +40,10 @@ Feature: Pico Search tests
   @C531901
   Scenario: Free term text with wildcard is not ignored on the second round of search from PICO
     When user enters heart* in intervention text box
-    Then autosuggestions list is displayed on PICO
+    And autosuggestions list is displayed on PICO
     And user selects Use heart* as a free term from autosuggestions list
     And user clicks on Show results button on PICO search
-    Then user is on Results Page
+    And user is on Results Page
     When user opens Pico search page
     Then Show results button is enabled on PICO
 
@@ -67,41 +67,42 @@ Feature: Pico Search tests
     When user clicks on Emtree node congenital tumor on PICO
     When user clicks on Emtree node fetal tumor on PICO
     And add to query for Emtree node fetal tumor is selected
-    Then fetal tumor is highlighted in emtree on PICO
+    And fetal tumor is highlighted in emtree on PICO
     And congenital tumor is not highlighted in emtree on PICO
     When user clicks on Show results button on PICO search
-    Then user is on Results Page
+    And user is on Results Page
     And the result set is not empty
     And search query is 'congenital cancer'/exp OR 'fetal tumor'/exp
 
-    #This test case has to be maintained, will update it in the next iteration
-#  Scenario: switch ON/OFF synonyms
-#    When user enters heart in outcome text box
-#    And user selects heart from autosuggestions list
-#    And user clicks Add 4 synonyms button
-#    Then synonyms popover is displayed
-#    And user clicks on down arrow of the synonym term
-#    And user clicks Remove synonyms button
-##    Then synonyms popover is closed
-#    When user clicks on down arrow of the free term
-#    And user clicks Add synonyms button
-#    And user clicks 4 synonyms :all button
-#    Then synonyms popover is displayed
-#    When user unselects Select all synonyms checkbox in the right panel
-#    Then user verifies that text is displayed: Add 4 synonyms
-#    And all the checkboxes are unselected in the synonyms right panel
+  @C531903
+  Scenario: switch ON/OFF synonyms
+    When user enters heart in outcome text box
+    And user selects heart from autosuggestions list
+    And user clicks Add 4 synonyms button
+    And synonyms popover is displayed
+    And user verifies that text is displayed: Select all synonyms
+    And user clicks on down arrow of the synonym term
+    And user clicks Remove synonyms button
+    And user verifies that text is not displayed: Select all synonyms
+    When user clicks on down arrow of the free term
+    And user clicks Add synonyms button
+    And user clicks 4 synonyms :all button
+    And synonyms popover is displayed
+    When user unselects Select all synonyms checkbox in the right panel
+    Then user verifies that text is displayed: Add 4 synonyms
+    And all the checkboxes are unselected in the synonyms right panel
 
   @C531904
   Scenario Outline: PICO lines are restored in the initial order after reset
-    Then following <fields> are available on PICO page
-    Then user verifies the Reset form button is disabled
+    And following <fields> are available on PICO page
+    And user verifies the Reset form button is disabled
     When user clicks Remove field of Intervention field
     When user clicks Remove field of Comparison field
-    Then following <fields1> are not available on PICO page
+    And following <fields1> are not available on PICO page
     And user verifies the Reset form button is enabled
     When user clicks Reset form button
     Then following <fields> are available on PICO page
-    Then user verifies the Reset form button is disabled
+    And user verifies the Reset form button is disabled
     Examples:
       | fields                                                  | fields1                 |
       | Population,Intervention,Comparison,Outcome,Study design | Intervention,Comparison |
@@ -116,5 +117,40 @@ Feature: Pico Search tests
     And user clicks on Display Full Query button on PICO search page
     Then query '5 (2 bromovinyl) 2` deoxyuridine'/exp OR '3` o benzyltrifluridine'/exp is displayed when display full query link is clicked
 
+  @C544502
+  Scenario: Term added from the Emtree pane should respect active input cursor position
+    When user enters diabetes in population text box
+    And user selects Use diabetes as a free term from autosuggestions list
+    And tag diabetes :all is displayed in PICO text box
+    When user enters congenital cancer in emtree search input
+    And user selects congenital cancer from autosuggestions list
+    And tag OR is displayed in PICO text box
+    And tag congenital cancer /exp is displayed in PICO text box
+    And user clicks on Show results button on PICO search
+    Then search query is diabetes OR 'congenital cancer'/exp
 
+  @C544507
+  Scenario: PICO allows to group terms with parentheses
+    When user enters diabetes and (human OR animal) in population text box
+    And user clicks somewhere
+    And tag diabetes and (human OR animal) :all is displayed in PICO text box
+    And user clicks on Show results button on PICO search
+    Then search query is 'diabetes and (human or animal)'
 
+  @C544508
+  Scenario: Verify on PICO default strategy selector can be changed
+     Given user enters diabetes in population text box
+     And user selects diabetes from autosuggestions list
+     And tag diabetes mellitus /exp is displayed in PICO text box
+     When user clicks on default strategy change dropdown
+     And user selects Major focus from strategy drop down
+     And user enters insulin in population text box
+     And user selects insulin from autosuggestions list
+     And tag insulin /mj is displayed in PICO text box
+     And user clicks Add 30 synonyms button
+     When user clicks on Show results button on PICO search
+     Then user is on Results Page
+     And search query is 'diabetes mellitus'/exp OR 'insulin'/mj OR 'actrapid insulin' OR 'actrapid mc' OR 'cross linked insulin' OR 'destripeptide insulin' OR 'fish insulin' OR 'humilin' OR 'iletin ii' OR 'immunoinsulin' OR 'in 105' OR 'in105' OR 'initard' OR 'insulin' OR 'insulin (animal source)' OR 'insulin actrapid' OR 'insulin hnc' OR 'insulin novo actrapid' OR 'insulin snc' OR 'insulina pronta lilly' OR 'insuline' OR 'insulinum' OR 'iodinated insulin' OR 'iszilin' OR 'maxirapid' OR 'monotard human' OR 'monotard insulin' OR 'neusulin' OR 'novolin' OR 'oralin' OR 'oro insulin' OR 'teleost insulin'
+     
+
+     

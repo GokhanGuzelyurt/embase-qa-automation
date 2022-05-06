@@ -44,9 +44,10 @@ public class CitationInfoSearchPageStepDef {
                 data.get("toYear"));
     }
 
-    @When("^user clicks Article search button$")
-    public void ClickArticleSearchButton() {
-        citationInfoSearchPage.clickArticleSearchButton();
+    @And("^user clicks on Show results button on citation search$")
+    public void clickShowResultsQuickSearch() {
+        citationInfoSearchPage.showResultButton.click();
+
     }
 
     @And("^user clicks on author name variants link$")
@@ -73,10 +74,5 @@ public class CitationInfoSearchPageStepDef {
         citationInfoSearchPage.clickSelectAll();
     }
 
-    @And("^user clicks on Add to Search button$")
-    public void clickAddToSearchBtn() {
-        citationInfoSearchPage.AddToSearch.click();
-
-    }
 
 }
