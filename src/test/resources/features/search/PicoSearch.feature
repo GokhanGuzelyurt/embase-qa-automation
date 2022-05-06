@@ -121,10 +121,10 @@ Feature: Pico Search tests
   Scenario: Term added from the Emtree pane should respect active input cursor position
     When user enters diabetes in population text box
     And user selects Use diabetes as a free term from autosuggestions list
-    Then tag diabetes :all is displayed in PICO text box
-    Then user enters congenital cancer in emtree search input
+    And tag diabetes :all is displayed in PICO text box
+    When user enters congenital cancer in emtree search input
     And user selects congenital cancer from autosuggestions list
-    Then tag OR is displayed in PICO text box
+    And tag OR is displayed in PICO text box
     And tag congenital cancer /exp is displayed in PICO text box
     And user clicks on Show results button on PICO search
     Then search query is diabetes OR 'congenital cancer'/exp
@@ -133,7 +133,7 @@ Feature: Pico Search tests
   Scenario: PICO allows to group terms with parentheses
     When user enters diabetes and (human OR animal) in population text box
     And user clicks somewhere
-    Then tag diabetes and (human or animal) :all is displayed in PICO text box
+    And tag diabetes and (human or animal) :all is displayed in PICO text box
     And user clicks on Show results button on PICO search
     Then search query is 'diabetes and (human or animal)'
 
@@ -141,12 +141,12 @@ Feature: Pico Search tests
   Scenario: Verify on PICO default strategy selector can be changed
      Given user enters diabetes in population text box
      And user selects diabetes from autosuggestions list
-     Then tag diabetes mellitus /exp is displayed in PICO text box
+     And tag diabetes mellitus /exp is displayed in PICO text box
      When user clicks on default strategy change dropdown
      And user selects Major focus from strategy drop down
      And user enters insulin in population text box
      And user selects insulin from autosuggestions list
-     Then tag insulin /mj is displayed in PICO text box
+     And tag insulin /mj is displayed in PICO text box
      And user clicks Add 30 synonyms button
      When user clicks on Show results button on PICO search
      Then user is on Results Page
