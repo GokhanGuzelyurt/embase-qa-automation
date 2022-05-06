@@ -127,7 +127,7 @@ Feature: Citation Information tests
   Scenario: Verify the author name variants dialog box on Citation information page
     Given user opens Citation Information search page
     And user clicks on author name variants link
-    Then Specify name variants dialog box is displayed
+    And Specify name variants dialog box is displayed
     And user enters authors information
       | authorLastName | authorFirstName | firstNameInitials | Affiliation | ORCID |
       | Smith          | John            | J.                | Chicago     |       |

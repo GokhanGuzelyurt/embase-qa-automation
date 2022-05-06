@@ -21,7 +21,7 @@ Feature: Pico Search tests
   Scenario: Term is prefilled when free-text modifier is opened for editing
     When user enters diabetes in population text box
     And user selects Use diabetes as a free term from autosuggestions list
-    Then tag diabetes :all is displayed in PICO text box
+    And tag diabetes :all is displayed in PICO text box
     When user clicks on down arrow of the free term
     When user clicks Edit free term text button
     Then text diabetes is displayed in population text box
@@ -40,10 +40,10 @@ Feature: Pico Search tests
   @C531901
   Scenario: Free term text with wildcard is not ignored on the second round of search from PICO
     When user enters heart* in intervention text box
-    Then autosuggestions list is displayed on PICO
+    And autosuggestions list is displayed on PICO
     And user selects Use heart* as a free term from autosuggestions list
     And user clicks on Show results button on PICO search
-    Then user is on Results Page
+    And user is on Results Page
     When user opens Pico search page
     Then Show results button is enabled on PICO
 
@@ -67,10 +67,10 @@ Feature: Pico Search tests
     When user clicks on Emtree node congenital tumor on PICO
     When user clicks on Emtree node fetal tumor on PICO
     And add to query for Emtree node fetal tumor is selected
-    Then fetal tumor is highlighted in emtree on PICO
+    And fetal tumor is highlighted in emtree on PICO
     And congenital tumor is not highlighted in emtree on PICO
     When user clicks on Show results button on PICO search
-    Then user is on Results Page
+    And user is on Results Page
     And the result set is not empty
     And search query is 'congenital cancer'/exp OR 'fetal tumor'/exp
 
@@ -79,7 +79,7 @@ Feature: Pico Search tests
     When user enters heart in outcome text box
     And user selects heart from autosuggestions list
     And user clicks Add 4 synonyms button
-    Then synonyms popover is displayed
+    And synonyms popover is displayed
     And user verifies that text is displayed: Select all synonyms
     And user clicks on down arrow of the synonym term
     And user clicks Remove synonyms button
@@ -87,22 +87,22 @@ Feature: Pico Search tests
     When user clicks on down arrow of the free term
     And user clicks Add synonyms button
     And user clicks 4 synonyms :all button
-    Then synonyms popover is displayed
+    And synonyms popover is displayed
     When user unselects Select all synonyms checkbox in the right panel
     Then user verifies that text is displayed: Add 4 synonyms
     And all the checkboxes are unselected in the synonyms right panel
 
   @C531904
   Scenario Outline: PICO lines are restored in the initial order after reset
-    Then following <fields> are available on PICO page
-    Then user verifies the Reset form button is disabled
+    And following <fields> are available on PICO page
+    And user verifies the Reset form button is disabled
     When user clicks Remove field of Intervention field
     When user clicks Remove field of Comparison field
-    Then following <fields1> are not available on PICO page
+    And following <fields1> are not available on PICO page
     And user verifies the Reset form button is enabled
     When user clicks Reset form button
     Then following <fields> are available on PICO page
-    Then user verifies the Reset form button is disabled
+    And user verifies the Reset form button is disabled
     Examples:
       | fields                                                  | fields1                 |
       | Population,Intervention,Comparison,Outcome,Study design | Intervention,Comparison |
@@ -133,7 +133,7 @@ Feature: Pico Search tests
   Scenario: PICO allows to group terms with parentheses
     When user enters diabetes and (human OR animal) in population text box
     And user clicks somewhere
-    And tag diabetes and (human or animal) :all is displayed in PICO text box
+    And tag diabetes and (human OR animal) :all is displayed in PICO text box
     And user clicks on Show results button on PICO search
     Then search query is 'diabetes and (human or animal)'
 
