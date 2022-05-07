@@ -127,12 +127,12 @@ Feature: Citation Information tests
   Scenario: Verify the author name variants dialog box on Citation information page
     Given user opens Citation Information search page
     And user clicks on author name variants link
-    Then Specify name variants dialog box is displayed
+    And Specify name variants dialog box is displayed
     And user enters authors information
       | authorLastName | authorFirstName | firstNameInitials | Affiliation | ORCID |
       | Smith          | John            | J.                | Chicago     |       |
     And user selects all authors from the citation info authors list
-    And user clicks on Add to Search button
-    And user clicks Article search button
+    And user clicks Add to search button
+    And user clicks on Show results button on citation search
     Then search query is 'smith,john'/an
 

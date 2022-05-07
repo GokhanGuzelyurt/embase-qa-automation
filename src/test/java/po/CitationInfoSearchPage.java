@@ -3,6 +3,7 @@ package po;
 import net.serenitybdd.core.annotations.findby.By;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
+import org.jruby.RubyProcess;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -64,7 +65,7 @@ public class CitationInfoSearchPage extends BasePage {
     @FindBy(xpath = "//span[contains(@class,'LinkButton-module_content__2F1Lc')][contains(text(),'Specify name variants')]")
     public WebElement authorNameVariantsLink;
 
-    @FindBy(xpath = "/html/body/div[9]/div/div[2]/div/div[2]/div/button/span")
+    @FindBy(css = "[data-testid='select-all-bottom']")
     public WebElement selectAllLink;
 
     @FindBy(id = "publication-year-from")
@@ -84,6 +85,9 @@ public class CitationInfoSearchPage extends BasePage {
 
     @FindBy(id = "author-variations-modal-label")
     public WebElement authorVariationsLabel;
+
+    @FindBy(id = "author-variations-modal")
+    public WebElement authorVariationsModal;
 
     @FindBy(id = "lastName")
     public WebElement authorLastName;
@@ -233,7 +237,10 @@ public class CitationInfoSearchPage extends BasePage {
     }
 
     public void clickSelectAll() {
-        selectAllLink.click();
+        waitForJStoLoad(10);
+        WebElement ele = authorVariationsModal.findElement(By.xpath("//*[@data-testid='select-all-bottom']//button//span"));
+        scrollIntoView();
+        ele.click();
     }
 
 }

@@ -61,6 +61,12 @@ public class PicoSearchPage extends BasePage {
     @FindBy(xpath = "//*[@id='page-modal']//*[contains(@class,'PageModalContent_scroll__-5XOu')]")
     public WebElement displayFullQueryTextBox;
 
+    @FindBy(css = "[data-testid='default-search-strategy-toggle']")
+    public WebElement strategyDropdown;
+
+    @FindBy(className = "tippy-content")
+    public WebElement strategyPopover;
+
     public boolean isAutoSuggestDeviceTerm(String term) {
         boolean flag = false;
         List<WebElement> options = autoSuggestionsBox.findElements(By.cssSelector("ul[role=listbox] li div[class*=row]>div[class=col]>span:nth-child(1)"));
@@ -81,6 +87,17 @@ public class PicoSearchPage extends BasePage {
             }
         }
     }
+
+    public void selectStrategyByText(String text) {
+        List<WebElement> options = strategyPopover.findElements(By.xpath("//span[contains(text(),'" + text + "')]"));
+        for (WebElement option : options) {
+            if (option.getText().contains(text)) {
+                option.click();
+                break;
+            }
+        }
+    }
+
 
     public List<String> validateAutosuggestionsTerms() {
         List<WebElement> options = autoSuggestionsBox.findElements(By.xpath("//div[@class='col']"));
@@ -126,9 +143,13 @@ public class PicoSearchPage extends BasePage {
 
     public void clickCheckAllSynonymsCheckBox() {
         waitForJStoLoad(10);
-        WebElement ele = synonymsEditor.findElement(By.xpath("//*[@data-testid='synonyms-editor-check-all']"));
-        System.out.println("Text is " + ele.getText());
-        ele.click();
+        if (synonymsEditor.isDisplayed()) {
+//            WebElement ele = synonymsEditor.findElement(By.xpath("//*[@data-testid='synonyms-editor-check-all']"));
+            WebElement ele = getDriver().findElement(By.xpath("//span[contains(text(),'Select all synonyms')]"));
+            System.out.println("Text is " + ele.getText());
+            scrollIntoView();
+            ele.click();
+        }
     }
 
     public List<String> validateLabels() {

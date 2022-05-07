@@ -57,10 +57,20 @@ public class PicoSearchPageStepDef {
         picoSearchPage.selectAutoSuggestionTermByText(text);
     }
 
+    @When("^user selects (.*) from strategy drop down$")
+    public void selectstrategyByText(String text) {
+        picoSearchPage.selectStrategyByText(text);
+    }
+
     @Then("^tag (.*) is displayed in PICO text box$")
     public void validateTextPICO(String text) {
         Assertions.assertThat(picoSearchPage.validateTagName(text)).describedAs("Tag name is not equal to expected").contains(text);
 
+    }
+
+    @When("^user clicks on default strategy change dropdown$")
+    public  void clickDefaultStrategyDropdown(){
+        picoSearchPage.strategyDropdown.click();
     }
 
     @When("^user clicks on down arrow of the free term$")
