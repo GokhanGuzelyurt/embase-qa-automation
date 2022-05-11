@@ -26,4 +26,5 @@ embase-e2e/embase-e2e.iws
 
 /src/test/resources/features/run/
 
-test-rail-sync/node_modules
+testrail-sync/node_modules
+/src/test/resources/features/testrail-sync/

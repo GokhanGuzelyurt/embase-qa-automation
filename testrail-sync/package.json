@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "@gromalog/cucumber-testrail-sync": "^1.0.11"
+  }
+}
