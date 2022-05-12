@@ -3,7 +3,7 @@ Feature: Record Details tests
 
   Background: Home page
     Given user opens Embase application
-    Then Quick search page is opened
+    And Quick search page is opened
     And user opens Results page
 
   @C483739
@@ -311,4 +311,12 @@ Feature: Record Details tests
     When user opens record #1 by clicking on title
     Then user is on Record Details page
     And full text link on Record Details page is displayed
+
+  @C544693
+  Scenario: Validating that Clinical trial numbers is displayed on record details page
+    When user enters query eudra*:cn and performs a search
+    And user opens record #1 by clicking on title
+    And user is on Record Details page
+    Then user verifies that text is displayed: Clinical trial numbers
+    And user verifies that text is displayed: ClinicalTrials.gov
 
