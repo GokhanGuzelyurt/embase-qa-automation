@@ -4,6 +4,7 @@ import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.Step;
 import org.assertj.core.api.Assertions;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.Color;
@@ -14,6 +15,7 @@ import po.common.BasePage;
 import po.common.SearchPage;
 
 import java.lang.invoke.MethodHandles;
+import java.util.List;
 
 @DefaultUrl("page:recordDetails.page")
 public class RecordDetailsPage extends BasePage {
@@ -158,6 +160,8 @@ public class RecordDetailsPage extends BasePage {
     @FindBy(css = "[data-testid='right-pane'] [data-testid='print']")
     public WebElementFacade printAction;
 
+    @FindBy(css = "[data-testid='field-value-clinicalTrialNumbers'] > div:nth-child(1) > span > span:nth-child(1)")
+    public List<WebElement> clinicalTrialNumbers;
 
     public boolean isORCIDHighlightingEnabled() {
         boolean flag = false;
@@ -238,5 +242,8 @@ public class RecordDetailsPage extends BasePage {
     }
 
 
+    public void verifiesThatClinicalTrialNumbersContains(String value) {
+        clinicalTrialNumbers.forEach(num -> Assert.assertTrue("The Clinical Trial Numbers does not contain '" + value + "'", num.getText().contains(value)));
+    }
 }
 

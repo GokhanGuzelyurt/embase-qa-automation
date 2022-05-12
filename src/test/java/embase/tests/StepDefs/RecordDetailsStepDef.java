@@ -278,5 +278,10 @@ public class RecordDetailsStepDef {
             Assertions.fail("Not a valid expected state: '" + expectedCollapsedState + "'. The only valid states are 'expanded' or 'collapsed'");
         }
     }
+
+    @Then("^user verifies that Clinical trial numbers contains (.*)$")
+    public void verifiesThatClinicalTrialNumbersContains(String value) {
+        recordDetailsPage.verifiesThatClinicalTrialNumbersContains(value);
+    }
 }
 
