@@ -251,4 +251,9 @@ public class ResultsPage extends BasePage {
             checkByScript(recordsFoundList.findElements(By.className("emb-checkbox-result")).get(i));
         }
     }
+
+    public void clicksSelectForSectionTitleInExportModalWindow(String linkName, String sectionTitle) {
+        WebElement elementFormat = modalContent.findElement(By.xpath("//*[contains(text(), '"+sectionTitle+"')]//*[contains(text(), '"+linkName+"')]"));
+        elementFormat.click();
+    }
 }
