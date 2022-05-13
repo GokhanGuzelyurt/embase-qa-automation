@@ -201,4 +201,9 @@ public class ResultsPageStepDef {
     public void savesTitleFromRecordsToVar(String recordNum, String varName) {
         resultsPage.savesTitleFromRecordsToVar(recordNum, varName);
     }
+
+    @And("user selects {int} records from the records list in Result Page")
+    public void selectsRecordsFromTheRecordsListInResultPage(int recordsNum) {
+        resultsPage.selectsRecordsFromTheRecordsListInResultPage(recordsNum);
+    }
 }
