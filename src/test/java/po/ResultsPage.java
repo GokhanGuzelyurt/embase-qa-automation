@@ -245,4 +245,15 @@ public class ResultsPage extends BasePage {
         String extractedTitles = recordsTitles.getText();
         setTestCaseVariable(varName, extractedTitles);
     }
+
+    public void selectsRecordsFromTheRecordsListInResultPage(int recordsNum) {
+        for (int i = 0; i < recordsNum; i++) {
+            checkByScript(recordsFoundList.findElements(By.className("emb-checkbox-result")).get(i));
+        }
+    }
+
+    public void clicksSelectForSectionTitleInExportModalWindow(String linkName, String sectionTitle) {
+        WebElement elementFormat = modalContent.findElement(By.xpath("//*[contains(text(), '"+sectionTitle+"')]//*[contains(text(), '"+linkName+"')]"));
+        elementFormat.click();
+    }
 }

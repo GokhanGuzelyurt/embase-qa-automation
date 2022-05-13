@@ -201,4 +201,14 @@ public class ResultsPageStepDef {
     public void savesTitleFromRecordsToVar(String recordNum, String varName) {
         resultsPage.savesTitleFromRecordsToVar(recordNum, varName);
     }
+
+    @And("user selects {int} records from the records list in Result Page")
+    public void selectsRecordsFromTheRecordsListInResultPage(int recordsNum) {
+        resultsPage.selectsRecordsFromTheRecordsListInResultPage(recordsNum);
+    }
+
+    @And("^user clicks (.*) for (.*) in Export modal window$")
+    public void clicksSelectForSectionTitleInExportModalWindow(String linkName, String sectionTitle) {
+        resultsPage.clicksSelectForSectionTitleInExportModalWindow(linkName, sectionTitle);
+    }
 }
