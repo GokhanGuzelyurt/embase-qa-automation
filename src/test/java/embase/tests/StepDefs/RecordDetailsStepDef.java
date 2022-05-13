@@ -283,5 +283,10 @@ public class RecordDetailsStepDef {
     public void verifiesThatClinicalTrialNumbersContains(String value) {
         recordDetailsPage.verifiesThatClinicalTrialNumbersContains(value);
     }
+
+    @Then("user verifies that Clinical trial numbers does not contain invalid symbols")
+    public void verifiesThatClinicalTrialNumbersDoesNotContainInvalidSymbols() {
+        recordDetailsPage.verifiesThatClinicalTrialNumbersDoesNotContainInvalidSymbols();
+    }
 }
 

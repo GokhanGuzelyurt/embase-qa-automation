@@ -327,3 +327,9 @@ Feature: Record Details tests
     And user is on Record Details page
     Then user verifies that Clinical trial numbers contains NCT
 
+  @C544762
+  Scenario: Validating that Clinical trial numbers does not contain invalid symbols
+    When user enters query eudra*:cn and performs a search
+    And user opens record #1 by clicking on title
+    And user is on Record Details page
+    Then user verifies that Clinical trial numbers does not contain invalid symbols

@@ -245,5 +245,9 @@ public class RecordDetailsPage extends BasePage {
     public void verifiesThatClinicalTrialNumbersContains(String value) {
         clinicalTrialNumbers.forEach(num -> Assert.assertTrue("The Clinical Trial Numbers does not contain '" + value + "'", num.getText().contains(value)));
     }
+
+    public void verifiesThatClinicalTrialNumbersDoesNotContainInvalidSymbols() {
+        clinicalTrialNumbers.forEach(num -> Assert.assertFalse("The Clinical Trial Numbers contain invalid symbols '[a-z!@#$%^&*()_+]", num.getText().matches(".*[a-z!@#$%^&*()_+].*")));
+    }
 }
 
