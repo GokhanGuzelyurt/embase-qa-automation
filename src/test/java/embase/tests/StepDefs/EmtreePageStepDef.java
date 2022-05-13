@@ -17,6 +17,7 @@ public class EmtreePageStepDef {
     @When("^user opens Emtree page$")
     public void openEmtreePage() {
         emtreePage.open();
+        emtreePage.refreshEmtree();
         emtreePage.waitFor(emtreePage.termInputTextField);
     }
 
@@ -55,5 +56,13 @@ public class EmtreePageStepDef {
         logger.info("Verify code present additional Emtree info: " + code);
         Assertions.assertThat(emtreePage.additionalEmtreeInformation.getText()).describedAs("GMDN code is not present in additional info").contains(code);
     }
+
+    @Then("^verify that the additional Emtree information contains the GMDN term (.*)$")
+    public void verifyGMDNPresentInAdditionalInfo(String gmdnTerm) {
+        // code is always between parenthesis, this makes the assertion more strict
+        logger.info("Verify code present additional Emtree info: " + gmdnTerm);
+        Assertions.assertThat(emtreePage.additionalEmtreeInformation.getText()).describedAs("GMDN code is not present in additional info").contains(gmdnTerm);
+    }
+
 
 }
