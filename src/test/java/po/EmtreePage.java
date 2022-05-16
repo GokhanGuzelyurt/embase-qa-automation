@@ -26,9 +26,5 @@ public class EmtreePage extends BasePage {
     @FindBy(css = "#emtreeWidget .emtree_content .additional")
     public WebElement additionalEmtreeInformation;
 
-    public void refreshEmtree(){
-        getDriver().navigate().refresh();
-    }
-
 }
 
