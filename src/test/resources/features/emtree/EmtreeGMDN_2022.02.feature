@@ -7,7 +7,7 @@ Feature: Emtree GMDN terms 2022.02
     And user opens Emtree page
 
   @C506770
-  Scenario Outline: Verify that GMDN terms have expected definition: <term>
+  Scenario Outline: Verify that GMDN terms have expected definition
     When user enters Emtree query <emtreeTerm> in Emtree page
     And user clicks the Find Term button in Emtree page
     Then verify that the list of Emtree term results has exact match for term <emtreeTerm>
