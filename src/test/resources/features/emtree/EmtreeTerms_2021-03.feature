@@ -16,7 +16,7 @@ Feature: Public API - Internal
     And I set a valid SESSION cookie
     When I execute the http request with method GET
     And the status code of the response is 200
-    And the first suggested term is <term>
+    Then the first suggested term is <term>
     Examples:
       | term                                                                                     |
       | aav rdh12                                                                                |
@@ -753,7 +753,7 @@ Feature: Public API - Internal
     And the status code of the response is 200
     And the first suggested term is <newTerm>
     And I extract the prefTermId
-    Given I set the endpoint for the http request to /rest/emtree/
+    And I set the endpoint for the http request to /rest/emtree/
     And I concatenate the extracted prefTermId to the URL
     And I concatenate the value /info to the URL
     And I set a valid SESSION cookie

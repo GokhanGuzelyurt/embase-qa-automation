@@ -16,7 +16,7 @@ Feature: Emtree-2022.02
     And I set a valid SESSION cookie
     When I execute the http request with method GET
     And the status code of the response is 200
-    And the first suggested term is <term>
+    Then the first suggested term is <term>
     Examples:
       | term                                                                             |
       | 3,5 diiodothyropropionic acid                                                    |
@@ -1369,7 +1369,7 @@ Feature: Emtree-2022.02
     When I execute the http request with method GET
     And the status code of the response is 200
     And the first suggested term is <newTerm>
-    Given I set the endpoint for the http request to /rest/searchquery/term/autocomplete
+    And I set the endpoint for the http request to /rest/searchquery/term/autocomplete
     And I set the queryParam term with value <newTerm>
     And I set the queryParam limit with value 10
     And I set a valid SESSION cookie
@@ -1377,7 +1377,7 @@ Feature: Emtree-2022.02
     And the status code of the response is 200
     And the first suggested term is <newTerm>
     And I extract the prefTermId
-    Given I set the endpoint for the http request to /rest/emtree/
+    And I set the endpoint for the http request to /rest/emtree/
     And I concatenate the extracted prefTermId to the URL
     And I concatenate the value /info to the URL
     And I set a valid SESSION cookie
