@@ -97,3 +97,24 @@ Feature: Export queries
       | Plain Text | TEXT_RECORDS        | \downloads\records.txt   | Title    | SOURCE,Current Issues in Molecular Biology |
       | CSV        | CSV_ROW_RECORDS     | \downloads\records.csv   | Title    | SOURCE,Current Issues in Molecular Biology |
       | RIS format | RIS_RECORDS         | \downloads\records.ris   | skip     | Current Issues in Molecular Biology        |
+
+  @C544862
+  Scenario Outline: Full Record field should only include the Full Record date entry and the AiP/In process
+    When user opens Results page
+    And user enters query l2010597638 and performs a search
+    And user selects records 1 from the records list on Results page and click on export
+    And user saves title from records 1 to variable titleText
+    And user selects Format <Format> in export window
+    And user selects checkbox <checkbox1> in export window
+    And user selects checkbox <checkbox2> in export window
+    And user clicks on Export button in modal window
+    And user waits 2 seconds
+    And user switches to Embase - Download tab
+    And user verifies that text is displayed: Download
+    And user clicks on download button on Export page
+    And user waits 2 seconds
+    Then user checks downloaded <FilePath> document contains <Text>
+    Examples:
+      | Format     | FilePath                 | checkbox1          | checkbox2                 | Text                                                            |
+      | MS Excel   | \downloads\records.xlsx  | AiP/IP entry date  | Full record entry date    | AiP/IP ENTRY DATE,2021-01-14,FULL RECORD ENTRY DATE,2021-02-03  |
+      | CSV        | \downloads\records.csv   | AiP/IP entry date  | Full record entry date    | AiP/IP ENTRY DATE,2021-01-14,FULL RECORD ENTRY DATE,2021-02-03  |
