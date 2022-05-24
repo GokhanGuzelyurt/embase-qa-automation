@@ -3,7 +3,7 @@ Feature: Medical Device tests
 
   Background: Home page
     Given user opens Embase application
-    Then Quick search page is opened
+    And Quick search page is opened
     And user opens Medical Device search page
 
   @C477465
@@ -115,20 +115,20 @@ Feature: Medical Device tests
     And the result set is not empty
 
   @C477473
-  Scenario: Adding device specific adverse  effects to medical devices
-    When user clicks on Add device name icon
-    When user enters the device name as medical thermometer
+  Scenario: Adding device specific adverse effects to medical devices
+    And user clicks on Add device name icon
+    And user enters the device name as medical thermometer
     And user clicks on Add device name button at medical device page
-    Then the Add device name popup is closed
+    And the Add device name popup is closed
     And the device name medical thermometer is displayed on the form
     And user waits for synonyms to load
     When user clicks on device specific adverse effect terms icon
-    Then the title on the popup is Add device specific adverse effects
-    Then validate that a list of specific device adverse effects are present
-    When user clicks on device specific adverse effect terms button at medical device page
-    Then the specific device adverse effects popup is closed
+    And the title on the popup is Add device specific adverse effects
+    And validate that a list of specific device adverse effects are present
+    And user clicks on device specific adverse effect terms button at medical device page
+    And the specific device adverse effects popup is closed
     And the label device specific adverse effect terms is displayed for device specific adverse effects
-    When user clicks on Show Results
+    And user clicks on Show Results
     Then user is on Results Page
     And the result set is not empty
 
