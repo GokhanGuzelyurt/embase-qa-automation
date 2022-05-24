@@ -187,19 +187,19 @@ Feature: Record Details tests
 
   @C489219
   Scenario: Verify that user can sign in from the sign in message box and open the Send Modal window
-    Given user enters query corona and performs a search
-    Then the result set is not empty
+    And user enters query corona and performs a search
+    And the result set is not empty
     And user selects records 1,2 from the records list on Results page and click on view
-    Then user is on Record Details page
+    And user is on Record Details page
     When user click on Send button on Record Details page
-    Then a message box on Record Details is displayed with the message To use this feature you must be a registered user of Embase.
-    When user clicks on Sign in on message box on Record Details page
-    Then user enters email id as embase_limited@elsevier.com and click Continue
-    Then Login page UI elements are displayed
+    And a message box on Record Details is displayed with the message To use this feature you must be a registered user of Embase.
+    And user clicks on Sign in on message box on Record Details page
+    And user enters email id as embase_limited@elsevier.com and click Continue
+    And Login page UI elements are displayed
     And the disabled email value on login page is embase_limited@elsevier.com
     And user enters password as embase_limited@elsevier.com1 and click SignIn
     Then user is on Record Details page
-    When user click on Send button on Record Details page
+    And user click on Send button on Record Details page
     Then user verifies the UI of Send Results modal
 
   @C489277
