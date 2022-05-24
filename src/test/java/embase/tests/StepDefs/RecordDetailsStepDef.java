@@ -179,7 +179,7 @@ public class RecordDetailsStepDef {
     @Then("^user verifies the UI of Send Results modal$")
     public void verifySendResultsModal() {
         Assertions.assertThat(recordDetailsPage.sendToLabelText.getText()).describedAs("Send to label text is not equal to expected").isEqualToIgnoringCase("Send to");
-        Assertions.assertThat(recordDetailsPage.sendToInputField.getAttribute("value")).describedAs("Input text does not have default value").isEqualToIgnoringCase(CommonSteps.USER_EMAIL);
+        Assertions.assertThat(recordDetailsPage.sendToInputField.getText()).describedAs("Input text does not have default value").isEqualToIgnoringCase(CommonSteps.USER_EMAIL);
         Assertions.assertThat(recordDetailsPage.ccLabelText.getText()).describedAs("cc label text is not equal to expected").isEqualToIgnoringCase("CC");
         Assertions.assertThat(recordDetailsPage.subjectLabelText.getText()).describedAs("subject label text is not equal to expected").isEqualToIgnoringCase("Subject");
         Assertions.assertThat(recordDetailsPage.commentsLabelText.getText()).describedAs("comment label text is not equal to expected").isEqualToIgnoringCase("Comments");
