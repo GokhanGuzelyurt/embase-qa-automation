@@ -8,9 +8,9 @@ Feature: Email Alerts
 
   @C488503
   Scenario Outline: Verify Email alert can be created with desired Preprints initial setting
-    Given user opens Results page
+    And user opens Results page
     And user enters query <initialSearchQuery> and performs a search
-    Then the result set is not empty
+    And the result set is not empty
     When user clicks on set EmailAlert link
     And Preprints labelname is displayed on Email Alerts
     And Preprints checkbox is selected by default
@@ -18,10 +18,10 @@ Feature: Email Alerts
     And user saves Email Alert:
       | alertName   | emailAddress      | isIncludeArticles | isIncludePreprints | comment | format  | content | freqPeriod | frequency |
       | $emailTitle | changeme@test.com | true              | <includePreprints> |         | default | default | default    | default   |
-    When user opens Email Alerts page
+    And user opens Email Alerts page
     And user highlights Email Alert with name $emailTitle
-    Then email alert details shows Preprints status <expectedInitialStatus>
-    When user clicks on ReRun action for Email Alert with name $emailTitle
+    And email alert details shows Preprints status <expectedInitialStatus>
+    And user clicks on ReRun action for Email Alert with name $emailTitle
     Then search query is <expectedSearchQuery>
     Examples:
       | includePreprints | expectedInitialStatus | initialSearchQuery | expectedSearchQuery    |
