@@ -225,11 +225,11 @@ Feature: Record Details tests
 
   @C489279
   Scenario: Verify the functionality of similar records feature
-    Given user enters query L2005607816 and performs a search
-    Then the result set is not empty
+    And user enters query L2005607816 and performs a search
+    And the result set is not empty
     When user opens record #1 by clicking on title
-    Then user is on Record Details page
-    When user clicks on Similar records link on Record Details Page
+    And user is on Record Details page
+    And user clicks on Similar records link on Record Details Page
     Then user is on Results Page
     And search query is L2005607816/sim
     And the result set is not empty
