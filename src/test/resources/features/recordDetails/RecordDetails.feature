@@ -198,7 +198,7 @@ Feature: Record Details tests
     And Login page UI elements are displayed
     And the disabled email value on login page is embase_limited@elsevier.com
     And user enters password as embase_limited@elsevier.com1 and click SignIn
-    Then user is on Record Details page
+    And user is on Record Details page
     And user click on Send button on Record Details page
     Then user verifies the UI of Send Results modal
 
