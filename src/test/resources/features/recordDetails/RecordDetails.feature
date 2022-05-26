@@ -71,8 +71,8 @@ Feature: Record Details tests
 
   @C488693
   Scenario: Validate the abstract when no abstract is available
-    Given user enters query L2002408824 and performs a search
-    Then the result set is not empty
+    When user enters query L2002408824 and performs a search
+    And the result set is not empty
     And user opens record #1 by clicking on title
     Then user is on Record Details page
     And the abstract on the Record details page is displayed as [No abstract available]

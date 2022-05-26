@@ -19,7 +19,7 @@ public class RecordDetailsStepDef {
     public void recordDetailsPageDisplayed() {
         recordDetailsPage.shouldBeDisplayed();
         recordDetailsPage.recordTitle.waitUntilEnabled();
-        Assertions.assertThat(recordDetailsPage.recordTitle.getText()).describedAs("Record Details title is not displayed").isEqualToIgnoringCase("Record details");
+        Assertions.assertThat(recordDetailsPage.recordTitle.isDisplayed()).describedAs("Record Details title is not displayed").isTrue();
     }
 
     @And("^author ORCID 0000-0001-6084-166X is displayed on record details page$")
