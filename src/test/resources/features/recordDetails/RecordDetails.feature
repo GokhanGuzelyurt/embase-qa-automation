@@ -211,15 +211,15 @@ Feature: Record Details tests
 
   @C489278
   Scenario: Validate the add to clipboard link on Record Details page
-    Given user enters query L2007119290 and performs a search
-    Then the result set is not empty
+    And user enters query L2007119290 and performs a search
+    And the result set is not empty
     When user opens record #1 by clicking on title
-    Then user is on Record Details page
+    And user is on Record Details page
     And the title on the Record details page is displayed as Circulating tumor DNA in the saliva of patients with head and neck cancer: A pilot report
     And Add to Clipboard link is present on Record Details page
-    When user clicks on Add to Clipboard link on Record Details page
-    Then Add to Clipboard link is disabled
-    When user opens Clipboard page
+    And user clicks on Add to Clipboard link on Record Details page
+    And Add to Clipboard link is disabled
+    And user opens Clipboard page
     Then the title for record #1 on Clipboard page is Circulating tumor DNA in the saliva of patients with head and neck cancer: A pilot report
 
   @C489279
