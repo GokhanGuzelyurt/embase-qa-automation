@@ -55,7 +55,6 @@ public class ResultsPageStepDef {
 
     @When("^user opens Results page$")
     public void openResultsPage() {
-        System.out.println("user opens Results page");
         resultsPage.open();
         resultsPage.waitFor(resultsPage.searchField);
     }

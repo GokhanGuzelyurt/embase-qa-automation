@@ -120,6 +120,8 @@ public class BasePage extends PageObject {
     public void checksThatValuesDoNotMatch(String var1, String var2) {
         String variable1 = testCaseVariables.get(var1);
         String variable2 = testCaseVariables.get(var2);
+        System.out.println(var1);
+        System.out.println(var2);
         Assert.assertNotEquals("The "+variable1+" should not be equal "+variable2+" ;", variable1, variable2);
     }
 }
