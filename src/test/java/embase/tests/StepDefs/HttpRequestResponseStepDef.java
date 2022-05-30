@@ -168,6 +168,9 @@ public class HttpRequestResponseStepDef {
                 response = request.get(concatenatedUrl);
                 break;
             case "POST":
+                logger.info("Executing HTTP POST method");
+                logger.info(request.toString());
+                logger.info(String.valueOf(request.post()));
                 response = request.post(concatenatedUrl);
                 logger.info("Executing HTTP POST method: " + response.toString());
                 break;
