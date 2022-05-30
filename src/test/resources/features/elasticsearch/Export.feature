@@ -1,4 +1,4 @@
-@export @BE
+@regression @export @BE
 Feature: Export queries
 
   Background: Home page
