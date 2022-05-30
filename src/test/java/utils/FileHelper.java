@@ -10,7 +10,8 @@ import java.util.stream.Stream;
 public class FileHelper {
     public static String readFile(String fileName) {
         StringBuilder contentBuilder = new StringBuilder();
-        try (Stream<String> stream = Files.lines(Paths.get("src/test/resources/" + fileName), StandardCharsets.UTF_8)) {
+        String userDir = new File(System.getProperty("user.dir")).getAbsolutePath();
+        try (Stream<String> stream = Files.lines(Paths.get(userDir + "/src/test/resources/" + fileName), StandardCharsets.UTF_8)) {
             stream.forEach(s -> contentBuilder.append(s));
         } catch (IOException e) {
             e.printStackTrace();
