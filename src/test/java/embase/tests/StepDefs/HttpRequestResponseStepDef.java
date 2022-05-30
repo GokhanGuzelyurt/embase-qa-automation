@@ -168,11 +168,13 @@ public class HttpRequestResponseStepDef {
                 response = request.get(concatenatedUrl);
                 break;
             case "POST":
-                logger.info("Executing HTTP POST method");
-                logger.info(request.toString());
-                logger.info(String.valueOf(request.post()));
-                response = request.post(concatenatedUrl);
-                logger.info("Executing HTTP POST method: " + response.toString());
+                if(concatenatedUrl.isEmpty()) {
+                    response = request.post();
+                    logger.info("Empty "+response.toString());
+                } else {
+                    response = request.post(concatenatedUrl);
+                    logger.info("concatenatedUrl "+response.toString());
+                }
                 break;
             case "PUT":
                 response = request.put(concatenatedUrl);
