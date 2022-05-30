@@ -27,8 +27,7 @@ import java.util.List;
 import static embase.tests.StepDefs.CommonSteps.testCaseVariables;
 
 public class DownloadPage extends PageObject {
-    private static String userDir = new File(System.getProperty("user.dir")).getAbsolutePath();
-    private static String BASE_RESOURCES_PATH = userDir + "/src/test/resources/";
+    private static String BASE_RESOURCES_PATH = "/src/test/resources/";
 
     @FindBy(css = "[class*='basebutton']")
     public WebElement baseButton;
@@ -39,7 +38,6 @@ public class DownloadPage extends PageObject {
 
     public void checksDownloadedDocumentContains(String fileName, String text) {
         List fileDataList = new ArrayList<>();
-        System.out.println(BASE_RESOURCES_PATH);
         if (fileName.contains("docx")) {
             fileDataList.add(readDocxFile(fileName));
         }
