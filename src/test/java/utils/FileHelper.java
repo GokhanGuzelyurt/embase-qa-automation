@@ -10,11 +10,12 @@ import java.util.stream.Stream;
 public class FileHelper {
     public static String readFile(String fileName) {
         StringBuilder contentBuilder = new StringBuilder();
-        try (Stream<String> stream = Files.lines(Paths.get("/src/test/resources/" + fileName), StandardCharsets.UTF_8)) {
+        try (Stream<String> stream = Files.lines(Paths.get("src/test/resources/" + fileName), StandardCharsets.UTF_8)) {
             stream.forEach(s -> contentBuilder.append(s));
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println(contentBuilder);
         return contentBuilder.toString();
     }
 
