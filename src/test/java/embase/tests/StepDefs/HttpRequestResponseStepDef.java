@@ -157,7 +157,6 @@ public class HttpRequestResponseStepDef {
     @When("^I execute the http request with method (.*)$")
     public void executeHttpGetRequest(String method) {
         logger.info("Executing HTTP request with method: " + method);
-        logger.info("Executing HTTP request with method 2222: " + method);
 
         if (printRequestToConsole)
             request.log().all();
@@ -170,6 +169,7 @@ public class HttpRequestResponseStepDef {
                 break;
             case "POST":
                 response = request.post(concatenatedUrl);
+                logger.info("Executing HTTP POST method: " + response.toString());
                 break;
             case "PUT":
                 response = request.put(concatenatedUrl);
