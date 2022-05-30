@@ -169,11 +169,11 @@ public class HttpRequestResponseStepDef {
                 break;
             case "POST":
                 if(concatenatedUrl.isEmpty()) {
+                    logger.info("Empty");
                     response = request.post();
-                    logger.info("Empty "+response.toString());
                 } else {
+                    logger.info("concatenatedUrl ");
                     response = request.post(concatenatedUrl);
-                    logger.info("concatenatedUrl "+response.toString());
                 }
                 break;
             case "PUT":
