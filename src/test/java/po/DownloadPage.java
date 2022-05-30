@@ -39,6 +39,7 @@ public class DownloadPage extends PageObject {
 
     public void checksDownloadedDocumentContains(String fileName, String text) {
         List fileDataList = new ArrayList<>();
+        System.out.println(BASE_RESOURCES_PATH);
         if (fileName.contains("docx")) {
             fileDataList.add(readDocxFile(fileName));
         }
