@@ -36,7 +36,7 @@ Feature: Export queries
     And I set the session UI cookies captured in the request body
     And user switches to Embase - Download tab
     And user saves download url job id to variable job_id
-    And I set the request body with content from file \jsonFiles\MS_WORD_RECORDS.json
+    And I set the request body with content from file jsonFiles/MS_WORD_RECORDS.json
     And I set the request header Content-Type with value application/json
     And I execute the http request with method POST
     And user reloads page
