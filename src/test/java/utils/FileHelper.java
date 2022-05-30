@@ -15,7 +15,6 @@ public class FileHelper {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(contentBuilder);
         return contentBuilder.toString();
     }
 
