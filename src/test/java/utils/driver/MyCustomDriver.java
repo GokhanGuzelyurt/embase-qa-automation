@@ -32,12 +32,6 @@ public class MyCustomDriver implements DriverSource {
         options.addArguments("--verbose");
         options.addArguments("--kiosk-printing");
 
-        Map<String, Object> prefs = new HashMap<>();
-        prefs.put("profile.default_content_settings.popups", 0);
-        prefs.put("download.prompt_for_download", false);
-        prefs.put("download.directory_upgrade", true);
-        prefs.put("safebrowsing.enabled", true);
-
         File downloadFolder = null;
         String downloadFilepath = "";
         String parentDirectoryPath = System.getProperty("user.dir");
@@ -66,8 +60,15 @@ public class MyCustomDriver implements DriverSource {
             }
         }
         downloadFolder.mkdir();
+
+        Map<String, Object> prefs = new HashMap<>();
+        prefs.put("profile.default_content_settings.popups", 0);
+        prefs.put("download.prompt_for_download", false);
+        prefs.put("download.directory_upgrade", true);
+        prefs.put("safebrowsing.enabled", true);
         prefs.put("download.default_directory", downloadFilepath);
         options.setExperimentalOption("prefs", prefs);
+
         options.addArguments("no-sandbox");
         driver = new ChromeDriver(options);
 
