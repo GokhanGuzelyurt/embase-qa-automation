@@ -59,14 +59,14 @@ Feature: Export queries
     And user waits 2 seconds
     Then user checks downloaded <FilePath> document contains <Text>
     Examples:
-      | Format     | FilePath                | checkbox | Text                                                                |
-      | MS Excel   | downloads/records.xlsx  | Title    | TITLE,titleText                                                     |
-      | MS Word    | downloads/records.docx  | Title    | TITLE,titleText                                                     |
-      | PDF        | downloads/records.pdf   | Title    | TITLE,titleText                                                     |
-      | XML        | downloads/records.xml   | skip     | titleText                                                           |
-      | Plain Text | downloads/records.txt   | Title    | TITLE,titleText                                                     |
-      | CSV        | downloads/records.csv   | Title    | TITLE,titleText                                                     |
-      | RIS format | downloads/records.ris   | skip     | titleText                                                           |
+      | Format     | FilePath      | checkbox | Text                                                                |
+      | MS Excel   | records.xlsx  | Title    | TITLE,titleText                                                     |
+      | MS Word    | records.docx  | Title    | TITLE,titleText                                                     |
+      | PDF        | records.pdf   | Title    | TITLE,titleText                                                     |
+      | XML        | records.xml   | skip     | titleText                                                           |
+      | Plain Text | records.txt   | Title    | TITLE,titleText                                                     |
+      | CSV        | records.csv   | Title    | TITLE,titleText                                                     |
+      | RIS format | records.ris   | skip     | titleText                                                           |
 
   @C543361
   Scenario Outline: Create export records. It should provide the document according to REST data.
