@@ -81,7 +81,7 @@ Feature: Export queries
     And user captures session UI cookies
     And I set the session UI cookies captured in the request body
     And user switches to Embase - Download tab
-    And I set the request body with content from file \jsonFiles\<bodyFormatValue>.json
+    And I set the request body with content from file jsonFiles/<bodyFormatValue>.json
     And I set the request header Content-Type with value application/json
     And I execute the http request with method POST
     And user reloads page
@@ -89,14 +89,14 @@ Feature: Export queries
     And user waits 2 seconds
     Then user checks downloaded <FilePath> document contains <Text>
     Examples:
-      | Format     | bodyFormatValue     | FilePath                 | checkbox | Text |
-      | MS Excel   | EXCEL_ROW_RECORDS   | \downloads\records.xlsx  | Title    | SOURCE,Current Issues in Molecular Biology |
-      | MS Word    | MS_WORD_RECORDS     | \downloads\records.docx  | Title    | SOURCE,Current Issues in Molecular Biology |
-      | PDF        | PDF_RECORDS         | \downloads\records.pdf   | Title    | SOURCE,Current Issues in Molecular Biology |
-      | XML        | XML_RECORDS         | \downloads\records.xml   | skip     | Current Issues in Molecular Biology        |
-      | Plain Text | TEXT_RECORDS        | \downloads\records.txt   | Title    | SOURCE,Current Issues in Molecular Biology |
-      | CSV        | CSV_ROW_RECORDS     | \downloads\records.csv   | Title    | SOURCE,Current Issues in Molecular Biology |
-      | RIS format | RIS_RECORDS         | \downloads\records.ris   | skip     | Current Issues in Molecular Biology        |
+      | Format     | bodyFormatValue     | FilePath      | checkbox | Text |
+      | MS Excel   | EXCEL_ROW_RECORDS   | records.xlsx  | Title    | SOURCE,Current Issues in Molecular Biology |
+      | MS Word    | MS_WORD_RECORDS     | records.docx  | Title    | SOURCE,Current Issues in Molecular Biology |
+      | PDF        | PDF_RECORDS         | records.pdf   | Title    | SOURCE,Current Issues in Molecular Biology |
+      | XML        | XML_RECORDS         | records.xml   | skip     | Current Issues in Molecular Biology        |
+      | Plain Text | TEXT_RECORDS        | records.txt   | Title    | SOURCE,Current Issues in Molecular Biology |
+      | CSV        | CSV_ROW_RECORDS     | records.csv   | Title    | SOURCE,Current Issues in Molecular Biology |
+      | RIS format | RIS_RECORDS         | records.ris   | skip     | Current Issues in Molecular Biology        |
 
   @C544862
   Scenario Outline: Full Record field should only include the Full Record date entry and the AiP/In process
@@ -115,6 +115,6 @@ Feature: Export queries
     And user waits 2 seconds
     Then user checks downloaded <FilePath> document contains <Text>
     Examples:
-      | Format     | FilePath                 | checkbox1          | checkbox2                 | Text                                                            |
-      | MS Excel   | \downloads\records.xlsx  | AiP/IP entry date  | Full record entry date    | AiP/IP ENTRY DATE,2021-01-14,FULL RECORD ENTRY DATE,2021-02-03  |
-      | CSV        | \downloads\records.csv   | AiP/IP entry date  | Full record entry date    | AiP/IP ENTRY DATE,2021-01-14,FULL RECORD ENTRY DATE,2021-02-03  |
+      | Format     | FilePath      | checkbox1          | checkbox2                 | Text                                                            |
+      | MS Excel   | records.xlsx  | AiP/IP entry date  | Full record entry date    | AiP/IP ENTRY DATE,2021-01-14,FULL RECORD ENTRY DATE,2021-02-03  |
+      | CSV        | records.csv   | AiP/IP entry date  | Full record entry date    | AiP/IP ENTRY DATE,2021-01-14,FULL RECORD ENTRY DATE,2021-02-03  |
