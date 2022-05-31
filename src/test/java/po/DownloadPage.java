@@ -28,7 +28,7 @@ import static embase.tests.StepDefs.CommonSteps.testCaseVariables;
 
 public class DownloadPage extends PageObject {
     private static String parentDirectoryPath = System.getProperty("user.dir");
-    private static String BASE_RESOURCES_PATH = parentDirectoryPath + "/src/test/resources/downloads/";
+    private static String BASE_RESOURCES_PATH = parentDirectoryPath + "/src/test/resources/";
 
     @FindBy(css = "[class*='basebutton']")
     public WebElement baseButton;
