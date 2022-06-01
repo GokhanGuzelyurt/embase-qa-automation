@@ -97,7 +97,9 @@ Feature: Elastic search queries
     Given user opens Results page
     And user enters query dna and performs a search
     When user goes to 402 page
+    And user verifies that text is not displayed: Please wait
     Then no warning message is displayed
+    And user verifies that text is displayed: Records per page
     When user goes to 900 page
     Then no warning message is displayed
 
