@@ -91,7 +91,7 @@ public class MedicalDeviceSearchPage extends BasePage {
     @FindBy(css = ".els-emtree .els-emtree-list-item-content .child")
     public WebElement addToQueryIcon;
 
-    @FindBy(id = "synonym-switchers")
+    @FindBy(id = "option-group")
     public WebElement specificDeviceAdverseEffectsList;
 
     @FindBy(css = ".Tag-module_content__3E4R- .LinkButton-module_root__2jLpv")
@@ -127,7 +127,7 @@ public class MedicalDeviceSearchPage extends BasePage {
     @FindBy(xpath = "//span[text()='Apply']")
     public WebElement applyBtn;
 
-    @FindBy(xpath = "//*[@id=\"root\"]/div[1]/div[3]/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[2]/div/span/span")
+    @FindBy(css = "[data-testid='selected-specific-effects'] span")
     public WebElement specificAdverseEffectsText;
 
     @FindBy(className = "Button-module_root__32E30")

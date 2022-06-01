@@ -19,7 +19,7 @@ public class RecordDetailsStepDef {
     public void recordDetailsPageDisplayed() {
         recordDetailsPage.shouldBeDisplayed();
         recordDetailsPage.recordTitle.waitUntilEnabled();
-        Assertions.assertThat(recordDetailsPage.recordTitle.getText()).describedAs("Record Details title is not displayed").isEqualToIgnoringCase("Record details");
+        Assertions.assertThat(recordDetailsPage.recordTitle.isDisplayed()).describedAs("Record Details title is not displayed").isTrue();
     }
 
     @And("^author ORCID 0000-0001-6084-166X is displayed on record details page$")
@@ -179,7 +179,7 @@ public class RecordDetailsStepDef {
     @Then("^user verifies the UI of Send Results modal$")
     public void verifySendResultsModal() {
         Assertions.assertThat(recordDetailsPage.sendToLabelText.getText()).describedAs("Send to label text is not equal to expected").isEqualToIgnoringCase("Send to");
-        Assertions.assertThat(recordDetailsPage.sendToInputField.getAttribute("value")).describedAs("Input text does not have default value").isEqualToIgnoringCase(CommonSteps.USER_EMAIL);
+        Assertions.assertThat(recordDetailsPage.sendToInputField.getText()).describedAs("Input text does not have default value").isEqualToIgnoringCase(CommonSteps.USER_EMAIL);
         Assertions.assertThat(recordDetailsPage.ccLabelText.getText()).describedAs("cc label text is not equal to expected").isEqualToIgnoringCase("CC");
         Assertions.assertThat(recordDetailsPage.subjectLabelText.getText()).describedAs("subject label text is not equal to expected").isEqualToIgnoringCase("Subject");
         Assertions.assertThat(recordDetailsPage.commentsLabelText.getText()).describedAs("comment label text is not equal to expected").isEqualToIgnoringCase("Comments");

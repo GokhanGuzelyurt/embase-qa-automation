@@ -80,6 +80,9 @@ public class QuickSearchPage extends BasePage {
     @FindBy(className = "fragmentSuggestions")
     public WebElement autosuggestList;
 
+    @FindBy(css = "[data-suggestion-index='0'] div.es-color-grey6")
+    public WebElement dataSuggestionIndex;
+
     @FindBy(id = "fragments[1].operator")
     public WebElement operatorDropdown;
 

@@ -3,7 +3,7 @@ Feature: Citation Information tests
 
   Background: Home page
     Given user opens Embase application
-    Then Quick search page is opened
+    And Quick search page is opened
 
   @C477708
   Scenario: Verify search query for Citation search: All fields
@@ -106,13 +106,13 @@ Feature: Citation Information tests
 
   @C477719
   Scenario: Verify that Citation search form returns results on the second search round
-    Given user opens Citation Information search page
+    And user opens Citation Information search page
     When user enters Citation Information
       | articleTitle | authorName | authorNameExact | journalTitle    | journalTitleExact | ABBRJournalTitle | ABBRJournalTitleExact | ISSN     | CODEN | DOI                                   | volume | issue | firstPage | pubYears | fromYear | toYear |
       | heart        | katakami n | true            | atherosclerosis | true              | atherosclerosis  | true                  | 18791484 | athsb | 10.1016/j.atherosclerosis.2014.05.936 | 235    | 2     | 408       | true     | 2003     | 2017   |
-    Then search query is 'heart':ti AND 'katakami n':au AND 'atherosclerosis'/jt AND 'atherosclerosis'/ta AND '10.1016/j.atherosclerosis.2014.05.936':do AND 'athsb':cd AND '18791484':is AND '235':vi AND '2':ip AND '408':sp AND [2003-2017]/py
-    When user opens Citation Information search page
-    And user clicks Article search button
+    And search query is 'heart':ti AND 'katakami n':au AND 'atherosclerosis'/jt AND 'atherosclerosis'/ta AND '10.1016/j.atherosclerosis.2014.05.936':do AND 'athsb':cd AND '18791484':is AND '235':vi AND '2':ip AND '408':sp AND [2003-2017]/py
+    And user opens Citation Information search page
+    And user clicks on Show results button on citation search
     Then search query is 'heart':ti AND 'katakami n':au AND 'atherosclerosis'/jt AND 'atherosclerosis'/ta AND '10.1016/j.atherosclerosis.2014.05.936':do AND 'athsb':cd AND '18791484':is AND '235':vi AND '2':ip AND '408':sp AND [2003-2017]/py
 
   @C477720

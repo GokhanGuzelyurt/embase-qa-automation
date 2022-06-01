@@ -114,6 +114,7 @@ public class BasePage extends PageObject {
     }
 
     public void userReloadsPage() {
+        logger.info("User reloads the page");
         getDriver().navigate().refresh();
     }
 

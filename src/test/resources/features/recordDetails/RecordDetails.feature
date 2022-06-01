@@ -8,13 +8,12 @@ Feature: Record Details tests
 
   @C483739
   Scenario: Validating that ORCID is displayed on record details page and is clickable
-    Given user enters query 0000-0001-6084-166X and performs a search
-    Then the result set is not empty
+    When user enters query 0000-0001-6084-166X and performs a search
+    And the result set is not empty
     And user opens record #1 by clicking on title
-    Then user is on Record Details page
     And author ORCID 0000-0001-6084-166X is displayed on record details page
     And the author ORCID 0000-0001-6084-166X is highlighted
-    When user clicks on the highlighted ORCID 0000-0001-6084-166X
+    And user clicks on the highlighted ORCID 0000-0001-6084-166X
     Then user is on Results Page
     And search query is '0000-0001-6084-166x'/oc
 
@@ -72,8 +71,8 @@ Feature: Record Details tests
 
   @C488693
   Scenario: Validate the abstract when no abstract is available
-    Given user enters query L2002408824 and performs a search
-    Then the result set is not empty
+    When user enters query L2002408824 and performs a search
+    And the result set is not empty
     And user opens record #1 by clicking on title
     Then user is on Record Details page
     And the abstract on the Record details page is displayed as [No abstract available]
@@ -148,28 +147,28 @@ Feature: Record Details tests
 
   @C489216
   Scenario: Verify the functionality of Send results UI on Record Details Page
-    Given user logs in as Default User
-    Then Quick search page is opened
+    And user logs in as Default User
+    And Quick search page is opened
     And user opens Results page
     And user enters query heart and performs a search
-    Then the result set is not empty
+    And the result set is not empty
     And user selects records 1,2 from the records list on Results page and click on view
-    Then user is on Record Details page
+    And user is on Record Details page
     When user click on Send button on Record Details page
-    Then user verifies the UI of Send Results modal
-    When user enters the subject as test_send_option on Send Results modal
+    And user verifies the UI of Send Results modal
+    And user enters the subject as test_send_option on Send Results modal
     And clicks on Send button on Send Results Modal
     Then user is on Record Details page
 
   @C489217
   Scenario: Verify that subject is mandatory on Send Results Page
-    Given user logs in as Default User
-    Then Quick search page is opened
+    And user logs in as Default User
+    And Quick search page is opened
     And user opens Results page
     And user enters query heart and performs a search
-    Then the result set is not empty
+    And the result set is not empty
     And user selects records 1,2 from the records list on Results page and click on view
-    Then user is on Record Details page
+    And user is on Record Details page
     When user click on Send button on Record Details page
     And clicks on Send button on Send Results Modal
     Then a subject error message This field is required is displayed on Send Results Modal
@@ -187,19 +186,19 @@ Feature: Record Details tests
 
   @C489219
   Scenario: Verify that user can sign in from the sign in message box and open the Send Modal window
-    Given user enters query corona and performs a search
-    Then the result set is not empty
+    And user enters query corona and performs a search
+    And the result set is not empty
     And user selects records 1,2 from the records list on Results page and click on view
-    Then user is on Record Details page
+    And user is on Record Details page
     When user click on Send button on Record Details page
-    Then a message box on Record Details is displayed with the message To use this feature you must be a registered user of Embase.
-    When user clicks on Sign in on message box on Record Details page
-    Then user enters email id as embase_limited@elsevier.com and click Continue
-    Then Login page UI elements are displayed
+    And a message box on Record Details is displayed with the message To use this feature you must be a registered user of Embase.
+    And user clicks on Sign in on message box on Record Details page
+    And user enters email id as embase_limited@elsevier.com and click Continue
+    And Login page UI elements are displayed
     And the disabled email value on login page is embase_limited@elsevier.com
     And user enters password as embase_limited@elsevier.com1 and click SignIn
-    Then user is on Record Details page
-    When user click on Send button on Record Details page
+    And user is on Record Details page
+    And user click on Send button on Record Details page
     Then user verifies the UI of Send Results modal
 
   @C489277
@@ -212,24 +211,24 @@ Feature: Record Details tests
 
   @C489278
   Scenario: Validate the add to clipboard link on Record Details page
-    Given user enters query L2007119290 and performs a search
-    Then the result set is not empty
+    And user enters query L2007119290 and performs a search
+    And the result set is not empty
     When user opens record #1 by clicking on title
-    Then user is on Record Details page
+    And user is on Record Details page
     And the title on the Record details page is displayed as Circulating tumor DNA in the saliva of patients with head and neck cancer: A pilot report
     And Add to Clipboard link is present on Record Details page
-    When user clicks on Add to Clipboard link on Record Details page
-    Then Add to Clipboard link is disabled
-    When user opens Clipboard page
+    And user clicks on Add to Clipboard link on Record Details page
+    And Add to Clipboard link is disabled
+    And user opens Clipboard page
     Then the title for record #1 on Clipboard page is Circulating tumor DNA in the saliva of patients with head and neck cancer: A pilot report
 
   @C489279
   Scenario: Verify the functionality of similar records feature
-    Given user enters query L2005607816 and performs a search
-    Then the result set is not empty
+    And user enters query L2005607816 and performs a search
+    And the result set is not empty
     When user opens record #1 by clicking on title
-    Then user is on Record Details page
-    When user clicks on Similar records link on Record Details Page
+    And user is on Record Details page
+    And user clicks on Similar records link on Record Details Page
     Then user is on Results Page
     And search query is L2005607816/sim
     And the result set is not empty

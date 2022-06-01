@@ -25,7 +25,7 @@ public class RecordDetailsPage extends BasePage {
 
     public static String EMAIL_TEXT_LABEL = "The email will be sent from no_reply@embase.com";
 
-    @FindBy(className = "es-color-white")
+    @FindBy(css = "[data-testid='title']")
     public WebElementFacade recordTitle;
 
     @FindBy(xpath = "//*[@id='additional-information-section-collapsible-content']")
@@ -112,7 +112,7 @@ public class RecordDetailsPage extends BasePage {
     @FindBy(css = "[data-testid='email-from-notice']")
     public WebElement emailNotificationText;
 
-    @FindBy(css = "[id='sendTo']")
+    @FindBy(css = "[data-testid='tag-section'] span span span")
     public WebElement sendToInputField;
 
     @FindBy(css = "[id='subject']")

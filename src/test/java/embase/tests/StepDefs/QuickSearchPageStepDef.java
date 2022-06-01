@@ -67,9 +67,8 @@ public class QuickSearchPageStepDef {
     @Then("^the autosuggested term contains count greater than (\\d*)$")
     public void verifyAutosuggestedCounts(Integer count) {
         Integer val;
-        String text = quickSearchPage.autosuggestList.getText();
-        String substring = StringUtils.substringAfterLast(text, "\n");
-        substring = substring.replaceAll("//s+", "").replaceAll(",", "");
+        String text = quickSearchPage.dataSuggestionIndex.getText();
+        String substring = text.replaceAll("//s+", "").replaceAll(",", "");
         val = Integer.parseInt(substring);
         Assertions.assertThat(val).describedAs("Value is not greater than " + count).isGreaterThan(count);
     }

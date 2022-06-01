@@ -32,10 +32,26 @@ public class MyCustomDriver implements DriverSource {
         options.addArguments("--verbose");
         options.addArguments("--kiosk-printing");
 
+        File downloadFolder = null;
+        String downloadFilepath = "";
         String parentDirectoryPath = System.getProperty("user.dir");
-        String downloadFilepath = parentDirectoryPath+"" + "\\src\\test\\resources\\downloads";
-        logger.info("Chrome Download path set to: "+downloadFilepath);
-        File downloadFolder = new File(downloadFilepath);
+        if (System.getenv("headless") != null && System.getenv("headless").equals("true")) {
+            logger.info("Headless environment variable set to true. Headless ChromeDriver mode: true");
+            options.addArguments("--headless");
+        } else if (CommonSteps.JENKINS_BUILD_URL != null) {
+            logger.info("Job is running in JENKINS. Headless ChromeDriver mode: true");
+            options.addArguments("--headless");
+            TestRailIntegration.SEND_RESULTS_TESTRAIL = true;
+            downloadFilepath = parentDirectoryPath+"" + "/src/test/resources/downloads";
+            logger.info("Chrome Download path set to: "+downloadFilepath);
+            downloadFolder = new File(downloadFilepath);
+        } else {
+            logger.info("Chromedriver Headless is FALSE. Instantiating window.");
+            downloadFilepath = parentDirectoryPath+"" + "\\src\\test\\resources\\downloads";
+            logger.info("Chrome Download path set to: "+downloadFilepath);
+            downloadFolder = new File(downloadFilepath);
+        }
+
         if (downloadFolder.exists()) {
             try {
                 FileUtils.deleteDirectory(downloadFolder);
@@ -44,6 +60,7 @@ public class MyCustomDriver implements DriverSource {
             }
         }
         downloadFolder.mkdir();
+
         Map<String, Object> prefs = new HashMap<>();
         prefs.put("profile.default_content_settings.popups", 0);
         prefs.put("download.prompt_for_download", false);
@@ -51,17 +68,6 @@ public class MyCustomDriver implements DriverSource {
         prefs.put("safebrowsing.enabled", true);
         prefs.put("download.default_directory", downloadFilepath);
         options.setExperimentalOption("prefs", prefs);
-
-        if (System.getenv("headless") != null && System.getenv("headless").equals("true")) {
-            logger.info("Headless environment variable set to true. Headless ChromeDriver mode: true");
-            options.addArguments("--headless");
-        } else if (CommonSteps.JENKINS_BUILD_URL != null) {
-            logger.info("Job is running in JENKINS. Headless ChromeDriver mode: true");
-            options.addArguments("--headless");
-            TestRailIntegration.SEND_RESULTS_TESTRAIL = true;
-        } else {
-            logger.info("Chromedriver Headless is FALSE. Instantiating window.");
-        }
 
         options.addArguments("no-sandbox");
         driver = new ChromeDriver(options);
