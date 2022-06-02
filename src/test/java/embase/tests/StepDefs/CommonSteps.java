@@ -102,12 +102,12 @@ public class CommonSteps {
     }
 
 
-    @After()
+    @After(order = 1)
     public void tearDown() {
         logger.info("-- AFTER --");
         logger.info("Closing driver");
         driver.close();
-        driver.quit();
+//        driver.quit();
         System.gc();
     }
 
