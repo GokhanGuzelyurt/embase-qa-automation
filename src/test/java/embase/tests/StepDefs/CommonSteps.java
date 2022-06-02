@@ -107,8 +107,8 @@ public class CommonSteps {
         logger.info("-- AFTER --");
         logger.info("Closing driver");
 //        driver.close();
-        driver.quit();
-        System.gc();
+//        driver.quit();
+//        System.gc();
     }
 
     @After(order = 2)
