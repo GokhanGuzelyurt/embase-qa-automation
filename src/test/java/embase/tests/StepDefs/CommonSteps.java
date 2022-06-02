@@ -102,7 +102,7 @@ public class CommonSteps {
     }
 
 
-    @After(order = 1)
+    @After(order = 3)
     public void tearDown() {
         logger.info("-- AFTER --");
         logger.info("Closing driver");
@@ -225,6 +225,7 @@ public class CommonSteps {
                 EMB_BUILD_NUMBER += ", SG: " + configPage.securityGatewayBuildNumber.getText().split(": ")[2].split("\n")[0];
                 EMB_BUILD_NUMBER += ", FE: " + configPage.reactBuildNumber.getText().split(": ")[2].split("\n")[0];
             }
+            tearDown();
         } else {
             logger.info("build number already known");
         }
