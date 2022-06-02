@@ -106,8 +106,8 @@ public class CommonSteps {
     public void tearDown() {
         logger.info("-- AFTER --");
         logger.info("Closing driver");
-        driver.close();
-//        driver.quit();
+//        driver.close();
+        driver.quit();
         System.gc();
     }
 
