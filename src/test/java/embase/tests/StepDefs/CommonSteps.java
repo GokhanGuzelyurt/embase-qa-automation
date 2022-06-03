@@ -102,16 +102,16 @@ public class CommonSteps {
     }
 
 
-    @After(order = 3)
+    @After(order = 1)
     public void tearDown() {
         logger.info("-- AFTER --");
         logger.info("Closing driver");
-//        driver.close();
-//        driver.quit();
-//        System.gc();
+        driver.close();
+        driver.quit();
+        System.gc();
     }
 
-    @After(order = 1)
+    @After(order = 2)
     public void sendResults(Scenario scenario) {
         if (TestRailIntegration.SEND_RESULTS_TESTRAIL) {
             logger.info("Sending results to TestRail.");
@@ -172,7 +172,7 @@ public class CommonSteps {
         }
     }
 
-    @After(order = 2)
+    @After(order = 3)
     public void takeScreenshot(Scenario scenario) {
         if (!IS_BE_SCENARIO) {
             logger.info("takeScreenshot - After test");
