@@ -12,6 +12,7 @@ import net.serenitybdd.core.environment.EnvironmentSpecificConfiguration;
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.util.EnvironmentVariables;
 import org.apache.commons.lang3.reflect.FieldUtils;
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
@@ -102,7 +103,7 @@ public class CommonSteps {
     }
 
 
-    @After(order = 3)
+    @AfterClass()
     public void tearDown() {
         logger.info("-- AFTER --");
         logger.info("Closing driver");
