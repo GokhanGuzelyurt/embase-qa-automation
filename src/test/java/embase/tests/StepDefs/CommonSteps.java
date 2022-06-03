@@ -12,7 +12,6 @@ import net.serenitybdd.core.environment.EnvironmentSpecificConfiguration;
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.util.EnvironmentVariables;
 import org.apache.commons.lang3.reflect.FieldUtils;
-import org.junit.AfterClass;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
@@ -103,13 +102,15 @@ public class CommonSteps {
     }
 
 
-    @AfterClass()
+    @After(order = 1)
     public void tearDown() {
         logger.info("-- AFTER --");
         logger.info("Closing driver");
-        driver.close();
-        driver.quit();
-        System.gc();
+        if (CommonSteps.JENKINS_BUILD_URL == null) {
+            driver.close();
+            driver.quit();
+            System.gc();
+        }
     }
 
     @After(order = 2)
@@ -173,7 +174,7 @@ public class CommonSteps {
         }
     }
 
-    @After(order = 1)
+    @After(order = 3)
     public void takeScreenshot(Scenario scenario) {
         if (!IS_BE_SCENARIO) {
             logger.info("takeScreenshot - After test");
