@@ -317,13 +317,13 @@ Feature: Record Details tests
     And user opens record #1 by clicking on title
     And user is on Record Details page
     Then user verifies that text is displayed: Clinical trial numbers
-    And user verifies that text is displayed: ClinicalTrials.gov
 
   @C544694
   Scenario: Validating that Clinical trial numbers contains NCT
     When user enters query eudra*:cn and performs a search
     And user opens record #1 by clicking on title
     And user is on Record Details page
+    And user is looking for ClinicalTrials.gov in Clinical section
     Then user verifies that Clinical trial numbers contains NCT
 
   @C544762
@@ -331,4 +331,5 @@ Feature: Record Details tests
     When user enters query eudra*:cn and performs a search
     And user opens record #1 by clicking on title
     And user is on Record Details page
+    And user is looking for ClinicalTrials.gov in Clinical section
     Then user verifies that Clinical trial numbers does not contain invalid symbols

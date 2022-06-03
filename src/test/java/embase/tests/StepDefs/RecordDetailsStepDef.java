@@ -288,5 +288,10 @@ public class RecordDetailsStepDef {
     public void verifiesThatClinicalTrialNumbersDoesNotContainInvalidSymbols() {
         recordDetailsPage.verifiesThatClinicalTrialNumbersDoesNotContainInvalidSymbols();
     }
+
+    @And("^user is looking for (.*) in Clinical section$")
+    public void userIsLookingForInClinicalSection(String text) {
+        recordDetailsPage.userIsLookingForInClinicalSection(text);
+    }
 }
 
