@@ -163,6 +163,15 @@ public class RecordDetailsPage extends BasePage {
     @FindBy(css = "[data-testid='field-value-clinicalTrialNumbers'] > div:nth-child(1) > span > span:nth-child(1)")
     public List<WebElement> clinicalTrialNumbers;
 
+    @FindBy(css = "[data-testid='field-value-clinicalTrialNumbers']")
+    public WebElementFacade clinicalTrial;
+
+    @FindBy(css = "[title='Next record']")
+    public WebElementFacade recordPageNext;
+
+    @FindBy(css = "[role='progressbar']")
+    public WebElementFacade progressbar;
+
     public boolean isORCIDHighlightingEnabled() {
         boolean flag = false;
         WebElement orcID = orcIDTitle.findElement(By.xpath("//mark[1]"));
@@ -247,7 +256,25 @@ public class RecordDetailsPage extends BasePage {
     }
 
     public void verifiesThatClinicalTrialNumbersDoesNotContainInvalidSymbols() {
-        clinicalTrialNumbers.forEach(num -> Assert.assertFalse("The Clinical Trial Numbers contain invalid symbols '[a-z!@#$%^&*()_+]", num.getText().matches(".*[a-z!@#$%^&*()_+].*")));
+        clinicalTrialNumbers.forEach(num -> Assert.assertFalse("The Clinical Trial Numbers " + num.getText() + " contain invalid symbols '[a-z!@#$%^&*()_+]", num.getText().matches(".*[a-z!@#$%^&*()_+].*")));
+    }
+
+
+    private void waitUntilLoadingPage() {
+        progressbar.shouldNotBeVisible();
+    }
+
+    public void userIsLookingForInClinicalSection(String value) {
+        int i = 0;
+        waitUntilLoadingPage();
+        while (!clinicalTrial.getText().contains(value)) {
+            i++;
+            recordPageNext.click();
+            recordPageNext.waitUntilEnabled();
+            if (i == 10) {
+                break;
+            }
+        }
     }
 }
 
