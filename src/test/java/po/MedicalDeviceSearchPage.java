@@ -100,7 +100,7 @@ public class MedicalDeviceSearchPage extends BasePage {
     @FindBy(xpath = "//button[contains(@title,'Close')]")
     public WebElement removeDeviceIcon;
 
-    @FindBy(className = "PanelButton_content__3tpqy")
+    @FindBy(css = "[class*='PanelButton_content']")
     public WebElementFacade synonymsBox;
 
     @FindBy(id = "study-limit-dropdown")
@@ -304,9 +304,17 @@ public class MedicalDeviceSearchPage extends BasePage {
     }
 
     @Step
-    public void clickByBtnText(String text) {
+    public void clickAddDeviceNameBtn() {
         if (btnTextValue.isEnabled()) {
             btnTextValue.click();
+        }
+    }
+
+    @Step
+    public void clickByBtnText(String text) {
+        WebElement btntext = body.findElement(By.xpath("//span[contains(@class,'Button-module_content') and contains(text(),'" + text + "')]"));
+        if (btntext.isEnabled()) {
+            btntext.click();
         }
     }
 
