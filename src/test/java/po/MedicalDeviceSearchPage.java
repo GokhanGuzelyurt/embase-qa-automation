@@ -46,7 +46,7 @@ public class MedicalDeviceSearchPage extends BasePage {
     @FindBy(css = ".modal-content specific-device-adverse-modal")
     public WebElement specificDeviceEffectsPopUp;
 
-    @FindBy(className = "Tag-module_text__3dcY0")
+    @FindBy(css = "[data-testid='selected-device-name']")
     public WebElement deviceTagName;
 
     @FindBy(className = "Tag-module_content__3E4R-")
@@ -100,7 +100,7 @@ public class MedicalDeviceSearchPage extends BasePage {
     @FindBy(xpath = "//button[contains(@title,'Close')]")
     public WebElement removeDeviceIcon;
 
-    @FindBy(className = "PanelButton_content__3tpqy")
+    @FindBy(css = "[class*='PanelButton_content']")
     public WebElementFacade synonymsBox;
 
     @FindBy(id = "study-limit-dropdown")
@@ -130,7 +130,7 @@ public class MedicalDeviceSearchPage extends BasePage {
     @FindBy(css = "[data-testid='selected-specific-effects'] span")
     public WebElement specificAdverseEffectsText;
 
-    @FindBy(className = "Button-module_root__32E30")
+    @FindBy(css = "[data-testid='page-modal-confirm']")
     public WebElement btnTextValue;
 
     @FindBy(css = ".PanelButton_root__1JTb7 .btn-open-synonyms-modal")
@@ -142,7 +142,7 @@ public class MedicalDeviceSearchPage extends BasePage {
     @FindBy(className = "Checkbox-module_root__1DisM")
     public WebElement checkBoxGroup;
 
-    @FindBy(className = "PanelButton_root__1JTb7")
+    @FindBy(css = "[class*='PanelButton_root']")
     public WebElement iconGroup;
 
     @FindBy(id = "publication-year-from")
@@ -174,13 +174,13 @@ public class MedicalDeviceSearchPage extends BasePage {
 
     public void clickIcon(String iconName) {
         logger.info("Click on icon" + iconName);
-        WebElement icon = iconGroup.findElement(By.xpath("//span[contains(@class,'PanelButton_content__3tpqy')and contains(text(),'" + iconName + "')]"));
+        WebElement icon = iconGroup.findElement(By.xpath("//*[contains(text(),'" + iconName + "')]"));
         icon.click();
     }
 
     public void verifyIconLabelIsDisplayed(String iconLabel) {
         logger.info("Verify the label of the icon");
-        WebElement ele = iconGroup.findElement(By.xpath("//span[contains(@class ,'PanelButton_content__3tpqy') and contains(text(),'" + iconLabel + "')]"));
+        WebElement ele = iconGroup.findElement(By.xpath("//*[contains(text(),'" + iconLabel + "')]"));
         ele.click();
     }
 
@@ -304,8 +304,15 @@ public class MedicalDeviceSearchPage extends BasePage {
     }
 
     @Step
+    public void clickAddDeviceNameBtn() {
+        if (btnTextValue.isEnabled()) {
+            btnTextValue.click();
+        }
+    }
+
+    @Step
     public void clickByBtnText(String text) {
-        WebElement btntext = btnTextValue.findElement(By.xpath("//span[contains(@class,'Button-module_content__7QNNH')and contains(text(),'" + text + "')]"));
+        WebElement btntext = body.findElement(By.xpath("//span[contains(@class,'Button-module_content') and contains(text(),'" + text + "')]"));
         if (btntext.isEnabled()) {
             btntext.click();
         }
