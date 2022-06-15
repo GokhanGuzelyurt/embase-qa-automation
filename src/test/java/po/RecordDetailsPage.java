@@ -213,7 +213,7 @@ public class RecordDetailsPage extends BasePage {
 
     @Step
     public void selectAuthorByText(String authorName) {
-        getDriver().findElement(By.xpath("//span[@class='Checkbox-module_content__1T7Il'][text()='" + authorName + "']")).click();
+        getDriver().findElement(By.xpath("//span[contains(@class,'Checkbox-module_content')][text()='" + authorName + "']")).click();
     }
 
     @Step
