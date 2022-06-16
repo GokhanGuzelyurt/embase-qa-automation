@@ -78,7 +78,7 @@ Feature: Email Alerts
     And user selects checkbox for Email Alert with name $emailTitle2
     And user selects checkbox for Email Alert with name $emailTitle3
     And user clicks on Edit preprint settings element by text
-    And user clicks <actionPreprintSettings> button
+    And user clicks on <actionPreprintSettings> element by text
     Then user highlights Email Alert with name $emailTitle
     And email alert details shows Preprints status <expectedStatusAfterEdit>
     And user highlights Email Alert with name $emailTitle2
@@ -87,5 +87,5 @@ Feature: Email Alerts
     And email alert details shows Preprints status <expectedStatusAfterEdit>
     Examples:
       | includePreprints | expectedInitialStatus | actionPreprintSettings | expectedStatusAfterEdit |
-      | true             | Included              | Exclude                | Excluded                |
-      | false            | Excluded              | Include                | Included                |
+      | true             | Included              | Exclude preprints      | Excluded                |
+      | false            | Excluded              | Include preprints      | Included                |

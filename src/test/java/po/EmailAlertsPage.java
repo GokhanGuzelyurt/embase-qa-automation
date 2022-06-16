@@ -28,7 +28,7 @@ public class EmailAlertsPage extends BasePage {
     @FindBy(css = ".summary :nth-child(5) :nth-child(2)")
     public WebElement alertDetailsArticleInPressStatus;
 
-    @FindBy(css = "[data-testid='field-value-includePreprints']")
+    @FindBy(xpath = "//*[contains(text(), 'Preprints')]/following-sibling::*")
     public WebElement alertDetailsPreprintsStatus;
 
     @FindBy(css = ".editPreprints:first-of-type")
@@ -42,7 +42,7 @@ public class EmailAlertsPage extends BasePage {
 
 
     public WebElement getEmailAlertRowByName(String name) {
-        return getDriver().findElement(By.xpath("//span[contains(text(), '" + name + "')]"));
+        return getDriver().findElement(By.xpath("//*[contains(text(), '" + name + "')]"));
     }
 
     public WebElement getReRunButtonForEmailAlertByName(String name) {
@@ -50,7 +50,7 @@ public class EmailAlertsPage extends BasePage {
     }
 
     public WebElement getEmailAlertCheckboxByName(String name) {
-        return getDriver().findElement(By.xpath("//span[contains(text(), '" + name + "')]//ancestor::tr//label"));
+        return getDriver().findElement(By.xpath("//*[contains(text(), '" + name + "')]//ancestor::*[contains(@class,'emailAlertRow')]//label"));
     }
 }
 
