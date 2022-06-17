@@ -235,13 +235,13 @@ Feature: Record Details tests
 
   @C489280
   Scenario: Verify search by author functionality
-    Given user enters query L2005607816 and performs a search
-    Then the result set is not empty
+    And user enters query L2005607816 and performs a search
+    And the result set is not empty
     When user opens record #1 by clicking on title
-    Then user is on Record Details page
-    When user clicks on Search by author link on Record Details Page
-    Then Search by authors modal is displayed
-    When user selects author Kuny C.V. and click on Search
+    And user is on Record Details page
+    And user clicks on Search by author link on Record Details Page
+    And Search by authors modal is displayed
+    And user selects author Kuny C.V. and click on Search
     Then user is on Results Page
     And search query is 'kuny c.v.'/au
 
