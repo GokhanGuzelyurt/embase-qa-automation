@@ -6,6 +6,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import io.cucumber.datatable.DataTable;
 import org.assertj.core.api.Assertions;
+import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -211,4 +212,39 @@ public class ResultsPageStepDef {
     public void clicksSelectForSectionTitleInExportModalWindow(String linkName, String sectionTitle) {
         resultsPage.clicksSelectForSectionTitleInExportModalWindow(linkName, sectionTitle);
     }
+
+
+    int expectedResult;
+    int actualResult;
+    @When("^user enters actual query (.*) and performs a search$")
+    public void user_enters_expected_pd_and_performs_a_search(String date) {
+
+        resultsPage.waitForJStoLoad();
+        resultsPage.searchField.clear();
+        resultsPage.searchField.sendKeys(date);
+        resultsPage.searchField.sendKeys(Keys.ENTER);
+        resultsPage.waitForRecordSectionIsLoaded();
+
+        expectedResult=resultsPage.resultList.getResultsCount();
+    }
+
+    @When("^user enters expected query (.*) and performs a search$")
+    public void user_enters_actual_pd_and_performs_a_search(String date1) {
+        resultsPage.searchField.clear();
+        resultsPage.searchField.sendKeys(date1);
+        resultsPage.searchField.sendKeys(Keys.ENTER);
+        resultsPage.waitForRecordSectionIsLoaded();
+
+        actualResult=resultsPage.resultList.getResultsCount();
+    }
+
+
+    @Then("the results are the same when the date format is changed")
+    public void the_results_are_the_same_when_the_date_format_is_changed() {
+
+        Assert.assertEquals("Results are not same",expectedResult,actualResult);
+
+    }
+
+
 }
